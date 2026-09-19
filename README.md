@@ -1,6 +1,6 @@
 # udctl
 
-**udctl** (UnDercontrol) is private AI infrastructure: you and your AI agents explore ideas, capture tasks, notes, finance and files, and distill them into knowledge that stays on your own machine. One data source; web, desktop, mobile, CLI, and chat clients on top of it.
+**udctl** (UnDercontrol) is a private workplace for people and AI agents: tasks, threads and knowledge live here; so do each agent's definition, skills and scheduling across your machines; and it works just as well for one person with no agents at all. One data source; web, desktop, mobile, CLI, and chat clients on top of it.
 
 This repository is the source of the documentation site at **https://udctl.com** (English and 简体中文). The application itself is proprietary and free for personal use; its code is not in this repository.
 
@@ -70,7 +70,7 @@ Docusaurus 3. Pushing to `main` deploys through Cloudflare Workers Builds, so a 
 
 ## 中文
 
-udctl（UnDercontrol）是私密的 AI 基础设施：你和你的 AI agent 在这里探索想法，记录任务、笔记、账目和文件，再沉淀成留在你自己机器上的知识；一份数据，Web、桌面、手机、命令行和聊天软件都是它的入口。本仓库是文档站 https://udctl.com 的源码，中英双语。应用本体为闭源软件，个人使用免费。
+udctl（UnDercontrol）是人与 AI agent 共用的私密工作场所：任务、对话和知识都存在这里，agent 的定义、技能和跨机器的编排也在这里，一个人不用 agent 照样能用；一份数据，Web、桌面、手机、命令行和聊天软件都是它的入口。本仓库是文档站 https://udctl.com 的源码，中英双语。应用本体为闭源软件，个人使用免费。
 
 - 在线试用：https://ud.oatnil.com
 - 下载（macOS / Windows / Linux 桌面版、iOS 公测、Android APK、Chrome 网页剪藏）：https://udctl.com/zh-Hans/download

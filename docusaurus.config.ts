@@ -14,7 +14,7 @@ const config: Config = {
   // Since the rename (same day, same task) the navbar, h1 and body copy say udctl
   // too; UnDercontrol is the full name, written once as "udctl (UnDercontrol)" (ud card 38c286b2).
   title: 'udctl',
-  tagline: 'Explore. Capture. Distill. Private AI infrastructure on your own machine.',
+  tagline: 'Explore. Capture. Distill. A private workplace for people and AI agents.',
   favicon: 'img/favicon.svg',
 
   future: {

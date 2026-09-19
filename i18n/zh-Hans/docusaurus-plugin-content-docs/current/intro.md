@@ -1,12 +1,12 @@
 ---
 title: "udctl 是什么:可自托管的任务、笔记与 AI agent 工作台"
-description: udctl(UnDercontrol)是私密的 AI 基础设施:探索、记录、沉淀,都在你自己的机器上。
+description: udctl(UnDercontrol)是人与 AI agent 共用的私密工作场所:探索、记录、沉淀,都在你自己的机器上。
 sidebar_position: 1
 ---
 
 # 欢迎使用 udctl
 
-udctl(UnDercontrol)是私密的 AI 基础设施:你和你的 AI agent 在这里探索想法,记录任务、笔记、账目和文件,再把它们沉淀成留在你自己机器上的知识。
+udctl(UnDercontrol)是人与 AI agent 共用的私密工作场所:任务、对话和知识都存在这里;agent 的定义、技能和跨机器的编排也在这里;一个人不用 agent 照样能用。跑在你自己的机器上。
 
 ## 什么是 udctl？
 

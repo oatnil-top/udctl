@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Welcome to udctl
 
-udctl (UnDercontrol) is private AI infrastructure: you and your AI agents explore ideas, capture tasks, notes, expenses and files, and distill them into knowledge that stays on your own machine.
+udctl (UnDercontrol) is a private workplace for people and AI agents: tasks, threads and knowledge live here; so do each agent's definition, skills and scheduling across your machines; and it works just as well for one person with no agents at all. On your own hardware.
 
 ## What is udctl?
 

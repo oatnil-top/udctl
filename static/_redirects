@@ -12,3 +12,17 @@
 # page and returns 200. Redirect rather than ship a 404.
 /support               /contact           301
 /zh-Hans/support       /zh-Hans/contact   301
+
+# trailingSlash: true since 2026-09-04 means the URLs Google remembers (old sitemap, old
+# inlinks) carry a trailing slash, and the rules above match only the bare form: Googlebot
+# 404'd /docs/privacy/ daily for a week (ud task 70775310). The slashed forms redirect to the
+# same successors. /docs/category/deployment was the auto-generated category page that vanished
+# when the deployment docs were merged into /docs/self-deployment/ (fc25b94); it never had a rule.
+/docs/privacy/                     /privacy                    301
+/zh-Hans/docs/privacy/             /zh-Hans/privacy            301
+/support/                          /contact                    301
+/zh-Hans/support/                  /zh-Hans/contact            301
+/docs/category/deployment          /docs/self-deployment/      301
+/docs/category/deployment/         /docs/self-deployment/      301
+/zh-Hans/docs/category/deployment  /zh-Hans/docs/self-deployment/  301
+/zh-Hans/docs/category/deployment/ /zh-Hans/docs/self-deployment/  301

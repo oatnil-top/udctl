@@ -41,7 +41,7 @@ automatically via Cloudflare Workers Builds on push to `main`. i18n: `en`
 
 ## Conventions
 
-- The product name is **UnDercontrol** (capital U and D). It is proprietary —
+- The product name is **udctl**; **UnDercontrol** (capital U and D) is its full name, written once as `udctl (UnDercontrol)`, never as "formerly". Positioning and copy rules: ud card 38c286b2. It is proprietary —
   never describe it as open-source.
 - Verify changes with `npm run build` (builds both locales; broken links fail
   the build). Pre-existing broken-anchor warnings on `/privacy`,

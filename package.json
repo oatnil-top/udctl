@@ -7,6 +7,7 @@
     "start": "docusaurus start",
     "prebuild": "node scripts/check-agent-guide.mjs",
     "build": "docusaurus build",
+    "indexnow": "node scripts/indexnow.mjs --dry-run",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

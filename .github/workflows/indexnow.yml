@@ -1,0 +1,78 @@
+# Ping IndexNow (Bing / Yandex / Naver / Seznam) with the pages a push changed.
+# Runs here, not in the Cloudflare Workers Build, for two reasons:
+#   1. Workers Builds clones shallow, so Docusaurus stamps EVERY page's sitemap
+#      <lastmod> with the deploy date (measured 2026-09-19: 208 of 270 live URLs
+#      say 2026-09-15). A full-depth checkout here gives real per-page dates,
+#      which is what scripts/indexnow.mjs selects on.
+#   2. The submission must go out after the pages are live, and the deploy
+#      command lives in the Cloudflare dashboard, outside this repo. So this job
+#      waits until udctl.com serves a new main bundle before submitting.
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'blog/**'
+      - 'i18n/**'
+      - 'src/pages/**'
+      - 'docusaurus.config.ts'
+      - 'sidebars.ts'
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: true
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history: sitemap <lastmod> comes from git
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Oldest commit date in this push (UTC) -> since
+        id: since
+        run: |
+          BEFORE='${{ github.event.before }}'
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BEFORE" 2>/dev/null; then
+            RANGE='-1 HEAD'   # first push or force-push: only the head commit
+          else
+            RANGE="$BEFORE..${{ github.sha }}"
+          fi
+          SINCE=$(TZ=UTC git log --format=%cs $RANGE | sort | head -1)
+          [ -n "$SINCE" ] || SINCE=$(TZ=UTC date +%F)
+          echo "since=$SINCE" >> "$GITHUB_OUTPUT"
+          echo "since=$SINCE (range $RANGE)"
+
+      - name: Remember which bundle udctl.com serves before the deploy
+        id: before
+        run: |
+          B=$(curl -fsS https://udctl.com/ | grep -o 'assets/js/main\.[0-9a-f]*\.js' | head -1)
+          echo "bundle=$B" >> "$GITHUB_OUTPUT"
+          echo "live bundle before: $B"
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Wait until Cloudflare has deployed this push (new main bundle)
+        run: |
+          BEFORE='${{ steps.before.outputs.bundle }}'
+          for i in $(seq 1 40); do
+            NOW=$(curl -fsS https://udctl.com/ | grep -o 'assets/js/main\.[0-9a-f]*\.js' | head -1)
+            if [ -n "$NOW" ] && [ "$NOW" != "$BEFORE" ]; then
+              echo "deployed: $BEFORE -> $NOW after $((i*30))s"; exit 0
+            fi
+            sleep 30
+          done
+          echo "::warning::udctl.com still serves $BEFORE after 20 min; submitting anyway, Bing will recrawl if it 404s"
+
+      - name: Submit changed URLs to IndexNow
+        run: node scripts/indexnow.mjs --since '${{ steps.since.outputs.since }}' --sitemap build/sitemap.xml --sitemap build/zh-Hans/sitemap.xml

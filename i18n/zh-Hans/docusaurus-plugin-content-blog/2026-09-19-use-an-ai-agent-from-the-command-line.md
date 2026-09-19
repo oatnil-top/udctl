@@ -68,7 +68,7 @@ claude # 或者 codex / gemini
 
 agent 能读你的代码,但读不到改动的原因:那张写着客户到底反馈了什么的工单、三周前你把最顺手那个方案否掉时留下的笔记、挂在 bug 上的那张截图。这些在浏览器标签页里,而 agent 没有浏览器标签页。
 
-[udctl](/)(原名 UnDercontrol)把它们放进同一个终端。它的 CLI 叫 `ud`,读写的就是你在应用里看到的那些任务、笔记、评论和附件:
+[udctl](/)(UnDercontrol)把它们放进同一个终端。它的 CLI 叫 `ud`,读写的就是你在应用里看到的那些任务、笔记、评论和附件:
 
 ```bash
 npm install -g @oatnil/ud # 需要 Node.js 18+

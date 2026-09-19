@@ -1,4 +1,5 @@
 ---
+title: 定价
 sidebar_position: 2
 description: udctl 自部署许可证定价:个人与 3 人及以下团队免费,20 人及以下 US$49/月,无限人数 US$149/月。按团队规模档位一口价,不按席位。
 ---

@@ -1,4 +1,5 @@
 ---
+title: Pricing
 sidebar_position: 2
 description: udctl self-hosted license pricing - free for individuals and teams of 3 or fewer, US$49/month up to 20 people, US$149/month unlimited. Flat per team-size band, never per seat.
 ---

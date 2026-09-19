@@ -393,7 +393,7 @@ function ShowcaseSection() {
       onMouseLeave={() => setPaused(false)}>
       <div>
         <div className={styles.eyebrow}>
-          <Translate id="home4.hero.eyebrow">Private AI Butler &amp; Workspace</Translate>
+          <Translate id="home4.hero.eyebrow">Explore. Capture. Distill. Private AI infrastructure.</Translate>
         </div>
         {/* All four copy blocks stay mounted, stacked in one grid cell
             (.copyStack); the tallest sets the column height at every viewport
@@ -1140,7 +1140,7 @@ export default function Home(): ReactNode {
   const metaDescription = translate({
     id: 'homepage.description',
     message:
-      'udctl (UnDercontrol) schedules, retries, and remembers for a team of AI agents on real CLIs. Delegate from chat; results land in your tasks. Self-hosted.',
+      'udctl (UnDercontrol) is private AI infrastructure: explore with your AI agents, capture tasks and notes, distill them into knowledge, all on your own machine.',
     description: 'The homepage meta description',
   });
   return (

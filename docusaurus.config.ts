@@ -12,9 +12,9 @@ const config: Config = {
   // f02f82bb): 'ud' and 'undercontrol' cannot be ranked for (two letters / the
   // phrase "under control"), 'udctl' has no competing owner anywhere we checked.
   // Since the rename (same day, same task) the navbar, h1 and body copy say udctl
-  // too; UnDercontrol survives as the former name in the intro and the copyright.
+  // too; UnDercontrol is the full name, written once as "udctl (UnDercontrol)" (ud card 38c286b2).
   title: 'udctl',
-  tagline: 'One workspace for tasks, knowledge, and AI agents — private, portable, yours.',
+  tagline: 'Explore. Capture. Distill. Private AI infrastructure on your own machine.',
   favicon: 'img/favicon.svg',
 
   future: {

@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Welcome to udctl
 
-udctl (UnDercontrol) is a self-hosted personal finance and task management app. Track your budget, log expenses, manage tasks, and organize files — all in one place, with full ownership of your data.
+udctl (UnDercontrol) is private AI infrastructure: you and your AI agents explore ideas, capture tasks, notes, expenses and files, and distill them into knowledge that stays on your own machine.
 
 ## What is udctl?
 

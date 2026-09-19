@@ -1,20 +1,33 @@
 ---
-title: Web Clipper (Chrome Extension)
-description: Save web pages as udctl tasks with full-page snapshots
+title: "Web Clipper for Chrome: Save Pages to udctl"
+description: A Chrome extension that saves any web page as a udctl task with a full-page snapshot, or copies the article as clean Markdown with no login needed.
 sidebar_position: 8
 ---
 
-# Web Clipper (Chrome Extension)
+# Web Clipper for Chrome
 
-The udctl Web Clipper is a Chrome browser extension that saves web pages as udctl tasks with a full-page HTML snapshot attached as a resource.
+A web clipper is a browser extension that captures a web page, or the part of it you care about, and files it somewhere you can find again. The udctl Web Clipper for Chrome does two things:
+
+- **Copy Markdown**: extracts the article on the current page into clean Markdown on your clipboard. No login, no account, no server. Paste it into any AI chat or editor.
+- **Save Page**: creates a udctl task from the page and attaches a full-page HTML snapshot to it, on your own udctl server.
+
+## What is a web clipper, and how is this one different?
+
+Most clippers, such as the Evernote and Notion extensions, save the page into that product's notebook or workspace, and you need an account there to use them. The udctl Web Clipper differs in two ways:
+
+- Copy Markdown works without any account. It is the feature most people install it for, and it never talks to a server.
+- Save Page files the clip as a **task**, not a note, on a server you run. The snapshot is a single self-contained HTML file attached to that task, so it stays readable when the original page changes or disappears, and your AI agents can read it through the task like any other attachment.
+
+One use case, copying an article for an AI chat, is walked through in the blog post [Turn any web page into clean Markdown for your AI](/blog/2026/07/11/web-clipper/).
 
 ## Features
 
+- **Copy Markdown** — One click, the article content lands on your clipboard as Markdown (Readability + Turndown; navigation, ads and sidebars are stripped)
 - **One-click save** — Click the extension icon, edit the title, and save
 - **Full-page snapshot** — Captures the entire page as a single HTML file using [SingleFile](https://github.com/gildas-lormeau/SingleFile)
 - **Auto-attachment** — The HTML snapshot is attached as a resource to the newly created task
 - **Custom title** — Edit the task title before saving (defaults to the page title)
-- **API Key auth** — Connects securely using your udctl API key
+- **API Key auth** — Save Page connects securely using your udctl API key; Copy Markdown needs no key
 
 ## Installation
 

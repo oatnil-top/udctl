@@ -11,7 +11,7 @@ You want to hand a web article to an AI — to summarize it, translate it, or as
 
 Select-all and copy? You paste a mess of navigation bars, ads, recommendation widgets, and broken formatting. Send the link? Many AI tools can't fetch pages, and when they can, the result is often incomplete.
 
-The UnDercontrol **Web Clipper** Chrome extension gives you a cleaner answer: click **Copy Markdown**, and the page's article content is extracted into tidy Markdown on your clipboard — **no login, no account, no configuration**. Install it and it works on any page. Paste it into Claude, ChatGPT, or any AI, and what it gets is pure content with zero noise.
+The UnDercontrol [**Web Clipper**](/docs/web-clipper/) Chrome extension gives you a cleaner answer: click **Copy Markdown**, and the page's article content is extracted into tidy Markdown on your clipboard — **no login, no account, no configuration**. Install it and it works on any page. Paste it into Claude, ChatGPT, or any AI, and what it gets is pure content with zero noise.
 
 ![Web Clipper popup — Copy Markdown and Save to Local, no login required](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/popup-setup.png)
 

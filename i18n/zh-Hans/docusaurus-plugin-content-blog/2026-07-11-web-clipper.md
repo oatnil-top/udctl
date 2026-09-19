@@ -11,7 +11,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-cli
 
 全选复制?粘过去的是一堆导航栏、广告、推荐位和乱掉的排版。发链接?很多 AI 工具抓不了页面,抓到的也常常是残缺的。
 
-UnDercontrol 的 **Web Clipper** Chrome 扩展给了一个更干净的答案:点一下 **Copy Markdown**,当前页面的正文被提取成整洁的 Markdown 进入剪贴板——**无需登录、无需账号、无需任何配置**,装上就能在任何页面用。粘给 Claude、ChatGPT 或任何 AI,它拿到的是纯正文,没有一点噪音。
+UnDercontrol 的 [**Web Clipper**](/zh-Hans/docs/web-clipper/) Chrome 扩展给了一个更干净的答案:点一下 **Copy Markdown**,当前页面的正文被提取成整洁的 Markdown 进入剪贴板——**无需登录、无需账号、无需任何配置**,装上就能在任何页面用。粘给 Claude、ChatGPT 或任何 AI,它拿到的是纯正文,没有一点噪音。
 
 ![Web Clipper 弹窗 — 无需登录即可 Copy Markdown 和本地保存](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/popup-setup.png)
 

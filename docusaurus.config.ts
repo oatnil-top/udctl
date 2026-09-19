@@ -235,8 +235,8 @@ const config: Config = {
               to: '/open-source',
             },
             {
-              label: 'Discord',
-              href: 'https://discord.gg/vkw2nhxE',
+              label: 'Telegram',
+              href: 'https://t.me/+4hZC0GtTe1syYzhl',
             },
             {
               label: 'GitHub',

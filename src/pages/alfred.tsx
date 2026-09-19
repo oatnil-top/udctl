@@ -15,7 +15,7 @@ import styles from './butler.module.css';
  * Mirrored as /alfred in the Vite app — keep structure and copy aligned when
  * editing either. Get-started CTAs point at /download (boss decision
  * 2026-07-26): Alfred needs a locally installed daemon, so the download IS
- * the first step. The ghost CTA goes to the Telegram/Discord configuration
+ * the first step. The ghost CTA goes to the Telegram configuration
  * reference.
  */
 
@@ -42,7 +42,7 @@ function AlfredHero() {
             <Translate id="alfredp.hero.ctaPrimary">Get started with Alfred</Translate>
           </Link>
           <Link className={styles.btnGhost} to="/configuration">
-            <Translate id="alfredp.hero.ctaSetup">Set up Telegram / Discord</Translate>
+            <Translate id="alfredp.hero.ctaSetup">Set up Telegram</Translate>
           </Link>
         </div>
       </div>
@@ -220,7 +220,7 @@ export default function AlfredPage(): ReactNode {
       description={translate({
         id: 'alfredp.meta.description',
         message:
-          'Alfred is a private AI butler living in your Telegram or Discord. Send one message — he understands, remembers, delegates to your AI agents, and reports back in the chat.',
+          'Alfred is a private AI butler living in your Telegram. Send one message — he understands, remembers, delegates to your AI agents, and reports back in the chat.',
         description: 'The Alfred page meta description',
       })}>
       <main className={styles.scope}>

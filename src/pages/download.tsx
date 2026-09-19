@@ -163,7 +163,7 @@ const HUB_REACH_IN: HeroPlatform[] = [
   {
     glyph: 'ud-g-chat',
     name: {en: 'Chat apps', zh: '聊天软件'},
-    meta: {en: 'Telegram · Discord', zh: 'Telegram · Discord'},
+    meta: {en: 'Telegram', zh: 'Telegram'},
     href: '/alfred',
   },
   {

@@ -795,7 +795,7 @@ function ArchitectureSection() {
               <Translate id="home4.arch.im">IM entry</Translate>
             </text>
             <text x="440" y="128" textAnchor="middle" className={s.aSub}>
-              Telegram · Discord · Web
+              Telegram · Web
             </text>
 
             {/* IM -> Alfred */}
@@ -939,7 +939,7 @@ function ArchitectureSection() {
             <Translate id="home4.arch.im">IM entry</Translate>
           </text>
           <text x="180" y="124" textAnchor="middle" className={s.aSub}>
-            Telegram · Discord · Web
+            Telegram · Web
           </text>
 
           {/* IM -> Alfred; ⑤ label sits in this gap, next to the right rail */}
@@ -1109,8 +1109,7 @@ function homepageJsonLd(description: string): string {
         sameAs: [
           'https://github.com/oatnil-top',
           'https://www.npmjs.com/package/@oatnil/ud',
-          'https://discord.gg/vkw2nhxE',
-          'https://t.me/+qoTRSTL82lMxZjJl',
+          'https://t.me/+4hZC0GtTe1syYzhl',
           'https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog',
         ],
       },

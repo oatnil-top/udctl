@@ -111,7 +111,7 @@ EOF
 
 两条路都一样:agent 认为做完时把任务改成 `pending`,不是 `done`。review 这一关还是你的。
 
-如果你连应用都不想打开,[Alfred](/alfred) 就是同一套机制套了个聊天窗口:在 Telegram 或 Discord 里发一条消息,它派给你的 agent,再在同一个会话里回报。
+如果你连应用都不想打开,[Alfred](/alfred) 就是同一套机制套了个聊天窗口:在 Telegram 里发一条消息,它派给你的 agent,再在同一个会话里回报。
 
 ## FAQ
 

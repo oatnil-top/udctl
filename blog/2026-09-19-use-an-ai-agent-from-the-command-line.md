@@ -112,7 +112,7 @@ Typing into a terminal means sitting at the terminal. Two ways around that, both
 
 Either way the agent moves the task to `pending` when it thinks it is done, not to `done`. You stay the review gate.
 
-If you would rather not open the app at all, [Alfred](/alfred) is the same mechanism behind a chat window: send a message in Telegram or Discord, and it delegates to your agents and reports back in the thread.
+If you would rather not open the app at all, [Alfred](/alfred) is the same mechanism behind a chat window: send a message in Telegram, and it delegates to your agents and reports back in the thread.
 
 ## FAQ
 

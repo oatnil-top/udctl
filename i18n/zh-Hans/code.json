@@ -24,7 +24,7 @@
     "message": "开始使用 Alfred"
   },
   "alfredp.hero.ctaSetup": {
-    "message": "配置 Telegram / Discord"
+    "message": "配置 Telegram"
   },
   "alfredp.hero.sub": {
     "message": "发一条消息，他会理解、记住、派给合适的 agent，并把结果带回聊天。整个 udctl，都在这一次对话里。"
@@ -36,7 +36,7 @@
     "message": "住在你 IM 里的管家。"
   },
   "alfredp.meta.description": {
-    "message": "Alfred 是住在你 Telegram / Discord 里的私人 AI 管家。发一条消息，他会理解、记住、派给你的 AI 代理，并把结果带回聊天。"
+    "message": "Alfred 是住在你 Telegram 里的私人 AI 管家。发一条消息，他会理解、记住、派给你的 AI 代理，并把结果带回聊天。"
   },
   "alfredp.meta.title": {
     "message": "Alfred — 你的私人 AI 管家 | udctl"
@@ -129,16 +129,13 @@
     "message": "挑一个你顺手的地方"
   },
   "contact.cta.fine": {
-    "message": "也可以在 Discord 找我们 · 或者直接发邮件"
+    "message": "或者直接发邮件"
   },
   "contact.cta.primary": {
     "message": "加入 Telegram 群"
   },
   "contact.cta.title": {
     "message": "来打个招呼吧。"
-  },
-  "contact.hero.ctaDiscord": {
-    "message": "Discord"
   },
   "contact.hero.ctaEmail": {
     "message": "发邮件"
@@ -175,7 +172,7 @@
     "message": "其他信息"
   },
   "contact.meta.description": {
-    "message": "联系 udctl 团队 —— Telegram 群、邮件、Discord 或 GitHub。"
+    "message": "联系 udctl 团队 —— Telegram 群、邮件或 GitHub。"
   },
   "contact.meta.title": {
     "description": "The contact page meta title",
@@ -192,18 +189,6 @@
   "contact.methods.community.title": {
     "description": "Community contact method title",
     "message": "社区"
-  },
-  "contact.methods.discord.description": {
-    "description": "Discord contact method description",
-    "message": "加入我们的 Discord 服务器，进行实时聊天、获取支持和参与社区讨论。"
-  },
-  "contact.methods.discord.linkText": {
-    "description": "Discord contact method link text",
-    "message": "加入 Discord"
-  },
-  "contact.methods.discord.title": {
-    "description": "Discord contact method title",
-    "message": "Discord"
   },
   "contact.methods.email.description": {
     "description": "Email contact method description",

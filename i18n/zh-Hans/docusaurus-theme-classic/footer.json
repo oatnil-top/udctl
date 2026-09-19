@@ -47,9 +47,9 @@
     "message": "开源组件",
     "description": "The label of footer link with label=Open Source Components linking to /open-source"
   },
-  "link.item.label.Discord": {
-    "message": "Discord",
-    "description": "The label of footer link with label=Discord"
+  "link.item.label.Telegram": {
+    "message": "Telegram",
+    "description": "The label of footer link with label=Telegram"
   },
   "link.item.label.GitHub": {
     "message": "GitHub",

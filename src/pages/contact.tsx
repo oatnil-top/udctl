@@ -21,8 +21,7 @@ import styles from './butler.module.css';
  * (ud-vite-app/src/pages/contact-page/index.tsx); keep the two channel sets in
  * sync.
  */
-const TELEGRAM_GROUP_URL = 'https://t.me/+qoTRSTL82lMxZjJl';
-const DISCORD_URL = 'https://discord.gg/vkw2nhxE';
+const TELEGRAM_GROUP_URL = 'https://t.me/+4hZC0GtTe1syYzhl';
 const EMAIL_URL = 'mailto:lintao.amons@gmail.com';
 const ISSUES_URL = 'https://github.com/oatnil-top/ud-docs/issues';
 const DISCUSSIONS_URL = 'https://github.com/oatnil-top/ud-docs/discussions';
@@ -62,17 +61,6 @@ function useChannels(): Channel[] {
       ),
       linkText: <Translate id="contact.methods.email.linkText">Send Email</Translate>,
       href: EMAIL_URL,
-    },
-    {
-      key: 'discord',
-      title: <Translate id="contact.methods.discord.title">Discord</Translate>,
-      description: (
-        <Translate id="contact.methods.discord.description">
-          Join our Discord server for real-time chat, support, and community discussions.
-        </Translate>
-      ),
-      linkText: <Translate id="contact.methods.discord.linkText">Join Discord</Translate>,
-      href: DISCORD_URL,
     },
     {
       key: 'github',
@@ -123,9 +111,6 @@ function HeroSection() {
         </Link>
         <Link className={styles.btnGhost} href={EMAIL_URL}>
           <Translate id="contact.hero.ctaEmail">Email us</Translate>
-        </Link>
-        <Link className={styles.btnGhost} href={DISCORD_URL}>
-          <Translate id="contact.hero.ctaDiscord">Discord</Translate>
         </Link>
       </div>
     </header>
@@ -195,7 +180,7 @@ function CtaSection() {
           <Translate id="contact.cta.primary">Join the Telegram group</Translate>
         </Link>
         <p className={styles.fine}>
-          <Translate id="contact.cta.fine">Also on Discord · Or just email us</Translate>
+          <Translate id="contact.cta.fine">Or just email us</Translate>
         </p>
       </div>
     </section>
@@ -212,7 +197,7 @@ export default function ContactPage(): ReactNode {
       })}
       description={translate({
         id: 'contact.meta.description',
-        message: 'Get in touch with the udctl team — Telegram group, email, Discord, or GitHub.',
+        message: 'Get in touch with the udctl team — Telegram group, email, or GitHub.',
         description: 'The contact page meta description',
       })}>
       <main className={styles.scope}>

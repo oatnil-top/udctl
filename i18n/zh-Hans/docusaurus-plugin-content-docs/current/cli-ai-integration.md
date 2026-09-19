@@ -1,6 +1,6 @@
 ---
-title: AI Agent CLI — 让 Claude Code、Cursor 和 Codex 管理你的任务
-description: 用 ud 这个 AI agent CLI，让 Claude Code、Cursor 和 Codex 在终端里管理你的任务、笔记和支出。
+title: "让 Claude Code、Codex 管理任务的 AI agent CLI"
+description: ud 是面向 AI agent 的命令行工具:Claude Code、Codex 在终端读任务、记进度、传文件,不用手写提示词。
 sidebar_label: AI Agent CLI
 sidebar_position: 6
 ---

@@ -1,6 +1,6 @@
 ---
-title: CLI 命令参考
-description: udctl 命令行工具完整参考手册
+title: "命令行任务管理:udctl CLI(ud)命令参考"
+description: 用 ud 在终端管理任务与看板:kubectl 风格的 get / apply 命令、vim 键位的 TUI,npm 或 Homebrew 安装。
 sidebar_position: 4
 ---
 

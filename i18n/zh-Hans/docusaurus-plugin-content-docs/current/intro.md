@@ -1,14 +1,16 @@
 ---
+title: "udctl 是什么:可自托管的任务、笔记与 AI agent 工作台"
+description: udctl(原名 UnDercontrol)是可自托管的任务、笔记、记账与 AI agent 工作台,数据放在你自己的服务器上。
 sidebar_position: 1
 ---
 
 # 欢迎使用 udctl
 
-udctl（原名 UnDercontrol）是一个自托管平台，旨在帮助您轻松管理和控制您的基础设施。
+udctl(原名 UnDercontrol)是一个可自托管的任务与 AI agent 工作台:任务、笔记、记账和文件放在一处,数据在你自己的服务器上,AI agent 通过命令行接手工作。
 
 ## 什么是 udctl？
 
-udctl 提供了一个全面的基础设施管理解决方案，具有以下特性：
+udctl 由一位独立开发者加 AI 打造,把管理时间与金钱的工作放进同一个空间,不依赖第三方服务:
 
 - **用户账户管理**：创建和管理具有基于角色的访问控制的用户账户
 - **API 集成**：用于程序化访问的 RESTful API

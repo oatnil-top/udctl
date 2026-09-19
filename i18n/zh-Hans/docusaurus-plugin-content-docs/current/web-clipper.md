@@ -1,6 +1,6 @@
 ---
-title: "Web Clipper Chrome 扩展:把网页存进 udctl"
-description: 一个 Chrome 扩展:把任意网页存成带完整页面快照的 udctl 任务,或者不用登录就把正文复制成干净的 Markdown。
+title: "网页剪藏 Chrome 扩展:网页转 Markdown 或存进 udctl"
+description: udctl 网页剪藏扩展:不登录就把网页正文复制成 Markdown,或存成带完整快照的任务,放在你的服务器上。
 sidebar_position: 8
 ---
 

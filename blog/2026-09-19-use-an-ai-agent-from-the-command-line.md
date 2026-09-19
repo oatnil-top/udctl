@@ -69,7 +69,7 @@ All three CLIs also take the task as an argument so you can call them from a scr
 
 The agent can read your code. It cannot read the reason for the change: the ticket that explains what the customer actually reported, the note from three weeks ago where you rejected the obvious fix, the screenshot attached to the bug. That context is in a browser tab, and the agent has no browser tab.
 
-[udctl](/) (formerly UnDercontrol) puts it in the same terminal. Its CLI, `ud`, reads and writes the same tasks, notes, comments and attachments you see in the app:
+[udctl](/) (UnDercontrol) puts it in the same terminal. Its CLI, `ud`, reads and writes the same tasks, notes, comments and attachments you see in the app:
 
 ```bash
 npm install -g @oatnil/ud # Node.js 18+

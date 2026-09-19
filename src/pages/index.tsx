@@ -409,11 +409,11 @@ function ShowcaseSection() {
               key={s.key}
               className={i === index ? styles.fadeup : styles.copyGhost}
               aria-hidden={i !== index}>
-              <h1>
+              <h2>
                 {s.t1}
                 <br />
                 <span className={styles.turn}>{s.t2}</span>
-              </h1>
+              </h2>
               <p className={styles.sub}>{s.sub}</p>
             </div>
           ))}

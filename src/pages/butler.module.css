@@ -120,7 +120,7 @@
      sticky — without this the section lands underneath it. */
   scroll-margin-top: 84px;
 }
-.hero h1 {
+.hero h2 {
   font-size: clamp(2.5rem, 5.4vw, 4.1rem);
   font-weight: 800;
   line-height: 1.08;

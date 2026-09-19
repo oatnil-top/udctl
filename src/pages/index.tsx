@@ -1140,7 +1140,7 @@ export default function Home(): ReactNode {
   const metaDescription = translate({
     id: 'homepage.description',
     message:
-      'udctl (UnDercontrol) is a private workplace for people and AI agents: tasks, threads and knowledge live here, agents are defined and scheduled here, on your own machine.',
+      'udctl (UnDercontrol) is a private workplace for people and AI agents: tasks, threads, knowledge, agent definitions and scheduling, all on your own machine.',
     description: 'The homepage meta description',
   });
   return (

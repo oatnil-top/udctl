@@ -111,6 +111,6 @@ For collaboration, tasks are shared through **groups** with role-based read/writ
 
 - 🏠 **Website & docs**: [oatnil.com](https://oatnil.com)
 - 📦 **CLI installation guide**: [oatnil.com/docs/cli](https://oatnil.com/docs/cli)
-- 💻 **Desktop App & self-hosting**: [oatnil.com/subscribe](https://oatnil.com/subscribe)
+- 💻 **Desktop App & self-hosting**: [udctl.com/docs/pricing](https://udctl.com/docs/pricing/)
 
 One universal container, one home for all your work — try it now with `npm install -g @oatnil/ud`.

@@ -21,7 +21,7 @@
   },
   "link.item.label.Pricing": {
     "message": "定价",
-    "description": "The label of footer link with label=Pricing linking to /subscribe"
+    "description": "The label of footer link with label=Pricing linking to /docs/pricing"
   },
   "link.item.label.Self-Host": {
     "message": "自部署",

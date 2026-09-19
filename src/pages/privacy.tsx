@@ -283,7 +283,7 @@ function FooterSection() {
         <Link to="/docs/intro" className={styles.footerLink}>
           <Translate id="homepage.footer.documentation">Documentation</Translate>
         </Link>
-        <Link to="/subscribe" className={styles.footerLink}>
+        <Link to="/docs/pricing" className={styles.footerLink}>
           <Translate id="homepage.footer.pricing">Pricing</Translate>
         </Link>
       </div>

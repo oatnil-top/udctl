@@ -176,6 +176,6 @@ Want a GUI, multi-device access, or the whole server running on your own machine
 
 - 🏠 **Website & docs**: [oatnil.com](https://oatnil.com)
 - 📦 **CLI installation guide**: [oatnil.com/docs/cli](https://oatnil.com/docs/cli)
-- 💻 **Desktop App & self-hosting**: [oatnil.com/subscribe](https://oatnil.com/subscribe)
+- 💻 **Desktop App & self-hosting**: [udctl.com/docs/pricing](https://udctl.com/docs/pricing/)
 
 Your data, your format, your tools. UnDercontrol just makes them flow — try it now with `npm install -g @oatnil/ud`.

@@ -11,7 +11,7 @@ API keys give you programmatic access to the udctl API. Use them to connect the 
 :::info
 API keys require a licensed deployment. The **Personal** tier does not include them; every
 licensed band does — **Small team** (free license), **Team**, and **Unlimited**. See the
-[Pricing](/subscribe) page.
+[Pricing](/docs/pricing) page.
 :::
 
 ## Main Features

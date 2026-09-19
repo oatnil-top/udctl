@@ -21,7 +21,7 @@ udctl self-hosted licenses are sold in four team-size bands:
 | **Team** | Up to 20 people | Paid license |
 | **Unlimited** | Any team size | Paid license |
 
-Prices are published in exactly one place: the [Pricing](/subscribe) page. They are not
+Prices are published in exactly one place: the [Pricing](/docs/pricing) page. They are not
 restated here. Licenses — the paid bands and the Small team free license alike — come
 through the [contact page](/contact). The [self-hosting page](/self-hosting) additionally
 includes a free 3-month trial license anyone can use.
@@ -228,7 +228,7 @@ Having trouble with license activation? We're here to help!
 
 - **Contact**: [Get in touch](/contact)
 - **Documentation**: [Self-Deployment Guide](/docs/self-deployment)
-- **Pricing Questions**: [Pricing Page](/subscribe)
+- **Pricing Questions**: [Pricing Page](/docs/pricing)
 
 ### Common Questions
 

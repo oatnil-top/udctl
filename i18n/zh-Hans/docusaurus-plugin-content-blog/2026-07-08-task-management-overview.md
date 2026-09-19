@@ -111,6 +111,6 @@ Claude Code、Codex、OpenCode 或任何终端型 Agent 都能通过统一的 CL
 
 - 🏠 **官网 & 文档**：[oatnil.com](https://oatnil.com)
 - 📦 **CLI 安装指南**：[oatnil.com/docs/cli](https://oatnil.com/docs/cli)
-- 💻 **桌面 App & 自托管**：[oatnil.com/subscribe](https://oatnil.com/subscribe)
+- 💻 **桌面 App & 自托管**：[udctl.com/docs/pricing](https://udctl.com/docs/pricing/)
 
 一个通用的信息容器,一处收纳你的全部工作——现在就 `npm install -g @oatnil/ud` 试试。

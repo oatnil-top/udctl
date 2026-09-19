@@ -26,3 +26,10 @@
 /docs/category/deployment/         /docs/self-deployment/      301
 /zh-Hans/docs/category/deployment  /zh-Hans/docs/self-deployment/  301
 /zh-Hans/docs/category/deployment/ /zh-Hans/docs/self-deployment/  301
+
+# /subscribe was the pricing page until 2026-09-19; the owner kept exactly one pricing
+# page, /docs/pricing/, and this one was retired. Both slash forms, both locales.
+/subscribe                 /docs/pricing/           301
+/subscribe/                /docs/pricing/           301
+/zh-Hans/subscribe         /zh-Hans/docs/pricing/   301
+/zh-Hans/subscribe/        /zh-Hans/docs/pricing/   301

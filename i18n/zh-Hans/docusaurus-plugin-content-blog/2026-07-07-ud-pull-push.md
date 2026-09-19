@@ -176,6 +176,6 @@ ud push            # 推回去
 
 - 🏠 **官网 & 文档**:[oatnil.com](https://oatnil.com)
 - 📦 **CLI 安装指南**:[oatnil.com/docs/cli](https://oatnil.com/docs/cli)
-- 💻 **桌面 App & 自托管**:[oatnil.com/subscribe](https://oatnil.com/subscribe)
+- 💻 **桌面 App & 自托管**:[udctl.com/docs/pricing](https://udctl.com/docs/pricing/)
 
 你的数据,你的格式,你的工具。UnDercontrol 只是让它们无缝流动起来——现在就 `npm install -g @oatnil/ud` 试试。

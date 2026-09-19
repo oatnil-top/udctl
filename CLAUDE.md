@@ -45,7 +45,7 @@ automatically via Cloudflare Workers Builds on push to `main`. i18n: `en`
   never describe it as open-source.
 - Verify changes with `npm run build` (builds both locales; broken links fail
   the build). Pre-existing broken-anchor warnings on `/privacy`,
-  `/self-hosting`, `/subscribe`, `/` and their `/zh-Hans/` twins are known.
+  `/self-hosting`, `/` and their `/zh-Hans/` twins are known.
   Docusaurus cannot enumerate anchors on TSX pages, so **any** link into
   `/configuration#<id>` or `/self-hosting#<id>` is reported broken even when the
   `id` really is in the emitted HTML (check with

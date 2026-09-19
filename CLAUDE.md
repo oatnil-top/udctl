@@ -56,8 +56,8 @@ automatically via Cloudflare Workers Builds on push to `main`. i18n: `en`
 ## IndexNow (Bing side of "did the crawler see the change")
 
 `.github/workflows/indexnow.yml` runs on every push to `main` that touches
-content: full-depth checkout, `npm run build`, wait until udctl.com serves a new
-main bundle, then `scripts/indexnow.mjs` POSTs every sitemap URL whose
+content: full-depth checkout, `npm run build`, wait until udctl.com serves the
+sitemap that build produced, then `scripts/indexnow.mjs` POSTs every sitemap URL whose
 `<lastmod>` is on or after the push's oldest commit date. The key is
 `static/<key>.txt` (public by design; the file's presence is the proof of
 ownership). `npm run indexnow` is a dry run against the live sitemaps. Google

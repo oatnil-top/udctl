@@ -227,7 +227,7 @@ function FirstScreen() {
             master's word, card 674aa679); before that it held the sentence
             master approved verbatim on 2026-08-29, 「把一切放回你手里」, plus
             the entry list. There is no zh tagline in docusaurus.config.ts, so
-            the zh sentence is kept in step with home4.hero.eyebrow by hand.
+            the zh sentence is kept in step with the EN tagline by hand.
           */}
           <p className={hero.sub}>
             <Translate id="home5.hero.sub">{tagline}</Translate>
@@ -395,9 +395,11 @@ function ShowcaseSection() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}>
       <div>
-        <div className={styles.eyebrow}>
-          <Translate id="home4.hero.eyebrow">Explore. Capture. Distill. A private workspace for people and AI agents.</Translate>
-        </div>
+        {/* No eyebrow here since 2026-09-20: it rendered the same slogan as
+            the first screen's hero subtitle (siteConfig.tagline), one screen
+            apart. Removed by seo-specialist under alfred's announced default
+            (ud card 674aa679, comment 5c2c542a); master gave no replacement
+            line. Bringing one back is product copy: master's call. */}
         {/* All four copy blocks stay mounted, stacked in one grid cell
             (.copyStack); the tallest sets the column height at every viewport
             width, so switching tabs never changes the section height — the

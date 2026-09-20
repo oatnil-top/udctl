@@ -192,6 +192,7 @@ function Chevron() {
 
 function FirstScreen() {
   const tiles = useTiles();
+  const {siteConfig: {tagline}} = useDocusaurusContext();
   return (
     <div className={hero.heroBleed}>
       <PlatformGlyphDefs />
@@ -217,17 +218,17 @@ function FirstScreen() {
           <h1 className={hero.h1}>udctl</h1>
 
           {/*
-            EN and ZH carry different sentences here on purpose. ZH gets the
-            slogan master approved verbatim (「把一切放回你手里」) plus the
-            entry list, in the reference's two-part shape. EN keeps the
-            product's existing approved subtitle — the site tagline in
-            docusaurus.config.ts — because no English wording for the slogan has
-            been approved, and an unapproved outward-facing line must not ship.
+            EN renders siteConfig.tagline itself (docusaurus.config.ts), not a
+            copy of it: the previous literal here was pasted from the tagline
+            and silently went stale when the tagline changed on 2026-09-19
+            (ud card 674aa679). master 2026-09-20: the homepage uses the new
+            slogan. ZH still carries its own sentence via code.json
+            home5.hero.sub (the slogan master approved verbatim on 2026-08-29,
+            「把一切放回你手里」, plus the entry list) until master decides the
+            Chinese noun for the new slogan (工作场所 / 工作空间, card 674aa679).
           */}
           <p className={hero.sub}>
-            <Translate id="home5.hero.sub">
-              One workspace for tasks, knowledge, and AI agents — private, portable, yours.
-            </Translate>
+            <Translate id="home5.hero.sub">{tagline}</Translate>
           </p>
 
           <div className={hero.ctas}>

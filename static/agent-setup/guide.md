@@ -1,5 +1,5 @@
 <!-- GENERATED COPY — do not edit here.
-     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one 2d0e57c8f
+     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one d07161e24
      Regenerate: auto/sync-agent-guide.sh -->
 
 # UnDercontrol Guide
@@ -43,7 +43,7 @@ Convention: If a note or comment produces canonical truth, promote it into the T
 | Assignee | Workload and accountability |
 | Links | Parent-child and peer references (knowledge graph) |
 | Description | Markdown body — the actual content |
-| Custom Metadata | Unlimited key-value pairs (`cf.priority`, `cf.sprint`), also queryable |
+| Custom Metadata | Key-value pairs on a card. Queryable: the built-in `ud.sprint`, `ud.points`, `ud.priority`, `ud.type`, and `cf.<name>` once that custom field is defined. Any other key is stored and shown, and nothing queries it. |
 
 **Task Relationships:**
 - **Peer Link** — Bidirectional association between two tasks
@@ -114,29 +114,29 @@ Relative deadline formats: `+2h`, `+1d`, `+7d`, `end_of_day`, `end_of_week`
 
 ### Query Syntax
 
-SQL-like filtering for tasks. Available fields: `title`, `description`, `status`, `tags`, `deadline`, `created_at`, `updated_at`, custom fields via `cf.fieldname`.
+SQL-like filtering for tasks. Available fields: `id`, `title`, `description`, `status`, `tags`, `assignee`, `kickoff`, `deadline`, `created_at`, `updated_at`, the built-in `ud.sprint`, `ud.points`, `ud.priority`, `ud.type`, and custom fields via `cf.<name>`. (`ud.projects` is stored on the card but is not queryable.)
 
-**Operators**: `=`, `!=`, `>`, `<`, `>=`, `<=`, `IN`, `LIKE`, `ILIKE`, `CONTAINS`, `CONTAINS_ALL`, `BETWEEN`, `IS NULL`, `IS EMPTY`
+**Operators**: `=`, `!=`, `>`, `<`, `>=`, `<=`, `IN`, `LIKE`, `ILIKE`, `CONTAINS`, `NOT CONTAINS`, `CONTAINS_ALL`, `BETWEEN`, `IS NULL`, `IS NOT NULL`
 
 **Datetime expressions**: `today`, `yesterday`, `tomorrow`, `now`, `-7d`, `+3d`, `-1w`, `-1M`
 
 **Examples:**
 ```
 status = 'todo' AND tags CONTAINS 'backend'
-deadline < NOW() AND status != 'done'
-tags IS EMPTY
+deadline < now AND status != 'done'
 created_at > -7d
-cf.priority = 'high'
-status IN ('todo', 'in_progress') ORDER BY deadline ASC
+status IN ('todo', 'in-progress') ORDER BY deadline ASC
 title ILIKE '%auth%' OR description ILIKE '%auth%'
+ud.sprint = '<sprint-task-id>' AND status = 'in-progress'
 ```
+
+**Two ways a query answers with a lie instead of an error**: status values are hyphenated, so `status = 'in_progress'` is not a syntax error — it returns an empty list, which reads exactly like "nothing is in progress"; and `cf.<name>` resolves only against a custom field you have defined — undefined, the whole query fails with `TASK_INVALID_QUERY`. `cf.` and `ud.` are separate keys, not two spellings of one: sprint membership is `ud.sprint`, and its value is the sprint card's own task id.
 
 **Common queries:**
 - Overdue: `deadline < today AND status != 'done'`
 - Due today: `deadline = today`
-- Recently created: `created_at > -7d`
-- Untagged (inbox): `tags IS EMPTY`
-- Work in progress: `status = 'in_progress'`
+- No deadline: `deadline IS NULL`
+- Work in progress: `status = 'in-progress'`
 
 ### Markdown Embeds
 
@@ -248,7 +248,7 @@ is why". An unlabelled command is not an acceptable answer.
 3. Create tasks and bind them to the board and project
 4. Use deadlines and assignees for accountability
 5. Track progress with Notes on each task
-6. Use query views: `status = 'in_progress' AND cf.sprint = '12'`
+6. Use query views: `status = 'in-progress' AND ud.sprint = '<sprint-task-id>'`
 
 ### Knowledge Base / Wiki
 1. Create tasks with tag `doc` for documentation

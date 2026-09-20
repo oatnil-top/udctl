@@ -44,6 +44,65 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 -->
 
 
+## v0.156.0 (2026-09-21)
+
+### New Features
+
+- **`ud find` — one command that answers "which command do I use to find X".** It maps what you are looking for (a task, a note, a comment, a skill, an agent, a board) onto the command that finds it, and for each one it also names what that command does **not** return — so an empty result is no longer ambiguous between "there is none" and "you asked the wrong command".
+- **A scheduled calendar block can be deleted, or moved to a different task, from the block itself.** Click a block on the calendar: the peek now carries a delete button and a re-bind control, so re-planning no longer means deleting the block and building a new one.
+- **Deleting a folder now deletes what is inside it.** It used to dissolve the folder and move its contents up one level. Now the server deletes the whole subtree, and before it does, a confirmation names how many items will go and warns that anything without a recycle bin — resources, diagrams — is deleted permanently. Cancel changes nothing. Tasks go to the recycle bin and can be restored.
+- **Desktop: every tab keeps its own page history, with back and forward buttons.** Navigating inside a tab no longer costs you the way back.
+- **Desktop navigation is one level flatter.** The Runtime group is gone; CLI, Workspace Prompts and Daemons are top-level tabs.
+- **The agent detail page was rebuilt around a single Edit switch.** Sections read as plain text until you press Edit, which flips the whole page into edit mode at once, instead of each field carrying its own editor.
+
+### Improvements
+
+- **Agent principles are an ordinary agent field now.** They are edited with everything else on the agent page, `ud apply` writes them (on create as well as on update), `ud describe agent -o apply` round-trips them, and every change is recorded as an `agent.updated` audit event that is kept forever.
+- **`ud apply` writes every document in a multi-document file, not only the first.** A file holding several documents used to write the first one and pour the rest into its body.
+- **`ud apply` can clear tags.** An empty tag list now reaches the server, and the echo reports the cleared state.
+- **`ud describe task` ends by saying how many comment threads the task has**, so "this task has no comments" and "I did not show you its comments" stop looking the same.
+- **Writing metadata no longer echoes back a result nobody verified.** A key that does not exist is an error at the call site instead of a success line, and a delete really deletes. `--set cf.points=...` is refused by name and points you at `ud.points`.
+- **Table output truncates by display width.** A column cut through the middle of a wide character used to make a grep over the whole output find nothing — which reads exactly like a miss.
+- **`--column todo` matches a column named "To Do".** The example in the command's own help no longer fails when you copy it.
+- **`ud cook` recipes and the `--help` examples were checked by running them**, each on a board the recipe itself names.
+- **Expired rows in the account switcher say so, and prefill the login form.** Switching to a session whose token has expired used to look like an ordinary switch.
+- **Calendar quick-create waits until you stop typing (3 seconds) before asking the backend**, and searches the whole local cache in the meantime.
+- **Calendar block colors follow live task status.** Change a status and the block repaints immediately, over a new set of attention colors.
+- **A screenshot pasted into a comment box is re-encoded before upload**, so pasting one costs a fraction of what it did.
+- **Budget: adding a plan resolves overlaps with the plans already there, and period totals accrue per period.**
+- **Desktop task detail: click the description heading to collapse the whole section.**
+- **The contact page points at a Telegram group** instead of Discord.
+- **The product reads as `udctl`** in the browser title, the login and onboarding screens, and About.
+
+### Bug Fixes
+
+- **Mermaid arrowheads no longer disappear when a page holds more than one diagram.** Marker ids are scoped per diagram, so an arrowhead can no longer resolve against a hidden one.
+- **A folder delete that fails no longer reports success.** The tree is put back from the pre-delete snapshot and the failure is shown; deleting explorer items reports which ids failed instead of throwing.
+- **Creating an agent keeps the principles you gave it.** They were dropped silently on create.
+- **The agent pages no longer serve stale data**, and a save that would overwrite somebody else's concurrent edit is stopped before it lands.
+- **Frontmatter unquoting strips the quotes**, rather than trimming characters out of the content.
+- **Self-hosted: `/health` really reads the database now**, and the SQLite connection pool gained two guards.
+
+### Upgrade Notes (self-hosted)
+
+- **Back up your database before upgrading.** Two migrations run on first boot and both of them drop something. `00090_drop_agent_cli_user_set` clears machine-guessed CLI picks and then removes the `agent_cli_user_set` column from `agent_configs`. `00091_drop_agent_principles_revisions` drops the `agent_principles_revisions` table with every row in it; the principles values themselves live on the agent and are not affected, but the change journal is gone. Rolling either one back restores the shape, not the data.
+- **Two API endpoints were retired.** `PUT /api/v1/agents/:id/principles` and `GET /api/v1/agents/:id/principles-history` no longer exist; principles are written through `PUT /api/v1/agents/:id`, and the CLI's `--principles-history` flag went with them. Anything scripted against those two paths needs changing.
+- **Deleting a folder changed meaning.** It used to move the folder's contents up one level; it now deletes them. Resources and diagrams have no recycle bin, so for those it is permanent.
+- No new configuration settings, and no settings removed.
+
+CLI upgrades are yours to run: publishing a release does not change the `ud` on anybody's machine. There are three routes — **take only one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route — install the new desktop app instead.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.156.0`.
+
+---
+
 ## v0.155.0 (2026-09-15)
 
 ### New Features

@@ -350,7 +350,7 @@
     "message": "五个角度，同一个 udctl"
   },
   "home4.hero.eyebrow": {
-    "message": "探索、记录、沉淀。人与 AI agent 共用的私密工作场所。"
+    "message": "探索、记录、沉淀。人与 AI agent 共用的私密工作空间。"
   },
   "home4.hero.ctaDownload": {
     "message": "下载"
@@ -663,7 +663,7 @@
     "message": "让你的信息回到掌控之中。"
   },
   "homepage.description": {
-    "message": "udctl(UnDercontrol)是人与 AI agent 共用的私密工作场所:探索、记录、沉淀,都在你自己的机器上。"
+    "message": "udctl(UnDercontrol)是人与 AI agent 共用的私密工作空间:探索、记录、沉淀,都在你自己的机器上。"
   },
   "homepage.docs.body": {
     "description": "Homepage: docs.body",
@@ -2232,7 +2232,7 @@
     "message": "标签"
   },
   "home5.hero.sub": {
-    "message": "把一切放回你手里。任务、笔记、文件和钱，放在一个你自己拥有的地方——从 Telegram、桌面端、网页、手机或终端里用它。"
+    "message": "探索、记录、沉淀。人与 AI agent 共用的私密工作空间。"
   },
   "home5.hero.ctaDownload": {
     "message": "下载 macOS 版"

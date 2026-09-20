@@ -222,10 +222,12 @@ function FirstScreen() {
             copy of it: the previous literal here was pasted from the tagline
             and silently went stale when the tagline changed on 2026-09-19
             (ud card 674aa679). master 2026-09-20: the homepage uses the new
-            slogan. ZH still carries its own sentence via code.json
-            home5.hero.sub (the slogan master approved verbatim on 2026-08-29,
-            「把一切放回你手里」, plus the entry list) until master decides the
-            Chinese noun for the new slogan (工作场所 / 工作空间, card 674aa679).
+            slogan. ZH resolves the same key through code.json home5.hero.sub,
+            which since 2026-09-20 carries the Chinese slogan (noun 工作空间,
+            master's word, card 674aa679); before that it held the sentence
+            master approved verbatim on 2026-08-29, 「把一切放回你手里」, plus
+            the entry list. There is no zh tagline in docusaurus.config.ts, so
+            the zh sentence is kept in step with home4.hero.eyebrow by hand.
           */}
           <p className={hero.sub}>
             <Translate id="home5.hero.sub">{tagline}</Translate>

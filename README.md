@@ -1,6 +1,6 @@
 # udctl
 
-**udctl** (UnDercontrol) is a private workplace for people and AI agents: tasks, threads and knowledge live here; so do each agent's definition, skills and scheduling across your machines; and it works just as well for one person with no agents at all. One data source; web, desktop, mobile, CLI, and chat clients on top of it.
+**udctl** (UnDercontrol) is a private workspace for people and AI agents: tasks, threads and knowledge live here; so do each agent's definition, skills and scheduling across your machines; and it works just as well for one person with no agents at all. One data source; web, desktop, mobile, CLI, and chat clients on top of it.
 
 This repository is the source of the documentation site at **https://udctl.com** (English and 简体中文). The application itself is proprietary and free for personal use; its code is not in this repository.
 

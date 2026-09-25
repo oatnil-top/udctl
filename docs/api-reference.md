@@ -12,6 +12,18 @@ specification is published here:
 - **Rendered reference:** [oatnil.com/api/](pathname:///api/)
 - **Raw specification:** [oatnil.com/api/openapi.json](pathname:///api/openapi.json)
 
+## Prefer it by behavior?
+
+The OpenAPI rendering lists 400 operations flat. For the surfaces we have
+rewritten so far there is a **behavior-first reference**: endpoints grouped by
+what you are doing, each with a full HTTP call (request in raw HTTP and curl,
+response per status code), and contract-only endpoints tagged Draft.
+
+- [Kanban and tasks, by behavior](/api/kanban)
+
+More groups will appear there as they are written; everything else stays fully
+described by the OpenAPI file below.
+
 The raw file is a Swagger 2.0 (OpenAPI 2.0) JSON document. It covers **303 paths /
 400 operations / 438 definitions** — every route the server registers, including
 the ones the web and desktop clients use.

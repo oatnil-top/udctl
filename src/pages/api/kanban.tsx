@@ -3,12 +3,16 @@
  *
  * DATA ONLY. Rendering, shared strings and the page frame live in
  * src/components/ApiReference; a future API group is another file like this
- * one under src/pages/api/. Contract-first: Draft endpoints are published
- * contract (target paths, not implemented yet); Live endpoints show today's
- * real paths. Field shapes for Live endpoints checked against go-backend web
- * DTOs (kanban/dto.go, todolist/dto.go) on 2026-09-26; Draft shapes come from
- * the design records on ud cards 936c5276 (read side) and 2509f97b (write
- * side), merged on card f081e261.
+ * one under src/pages/api/.
+ *
+ * TARGET CONTRACT ONLY (owner decision 2026-09-26, "只写目标的API"): every
+ * path here is the target shape — /tasks/* and /boards/* prefixes, target
+ * verbs. Implemented operations carry status "live" plus `today`, the path
+ * that answers until the renames ship; unimplemented ones carry "draft".
+ * Field shapes for live operations checked against go-backend web DTOs
+ * (kanban/dto.go, todolist/dto.go) on 2026-09-26; draft shapes come from the
+ * design records on ud cards 936c5276 (read side) and 2509f97b (write side),
+ * merged on card f081e261.
  */
 import type {ReactNode} from 'react';
 import ApiReferencePage, {type ApiPageData} from '@site/src/components/ApiReference';
@@ -34,76 +38,11 @@ const DATA: ApiPageData = {
       },
       endpoints: [
         {
-          id: 'raw-column-query',
-          method: 'POST',
-          path: '/api/v1/kanban/boards/{boardId}/query',
-          status: 'live',
-          behavior: {en: 'See what is in a column (today)', zh: '看某列有什么卡(今天的方式)'},
-          summary: {
-            en: 'The raw query gate, scoped to one board. You send a complete query string — which means the client assembles it: the column query, the board default_tags, the active-sprint condition, any ad-hoc filter, and the ORDER BY all have to be combined on your side. The Draft column endpoint below moves that assembly to the server.',
-            zh: '板范围的 raw 查询门。你要发一条拼好的完整查询 —— 列自己的查询、板的 default_tags、active sprint 条件、临时过滤和 ORDER BY 都得在客户端 AND 起来。下面那条 Draft 列读端点就是把这份拼装收进服务端。',
-          },
-          fields: [
-            {name: 'query', type: 'string', desc: {en: 'Complete query string (same syntax as /api/v1/todolist/query).', zh: '完整查询串(语法与 /api/v1/todolist/query 相同)。'}},
-            {name: 'page', type: 'int', desc: {en: '1-indexed.', zh: '从 1 开始。'}},
-            {name: 'page_size', type: 'int', desc: {en: 'Items per page.', zh: '每页条数。'}},
-          ],
-          request: [
-            {
-              label: 'HTTP',
-              lang: 'text',
-              code: `POST /api/v1/kanban/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/query HTTP/1.1
-Host: api.oatnil.com
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "query": "(status = 'doing') ORDER BY metadata.order ASC",
-  "page": 1,
-  "page_size": 20
-}`,
-            },
-            {
-              label: 'curl',
-              lang: 'bash',
-              code: `curl -s "$UD_API/api/v1/kanban/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/query" \\
-  -H "Authorization: Bearer $UD_TOKEN" -H "Content-Type: application/json" \\
-  -d "{\\"query\\":\\"(status = 'doing') ORDER BY metadata.order ASC\\",\\"page\\":1,\\"page_size\\":20}"`,
-            },
-          ],
-          responses: [
-            {
-              label: '200',
-              lang: 'json',
-              code: `{
-  "data": [
-    {
-      "id": "7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10",
-      "title": "Retry payment callback on timeout",
-      "description": "",
-      "status": "doing",
-      "path": "",
-      "tags": ["dev", "urgent"],
-      "checkInCount": 0,
-      "metadata": {"ud.sprint": "3f6d9a52-88a1-4f0e-b1d4-6c1f2e7a9b31", "order": 3},
-      "created_at": "2026-09-22T08:01:44Z",
-      "created_by": "9a7e5c21-1b3f-4e8a-92d6-04c8f1a7d502",
-      "updated_at": "2026-09-25T10:12:03Z",
-      "updated_by": "9a7e5c21-1b3f-4e8a-92d6-04c8f1a7d502"
-    }
-  ],
-  "total": 9,
-  "page": 1
-}`,
-            },
-          ],
-        },
-        {
           id: 'column-query',
           method: 'POST',
           path: '/api/v1/boards/{boardId}/columns/{columnId}/query',
           status: 'draft',
-          behavior: {en: 'See what is in a column (contract)', zh: '看某列有什么卡(契约)'},
+          behavior: {en: 'See what is in a column', zh: '看某列有什么卡'},
           summary: {
             en: 'Semantic column read. You name the column and how to treat sprints; the server assembles the query — column query, board default_tags, active-sprint expansion, your ad-hoc filter, default ordering — and echoes the result as effective_query so you can see exactly what was asked.',
             zh: '语义化列读。你只说要哪一列、sprint 怎么算;查询由服务端拼装 —— 列查询、板 default_tags、active sprint 展开、你的临时过滤、缺省排序 —— 并把结果回显在 effective_query 里,你能看到实际查了什么。',
@@ -118,8 +57,8 @@ Content-Type: application/json
             {status: '404', desc: {en: 'The column id is not on this board.', zh: '列 id 不在这块板上。'}},
           ],
           note: {
-            en: 'Column ids come from GET /api/v1/kanban/boards/{id} (the board carries its column definitions); translating a column name to its id is the client\'s one remaining job.',
-            zh: '列 id 从 GET /api/v1/kanban/boards/{id} 拿(板对象带列定义);「列名翻 id」是留在客户端的唯一一件事。',
+            en: 'Column ids come from GET /api/v1/boards/{id} (the board carries its column definitions); translating a column name to its id is the client\'s one remaining job. Until this endpoint ships, column reads go through the raw query gate below.',
+            zh: '列 id 从 GET /api/v1/boards/{id} 拿(板对象带列定义);「列名翻 id」是留在客户端的唯一一件事。本端点上线前,列读走下面那扇 raw 查询门。',
           },
           request: [
             {
@@ -173,10 +112,77 @@ Content-Type: application/json
           },
         },
         {
+          id: 'board-query',
+          method: 'POST',
+          path: '/api/v1/boards/{boardId}/query',
+          status: 'live',
+          today: 'POST /api/v1/kanban/boards/{boardId}/query',
+          behavior: {en: 'Free query within a board', zh: '板范围自由查询'},
+          summary: {
+            en: 'The raw query gate, scoped to one board. You send a complete query string and the server only applies the board\'s visibility scope. Free querying is a product feature and stays; the semantic column read above absorbs only the most common shape.',
+            zh: '板范围的 raw 查询门。你发一条拼好的完整查询,服务端只负责板的可见性范围。自由查询是产品能力,会一直在;上面的语义化列读只收编最常用的那一种形状。',
+          },
+          fields: [
+            {name: 'query', type: 'string', desc: {en: 'Complete query string (same syntax as /api/v1/tasks/query).', zh: '完整查询串(语法与 /api/v1/tasks/query 相同)。'}},
+            {name: 'page', type: 'int', desc: {en: '1-indexed.', zh: '从 1 开始。'}},
+            {name: 'page_size', type: 'int', desc: {en: 'Items per page.', zh: '每页条数。'}},
+          ],
+          request: [
+            {
+              label: 'HTTP',
+              lang: 'text',
+              code: `POST /api/v1/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/query HTTP/1.1
+Host: api.oatnil.com
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "query": "(status = 'doing') ORDER BY metadata.order ASC",
+  "page": 1,
+  "page_size": 20
+}`,
+            },
+            {
+              label: 'curl',
+              lang: 'bash',
+              code: `curl -s "$UD_API/api/v1/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/query" \\
+  -H "Authorization: Bearer $UD_TOKEN" -H "Content-Type: application/json" \\
+  -d "{\\"query\\":\\"(status = 'doing') ORDER BY metadata.order ASC\\",\\"page\\":1,\\"page_size\\":20}"`,
+            },
+          ],
+          responses: [
+            {
+              label: '200',
+              lang: 'json',
+              code: `{
+  "data": [
+    {
+      "id": "7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10",
+      "title": "Retry payment callback on timeout",
+      "description": "",
+      "status": "doing",
+      "path": "",
+      "tags": ["dev", "urgent"],
+      "checkInCount": 0,
+      "metadata": {"ud.sprint": "3f6d9a52-88a1-4f0e-b1d4-6c1f2e7a9b31", "order": 3},
+      "created_at": "2026-09-22T08:01:44Z",
+      "created_by": "9a7e5c21-1b3f-4e8a-92d6-04c8f1a7d502",
+      "updated_at": "2026-09-25T10:12:03Z",
+      "updated_by": "9a7e5c21-1b3f-4e8a-92d6-04c8f1a7d502"
+    }
+  ],
+  "total": 9,
+  "page": 1
+}`,
+            },
+          ],
+        },
+        {
           id: 'create-in-board',
           method: 'POST',
-          path: '/api/v1/kanban/boards/{boardId}/tasks',
+          path: '/api/v1/boards/{boardId}/tasks',
           status: 'live',
+          today: 'POST /api/v1/kanban/boards/{boardId}/tasks',
           behavior: {en: 'Create a card on a board', zh: '在板上建一张卡'},
           summary: {
             en: 'Creates a task associated with the board; the server merges the board default_tags in. Today the client decides the initial status/tags itself. The Draft column_id field changes that: name the column, and the server computes the initial values from the column\'s enter actions (your explicit fields always win).',
@@ -195,7 +201,7 @@ Content-Type: application/json
             {
               label: 'HTTP',
               lang: 'text',
-              code: `POST /api/v1/kanban/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/tasks HTTP/1.1
+              code: `POST /api/v1/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/tasks HTTP/1.1
 Host: api.oatnil.com
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -210,7 +216,7 @@ Content-Type: application/json
             {
               label: 'curl',
               lang: 'bash',
-              code: `curl -s "$UD_API/api/v1/kanban/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/tasks" \\
+              code: `curl -s "$UD_API/api/v1/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/tasks" \\
   -H "Authorization: Bearer $UD_TOKEN" -H "Content-Type: application/json" \\
   -d '{"title":"Export support tickets","description":"CSV and XLSX","status":"todo","tags":["dev"]}'`,
             },
@@ -258,8 +264,8 @@ Content-Type: application/json
             {status: '409', desc: {en: 'Your view is stale: the card no longer matches the source column query. The response carries the card\'s current snapshot — refresh and retry. The server never writes fields based on an outdated view.', zh: '你的视图过期了:卡已不匹配源列查询。响应带卡的当前快照 —— 刷新后重试。服务端绝不按过期视图写字段。'}},
           ],
           note: {
-            en: 'The whole move is idempotent (set / add / remove are all idempotent), so replays are safe — no idempotency key needed. Not to be confused with PATCH /api/v1/todolist/{id}/move, which moves a task to a different folder path.',
-            zh: '整个操作幂等(set / add / remove 都幂等),重放安全,不需要幂等 key。别与 PATCH /api/v1/todolist/{id}/move 混淆 —— 那条移动的是目录路径。',
+            en: 'The whole move is idempotent (set / add / remove are all idempotent), so replays are safe — no idempotency key needed. Not to be confused with PATCH /api/v1/tasks/{id}/move, which moves a task to a different folder path.',
+            zh: '整个操作幂等(set / add / remove 都幂等),重放安全,不需要幂等 key。别与 PATCH /api/v1/tasks/{id}/move 混淆 —— 那条移动的是目录路径。',
           },
           request: [
             {
@@ -374,12 +380,13 @@ Authorization: Bearer <token>`,
         {
           id: 'metadata',
           method: 'PATCH',
-          path: '/api/v1/todolist/{taskId}/metadata',
+          path: '/api/v1/tasks/{taskId}/metadata',
           status: 'live',
+          today: 'PATCH /api/v1/todolist/{taskId}/metadata',
           behavior: {en: 'Reorder in a column / assign to a sprint', zh: '列内重排 / 排进 sprint'},
           summary: {
-            en: 'Patches one metadata key per call. Reordering inside a column writes "order"; putting a card into a sprint writes "ud.sprint". Removing a key (taking a card out of a sprint) is the DELETE twin: DELETE /api/v1/todolist/{taskId}/metadata/{key}.',
-            zh: '一次调用改一个 metadata key。列内重排写 "order";把卡排进 sprint 写 "ud.sprint"。删 key(把卡移出 sprint)走孪生路由:DELETE /api/v1/todolist/{taskId}/metadata/{key}。',
+            en: 'Patches one metadata key per call. Reordering inside a column writes "order"; putting a card into a sprint writes "ud.sprint". Removing a key (taking a card out of a sprint) is the DELETE twin: DELETE /api/v1/tasks/{taskId}/metadata/{key}.',
+            zh: '一次调用改一个 metadata key。列内重排写 "order";把卡排进 sprint 写 "ud.sprint"。删 key(把卡移出 sprint)走孪生路由:DELETE /api/v1/tasks/{taskId}/metadata/{key}。',
           },
           fields: [
             {name: 'key', type: 'string', req: true, desc: {en: 'Metadata key, e.g. "order", "ud.sprint", "cf.priority".', zh: 'metadata 键,如 "order"、"ud.sprint"、"cf.priority"。'}},
@@ -389,7 +396,7 @@ Authorization: Bearer <token>`,
             {
               label: 'HTTP',
               lang: 'text',
-              code: `PATCH /api/v1/todolist/7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10/metadata HTTP/1.1
+              code: `PATCH /api/v1/tasks/7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10/metadata HTTP/1.1
 Host: api.oatnil.com
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -402,31 +409,32 @@ Content-Type: application/json
             {
               label: 'curl',
               lang: 'bash',
-              code: `curl -s -X PATCH "$UD_API/api/v1/todolist/7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10/metadata" \\
+              code: `curl -s -X PATCH "$UD_API/api/v1/tasks/7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10/metadata" \\
   -H "Authorization: Bearer $UD_TOKEN" -H "Content-Type: application/json" \\
   -d '{"key":"order","value":12}'`,
             },
           ],
           note: {
-            en: 'The 200 response is the full task object (same shape as GET /api/v1/todolist/{id}).',
-            zh: '200 响应是完整任务对象(形状同 GET /api/v1/todolist/{id})。',
+            en: 'The 200 response is the full task object (same shape as GET /api/v1/tasks/{id}).',
+            zh: '200 响应是完整任务对象(形状同 GET /api/v1/tasks/{id})。',
           },
         },
         {
           id: 'task-detail',
           method: 'GET',
-          path: '/api/v1/todolist/{taskId}',
+          path: '/api/v1/tasks/{taskId}',
           status: 'live',
+          today: 'GET | POST | DELETE /api/v1/todolist/{taskId}',
           behavior: {en: 'Open, edit, delete a card', zh: '打开、编辑、删除一张卡'},
           summary: {
-            en: 'The generic task detail family: GET reads (with notes and linked items), POST /api/v1/todolist/{taskId} updates, DELETE soft-deletes. The update is a partial update — every field is optional and an omitted field stays unchanged; for assignee, kickoff and deadline an explicit empty string means "clear". The rename contract turns this update into PATCH /tasks/{taskId}; the POST verb keeps working through the alias period.',
-            zh: '通用任务详情一族:GET 读(带 notes 与关联),POST /api/v1/todolist/{taskId} 改,DELETE 软删。更新是部分更新 —— 所有字段可选,没传的字段不动;assignee、kickoff、deadline 三个字段显式传空串表示「清除」。改名契约会把这条更新收敛为 PATCH /tasks/{taskId};别名期内 POST 动词继续工作。',
+            en: 'The generic task detail family: GET reads (with notes and linked items), PATCH /api/v1/tasks/{taskId} updates, DELETE soft-deletes. The update is a partial update — every field is optional and an omitted field stays unchanged; for assignee, kickoff and deadline an explicit empty string means "clear". Note the verb change in the contract: today the update answers to POST at the old path; the target verb is PATCH, which is what the semantics have been all along.',
+            zh: '通用任务详情一族:GET 读(带 notes 与关联),PATCH /api/v1/tasks/{taskId} 改,DELETE 软删。更新是部分更新 —— 所有字段可选,没传的字段不动;assignee、kickoff、deadline 三个字段显式传空串表示「清除」。注意契约里的动词变化:今天更新在旧路径上应答的是 POST;目标动词是 PATCH —— 这本来就是它的语义。',
           },
           request: [
             {
               label: 'HTTP',
               lang: 'text',
-              code: `POST /api/v1/todolist/7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10 HTTP/1.1
+              code: `PATCH /api/v1/tasks/7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10 HTTP/1.1
 Host: api.oatnil.com
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -439,7 +447,7 @@ Content-Type: application/json
             {
               label: 'curl',
               lang: 'bash',
-              code: `curl -s "$UD_API/api/v1/todolist/7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10" \\
+              code: `curl -s -X PATCH "$UD_API/api/v1/tasks/7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10" \\
   -H "Authorization: Bearer $UD_TOKEN" -H "Content-Type: application/json" \\
   -d '{"status":"done","deadline":""}'`,
             },
@@ -462,8 +470,9 @@ Content-Type: application/json
         {
           id: 'global-query',
           method: 'POST',
-          path: '/api/v1/todolist/query',
+          path: '/api/v1/tasks/query',
           status: 'live',
+          today: 'POST /api/v1/todolist/query',
           behavior: {en: 'Backlog, sprint members, any free query', zh: '看 backlog、sprint 成员,任意自由查询'},
           summary: {
             en: 'The global query gate: SQL-like syntax over built-in fields, tags, ud.* and cf.* metadata. Backlog views, sprint member lists and every ad-hoc slice go through here. Free querying is a product feature and stays — the semantic endpoints above only absorb the most common shape ("give me a column").',
@@ -479,7 +488,7 @@ Content-Type: application/json
             {
               label: 'HTTP',
               lang: 'text',
-              code: `POST /api/v1/todolist/query HTTP/1.1
+              code: `POST /api/v1/tasks/query HTTP/1.1
 Host: api.oatnil.com
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -494,7 +503,7 @@ Content-Type: application/json
             {
               label: 'curl',
               lang: 'bash',
-              code: `curl -s "$UD_API/api/v1/todolist/query" \\
+              code: `curl -s "$UD_API/api/v1/tasks/query" \\
   -H "Authorization: Bearer $UD_TOKEN" -H "Content-Type: application/json" \\
   -d "{\\"query\\":\\"(status = 'todo') AND ('q4' IN tags) ORDER BY metadata.order ASC\\",\\"page\\":1,\\"pageSize\\":20,\\"view\\":\\"lite\\"}"`,
             },
@@ -534,8 +543,9 @@ Content-Type: application/json
         {
           id: 'close-sprint',
           method: 'POST',
-          path: '/api/v1/todolist/{sprintId}/close-sprint',
+          path: '/api/v1/tasks/{sprintId}/close-sprint',
           status: 'live',
+          today: 'POST /api/v1/todolist/{sprintId}/close-sprint',
           behavior: {en: 'Close a sprint', zh: '完成一个 sprint'},
           summary: {
             en: 'The close ceremony in one server-side transaction: rolls unfinished members to the target, settles velocity, writes the retro note, marks the sprint done. Milestone-ordered — the sprint only flips to done after every rollover succeeded, so retries are safe.',
@@ -548,14 +558,14 @@ Content-Type: application/json
             {status: '400', desc: {en: 'Not a sprint task, bad rollover target, or unfinished members with no rollover chosen.', zh: '不是 sprint 任务、rollover 目标不合法,或还有未完成员却没有给 rollover。'}},
           ],
           note: {
-            en: 'Draft change under review: today, repointing the board\'s activeSprintId after a close is the caller\'s job (the web client does it, other clients may not). The contract folds that rotation into this endpoint, with the affected boards listed in the response.',
-            zh: '契约中的修改:今天 close 之后把板的 activeSprintId 指过去是调用方的事(web 客户端会做,其他客户端不一定)。契约把这次轮转收进本端点,响应列出被改的板。',
+            en: 'Draft addition to this contract: today, repointing the board\'s activeSprintId after a close is the caller\'s job (the web client does it, other clients may not). The target contract folds that rotation into this endpoint, with the affected boards listed in the response.',
+            zh: '本契约中的 Draft 增项:今天 close 之后把板的 activeSprintId 指过去是调用方的事(web 客户端会做,其他客户端不一定)。目标契约把这次轮转收进本端点,响应列出被改的板。',
           },
           request: [
             {
               label: 'HTTP',
               lang: 'text',
-              code: `POST /api/v1/todolist/3f6d9a52-88a1-4f0e-b1d4-6c1f2e7a9b31/close-sprint HTTP/1.1
+              code: `POST /api/v1/tasks/3f6d9a52-88a1-4f0e-b1d4-6c1f2e7a9b31/close-sprint HTTP/1.1
 Host: api.oatnil.com
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -567,7 +577,7 @@ Content-Type: application/json
             {
               label: 'curl',
               lang: 'bash',
-              code: `curl -s "$UD_API/api/v1/todolist/3f6d9a52-88a1-4f0e-b1d4-6c1f2e7a9b31/close-sprint" \\
+              code: `curl -s "$UD_API/api/v1/tasks/3f6d9a52-88a1-4f0e-b1d4-6c1f2e7a9b31/close-sprint" \\
   -H "Authorization: Bearer $UD_TOKEN" -H "Content-Type: application/json" \\
   -d '{"rollover":"backlog"}'`,
             },
@@ -592,20 +602,20 @@ Content-Type: application/json
       id: 'board',
       title: {en: 'Board lifecycle', zh: '板生命周期'},
       blurb: {
-        en: 'Board CRUD and sharing. One thing to know: PUT /api/v1/kanban/boards/{id} is the single write path for column definitions — the server materializes column actions and backfills missing column ids on every board write. Field shapes are in OpenAPI.',
-        zh: '板的增删改查与分享。一件事值得知道:PUT /api/v1/kanban/boards/{id} 是列定义的唯一写入口 —— 每次写板,服务端都会物化列 actions 并补齐缺失的列 id。字段形状见 OpenAPI。',
+        en: 'Board CRUD and sharing; until the rename ships these answer under /api/v1/kanban/boards/*. One thing to know: PUT /api/v1/boards/{id} is the single write path for column definitions — the server materializes column actions and backfills missing column ids on every board write. Field shapes are in OpenAPI.',
+        zh: '板的增删改查与分享;改名落地前这些路由在 /api/v1/kanban/boards/* 下应答。一件事值得知道:PUT /api/v1/boards/{id} 是列定义的唯一写入口 —— 每次写板,服务端都会物化列 actions 并补齐缺失的列 id。字段形状见 OpenAPI。',
       },
       endpoints: [],
       compactNavLabel: {en: 'all 8 routes', zh: '全部 8 条'},
       compact: [
-        {method: 'POST', path: '/api/v1/kanban/boards', desc: {en: 'Create a board (name and board_type "private" | "shared" required; columns optional).', zh: '建板(name 与 board_type "private" | "shared" 必填;columns 可选)。'}},
-        {method: 'GET', path: '/api/v1/kanban/boards', desc: {en: 'List the boards you can see.', zh: '列出你可见的板。'}},
-        {method: 'GET', path: '/api/v1/kanban/boards/{id}', desc: {en: 'Get one board with its column definitions and settings.', zh: '取一块板,含列定义与设置。'}},
-        {method: 'PUT', path: '/api/v1/kanban/boards/{id}', desc: {en: 'Update name, columns, default_tags, metadata — the column-definition write path.', zh: '改名字、列、default_tags、metadata —— 列定义的写路径。'}},
-        {method: 'DELETE', path: '/api/v1/kanban/boards/{id}', desc: {en: 'Delete the board; its tasks are preserved.', zh: '删板;板上的卡保留。'}},
-        {method: 'POST', path: '/api/v1/kanban/boards/{id}/share', desc: {en: 'Share with a group (group_id, permission "r" | "rw").', zh: '分享给 group(group_id,permission "r" | "rw")。'}},
-        {method: 'DELETE', path: '/api/v1/kanban/boards/{id}/share', desc: {en: 'Remove group sharing.', zh: '取消分享。'}},
-        {method: 'POST', path: '/api/v1/kanban/boards/preview-actions', desc: {en: 'Preview the column actions a query would auto-generate — read-only, used while editing columns.', zh: '预览一条列查询会物化出什么 actions —— 只读,编列时用。'}},
+        {method: 'POST', path: '/api/v1/boards', desc: {en: 'Create a board (name and board_type "private" | "shared" required; columns optional).', zh: '建板(name 与 board_type "private" | "shared" 必填;columns 可选)。'}},
+        {method: 'GET', path: '/api/v1/boards', desc: {en: 'List the boards you can see.', zh: '列出你可见的板。'}},
+        {method: 'GET', path: '/api/v1/boards/{id}', desc: {en: 'Get one board with its column definitions and settings.', zh: '取一块板,含列定义与设置。'}},
+        {method: 'PUT', path: '/api/v1/boards/{id}', desc: {en: 'Update name, columns, default_tags, metadata — the column-definition write path.', zh: '改名字、列、default_tags、metadata —— 列定义的写路径。'}},
+        {method: 'DELETE', path: '/api/v1/boards/{id}', desc: {en: 'Delete the board; its tasks are preserved.', zh: '删板;板上的卡保留。'}},
+        {method: 'POST', path: '/api/v1/boards/{id}/share', desc: {en: 'Share with a group (group_id, permission "r" | "rw").', zh: '分享给 group(group_id,permission "r" | "rw")。'}},
+        {method: 'DELETE', path: '/api/v1/boards/{id}/share', desc: {en: 'Remove group sharing.', zh: '取消分享。'}},
+        {method: 'POST', path: '/api/v1/boards/preview-actions', desc: {en: 'Preview the column actions a query would auto-generate — read-only, used while editing columns.', zh: '预览一条列查询会物化出什么 actions —— 只读,编列时用。'}},
       ],
     },
   ],

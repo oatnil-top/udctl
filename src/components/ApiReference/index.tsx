@@ -55,6 +55,8 @@ export interface Endpoint {
   method: Method;
   path: string;
   status: 'live' | 'draft';
+  /** Path that answers today, when the target path has not shipped yet. */
+  today?: string;
   behavior: L;
   summary: L;
   fields?: Field[];
@@ -98,9 +100,10 @@ export interface ApiPageData {
 
 const UI = {
   contractNote: {
-    en: 'Contract first: endpoints tagged Draft are published contract, not yet implemented — they are the agreed target shape and may still change before shipping. Endpoints tagged Live work today at the exact paths shown. Planned renames: the /todolist/* family converges on /tasks/* (direction decided, alias rollout pending); /kanban/boards/* to /boards/* is under consideration. Draft endpoints are published directly under the new prefixes.',
-    zh: '契约先行:标 Draft 的端点是先发布的契约、尚未实现 —— 形状已定向,上线前仍可能调整。标 Live 的端点今天就按页面上的路径工作。改名计划:/todolist/* 一族将收敛到 /tasks/*(方向已定,别名机制在实现计划里);/kanban/boards/* 换 /boards/* 尚在讨论。Draft 端点直接以新前缀发布。',
+    en: 'Contract first: every path on this page is the target contract. Live means the operation is implemented — until the path renames ship (/todolist/* becomes /tasks/*, /kanban/boards/* becomes /boards/*) it answers at the "works today" path shown beneath it. Draft means the endpoint is published contract only, not implemented yet, and may still change before shipping. The machine truth for what is deployed right now stays the OpenAPI spec.',
+    zh: '契约先行:本页所有路径都是目标契约。Live 表示操作已实现 —— 在改名落地前(/todolist/* 收敛到 /tasks/*,/kanban/boards/* 收敛到 /boards/*),它在下方标注的「今天可用路径」上应答。Draft 表示端点只发布了契约、尚未实现,上线前仍可能调整。当前线上实况的机器真值仍是 OpenAPI 规范。',
   },
+  todayLabel: {en: 'Works today at', zh: '今天可用路径'},
   baseUrl: {en: 'Base URL', zh: '基础地址'},
   baseUrlVal: {
     en: '`https://api.oatnil.com` (hosted) or wherever you self-host',
@@ -230,6 +233,11 @@ export default function ApiReferencePage({data}: {data: ApiPageData}): ReactNode
                     {ep.status === 'draft' ? t(UI.draft) : t(UI.live)}
                   </span>
                 </div>
+                {ep.today && (
+                  <p className={styles.today}>
+                    {t(UI.todayLabel)}: <code>{ep.today}</code>
+                  </p>
+                )}
                 <p className={styles.epBeh}>{t(ep.behavior)}</p>
                 <p className={styles.epSummary}>{inline(t(ep.summary))}</p>
 

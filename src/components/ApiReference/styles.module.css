@@ -172,6 +172,15 @@
 }
 .epPath .prm { color: var(--ifm-color-warning-darkest); }
 [data-theme='dark'] .epPath .prm { color: var(--ifm-color-warning-lightest); }
+.today {
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-600);
+  margin: 0.3rem 0 0;
+}
+.today code {
+  font-size: 0.9em;
+}
+
 .epBeh {
   font-size: 1.02rem;
   font-weight: 700;

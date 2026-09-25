@@ -1,0 +1,87 @@
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.lead {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 720px;
+}
+
+.section {
+  margin-top: 2.2rem;
+}
+.sectionTitle {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+.sectionBlurb {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9rem;
+  margin: 0 0 0.8rem;
+  max-width: 720px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.7rem;
+}
+@media (min-width: 700px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card {
+  display: block;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+  padding: 0.8rem 1rem;
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  line-height: 1.6;
+}
+.card:hover {
+  border-color: var(--ifm-color-primary);
+  text-decoration: none;
+  color: var(--ifm-font-color-base);
+}
+.cardTitle {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ifm-color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.cardDesc {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-top: 0.15rem;
+}
+.tag {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+  padding: 0.05rem 0.4rem;
+  background: rgba(230, 167, 0, 0.16);
+  color: var(--ifm-color-warning-darkest);
+  white-space: nowrap;
+}
+[data-theme='dark'] .tag {
+  color: var(--ifm-color-warning-lightest);
+}
+.soon {
+  border-style: dashed;
+  color: var(--ifm-color-emphasis-600);
+}
+.soon .cardTitle {
+  color: var(--ifm-color-emphasis-600);
+}

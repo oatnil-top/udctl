@@ -214,6 +214,10 @@ const config: Config = {
               to: '/docs/intro',
             },
             {
+              label: 'Developers',
+              to: '/dev',
+            },
+            {
               label: 'Blog',
               to: '/blog',
             },

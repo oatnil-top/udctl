@@ -33,3 +33,11 @@
 /subscribe/                /docs/pricing/           301
 /zh-Hans/subscribe         /zh-Hans/docs/pricing/   301
 /zh-Hans/subscribe/        /zh-Hans/docs/pricing/   301
+
+# Paths are case-sensitive on Workers Static Assets: /zh-hans/... is a 404, and the 404 page
+# still fires the RUM beacon, which is how four readers were seen landing on lowercase
+# /zh-hans/ URLs in one day (2026-09-24, ud task 2cb63040) with no referer to say where the
+# links came from. Fold the lowercase locale prefix back onto the real one, path preserved.
+# Only the all-lowercase form is covered; it is the only form that has been observed.
+/zh-hans        /zh-Hans/        301
+/zh-hans/*      /zh-Hans/:splat  301

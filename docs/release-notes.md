@@ -44,6 +44,56 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 -->
 
 
+## v0.157.0 (2026-09-27)
+
+**Self-hosting? Upgrade the server before the apps and the CLI.** This release's web app, desktop app and CLI call API paths that older servers do not answer, so a 0.157.0 client against an older server fails; older clients keep working against the new server. Back up your database first: two migrations run on first boot, and both only add. Details under Upgrade Notes below.
+
+### New Features
+
+- **`ud sprint start <id> --board <board>` starts a sprint from the CLI in one action.** It flips the sprint to in progress and points the board at it in a single write, so a failure leaves neither half done. `--kickoff` / `--deadline` set the window in the same call, and `ud sprint list --board <board>` reads it back.
+- **Closing a sprint also moves the board on.** Every board that pointed at the closed sprint is repointed at the rollover sprint (or cleared, when the rest goes to the backlog). `ud sprint close` prints which boards it moved, and names any board it skipped because you cannot write to it.
+- **`ud move task <id> --board <board> --from <column> --to <column>` moves a card between columns in one step**, running the board's exit and enter actions together on the server. `--dry-run` shows what would change. If the board changed under you since you last read it, the move is refused instead of landing on stale data.
+- **Reading a board from the CLI shows what the board shows.** `ud get task --board <board> --column <column>`, `--sprint`, `ud describe board` (with a count per column) and `ud sprint list` read the same columns the app reads, including the active sprint's scope, and end with a footer saying whether the listing is complete.
+- **`ud apply` with `board:` and `column:` creates the card the way the column would**: status, tags and the active sprint are set by the server from the column's rules.
+
+### Improvements
+
+- **Dragging a card to another column is smooth.** The card lands in the target column immediately instead of bouncing back to where it came from and jumping over a moment later. A cross-column drop is one request now.
+- **Starting a sprint updates the board you are looking at straight away.** The columns used to keep showing cards from outside the sprint until the page was reloaded.
+- **Creating a card inside a column lets the server apply that column's rules**, and a sprint's start and end dates are saved in one write.
+- **A comment reply that fails to send stays on screen marked "Not sent", with Retry and Discard.** It used to disappear, leaving only a toast that scrolls away.
+- **Desktop: Cmd+R / Ctrl+R reloads the focused window**, as in a browser, and View > Reload does the same.
+- **The board's column list and the built-in All Tasks columns come from the server**, so every client shows the same columns.
+- **`ud query board` without a query is one request for the whole board**, instead of one per column.
+- **`ud get task --status in_progress` (a status that does not exist) is an error that lists the valid values.** It used to print "No tasks found", which looks exactly like an empty result.
+
+### Bug Fixes
+
+- **Desktop: launching the app a second time no longer starts a second copy against the same data.** The second launch used to delete the running app's single-instance lock and start anyway, so two copies shared one profile and one daemon.
+- **Agent sessions started by the desktop daemon no longer stall on arrival** about one time in four. The daemon now types a short word after pasting the prompt, so the session always has something to act on.
+- **Self-hosted on SQLite: a project's task list no longer fails with "malformed JSON"**, and returns the tasks it should.
+
+### Upgrade Notes (self-hosted)
+
+- **Back up your database before upgrading.** Two migrations run on first boot. Both only add: `00092_add_status_to_budgets` adds a `status` column to `budgets` (every existing budget becomes `active`), and `00093_add_content_hash_to_resources` adds a nullable `content_hash` column and an index to `resources`. Nothing is dropped.
+- **First boot also rewrites some boards, once.** Board columns saved without an id get one, and their column-query actions are regenerated, so moving a card can address the column by id. This runs at startup, not as a migration; it is idempotent and later starts change nothing. The backup above covers it.
+- **Upgrade the server before the apps and the CLI.** The API now also answers under `/api/v1/tasks` and `/api/v1/boards`, and this release's web app, desktop app and CLI call those paths. The old paths (`/api/v1/todolist`, `/api/v1/kanban/boards`) keep working, and no endpoint was removed, so older clients are fine against the new server. The other direction is not: a 0.157.0 desktop app or CLI pointed at an older server fails.
+- **Closing a sprint now changes boards too.** Any board whose active sprint was the one being closed is repointed by the close itself. Scripts that did that repointing by hand can drop the step.
+- No new configuration settings, and no settings removed.
+
+CLI upgrades are yours to run: publishing a release does not change the `ud` on anybody's machine. There are three routes — **take only one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route — install the new desktop app instead.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.157.0`.
+
+---
+
 ## v0.156.0 (2026-09-21)
 
 ### New Features

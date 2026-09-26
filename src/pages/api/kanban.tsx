@@ -249,7 +249,11 @@ Content-Type: application/json
           id: 'move',
           method: 'POST',
           path: '/api/v1/boards/{boardId}/tasks/{taskId}/move',
-          status: 'draft',
+          // Live at the target /boards/ prefix (route_table.go, epic 7619cffc);
+          // the old /kanban/boards/... alias also answers during the rename
+          // window. No `today` line: unlike the other board endpoints, this one's
+          // target path already ships, so there is no "works today at" fallback.
+          status: 'live',
           behavior: {en: 'Move a card to another column', zh: '把卡移到另一列'},
           summary: {
             en: 'Single-transaction move. The server computes merge(exit(from), enter(to)) and writes once — replacing today\'s client-side sequence of one update plus N metadata patches, which can fail halfway. dry_run: true computes without writing, for confirmation UIs.',
@@ -558,8 +562,8 @@ Content-Type: application/json
             {status: '400', desc: {en: 'Not a sprint task, bad rollover target, or unfinished members with no rollover chosen.', zh: '不是 sprint 任务、rollover 目标不合法,或还有未完成员却没有给 rollover。'}},
           ],
           note: {
-            en: 'Draft addition to this contract: today, repointing the board\'s activeSprintId after a close is the caller\'s job (the web client does it, other clients may not). The target contract folds that rotation into this endpoint, with the affected boards listed in the response.',
-            zh: '本契约中的 Draft 增项:今天 close 之后把板的 activeSprintId 指过去是调用方的事(web 客户端会做,其他客户端不一定)。目标契约把这次轮转收进本端点,响应列出被改的板。',
+            en: 'The close also repoints the activeSprintId of every board pointing at this sprint — to the target sprint, or cleared for a backlog close — and reports them: rotatedBoardIds are the boards it moved; skippedBoardIds are shared boards the caller cannot write, whose pointer is left for a group admin to reconcile (a view preference must not fail the close).',
+            zh: 'close 同时把每一块指向这个 sprint 的板的 activeSprintId 指过去 —— 指向目标 sprint,或 backlog 关闭时清空 —— 并在响应里报告:rotatedBoardIds 是被移动的板,skippedBoardIds 是调用方无权写的分享板,其指针留给 group admin 校正(看板视图偏好不该让 close 失败)。',
           },
           request: [
             {
@@ -586,15 +590,22 @@ Content-Type: application/json
             {
               label: '200',
               lang: 'json',
+              hl: '{6-7}',
               code: `{
   "sprintId": "3f6d9a52-88a1-4f0e-b1d4-6c1f2e7a9b31",
   "target": "backlog",
   "completed": 11,
   "rolledOver": 4,
+  "rotatedBoardIds": ["7d55a212-30f5-4a41-a5da-b2f7f01f3bb9"],
+  "skippedBoardIds": [],
   "velocity": 23.5
 }`,
             },
           ],
+          legend: {
+            en: 'Highlighted: the boards whose active-sprint pointer this close moved (rotatedBoardIds) and the ones it left for a group admin (skippedBoardIds).',
+            zh: '高亮行:被这次 close 移动了 active-sprint 指针的板(rotatedBoardIds),以及留给 group admin 的板(skippedBoardIds)。',
+          },
         },
       ],
     },

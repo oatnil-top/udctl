@@ -43,6 +43,9 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.151.0.)
 -->
 
+- **Self-hosted Personal instances no longer auto-login in the browser.** The Personal-tier password is no longer returned by the public `/auth/tier-info` endpoint — it was readable by anyone who could reach the instance, including over a tunnel. Browser sign-in is now manual: use `personal@undercontrol.local` with the password from the server's startup log or its `PERSONAL_TIER_PASSWORD` setting. The desktop app still signs in with one click.
+- **The desktop app now generates a unique Personal-tier password per install** instead of the fixed `personal123`. Connecting to the desktop backend from the CLI or another device using `personal123` no longer works; view or reset this machine's password under Settings → Password.
+
 
 ## v0.157.0 (2026-09-27)
 

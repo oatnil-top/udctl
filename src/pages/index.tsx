@@ -261,9 +261,15 @@ function FirstScreen() {
               </svg>
             </Link>
           </div>
-          {/* Order follows our own download page, not the reference's. */}
+          {/* Order follows our own download page, not the reference's. The
+              "Built since September 2024" trust signal lived on the first
+              screen until the 2026-08-29 copied-hero redesign (d9f0567c)
+              pushed the old hero below the fold; master 2026-09-28 wanted it
+              back on the first screen, so it rides this fine line (verbatim
+              from home4.hero.fine, which still carries it in ShowcaseSection).
+              The date is verifiable — first ud-next-web commit is 2024-09-22. */}
           <p className={hero.fine}>
-            <Translate id="home5.hero.fine">Available for macOS, Windows, and Linux.</Translate>
+            <Translate id="home5.hero.fine">Available for macOS, Windows, and Linux · Built since September 2024</Translate>
           </p>
 
           <p className={hero.waysLabel}>

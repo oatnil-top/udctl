@@ -39,9 +39,52 @@ sidebar_position: 1
   (目前没有欠着的:曾经列在这里的条目已全部折进 v0.151.0。)
 -->
 
+## v0.158.0 (2026-09-30)
+
+**自托管的用户:升级前请先备份数据库。** 首次启动会跑一个迁移，只加一列。如果你的服务端启动时带着 `--license-private-key` 或 `LICENSE_PRIVATE_KEY`,先把它去掉：这个配置已经不存在，而服务端遇到不认识的命令行参数会拒绝启动。细节见下面的「升级注意」。
+
+### 新功能
+
+- **桌面端：在应用里激活 Pro / Max license。** 设置里新增 License 一节：粘贴 license 即可激活、续期或移除。保存的 license 过期或校验不过时，应用会停在续期页面，而不是照常拉起后端。
+- **桌面端：可选的公网访问地址。** 如果你用自己的隧道或域名把桌面后端暴露出去，在设置里填上这个地址。附件链接和跨域请求随之改用它，远端浏览器拿到的是能打开的文件链接，而不是 `localhost`。不填则一切照旧。隧道本身由你自己运行，应用不代管。
+- **桌面端：经隧道访问的人能拿到完整的网页界面**,由桌面后端自己提供。
+
+### 改进
+
+- **桌面端：后端固定监听 24816 端口。** 过去它从 8888 往上找第一个空闲端口，重启之后隧道或直连地址可能悄悄失效。端口被占用时，应用会显示是谁占着，而不会换一个端口启动。
+- **桌面端：后端起不来时，窗口会说明原因**:后端日志的末尾、占用端口的进程、端口设置的来源，而不再只是一句「Check Console.app」。
+- **评论线程的「标注」改名为「留存」**(英文 Keep),图标换成书签。对话列表里加星的线程排在最前，对话的状态标记也有了中文。
+- **任务状态颜色与手机端一致**:进行中是蓝色，等待中是琥珀色。
+- **会话活动颜色在各个会话表里统一。**
+
+### 问题修复
+
+- **粘贴进评论的图片不再出现在卡片的附件列表里。** 组成员照样能打开。
+- **评论里不带前导 `!` 的已上传文件链接，显示为文件**,而不是 markdown 源码。
+- **`ud get task --deleted` 恢复可用**,`ud describe task --deleted`、恢复和彻底删除也接受短 ID。
+- **CLI daemon 拉起的普通 shell 会话，输入按原样键入。** 过去 `pwd` 这类命令会被弄乱，而且一个正常运行的 CLI daemon 会话会在刚启动时就被报成已退出。
+
+### 升级注意(自托管)
+
+- **升级前请先备份数据库。** 首次启动会跑一个迁移 `00094_add_prompt_read_at_to_workspace_sessions`,给 `workspace_sessions` 加一列可空的 `prompt_read_at`。没有删除任何东西。
+- **服务端签发 license 的功能已移除。** `POST /license/generate`、`GET /license/decode`、网页 `/license` 与 `/license-pro`、`--license-private-key` 参数、`LICENSE_PRIVATE_KEY` 环境变量和隐藏配置 `license.private_key` 都没有了。**升级前先从启动命令里去掉 `--license-private-key`**:服务端遇到不认识的参数会拒绝启动。残留的 `LICENSE_PRIVATE_KEY` 环境变量会被忽略。license 校验(`LICENSE_TOKEN`、`/license/info`)不变。
 - **自托管的浏览器 Personal 部署不再自动登录。** Personal 档位的密码不再由公开的 `/auth/tier-info` 接口返回——此前任何能访问到该实例的人（包括经隧道访问）都能读到它。浏览器现改为手动登录:用户名 `personal@undercontrol.local`,密码见服务器启动日志或其 `PERSONAL_TIER_PASSWORD` 设置。桌面应用仍是一键登录。
 - **桌面应用现在为每台安装随机生成独立的 Personal 密码**,不再是固定的 `personal123`。用 `personal123` 从 CLI 或其他设备连接桌面后端的用法失效;可在「设置 → 密码」查看或重置本机密码。
+- **桌面端：后端端口改为 24816。** 指向旧端口的东西(隧道、CLI context、书签)需要改。要用别的端口，设置 `UD_BACKEND_PORT`,或者在应用数据目录里放一个写着端口号的 `.port-override` 文件。
+- **新增实例配置 `workspace.promptDelivery`**,默认 `paste-full`,即现有行为。`short-string` 只给 agent 会话一行短串，让它从磁盘读取完整指令。请等所有运行 daemon 的机器都装上 0.158.0 的 CLI 和桌面应用之后再打开：旧版 `ud` 会忽略短串要求的参数，agent 就拿不到指令。
 
+CLI 要你自己升：发布一个新版本不会让任何人机器上的 `ud` 变新。一共三条路,**只走其中一条**。
+
+```bash
+npm i -g @oatnil/ud # npm 装的
+brew update && brew upgrade ud # Homebrew 装的
+```
+
+**如果你的 `ud` 是从桌面端装的，上面两条都不是你的路 —— 装新版桌面 App 就行。** App 的「Install ud CLI」把 `/usr/local/bin/ud` 做成了指进 App 包里的符号链接，所以你跑的那个 `ud` 就是 App 里带的那个。
+
+然后确认升上去了:`ud --version` 必须打印 `udctl version 0.158.0`。
+
+---
 
 ## v0.157.0 (2026-09-27)
 

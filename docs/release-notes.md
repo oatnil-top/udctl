@@ -40,12 +40,55 @@ Merged to `main`, not in any published build yet. These ship with the next versi
     3. Then leave the section here with no bullets under it. Deleting the section is how it
        stops being read.
 
-  (Nothing owed right now: every bullet that was listed here was folded into v0.151.0.)
+  (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.158.0 (2026-09-30)
+
+**Self-hosted: back up the database before upgrading.** One migration runs on first boot and only adds a column. If your server is started with `--license-private-key` or `LICENSE_PRIVATE_KEY`, remove it first: the setting no longer exists, and an unknown command-line flag stops the server from starting. Details under "Upgrade Notes".
+
+### New Features
+
+- **Desktop: activate a Pro or Max license in the app.** Settings has a new License section: paste a license to activate, renew or remove it. If the stored license has expired or does not verify, the app opens on a renewal screen instead of starting the backend.
+- **Desktop: optional public access address.** If you expose the desktop backend through your own tunnel or domain, enter that address under Settings. Attachment links and cross-origin requests then use it, so a remote browser gets working file links instead of `localhost` ones. Leave it empty and nothing changes. The app does not run the tunnel for you.
+- **Desktop: visitors over a tunnel get the full web UI** served by the desktop backend itself.
+
+### Improvements
+
+- **Desktop: the backend always listens on the same port, 24816.** It used to take the first free port from 8888 up, so a tunnel or direct address could silently stop working after a restart. If the port is taken, the app shows what is holding it and does not start on a different one.
+- **Desktop: when the backend fails to start, the window says why**: the tail of the backend log, the process holding the port, and where the port setting came from, instead of "Check Console.app".
+- **Comment threads: "Annotate" is now "Keep"** (Chinese: 留存), with a bookmark icon. Starred threads are listed first in the conversation list, and the conversation status badges are translated.
+- **Task status colours match the mobile app**: in progress is blue, pending is amber.
+- **Session activity colours are consistent** across the session tables.
+
+### Bug Fixes
+
+- **Images pasted into a comment no longer appear in the card's attachment list.** Group members can still open them.
+- **A link to an uploaded file written in a comment without the leading `!` shows as a file**, not as raw markdown.
+- **`ud get task --deleted` works again**, and `ud describe task --deleted`, restore and permanent delete accept a short ID.
+- **Plain shell sessions started by the CLI daemon take input as typed.** Commands like `pwd` were arriving mangled, and a live CLI-daemon session could be reported as exited right after it started.
+
+### Upgrade Notes (self-hosted)
+
+- **Back up your database before upgrading.** First boot runs one migration, `00094_add_prompt_read_at_to_workspace_sessions`, which adds a nullable `prompt_read_at` column to `workspace_sessions`. Nothing is removed.
+- **Server-side license signing is removed.** `POST /license/generate`, `GET /license/decode`, the web pages `/license` and `/license-pro`, the `--license-private-key` flag, the `LICENSE_PRIVATE_KEY` environment variable and the hidden `license.private_key` setting are gone. **Remove `--license-private-key` from your start command before upgrading**: the server refuses unknown flags and will not start. A leftover `LICENSE_PRIVATE_KEY` environment variable is ignored. License verification (`LICENSE_TOKEN`, `/license/info`) is unchanged.
 - **Self-hosted Personal instances no longer auto-login in the browser.** The Personal-tier password is no longer returned by the public `/auth/tier-info` endpoint — it was readable by anyone who could reach the instance, including over a tunnel. Browser sign-in is now manual: use `personal@undercontrol.local` with the password from the server's startup log or its `PERSONAL_TIER_PASSWORD` setting. The desktop app still signs in with one click.
 - **The desktop app now generates a unique Personal-tier password per install** instead of the fixed `personal123`. Connecting to the desktop backend from the CLI or another device using `personal123` no longer works; view or reset this machine's password under Settings → Password.
+- **Desktop: the backend port is now 24816.** Anything that pointed at the old port (a tunnel, a CLI context, a bookmark) needs updating. To use another port, set `UD_BACKEND_PORT` or put the number in a `.port-override` file in the app's data directory.
+- **New instance setting `workspace.promptDelivery`**, default `paste-full`, which is the existing behaviour. `short-string` hands agent sessions a short line and has them read the full brief from disk. Turn it on only after every machine that runs a daemon has the 0.158.0 CLI and desktop app: an older `ud` ignores the flag the short line asks for, and the agent never receives its instructions.
 
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.158.0`.
+
+---
 
 ## v0.157.0 (2026-09-27)
 

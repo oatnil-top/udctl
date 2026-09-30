@@ -43,6 +43,34 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.159.0 (2026-09-30)
+
+**Self-hosted: before upgrading the server, make sure every machine that runs agent sessions has `ud` 0.158.0 or later.** From this release every agent session starts with a short line and reads its brief from disk; an older `ud` cannot read it. No new database migrations. Details under "Upgrade Notes".
+
+### Improvements
+
+- **Agent sessions always start the short way.** The agent is handed one short line and reads its full brief from disk, instead of having the whole brief pasted into its terminal. This used to be the opt-in instance setting `workspace.promptDelivery` = `short-string`; it is now the only behaviour, and the setting is gone.
+- **Claude Code and Codex sessions no longer get a stray `go` after their first message.** The short line is passed on the command line and submitted as it is.
+- **A session that never reads its brief is reported, not silent.** If the agent has not confirmed reading its brief within 60 seconds, the short line is sent again; after 120 seconds a reply is posted in the thread that started the session.
+
+### Upgrade Notes (self-hosted)
+
+- **No new database migrations.**
+- **The `workspace.promptDelivery` setting is removed, and every agent session now uses the short line.** On every machine that runs agent sessions, upgrade the desktop app or CLI daemon, and the `ud` on its `PATH`, to 0.158.0 or later before you upgrade the server. An older `ud` ignores the flag the short line asks for, so the agent does not receive its instructions; the server notices the missing read receipt and, after 120 seconds, posts a reply in the thread that started the session. A value already stored for `workspace.promptDelivery` (either value) stays in the database and is ignored; the upgrade does not fail because of it.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.159.0`.
+
+---
+
 ## v0.158.0 (2026-09-30)
 
 **Self-hosted: back up the database before upgrading.** One migration runs on first boot and only adds a column. If your server is started with `--license-private-key` or `LICENSE_PRIVATE_KEY`, remove it first: the setting no longer exists, and an unknown command-line flag stops the server from starting. Details under "Upgrade Notes".

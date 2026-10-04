@@ -43,6 +43,37 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.160.1 (2026-10-04)
+
+**Patch release for the machines that run agent sessions: replies to a running agent reach its terminal in full again.** No server changes, no new database migrations. Details under "Upgrade Notes".
+
+### Improvements
+
+- **Calendar**: the peek has an icon that opens the task in a new tab, and "Open full task" in the edit drawer opens a tab and leaves the drawer open.
+
+### Bug Fixes
+
+- **A reply to a running agent session arrives as the message itself again.** Since 0.160.0 the agent received a one-line `ud describe session <id> -o input <n>` pointer and had to run it before it could read the message. The desktop app and the `ud` CLI daemon now paste the full message into the agent's terminal, as before 0.160.0. Sessions still start with the short line, and no stray `go` is typed after a message.
+
+### Upgrade Notes (self-hosted)
+
+- **No new database migrations, and nothing changed on the server.** A 0.160.1 server behaves like 0.160.0; upgrading it only keeps the versions aligned.
+- **The fix is on the machines that run agent sessions**: upgrade the desktop app or the `ud` CLI daemon there. Restarting the desktop app or the daemon ends the agent sessions running on that machine, so pick a moment when none are mid-task.
+- `ud describe session <id> -o input <n>` still works, for messages that were already delivered the 0.160.0 way.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.160.1`.
+
+---
+
 ## v0.160.0 (2026-10-04)
 
 **Self-hosted: upgrade the server first, then every machine that runs agent sessions (desktop app or `ud` CLI daemon, and the `ud` on its `PATH`) to 0.160.0 right after.** Until a machine is upgraded, Claude Code and Codex sessions on it fail to start. No new database migrations. Details under "Upgrade Notes".

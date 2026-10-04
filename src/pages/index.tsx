@@ -309,10 +309,10 @@ function AgentSetupRow() {
   );
 }
 
-// --- "What is udctl" intro video (ud task 43868daa, master 2026-10-04) ---
+// --- Intro video (ud task 43868daa, master 2026-10-04) ---
 /**
- * The promo v2 film (ud task 7f543890), directly under the first screen and
- * above the showcase. Files live in static/promo/ and ship with the site bundle
+ * The promo v2 film (ud task 7f543890), directly under the first screen; page order is
+ * FirstScreen, video, AgentSetupRow, WhatIsSection, ShowcaseSection. Files live in static/promo/ and ship with the site bundle
  * (~10 MB per locale, 110 s, 1080p H.264) — no YouTube, no third-party host.
  * The silent cut is used on purpose: captions are burned into the picture, and
  * the page never makes sound on its own. preload="none" + poster means a
@@ -325,10 +325,10 @@ function IntroVideoSection() {
   const src = useBaseUrl(`/promo/udctl-intro-${lang}.mp4`);
   const poster = useBaseUrl(`/promo/udctl-intro-poster-${lang}.jpg`);
   return (
-    <section className={styles.section} id="what-is-udctl">
+    <section className={styles.section} id="intro-video">
       <div className={styles.wrap}>
         <div className={styles.eyebrow}>
-          <Translate id="home7.video.eyebrow">What is udctl</Translate>
+          <Translate id="home7.video.eyebrow">Intro film</Translate>
         </div>
         <h2>
           <Translate id="home7.video.title">See it in under two minutes.</Translate>
@@ -1211,10 +1211,10 @@ export default function Home(): ReactNode {
       </Head>
       <main className={styles.scope}>
         <FirstScreen />
-        <AgentSetupRow />
         <IntroVideoSection />
-        <ShowcaseSection />
+        <AgentSetupRow />
         <WhatIsSection />
+        <ShowcaseSection />
         <MeetAlfredSection />
         <EngineSection />
         <ArchitectureSection />

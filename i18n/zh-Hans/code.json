@@ -2243,9 +2243,6 @@
   "home5.hero.ways": {
     "message": "其它使用 udctl 的方式："
   },
-  "home5.strip.explore": {
-    "message": "往下看"
-  },
   "home5.agent.label": {
     "message": "带了 AI Agent？把这句粘给它"
   },
@@ -2277,7 +2274,7 @@
     "message": "两分钟内看懂它。"
   },
   "home7.video.aria": {
-    "message": "udctl 介绍视频，时长 1 分 50 秒，画面内带字幕"
+    "message": "udctl 介绍视频，时长 1 分 50 秒，带配音和画面字幕"
   },
   "home6.what.eyebrow": {
     "message": "udctl 是什么"

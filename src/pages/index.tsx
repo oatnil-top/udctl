@@ -182,15 +182,6 @@ function useTiles(): Tile[] {
   ];
 }
 
-/** The chevron the strip and the reference's menus both use. */
-function Chevron() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} aria-hidden="true">
-      <path d="M6 9l6 6 6-6" />
-    </svg>
-  );
-}
-
 function FirstScreen() {
   const tiles = useTiles();
   const {siteConfig: {tagline}} = useDocusaurusContext();
@@ -198,14 +189,6 @@ function FirstScreen() {
     <div className={hero.heroBleed}>
       <PlatformGlyphDefs />
       <header className={hero.hero}>
-        <div className={hero.strip}>
-          <span>udctl</span>
-          <a className={hero.stripJump} href="#explore">
-            <Translate id="home5.strip.explore">Explore here</Translate>
-            <Chevron />
-          </a>
-        </div>
-
         <div className={hero.body}>
           {/*
             The headline is the product name in BOTH locales — the chosen layout
@@ -313,11 +296,12 @@ function AgentSetupRow() {
 /**
  * The promo v2 film (ud task 7f543890), directly under the first screen; page order is
  * FirstScreen, AgentSetupRow, video, WhatIsSection, ShowcaseSection. Files live in static/promo/ and ship with the site bundle
- * (~10 MB per locale, 110 s, 1080p H.264) — no YouTube, no third-party host.
- * The silent cut is used on purpose: captions are burned into the picture, and
- * the page never makes sound on its own. preload="none" + poster means a
- * visitor who never presses play downloads only the ~46 KB poster. One cut per
- * locale; the zh file's captions are Chinese.
+ * (~12.7 MB per locale, 110 s, 1080p H.264) — no YouTube, no third-party host.
+ * The voiced cut (master 2026-10-04): captions stay burned into the picture, and
+ * the page never makes sound on its own — no autoPlay, sound only after the
+ * visitor presses play. preload="none" + poster means a visitor who never
+ * presses play downloads only the ~46 KB poster. One cut per locale; the zh
+ * file's voiceover and captions are Chinese.
  */
 function IntroVideoSection() {
   const {i18n: {currentLocale}} = useDocusaurusContext();
@@ -342,7 +326,7 @@ function IntroVideoSection() {
           preload="none"
           aria-label={translate({
             id: 'home7.video.aria',
-            message: 'udctl introduction video, 1 minute 50 seconds, captions on screen',
+            message: 'udctl introduction video, 1 minute 50 seconds, with voiceover and on-screen captions',
           })}
         />
       </div>

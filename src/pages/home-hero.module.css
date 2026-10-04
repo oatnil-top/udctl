@@ -87,36 +87,6 @@
   border-bottom: 1px solid #4a4741;
 }
 
-/* The strip under the navbar. On the reference page it is a parent-brand →
-   product breadcrumb; we have no parent brand, so the shape is copied and the
-   job is demoted to one in-page jump. Delete it and nothing else on this screen
-   moves. */
-.strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 3.2cqw;
-  height: 3.8cqw;
-  border-bottom: 1px solid var(--d-hair);
-  font-size: 1.18cqw;
-  color: #b6b3ab;
-}
-.stripJump {
-  display: flex;
-  align-items: center;
-  gap: 0.4cqw;
-  color: #b6b3ab;
-  text-decoration: none;
-}
-.stripJump:hover {
-  color: var(--d-cream);
-  text-decoration: none;
-}
-.stripJump svg {
-  width: 0.9cqw;
-  height: 0.9cqw;
-}
-
 .body {
   text-align: center;
   padding: 8.4cqw 4cqw 0;
@@ -283,9 +253,6 @@
    reading: the draft only ever covered the desktop screen. It keeps the same
    elements and the same order, and only stops shrinking them. */
 @container (max-width: 700px) {
-  .strip {
-    display: none;
-  }
   .body {
     padding: 48px 20px 0;
   }

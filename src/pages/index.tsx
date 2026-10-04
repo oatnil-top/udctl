@@ -312,7 +312,7 @@ function AgentSetupRow() {
 // --- Intro video (ud task 43868daa, master 2026-10-04) ---
 /**
  * The promo v2 film (ud task 7f543890), directly under the first screen; page order is
- * FirstScreen, video, AgentSetupRow, WhatIsSection, ShowcaseSection. Files live in static/promo/ and ship with the site bundle
+ * FirstScreen, AgentSetupRow, video, WhatIsSection, ShowcaseSection. Files live in static/promo/ and ship with the site bundle
  * (~10 MB per locale, 110 s, 1080p H.264) — no YouTube, no third-party host.
  * The silent cut is used on purpose: captions are burned into the picture, and
  * the page never makes sound on its own. preload="none" + poster means a
@@ -1211,8 +1211,8 @@ export default function Home(): ReactNode {
       </Head>
       <main className={styles.scope}>
         <FirstScreen />
-        <IntroVideoSection />
         <AgentSetupRow />
+        <IntroVideoSection />
         <WhatIsSection />
         <ShowcaseSection />
         <MeetAlfredSection />

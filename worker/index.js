@@ -39,6 +39,51 @@ export default {
       return Response.redirect(CANONICAL_ORIGIN + url.pathname + url.search, 301);
     }
 
+    if (request.headers.has('Range') && url.pathname.startsWith('/promo/')) {
+      return rangedAsset(request, env);
+    }
+
     return env.ASSETS.fetch(request);
   },
 };
+
+/**
+ * Workers Static Assets answers `Range` with a plain 200 and no Accept-Ranges
+ * (measured 2026-10-04 on /promo/udctl-intro-en.mp4; the docs are silent on it).
+ * Safari / iOS will not play an mp4 without 206, so the intro videos in
+ * static/promo/ (~10 MB each, ud task 43868daa) get their ranges cut here. The
+ * body is buffered, which is fine for files this size; do not route large media
+ * through this path — move it to R2 instead. Only a single `bytes=a-b` range is
+ * honoured, anything else falls back to the full 200.
+ */
+async function rangedAsset(request, env) {
+  const full = await env.ASSETS.fetch(new Request(request.url, { headers: { 'Accept-Encoding': 'identity' } }));
+  if (full.status !== 200) return full;
+
+  const headers = new Headers(full.headers);
+  headers.set('Accept-Ranges', 'bytes');
+
+  const m = /^bytes=(\d*)-(\d*)$/.exec(request.headers.get('Range') || '');
+  if (!m || (m[1] === '' && m[2] === '')) return new Response(full.body, { status: 200, headers });
+
+  const buf = await full.arrayBuffer();
+  const size = buf.byteLength;
+  let start;
+  let end;
+  if (m[1] === '') {
+    start = Math.max(0, size - Number(m[2]));
+    end = size - 1;
+  } else {
+    start = Number(m[1]);
+    end = m[2] === '' ? size - 1 : Math.min(Number(m[2]), size - 1);
+  }
+  if (start >= size || start > end) {
+    headers.set('Content-Range', `bytes */${size}`);
+    headers.delete('Content-Length');
+    return new Response(null, { status: 416, headers });
+  }
+
+  headers.set('Content-Range', `bytes ${start}-${end}/${size}`);
+  headers.set('Content-Length', String(end - start + 1));
+  return new Response(buf.slice(start, end + 1), { status: 206, headers });
+}

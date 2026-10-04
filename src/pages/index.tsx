@@ -4,6 +4,7 @@ import Layout from '@theme/Layout';
 import Head from '@docusaurus/Head';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Translate, {translate} from '@docusaurus/Translate';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import PhoneDemo from '@site/src/components/HeroDemos/PhoneDemo';
 import KanbanDemo from '@site/src/components/HeroDemos/KanbanDemo';
@@ -305,6 +306,47 @@ function AgentSetupRow() {
       </p>
       <AgentSetupButton />
     </div>
+  );
+}
+
+// --- "What is udctl" intro video (ud task 43868daa, master 2026-10-04) ---
+/**
+ * The promo v2 film (ud task 7f543890), directly under the first screen and
+ * above the showcase. Files live in static/promo/ and ship with the site bundle
+ * (~10 MB per locale, 110 s, 1080p H.264) — no YouTube, no third-party host.
+ * The silent cut is used on purpose: captions are burned into the picture, and
+ * the page never makes sound on its own. preload="none" + poster means a
+ * visitor who never presses play downloads only the ~46 KB poster. One cut per
+ * locale; the zh file's captions are Chinese.
+ */
+function IntroVideoSection() {
+  const {i18n: {currentLocale}} = useDocusaurusContext();
+  const lang = currentLocale === 'zh-Hans' ? 'zh' : 'en';
+  const src = useBaseUrl(`/promo/udctl-intro-${lang}.mp4`);
+  const poster = useBaseUrl(`/promo/udctl-intro-poster-${lang}.jpg`);
+  return (
+    <section className={styles.section} id="what-is-udctl">
+      <div className={styles.wrap}>
+        <div className={styles.eyebrow}>
+          <Translate id="home7.video.eyebrow">What is udctl</Translate>
+        </div>
+        <h2>
+          <Translate id="home7.video.title">See it in under two minutes.</Translate>
+        </h2>
+        <video
+          className={styles.introVideo}
+          src={src}
+          poster={poster}
+          controls
+          playsInline
+          preload="none"
+          aria-label={translate({
+            id: 'home7.video.aria',
+            message: 'udctl introduction video, 1 minute 50 seconds, captions on screen',
+          })}
+        />
+      </div>
+    </section>
   );
 }
 
@@ -1170,6 +1212,7 @@ export default function Home(): ReactNode {
       <main className={styles.scope}>
         <FirstScreen />
         <AgentSetupRow />
+        <IntroVideoSection />
         <ShowcaseSection />
         <WhatIsSection />
         <MeetAlfredSection />

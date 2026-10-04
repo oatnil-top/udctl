@@ -2270,6 +2270,15 @@
   "home5.tile.extension": {
     "message": "浏览器扩展"
   },
+  "home7.video.eyebrow": {
+    "message": "udctl 是什么"
+  },
+  "home7.video.title": {
+    "message": "两分钟内看懂它。"
+  },
+  "home7.video.aria": {
+    "message": "udctl 介绍视频，时长 1 分 50 秒，画面内带字幕"
+  },
   "home6.what.eyebrow": {
     "message": "udctl 是什么"
   },

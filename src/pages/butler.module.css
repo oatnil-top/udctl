@@ -530,6 +530,19 @@
   }
 }
 
+/* ---------- Intro video ---------- */
+/* width:100% + aspect-ratio keeps the 16:9 box reserved before the poster
+ * loads and can never exceed the .wrap column, so phones do not overflow. */
+.introVideo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-top: 28px;
+  background: #000;
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 880px) {
   .hero,

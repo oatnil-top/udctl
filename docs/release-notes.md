@@ -43,6 +43,60 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.160.0 (2026-10-04)
+
+**Self-hosted: upgrade the server first, then every machine that runs agent sessions (desktop app or `ud` CLI daemon, and the `ud` on its `PATH`) to 0.160.0 right after.** Until a machine is upgraded, Claude Code and Codex sessions on it fail to start. No new database migrations. Details under "Upgrade Notes".
+
+### New Features
+
+- **Copy a Markdown link to a task from its title row.** One click on the task detail page (wide and narrow layouts) and in the calendar peek.
+- **Agents act with the permissions of the person they work for.** An agent working for an admin can now read and change system settings, the same as that admin; an agent working for anyone else is refused, as before. Every admin action an agent takes is logged with both the agent and the person it acted for.
+
+### Improvements
+
+- **Task details read as a ledger.** Properties sit in five groups with one label column; dates and times use one format (`YYYY-MM-DD HH:mm`, 24-hour); the sprint row shows the sprint's title; custom fields drop the `cf.` prefix. The board row shows the task's boards as chips you can click, add and remove.
+- **Mobile task details** list the properties inline, give attachments their own section, and rename "Details" to "Relationship", in the same order as desktop.
+- **Attachments** are listed as plain rows with their upload time; thumbnails carry a filename bar. Uploaded files show the upload time, not only the date, in preview, inspector and the mobile list.
+- **Calendar peek**: clicking the title opens the edit drawer; moving or removing a slot are icon buttons in the action row.
+- **Desktop app**: links that open a task in a new tab now open a new tab inside the app.
+- **Agent sessions start one way, decided by the server.** Every agent session is started as `<agent cli> <short line>`; the server builds the whole command, including the board's tmux setting, and records exactly the command that runs. A `{{prompt}}` placeholder in an agent CLI command marks where the short line goes.
+- **Messages to a running agent are no longer pasted into its terminal.** The agent receives one line and reads the full message from disk, so long and multi-line messages arrive intact. No session gets a stray `go` typed after a message any more, including the first message of a human session.
+- **A session whose agent never reads its brief gets a hint.** The reply posted in the thread suggests changing the launch command to `<cli> <flag> {{prompt}}` for CLIs that do not take the prompt as a plain argument.
+- The built-in Alfred agent's default principles are now written in English.
+
+### Bug Fixes
+
+- Switching to another task by editing the address bar on a task detail page no longer sometimes shows "Something went wrong".
+- The blank band at the top of the task detail page is gone.
+- `ud.projects` and `cf.release_train` no longer appear twice in a task's properties.
+- The sprint row is no longer blank when the sprint is on no board.
+- Schedule times on the task detail page used a 12-hour clock; they are 24-hour like everywhere else.
+- Section header and Relations icons are sized and spaced consistently.
+- The "Open in new window" label on the board header is translated in Chinese.
+- Admin-only backup routes (start, status, download) now check the caller's admin permission on the server as well, so a token carrying an outdated admin claim can no longer start or download a full database backup.
+
+### Upgrade Notes (self-hosted)
+
+- **No new database migrations.**
+- **Upgrade the server first, then the machines that run agent sessions, with as little time between as you can.** The server now puts the short line into the launch command itself. A daemon from 0.159.0 or older adds it a second time, and Claude Code and Codex sessions on that machine fail to start; upgrading the daemon fixes it. The other order is safer but not clean: a 0.160.0 daemon against an older server starts the agent without the short line, and the server re-sends it after 60 seconds.
+- **The `ud` on each of those machines' `PATH` must be 0.160.0 as well.** Messages to a running agent now arrive as one line asking it to run `ud describe session <id> -o input <n>`, which older `ud` versions do not have.
+- **Agent CLI extra arguments are limited** to letters, digits, spaces and `._=:@/,+-`, plus the `{{prompt}}` and `{{args}}` placeholders. Saving anything else is refused (`AGENT_CLI_ARGS_INVALID`). An existing setting that already contains other characters makes the session fail to start, with the reason posted in the thread; edit the arguments to fix it.
+- **The board's tmux session setting is now applied by the server.** On a Windows machine a tmux setting makes the session fail to start, with the reason posted in the thread, instead of being skipped silently. Clear the setting for boards whose sessions run on Windows.
+- **Agents now get the admin surface when the person they work for is an admin.** Sessions you dispatch as an admin can read and change system settings, create users and API keys. These accesses are logged with the agent and the person. An agent account itself can no longer be given the admin role, and an API key owned by an agent never counts as admin, whatever role it was created with.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.160.0`.
+
+---
+
 ## v0.159.0 (2026-09-30)
 
 **Self-hosted: before upgrading the server, make sure every machine that runs agent sessions has `ud` 0.158.0 or later.** From this release every agent session starts with a short line and reads its brief from disk; an older `ud` cannot read it. No new database migrations. Details under "Upgrade Notes".

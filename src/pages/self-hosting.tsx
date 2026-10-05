@@ -16,9 +16,9 @@ import styles from './self-hosting.module.css';
 
 // --- Free 3-month Pro trial license (dev-phase, shared publicly on purpose) ---
 const LICENSE_TOKEN =
-  'eyJjcmVhdGVkX2F0IjoxNzgzNjAwMzY4LCJ2YWxpZF91bnRpbCI6MTc5MTM3NjM2OCwidGllciI6InBybyIsInVzZXJfbmFtZSI6IlNlbGYtSG9zdCBUcmlhbCIsInVzZXJfc2VjcmV0X2hhc2giOiJlZDJiYTE3OGM2NzBlYzdmZjA0NzdlZTc1MTAyNjVkM2M4NWUzN2QyNWI2NDcxNDc3OTBmZDJmZDJlMTI1YmQ4Iiwibm9uY2UiOiJiMjAzYmFkNS1mYTQ4LTQwOWMtYmU1OC0yYTc0YWJkNjNiM2YiLCJtYXhfdXNlcnMiOjV9.Nf81OrehjlpXGDP7ppap5C8GYt0eXBh5wP0y62_-mz37SHd5-3iSMmGzGZ0P4Bz9z0E1cXs1F4IwDbad2s3BAQ';
+  'eyJjcmVhdGVkX2F0IjoxNzkxMTY5MDU3LCJ2YWxpZF91bnRpbCI6MTc5ODk0NTA1NywidGllciI6InBybyIsInVzZXJfbmFtZSI6IlNlbGYtSG9zdCBUcmlhbCIsInVzZXJfc2VjcmV0X2hhc2giOiJlZDJiYTE3OGM2NzBlYzdmZjA0NzdlZTc1MTAyNjVkM2M4NWUzN2QyNWI2NDcxNDc3OTBmZDJmZDJlMTI1YmQ4Iiwibm9uY2UiOiI0NmU0NTE5Mi04NWI0LTQzZDUtOTczYS1kMzg2MDc2NmZhNWMiLCJtYXhfdXNlcnMiOjV9.uP9ZL2efUQbLQAVa3RMgNVJi7br0o3i44yE64lhev21Gpw8_yp8Qs1jgKASLpEHsQgusS8oqq5QtVy7y5L0fBQ';
 const LICENSE_SECRET = 'undercontrol-selfhost-trial';
-const LICENSE_VALID_UNTIL = '2026-10-07';
+const LICENSE_VALID_UNTIL = '2027-01-03';
 
 // --- Copy-paste-ready snippets (code is not translated) ---
 const HERO_RUN = `# the all-in-one image: frontend + backend in one container

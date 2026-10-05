@@ -24,7 +24,7 @@ udctl self-hosted licenses are sold in four team-size bands:
 Prices are published in exactly one place: the [Pricing](/docs/pricing) page. They are not
 restated here. Licenses — the paid bands and the Small team free license alike — come
 through the [contact page](/contact). The [self-hosting page](/self-hosting) additionally
-includes a free 3-month trial license anyone can use.
+includes a free trial license (valid until 2027-01-03) anyone can use.
 
 :::info Why the product says "Pro"
 The license machinery inside udctl predates the current band names. A licensed
@@ -244,7 +244,7 @@ A: The server refuses to start with an expired license. Renew via the
 remains safe either way.
 
 **Q: Can I get a trial license?**
-A: Yes — the [self-hosting page](/self-hosting) includes a free 3-month trial license.
+A: Yes — the [self-hosting page](/self-hosting) includes a free trial license (valid until 2027-01-03).
 The Personal tier is also free forever for single-user use.
 
 ---

@@ -35,7 +35,7 @@ udctl 自部署许可证按团队规模分档定价,不按人头计费。选中�
 
 ## 先部署,再决定
 
-私有部署是一等公民:一个 all-in-one Docker 镜像,或一条 npm 命令安装的单二进制,[私有部署页面](/self-hosting)还附带免费 3 个月 Pro 试用许可证。不想碰服务器?[桌面应用](/download#desktop)自带后端,完全本地运行,免费。部署细节见[部署文档](/docs/self-deployment)。
+私有部署是一等公民:一个 all-in-one Docker 镜像,或一条 npm 命令安装的单二进制,[私有部署页面](/self-hosting)还附带免费 Pro 试用许可证（有效期至 2027-01-03）。不想碰服务器?[桌面应用](/download#desktop)自带后端,完全本地运行,免费。部署细节见[部署文档](/docs/self-deployment)。
 
 ## 托管版 udctl 仍在路上
 

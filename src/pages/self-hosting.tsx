@@ -14,7 +14,7 @@ import {
 
 import styles from './self-hosting.module.css';
 
-// --- Free 3-month Pro trial license (dev-phase, shared publicly on purpose) ---
+// --- Free Pro trial license, valid until 2027-01-03 (dev-phase, shared publicly on purpose) ---
 const LICENSE_TOKEN =
   'eyJjcmVhdGVkX2F0IjoxNzkxMTY5MDU3LCJ2YWxpZF91bnRpbCI6MTc5ODk0NTA1NywidGllciI6InBybyIsInVzZXJfbmFtZSI6IlNlbGYtSG9zdCBUcmlhbCIsInVzZXJfc2VjcmV0X2hhc2giOiJlZDJiYTE3OGM2NzBlYzdmZjA0NzdlZTc1MTAyNjVkM2M4NWUzN2QyNWI2NDcxNDc3OTBmZDJmZDJlMTI1YmQ4Iiwibm9uY2UiOiI0NmU0NTE5Mi04NWI0LTQzZDUtOTczYS1kMzg2MDc2NmZhNWMiLCJtYXhfdXNlcnMiOjV9.uP9ZL2efUQbLQAVa3RMgNVJi7br0o3i44yE64lhev21Gpw8_yp8Qs1jgKASLpEHsQgusS8oqq5QtVy7y5L0fBQ';
 const LICENSE_SECRET = 'undercontrol-selfhost-trial';
@@ -33,7 +33,7 @@ docker run -d -p 3000:8080 \\
   -v undercontrol-data:/app/data \\
   lintao0o0/undercontrol:latest`;
 
-const ENV_FILE = `# udctl - free 3-month Pro trial license
+const ENV_FILE = `# udctl - free Pro trial license (valid until ${LICENSE_VALID_UNTIL})
 LICENSE_TOKEN=${LICENSE_TOKEN}
 LICENSE_HOST_SECRET=${LICENSE_SECRET}`;
 
@@ -51,7 +51,7 @@ const COMPOSE_ALLINONE = `services:
       - ADMIN_PASSWORD=changeme
       # let other people sign up too (default: only you can log in)
       # - REGISTRATION_ENABLED=true
-      # free 3-month Pro trial license
+      # free Pro trial license (valid until ${LICENSE_VALID_UNTIL})
       - LICENSE_TOKEN=${LICENSE_TOKEN}
       - LICENSE_HOST_SECRET=${LICENSE_SECRET}
     volumes:
@@ -148,7 +148,7 @@ volumes:
 const BAREMETAL_NPM = `# no Docker needed — one binary with the web UI built in (requires Node.js 18+)
 npm install -g @oatnil/ud-server @oatnil/ud
 
-# free 3-month Pro trial license
+# free Pro trial license (valid until ${LICENSE_VALID_UNTIL})
 export LICENSE_TOKEN=${LICENSE_TOKEN}
 export LICENSE_HOST_SECRET=${LICENSE_SECRET}
 
@@ -244,7 +244,7 @@ function HeroSection() {
           <b>~2</b> <Translate id="selfhosting.hero.pill2">min to running</Translate>
         </span>
         <span className={styles.pill}>
-          <b><Translate id="selfhosting.hero.pill3a">Free</Translate></b> <Translate id="selfhosting.hero.pill3b">3-month Pro license</Translate>
+          <b><Translate id="selfhosting.hero.pill3a">Free</Translate></b> <Translate id="selfhosting.hero.pill3b" values={{date: LICENSE_VALID_UNTIL}}>{'Pro license until {date}'}</Translate>
         </span>
       </div>
       <div className={styles.term} style={{marginTop: 26}}>
@@ -469,7 +469,7 @@ function LicenseSection() {
         <Translate id="selfhosting.license.label">Free trial license</Translate>
       </p>
       <h2 className={styles.h2}>
-        <Translate id="selfhosting.license.title">Start on Pro — on us, for 3 months.</Translate>
+        <Translate id="selfhosting.license.title" values={{date: LICENSE_VALID_UNTIL}}>{'Start on Pro — on us, until {date}.'}</Translate>
       </h2>
       <p className={`${styles.lede} ${styles.sub}`}>
         <Translate id="selfhosting.license.lede">

@@ -522,8 +522,8 @@ function SelfHostSection() {
       <h2 className={styles.h2}>{t({en: 'Or skip our cloud entirely.', zh: '或者，完全不依赖我们的云。'})}</h2>
       <p className={styles.lede}>
         {t({
-          en: 'Every client above also works against a server you run yourself. Pick your path: one all-in-one Docker image (amd64 and arm64), or a bare-metal npm install — a single ud-server binary with the web UI built in. A free 3-month Pro trial license is included on the self-hosting page.',
-          zh: '上面的每个客户端都可以连接你自己部署的服务器。两条路径任选：all-in-one Docker 镜像（支持 amd64 和 arm64），或裸机 npm 安装——一个自带 Web UI 的 ud-server 二进制。私有部署页面还附带免费 3 个月的 Pro 试用许可证。',
+          en: 'Every client above also works against a server you run yourself. Pick your path: one all-in-one Docker image (amd64 and arm64), or a bare-metal npm install — a single ud-server binary with the web UI built in. A free Pro trial license (valid until 2027-01-03) is included on the self-hosting page.',
+          zh: '上面的每个客户端都可以连接你自己部署的服务器。两条路径任选：all-in-one Docker 镜像（支持 amd64 和 arm64），或裸机 npm 安装——一个自带 Web UI 的 ud-server 二进制。私有部署页面还附带免费 Pro 试用许可证（有效期至 2027-01-03）。',
         })}
       </p>
       <div className={styles.btnrow}>

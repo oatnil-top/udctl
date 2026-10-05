@@ -40,7 +40,7 @@ Each license covers a size band at one flat price. Going from 4 people to 20 cos
 
 ## Deploy first, decide later
 
-Self-hosting is a first-class path: one all-in-one Docker image or a single npm-installed binary, with a free 3-month Pro trial license included on the [self-hosting page](/self-hosting). Prefer zero servers? The [desktop app](/download#desktop) ships its own backend and runs fully local, free. Deployment details are in the [deployment docs](/docs/self-deployment).
+Self-hosting is a first-class path: one all-in-one Docker image or a single npm-installed binary, with a free Pro trial license (valid until 2027-01-03) included on the [self-hosting page](/self-hosting). Prefer zero servers? The [desktop app](/download#desktop) ships its own backend and runs fully local, free. Deployment details are in the [deployment docs](/docs/self-deployment).
 
 ## Hosted udctl is still on the way
 

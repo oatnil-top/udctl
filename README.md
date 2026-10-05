@@ -27,7 +27,7 @@ docker run -d -p 3000:8080 \
   lintao0o0/undercontrol:latest
 ```
 
-Frontend and backend ship in one image (amd64 and arm64). SQLite by default, PostgreSQL optional. A free 3-month Pro trial license is on the self-hosting page, and every environment variable is documented at https://udctl.com/configuration.
+Frontend and backend ship in one image (amd64 and arm64). SQLite by default, PostgreSQL optional. A free Pro trial license (valid until 2027-01-03) is on the self-hosting page, and every environment variable is documented at https://udctl.com/configuration.
 
 ### CLI
 

@@ -1249,7 +1249,7 @@
     "message": "免费"
   },
   "selfhosting.hero.pill3b": {
-    "message": "3 个月 Pro 许可证"
+    "message": "Pro 许可证有效期至 {date}"
   },
   "selfhosting.hero.title.a": {
     "message": "一个镜像。"
@@ -1282,7 +1282,7 @@
     "message": "版本"
   },
   "selfhosting.license.title": {
-    "message": "免费用上 Pro——我们请客，3 个月。"
+    "message": "免费用上 Pro——我们请客，有效期至 {date}。"
   },
   "selfhosting.license.validUntil": {
     "message": "有效期至"

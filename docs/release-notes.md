@@ -43,6 +43,44 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.160.2 (2026-10-05)
+
+**Patch release: the nightly backup uploads again, and agent sessions now receive their instructions as a typed message.** Since 0.160.0 a scheduled backup larger than the per-file upload limit was refused, so no backup file was stored. No new database migrations. **Before you upgrade the server, read "Upgrade Notes": a machine whose `ud` is older than 0.160.2 cannot start agent sessions against a 0.160.2 server.**
+
+### Bug Fixes
+
+- **Scheduled backups are stored again.** On 0.160.0 and 0.160.1 the server checked the backup file against the per-file upload limit and the per-user storage quota in Admin settings, so any backup larger than that limit (10 MB unless an admin changed it) failed with `File size ... exceeds limit` while the scheduled job still reported success. Backups now count only against the server-wide storage limit, as they did before 0.160.0. Normal uploads keep every limit they had.
+- **An agent session that never gets going now says so.** A session that hits the usage limit, exits right after launch, or does not read its instructions within 90 seconds is marked "failed" and replies in the thread that started it with the reason. Before, it stayed "running" and was later swept to "lost" with no explanation. When the usage limit was the cause, the reply quotes the limit message, including the reset time. A session now counts as having received its instructions only after the desktop app or the `ud` CLI daemon confirms it typed and submitted them; if a permission dialog swallowed them, they are sent again after 60 seconds.
+- **A message sent to an agent that is waiting on a permission prompt no longer answers that prompt.** Before, if the agent's terminal showed a permission dialog or a menu when a message arrived, the Enter that should have sent the message could approve the dialog instead, and the message was lost. The desktop app and the `ud` CLI daemon now check for an open dialog before typing, and never press Enter on a message they could not see arrive in the input box.
+
+### Improvements
+
+- **Agent sessions start with one short command and receive their instructions as a normal message.** The startup line is now `ud send-input session <id> --briefing`. The instructions are then typed into the session's terminal as a user message, instead of being pasted in or printed as command output. `ud describe session <id> -o prompt` still prints them for a person who wants to read them.
+- **Attachments**: the attachments panel's labels and messages follow the app language. Some were always shown in Chinese before.
+
+### Upgrade Notes (self-hosted)
+
+- **No new database migrations.** Upgrading the server brings backups back; that fix is entirely on the server.
+- **Every machine that runs agent sessions needs `ud` 0.160.2.** A 0.160.2 server starts each session with `ud send-input session <id> --briefing`. A `ud` older than 0.160.2 rejects that with `Error: unknown flag: --briefing`, so no session on that machine starts: each one is marked "failed" after 90 seconds. Upgrade `ud` on those machines by the route below that matches how it was installed. If that machine's `ud` came from the desktop app, the only way is to install the 0.160.2 desktop app.
+- **The daemon on those machines needs 0.160.2 too: the desktop app 0.160.2, or a `ud` CLI daemon restarted on `ud` 0.160.2.** A 0.160.2 server waits for the daemon to confirm that it submitted a session's instructions, and an older daemon never sends that confirmation. Its sessions get their startup line a second time after 60 seconds and are marked "failed" after 90 seconds, even when they are working.
+- **If you run the `ud` CLI daemon, restart it after upgrading `ud`**: the running daemon keeps the old code until it is restarted. Stop it with the new `ud`: an older `ud daemon stop` run against a 0.160.2 daemon reports success while the daemon keeps running. The daemon's local port 19514 now answers 403 to requests made through `[::1]` or a host name; use `127.0.0.1` or `localhost`.
+- Upgrading the desktop app or restarting the `ud` CLI daemon ends the agent sessions running on that machine, so pick a moment when none are mid-task.
+- After the next scheduled backup, check that a new backup file is listed under Admin -> Backup. A job marked "success" is not enough, because the upload runs after the job is marked complete.
+- **Usage-limit detection needs the desktop app 0.160.2** on the machine that runs the agent sessions. With an older app, such a session is still marked "failed", but with the general reason.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.160.2`.
+
+---
+
 ## v0.160.1 (2026-10-04)
 
 **Patch release for the machines that run agent sessions: replies to a running agent reach its terminal in full again.** No server changes, no new database migrations. Details under "Upgrade Notes".

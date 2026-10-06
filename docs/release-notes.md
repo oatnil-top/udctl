@@ -43,6 +43,38 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.160.3 (2026-10-06)
+
+**Patch release: backups are now a consistent copy of the database, and the OpenCode and GitHub Copilot agent CLIs start correctly.** Before, a backup taken while the server was writing could be a damaged database that does not restore. No new database migrations. **Self-hosted on SQLite: after upgrading, take a fresh backup** (see Upgrade Notes).
+
+### Bug Fixes
+
+- **Backups are a consistent snapshot of the database.** On servers that use SQLite, the backup copied the database file while the app kept writing to it, so a backup taken during writes could mix data from before and after a change and fail to restore. Each backup now first takes a consistent snapshot of the database and archives that snapshot. Backups already stored are not changed.
+- **One failed backup no longer makes the next night's backup report "failed" too.** The scheduled backup job judges its health from the previous backup's result, so a single failed night made the following run report "failed" even when its own backup succeeded. A single isolated failure is now logged as a warning; two failures in a row, or no finished backup within the expected window, still mark the run failed.
+- **OpenCode agent sessions start.** OpenCode took the session's startup line as a project directory and exited right after launch. Its default launch command is now `opencode --auto --prompt {{prompt}}`.
+- **GitHub Copilot agent sessions receive their startup line.** Copilot has no plain positional prompt, so the startup line never arrived. Its default launch command is now `copilot --yolo -i {{prompt}}`, which starts an interactive session with that line as its first message.
+- **aider and kimi are no longer offered as default agent CLIs for new accounts.** Neither can take a startup line and stay open, which agent sessions need.
+
+### Upgrade Notes (self-hosted)
+
+- **No new database migrations.**
+- **Take a fresh backup after upgrading** (Admin -> Backup), then check that a new backup file is listed there. A backup made by an earlier version while the server was busy may not restore; this is the first version whose backups are consistent.
+- **A backup now needs temporary free disk space up to the size of the database**, in the server's backup directory, on top of the archive itself. The snapshot is deleted when the backup finishes. On a nearly full disk the backup fails and the job reports it.
+- **Your existing agent CLI settings are not changed.** If OpenCode or GitHub Copilot is already in your agent CLI list (Your agent CLIs), it keeps its old command and still fails to start. Its row shows "Differs from the system default (last changed in v0.160.3)"; open "View differences" and change the command to the new default above. aider and kimi rows you already have stay as they are.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.160.3`.
+
+---
+
 ## v0.160.2 (2026-10-05)
 
 **Patch release: the nightly backup uploads again, and agent sessions now receive their instructions as a typed message.** Since 0.160.0 a scheduled backup larger than the per-file upload limit was refused, so no backup file was stored. No new database migrations. **Before you upgrade the server, read "Upgrade Notes": a machine whose `ud` is older than 0.160.2 cannot start agent sessions against a 0.160.2 server.**

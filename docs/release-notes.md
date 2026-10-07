@@ -43,6 +43,46 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.160.4 (2026-10-07)
+
+**Patch release: a backup no longer stops a busy SQLite server from saving, and a self-hosted server whose license has expired now starts in a recovery mode instead of refusing to start.** No new database migrations. **Self-hosted on SQLite and running v0.160.3: upgrade** (see Upgrade Notes).
+
+### New Features
+
+- **Recover a self-hosted server with an expired license from the browser.** Before, a server started with an expired license refused to start at all. Now, when the license is genuine but expired, the server starts in a restricted recovery mode: opening the app shows a recovery page naming the license and when it expired, and an admin can paste a new license there. The server returns to normal without restarting the process, and keeps the new license for later starts. No data is touched. A license that is forged or was issued for another server still refuses to start, as before.
+- **Start an agent session from a project.** The project page and each row of the project list have a Start Session action. It opens the usual run dialog with the project already chosen, so the session runs in the project's directory, and on Run it creates a card for the session linked to the project. Choosing an existing card instead still works.
+- **Agent CLI rows that differ from the system default are marked in the list.** In Your agent CLIs, a row whose command has drifted from the default of the same name carries a "Differs from default" tag. Clicking the tag opens the comparison with one-click overwrite, and the tag goes away as soon as the row matches the default again.
+
+### Bug Fixes
+
+- **A backup no longer leaves a SQLite server unable to save.** On v0.160.3, a backup taken while the server was writing could make a save fail in a way that blocked every later save until the server was restarted. Backups now take their snapshot on the server's own database connection, and a save that fails under contention now fails on its own instead of blocking the ones after it. While the snapshot is copied, other database work waits for it.
+- **Admins are no longer held to the 1 GB storage limit on image uploads.** Quick capture, creating a task from an image, the to-do vision upload and creating an expense from a photo checked an admin's storage quota as if they were a regular 1 GB user, and failed with "quota exceeded" past 1 GB.
+- **Replies routed into an OpenCode session arrive once.** The terminal relay did not recognise OpenCode's "[Pasted ~N lines]" marker, so it pasted the same reply again and again and never pressed Enter. Fixed in both the ud CLI daemon and the desktop app, together with a related case where an earlier paste marker still on screen could be mistaken for the new one.
+- **Narrow screens:** the "Differs from default" tag and the system-default comparison dialog no longer spill outside their box.
+
+### Upgrade Notes (self-hosted)
+
+- **No new database migrations.**
+- **If you are on SQLite and running v0.160.3, upgrade.** A backup on v0.160.3 can stop the server saving until it is restarted. If your server has stopped saving after a backup, restart it, then upgrade.
+- **A backup still needs temporary free disk space up to the size of the database**, in the server's backup directory, on top of the archive itself, as in v0.160.3.
+- **A license pasted on the recovery page is saved as `license.token` in the server's data directory**, and on later starts it is used ahead of `LICENSE_TOKEN` and the config file for as long as it stays valid. If you later switch licenses through `LICENSE_TOKEN`, delete that file, or it keeps being used.
+- **If you pass the license with the `--license-token` startup flag, the recovery page cannot help you**: that flag wins on every start, so the page refuses the new license and tells you to change the startup command instead.
+- **Pro and Max: the recovery page refuses a license while `ADMIN_EMAIL` is not set**, and names the missing setting, because the server could not finish starting without it.
+- **The recovery page appears only when the server starts with an expired license.** A server that is already running when its license expires keeps running.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.160.4`.
+
+---
+
 ## v0.160.3 (2026-10-06)
 
 **Patch release: backups are now a consistent copy of the database, and the OpenCode and GitHub Copilot agent CLIs start correctly.** Before, a backup taken while the server was writing could be a damaged database that does not restore. No new database migrations. **Self-hosted on SQLite: after upgrading, take a fresh backup** (see Upgrade Notes).

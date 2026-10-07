@@ -231,8 +231,11 @@ function FirstScreen() {
               </svg>
               <Translate id="home5.hero.ctaDownload">Download for macOS</Translate>
             </Link>
-            <Link className={hero.ctaSecondary} to="/docs/intro">
-              <Translate id="home5.hero.ctaDocs">Read the docs</Translate>
+            {/* master 2026-10-07 (ud card 20efddc7): "Read the docs" became these two.
+                Docs stay reachable from the navbar (Docs) and the footer (Getting Started).
+                Try online goes to the hosted app's login, the same entry /download uses. */}
+            <Link className={hero.ctaSecondary} href="https://ud.oatnil.com/#/login">
+              <Translate id="home5.hero.ctaTryOnline">Try online</Translate>
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -243,6 +246,9 @@ function FirstScreen() {
                 aria-hidden="true">
                 <path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6" />
               </svg>
+            </Link>
+            <Link className={hero.ctaSecondary} to="/self-hosting">
+              <Translate id="home5.hero.ctaSelfHost">Self-host</Translate>
             </Link>
           </div>
           {/* Order follows our own download page, not the reference's. The

@@ -267,8 +267,21 @@
   .ctas {
     margin-top: 26px;
     gap: 10px;
+    /* Three buttons do not fit one 390px row; left to wrap, Self-host sat alone
+       on row two (ud card 20efddc7). Download takes row one, the two secondaries
+       split row two evenly. */
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .ctaPrimary {
+    flex: 1 1 100%;
+  }
+  .ctaSecondary {
+    flex: 1 1 0;
   }
   .cta {
+    justify-content: center;
     font-size: 0.9rem;
     padding: 11px 18px;
     border-radius: 6px;

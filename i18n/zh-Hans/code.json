@@ -2234,8 +2234,11 @@
   "home5.hero.ctaDownload": {
     "message": "下载 macOS 版"
   },
-  "home5.hero.ctaDocs": {
-    "message": "阅读文档"
+  "home5.hero.ctaTryOnline": {
+    "message": "在线试用"
+  },
+  "home5.hero.ctaSelfHost": {
+    "message": "自部署"
   },
   "home5.hero.fine": {
     "message": "支持 macOS、Windows 和 Linux · 自 2024 年 9 月持续开发"

@@ -51,7 +51,7 @@ import styles from './download.module.css';
 const VERSION: string = versionConfig.version;
 
 const APP_URL = 'https://ud.oatnil.com';
-const R2_RELEASES = 'https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases';
+const R2_RELEASES = 'https://dl.udctl.com/releases';
 const CHROME_STORE_URL =
   'https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog';
 const SHORTCUT_URL = 'https://www.icloud.com/shortcuts/4e0becebe3cd48a180940ccbd04d6fa7';
@@ -66,7 +66,7 @@ const TESTFLIGHT_URL = 'https://testflight.apple.com/join/st2TnaBF';
 // Bumping ANDROID_VERSION IS the publish moment: do it only after
 // auto/verify-android-release.sh <version> (monorepo) reports all four gates
 // green — the script prints the sha256 and signer to paste on the release card.
-const R2_ANDROID_RELEASES = 'https://pub-366894d3b9a34981b42199be2ebdad70.r2.dev/android';
+const R2_ANDROID_RELEASES = 'https://dl-android.udctl.com/android';
 const ANDROID_VERSION = '0.0.20';
 const ANDROID_APK_FILE = `undercontrol-${ANDROID_VERSION}.apk`;
 const ANDROID_APK_URL = `${R2_ANDROID_RELEASES}/${ANDROID_VERSION}/${ANDROID_APK_FILE}`;

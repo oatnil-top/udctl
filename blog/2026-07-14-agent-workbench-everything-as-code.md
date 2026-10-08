@@ -4,14 +4,14 @@ description: "The agent-workbench trend stops at the execution layer. UnDercontr
 authors: [lintao]
 tags: [feature, agents]
 date: 2026-07-14
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/concept-hero.png
+image: https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/concept-hero.png
 ---
 
 The "agent workbench" idea is heating up. More and more people agree: an AI agent should act like a teammate — pick up tasks, report progress, leave durable output — not just answer questions in a chat box.
 
 But there's a further question that rarely gets asked: **can the AI operate the platform itself?** Not just do work inside the system, but *run* it for you — tidy up boards, archive stale tasks, maintain tags, distill hard-won steps into a reusable capability.
 
-![Not just a worker — an operator of the platform itself](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/concept-hero.png)
+![Not just a worker — an operator of the platform itself](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/concept-hero.png)
 
 <!-- truncate -->
 
@@ -35,13 +35,13 @@ Pre-release checklist…
 EOF
 ```
 
-![Everything as Code — tasks, boards, skills, metadata are all Markdown + one CLI](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/concept-eoc.png)
+![Everything as Code — tasks, boards, skills, metadata are all Markdown + one CLI](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/concept-eoc.png)
 
 Here's the key: **the same abilities an AI agent uses to read and write code — run commands, read and write text — work unchanged on the whole platform.** It can create tasks, break out subtasks, change statuses, apply tags, build boards (a board is just a saved query), distill a repeated prompt into a new Skill, patch custom fields… Those management actions are themselves code.
 
 In short: the AI isn't only a **worker** inside the platform — it can also be an **admin**, because managing the platform is itself programmable.
 
-![An Engineering board — columns are saved queries the agent can build and reshape](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/app-board.png)
+![An Engineering board — columns are saved queries the agent can build and reshape](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/app-board.png)
 
 **Typical scenarios**
 
@@ -52,7 +52,7 @@ In short: the AI isn't only a **worker** inside the platform — it can also be 
 
 **Agents as teammates.** Write a requirement as a task, @mention an agent, and it claims the task, reads the description, notes, and links as context, writes code, runs tests, commits, and writes progress back into the notes. What it picks up isn't a black-box issue — it's **structured Markdown it can also edit itself**.
 
-![Task detail — the agent reads the description and writes progress + commits back into the notes timeline](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/app-task.png)
+![Task detail — the agent reads the description and writes progress + commits back into the notes timeline](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/app-task.png)
 
 **Daemon / runtime.** The agent runs on your own dev machine — a background **daemon** stays connected over SSE and streams the terminal output back in real time. This remote workspace has been in the works since April 2026; today daemon registration, SSE, multi-surface triggering, and session viewing are all in place — you can start and monitor from the web, the desktop app, the CLI, even your phone.
 
@@ -70,7 +70,7 @@ In most tools, AI handles the **execution layer** (write code, run tests), while
 
 When the platform itself is code, that line disappears: AI can share both execution and management. Your knowledge base is both **content** and a **programmable control surface**. You gain a teammate who does the work — and an admin who keeps the system in order.
 
-![Most tools stop at execution; here AI shares the management layer too](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/concept-layers.png)
+![Most tools stop at execution; here AI shares the management layer too](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/concept-layers.png)
 
 ### Wrapping up
 
@@ -82,4 +82,4 @@ The heart of an "agent workbench" is letting AI do the work reliably, leave dura
 
 In UnDercontrol, AI is both a teammate and an admin.
 
-![Everything as Code — so AI can run the platform, not just work in it](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/concept-cta.png)
+![Everything as Code — so AI can run the platform, not just work in it](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/concept-cta.png)

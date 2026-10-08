@@ -19,7 +19,7 @@ UnDercontrol 的任务分享功能解决了这个问题。生成一个公开链�
 1. **直接链接** ——一个完整的 URL，打开后是干净的只读视图
 2. **访问码** ——一个短字母数字代码（比如 `QJVOFL`），在分享码页面输入即可访问
 
-![分享对话框，显示配置选项和活跃的访问码 QJVOFL](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-sharing/share-dialog.png)
+![分享对话框，显示配置选项和活跃的访问码 QJVOFL](https://dl.udctl.com/features/blog/task-sharing/share-dialog.png)
 
 访问码是为不方便发送链接的场景设计的——比如电话里告诉对方、写在白板上、或在长链接会被截断的聊天工具里使用。
 
@@ -31,7 +31,7 @@ UnDercontrol 的任务分享功能解决了这个问题。生成一个公开链�
 
 **附件权限**：默认情况下，附件会被列出但不可下载。如果你希望查看者能下载任务附件，打开"允许下载附件"开关。
 
-![流程图：你的任务 → 生成链接 → 分享 → 任何人查看](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-sharing/slide-2.png)
+![流程图：你的任务 → 生成链接 → 分享 → 任何人查看](https://dl.udctl.com/features/blog/task-sharing/slide-2.png)
 
 你可以为同一个任务创建多个分享链接，使用不同的设置——比如一个 1 小时链接用于快速审查，一个 7 天链接用于协作。
 
@@ -48,7 +48,7 @@ UnDercontrol 的任务分享功能解决了这个问题。生成一个公开链�
 - **二维码**，方便手机端快速分享
 - **过期倒计时**，让查看者知道链接还有多久有效
 
-![分享任务视图，包含标题、二维码、Markdown 描述和过期倒计时](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-sharing/shared-view.png)
+![分享任务视图，包含标题、二维码、Markdown 描述和过期倒计时](https://dl.udctl.com/features/blog/task-sharing/shared-view.png)
 
 页面是独立的。没有导航栏，没有登录提示，没有应用外壳。只有内容本身。
 
@@ -56,7 +56,7 @@ UnDercontrol 的任务分享功能解决了这个问题。生成一个公开链�
 
 访问码功能值得单独介绍。打开分享页面（`/share`），输入代码，就会自动跳转到分享的任务。
 
-![访问码输入页面，大号等宽字体输入框显示 QJVOFL](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-sharing/code-entry.png)
+![访问码输入页面，大号等宽字体输入框显示 QJVOFL](https://dl.udctl.com/features/blog/task-sharing/code-entry.png)
 
 这在以下场景特别有用：
 - **演示文稿**：把代码放在幻灯片上，让观众自行查看参考资料

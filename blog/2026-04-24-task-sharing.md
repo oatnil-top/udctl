@@ -19,7 +19,7 @@ From any task detail page, click the share icon to open the share dialog. You ge
 1. **A direct link** — a full URL that opens the task in a clean, read-only view
 2. **An access code** — a short alphanumeric code (like `QJVOFL`) that someone can type into the share code page
 
-![Share dialog showing configuration options, active links with access code QJVOFL](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-sharing/share-dialog.png)
+![Share dialog showing configuration options, active links with access code QJVOFL](https://dl.udctl.com/features/blog/task-sharing/share-dialog.png)
 
 The access code is designed for situations where you can't easily send a link — like telling someone over the phone, writing it on a whiteboard, or dropping it in a chat where long URLs get mangled.
 
@@ -31,7 +31,7 @@ Not every task should be shared the same way. The share dialog gives you two con
 
 **Attachment access**: By default, attachments are listed but not downloadable. Toggle "Allow attachments" if you want viewers to download files attached to the task.
 
-![Flow diagram: Your Task → Generate Link → Share → Anyone Views](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-sharing/slide-2.png)
+![Flow diagram: Your Task → Generate Link → Share → Anyone Views](https://dl.udctl.com/features/blog/task-sharing/slide-2.png)
 
 You can create multiple share links for the same task with different settings — maybe a 1-hour link for a quick review and a 7-day link for a collaborator.
 
@@ -48,7 +48,7 @@ When someone opens a shared link, they see a clean, focused view of the task:
 - **QR code** in the corner for easy re-sharing on mobile
 - **Expiration countdown** so viewers know how long the link is valid
 
-![Shared task view with title, QR code, markdown description, and expiration countdown](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-sharing/shared-view.png)
+![Shared task view with title, QR code, markdown description, and expiration countdown](https://dl.udctl.com/features/blog/task-sharing/shared-view.png)
 
 The page is self-contained. No navigation chrome, no login prompts, no app shell. Just the content.
 
@@ -56,7 +56,7 @@ The page is self-contained. No navigation chrome, no login prompts, no app shell
 
 The access code feature deserves its own mention. Navigate to the share page (`/share`), type in the code, and you're redirected to the shared task.
 
-![Access code entry page with large monospace input showing QJVOFL](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-sharing/code-entry.png)
+![Access code entry page with large monospace input showing QJVOFL](https://dl.udctl.com/features/blog/task-sharing/code-entry.png)
 
 This is particularly useful for:
 - **Presentations**: Put the code on a slide, let the audience look up the reference material

@@ -10,7 +10,7 @@ date: 2026-04-05
 
 下面介绍资源管理系统在实际使用中的工作方式。
 
-![Task list view — files attach directly to tasks, expenses, and budgets](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/resource-management/task-with-attachments.png)
+![Task list view — files attach directly to tasks, expenses, and budgets](https://dl.udctl.com/features/blog/resource-management/task-with-attachments.png)
 
 ## 按你的工作习惯上传
 
@@ -40,7 +40,7 @@ ud upload resource ./receipt.png --entity-type expense --entity-id exp-456
 
 检查器还会显示照片的 EXIF 元数据——如果你需要确认照片的拍摄时间或地点，这非常实用。
 
-![Resource management page showing uploaded files with thumbnails and metadata](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/resource-management/resources-grid.png)
+![Resource management page showing uploaded files with thumbnails and metadata](https://dl.udctl.com/features/blog/resource-management/resources-grid.png)
 
 ## 存储：本地或 S3
 
@@ -64,7 +64,7 @@ ud upload resource ./receipt.png --entity-type expense --entity-id exp-456
 
 所有内容集中在一处，无需外部文件托管，也无需翻找邮件记录。
 
-![Budget overview — receipts and invoices attach to expenses within budgets](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/resource-management/budget-overview.png)
+![Budget overview — receipts and invoices attach to expenses within budgets](https://dl.udctl.com/features/blog/resource-management/budget-overview.png)
 
 ## 开始使用
 

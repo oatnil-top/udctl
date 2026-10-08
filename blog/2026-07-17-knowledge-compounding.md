@@ -4,10 +4,10 @@ description: "I studied architecture, switched to software, and moved to Singapo
 authors: [lintao]
 tags: [story]
 date: 2026-07-17
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/knowledge-compounding/concept-1.png
+image: https://dl.udctl.com/features/blog/knowledge-compounding/concept-1.png
 ---
 
-![The compounding curve of knowledge](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/knowledge-compounding/concept-1.png)
+![The compounding curve of knowledge](https://dl.udctl.com/features/blog/knowledge-compounding/concept-1.png)
 
 I studied architecture. Then I switched careers and became a programmer. Later I left everything familiar behind and moved to Singapore, where I now work as a fullstack / DevOps engineer.
 
@@ -21,7 +21,7 @@ Looking back, that habit is the highest-return investment I've ever made. It car
 
 Over the years, my "account" changed three times: Joplin → Obsidian → UnDercontrol. Each migration wasn't chasing something shiny — it was my understanding of *how knowledge should work* leveling up.
 
-![Two journeys, one habit](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/knowledge-compounding/concept-2.png)
+![Two journeys, one habit](https://dl.udctl.com/features/blog/knowledge-compounding/concept-2.png)
 
 ### The Joplin era: get things written down (Collect)
 

@@ -18,13 +18,13 @@ Learn how to add your own AI provider to UnDercontrol for AI chat and smart feat
 
 Click your username at the bottom-left corner of the sidebar to open the Settings page.
 
-![Step 1: Go to Settings](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/howto/config-ai-provider/1-goto-config-page.jpg)
+![Step 1: Go to Settings](https://dl.udctl.com/features/howto/config-ai-provider/1-goto-config-page.jpg)
 
 ### Step 2: Open AI Configuration
 
 In the settings sidebar, click the **AI Configuration** section.
 
-![Step 2: Open AI Configuration](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/howto/config-ai-provider/2-goto-ai-config-section.jpg)
+![Step 2: Open AI Configuration](https://dl.udctl.com/features/howto/config-ai-provider/2-goto-ai-config-section.jpg)
 
 ### Step 3: Add an AI Provider
 
@@ -36,13 +36,13 @@ Click the **+ Add Provider** button. In the dialog, fill in:
 - **API Base URL**: The provider's API endpoint (e.g., `https://models.github.ai/inference`)
 - **Model**: The model to use (e.g., `gpt-4o`)
 
-![Step 3: Add AI Provider](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/howto/config-ai-provider/3-add-ai-provider.jpg)
+![Step 3: Add AI Provider](https://dl.udctl.com/features/howto/config-ai-provider/3-add-ai-provider.jpg)
 
 ### Step 4: Test the Connection
 
 Click the **Test Connection** button to verify your API key and configuration are correct. A green checkmark confirms the connection is successful.
 
-![Step 4: Test Connection](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/howto/config-ai-provider/4-test-connection.jpg)
+![Step 4: Test Connection](https://dl.udctl.com/features/howto/config-ai-provider/4-test-connection.jpg)
 
 ### Step 5: Set Availability
 
@@ -53,13 +53,13 @@ After creating the provider, configure where it can be used:
 
 Both toggles will show **Available** when enabled.
 
-![Step 5: Set Availability](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/howto/config-ai-provider/5-set-fe-be-avail.jpg)
+![Step 5: Set Availability](https://dl.udctl.com/features/howto/config-ai-provider/5-set-fe-be-avail.jpg)
 
 ### Step 6: Chat with AI
 
 Open any task and click the **AI Chat** panel on the right side. Select your newly configured provider from the dropdown menu to start a conversation.
 
-![Step 6: Chat with AI](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/howto/config-ai-provider/6-chat-with-ai-using-this-provider.jpg)
+![Step 6: Chat with AI](https://dl.udctl.com/features/howto/config-ai-provider/6-chat-with-ai-using-this-provider.jpg)
 
 ## Result
 

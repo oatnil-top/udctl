@@ -18,7 +18,7 @@ UnDercontrol 中的群组是一个共享工作空间。可以把它理解为一�
 
 邀请链接有一定的灵活性。你可以设置有效期，让链接在一天或一周后自动失效——在添加临时协作者时非常实用。你也可以随时撤销任意链接。这是个小细节，但当你在意谁能访问你的工作空间时，它就变得很重要。
 
-![Group management for team collaboration](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/collaboration/groups.png)
+![Group management for team collaboration](https://dl.udctl.com/features/blog/collaboration/groups.png)
 
 ## 基于角色的权限管理
 
@@ -44,7 +44,7 @@ UnDercontrol 中的群组是一个共享工作空间。可以把它理解为一�
 
 共享看板与群组系统直接集成。创建共享看板时，系统会在后台自动创建一个对应的群组。看板创建者成为群组管理员，协作者以成员身份加入。这意味着团队的工作流程始终绑定在一套完整的权限模型上，而不是一个任何人都能偶然访问的开放链接。
 
-![Shared kanban board for team collaboration](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/collaboration/shared-board.png)
+![Shared kanban board for team collaboration](https://dl.udctl.com/features/blog/collaboration/shared-board.png)
 
 ## 实用建议
 

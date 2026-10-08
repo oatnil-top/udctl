@@ -4,18 +4,18 @@ description: "选中任务正文里的一句话就地评论，引文和高亮跟
 authors: [lintao]
 tags: [feature, collaboration]
 date: 2026-07-25
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/anchored-comments/concept-anchored.png
+image: https://dl.udctl.com/features/blog/anchored-comments/concept-anchored.png
 ---
 
 需求写完发出去，讨论就开始散架。同事在群里回一句"第三段那个字段是不是应该可空"，你得翻回文档、数到第三段、再猜他说的是哪个字段。隔天再看到这条消息，上下文已经没了。
 
-![锚定评论：讨论钉在它所讨论的那一行上](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/anchored-comments/concept-anchored.png)
+![锚定评论：讨论钉在它所讨论的那一行上](https://dl.udctl.com/features/blog/anchored-comments/concept-anchored.png)
 
 <!-- truncate -->
 
 UnDercontrol 的锚定评论把讨论留在原文旁边。在任务正文里选中一句话，气泡菜单点 Comment，右边侧边栏就多出一条带着这句引文的评论，正文里那句话同时变成高亮。以后谁点这块高亮，侧边栏就跳到对应的讨论。引用信息记在评论上，正文的 markdown 一个字都没被改过，复制出去、用命令行拉下来，还是你写的那一份。
 
-![任务正文里的高亮句子，右侧边栏是对应的锚定评论线程](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/anchored-comments/shot-1-anchored-thread.png)
+![任务正文里的高亮句子，右侧边栏是对应的锚定评论线程](https://dl.udctl.com/features/blog/anchored-comments/shot-1-anchored-thread.png)
 
 一条讨论谈完，点 Resolve，高亮从正文里消失，线程折叠成一行灰字，需要时能重新打开。别人回复的时候你这边的线程会自己更新，不用刷新页面。手机上不画高亮，评论排在正文下面。
 
@@ -25,7 +25,7 @@ UnDercontrol 的锚定评论把讨论留在原文旁边。在任务正文里选�
 
 一份需求过完一遍，页面上还亮着的高亮就是没谈拢的地方。不用再单独整理一份会议纪要，剩下的未解决线程本身就是待办清单。
 
-![评审过一遍之后的评论侧边栏：已解决的线程折叠成灰字，剩下的是还没谈拢的](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/anchored-comments/shot-2-review-pass.png)
+![评审过一遍之后的评论侧边栏：已解决的线程折叠成灰字，剩下的是还没谈拢的](https://dl.udctl.com/features/blog/anchored-comments/shot-2-review-pass.png)
 
 ### 指着一行让 agent 去改
 
@@ -33,7 +33,7 @@ UnDercontrol 的锚定评论把讨论留在原文旁边。在任务正文里选�
 
 人和 agent 在同一条线程里说话，不用你在两个工具之间来回转述。
 
-![人在评论里 @ 了 agent，agent 的回复带着 commit hash 排在同一条线程里](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/anchored-comments/shot-3-agent-thread.png)
+![人在评论里 @ 了 agent，agent 的回复带着 commit hash 排在同一条线程里](https://dl.udctl.com/features/blog/anchored-comments/shot-3-agent-thread.png)
 
 ### 长文档的分段讨论
 

@@ -22,7 +22,7 @@ SSE 基于普通 HTTP 实现持久连接，浏览器规范内置自动重连能�
 
 这意味着你在手机上记录一笔支出，浏览器标签页会在毫秒内感知到。无需轮询，无需手动刷新。
 
-![Task list view — changes sync in real-time across all connected clients](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/sse-realtime-sync/task-list.png)
+![Task list view — changes sync in real-time across all connected clients](https://dl.udctl.com/features/blog/sse-realtime-sync/task-list.png)
 
 连接的生命周期经过精心管理。连接最长保持 30 分钟，到期后会自动重连。这可以防止长时间运行的实例出现资源泄漏，同时与有自身超时规则的负载均衡器和反向代理友好兼容。如果连接因任何原因断开——网络抖动、设备休眠唤醒、代理超时——客户端会使用指数退避策略自动重连。初始延迟较短，随后逐步增加，避免短暂离线的设备在恢复上线时瞬间冲击服务器。
 
@@ -34,7 +34,7 @@ SSE 基于普通 HTTP 实现持久连接，浏览器规范内置自动重连能�
 
 这让界面保持流畅，避免了那种因频繁全量请求而带来的突兀刷新感。
 
-![Kanban board with live status updates pushed via SSE](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/sse-realtime-sync/kanban-board.png)
+![Kanban board with live status updates pushed via SSE](https://dl.udctl.com/features/blog/sse-realtime-sync/kanban-board.png)
 
 ## 乐观更新与服务端协调
 
@@ -46,7 +46,7 @@ SSE 与 UnDercontrol 的乐观更新模型协同工作。本地做出变更时�
 
 在两个浏览器标签页中打开同一个 UnDercontrol 实例，在其中一个标签页做出修改，另一个标签页无需任何操作即可看到变更。当你在一块屏幕上查看预算概览、在另一块屏幕上记录交易时，这一特性尤为实用。
 
-![Budget overview — expense changes propagate instantly to all open views](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/sse-realtime-sync/budget-overview.png)
+![Budget overview — expense changes propagate instantly to all open views](https://dl.udctl.com/features/blog/sse-realtime-sync/budget-overview.png)
 
 Electron 桌面应用同样参与这套同步机制。通过 CLI 或 Chrome 扩展所做的变更，也会通过 SSE 传播到当前打开的所有端。整个多平台体验的基础，正是这一层同步机制的可靠运行。
 

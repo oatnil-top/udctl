@@ -16,7 +16,7 @@ date: 2026-04-14
 
 **第 1 层：看板范围**（私有 vs 共享）→ **第 2 层：范围标签**（看板级标签过滤）→ **第 3 层：列查询**（每列的匹配条件）→ **第 4 层：临时筛选**（工具栏中的搜索、标签、指派人）
 
-![四层过滤如何组合——从所有任务到精确聚焦](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-board-filters/slide-6.png)
+![四层过滤如何组合——从所有任务到精确聚焦](https://dl.udctl.com/features/blog/kanban-board-filters/slide-6.png)
 
 让我们逐一了解。
 
@@ -43,11 +43,11 @@ date: 2026-04-14
 
 这在**设置 → 编辑看板详情 → 范围标签**中配置。
 
-![看板设置显示范围标签配置](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-board-filters/scope-tags-settings.png)
+![看板设置显示范围标签配置](https://dl.udctl.com/features/blog/kanban-board-filters/scope-tags-settings.png)
 
 关键洞察：范围标签创建了任务池上的**命名持久视图**。你可以有一个"前端"看板（范围标签：`frontend`）、一个"Sprint 2"看板（范围标签：`sprint-2`），它们都从相同的任务中提取。更改任务的标签，它会自动出现在或消失于相关看板中。
 
-![Sprint 1 看板只显示 sprint-1 标记的任务](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-board-filters/sprint1-board.png)
+![Sprint 1 看板只显示 sprint-1 标记的任务](https://dl.udctl.com/features/blog/kanban-board-filters/sprint1-board.png)
 
 ## 第 3 层：列查询——将任务分流到泳道
 
@@ -60,7 +60,7 @@ date: 2026-04-14
 
 但列可以使用任何字段和运算符。你可以创建一个 `tags CONTAINS 'urgent'` 的列，或 `cf.priority >= '3'`，或用 AND/OR 逻辑组合多个条件。
 
-![列条件编辑器显示 Status = todo 匹配条件](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-board-filters/column-query.png)
+![列条件编辑器显示 Status = todo 匹配条件](https://dl.udctl.com/features/blog/kanban-board-filters/column-query.png)
 
 强大之处在于：列还有**自动动作**。当你把任务拖入一列时，其条件会自动应用。将任务拖入"已完成"，状态变为 `done`。将其拖入按 `tags CONTAINS 'reviewed'` 过滤的列，标签会自动添加。看板替你处理簿记工作。
 
@@ -74,7 +74,7 @@ date: 2026-04-14
 
 这些筛选是**临时的**——它们不会永久修改看板。关闭标签页就消失了。但它们是 **URL 持久化**的：筛选状态编码在 URL 查询参数中，如 `?tags=backend&search=API`。
 
-![临时筛选栏显示搜索和标签过滤器](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-board-filters/ephemeral-filter.png)
+![临时筛选栏显示搜索和标签过滤器](https://dl.udctl.com/features/blog/kanban-board-filters/ephemeral-filter.png)
 
 这意味着你可以收藏一个筛选视图，或将 URL 分享给队友，展示你正在查看的确切任务子集。
 

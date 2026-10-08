@@ -3,7 +3,7 @@ title: "漏掉一笔之后，账本为什么越来越难继续"
 description: "漏记真正破坏的是对账本的信任。一次可核对的对账如何找出遗漏、重复、退款和旧数据问题，把人的工作缩小到判断与确认。"
 authors: [lintao]
 tags: [story, agents]
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/reconciliation-you-can-audit/duplicate-channels.png
+image: https://dl.udctl.com/features/blog/reconciliation-you-can-audit/duplicate-channels.png
 date: 2026-07-30
 ---
 
@@ -24,7 +24,7 @@ date: 2026-07-30
 
 其中任何一类问题，靠回忆都很难补全。尤其是退款和缺少日期的旧记录，它们看起来不像错误，只会悄悄改变统计结果。
 
-![跨渠道重复示意：同一笔消费在两个渠道和已有账本中留下相似记录，系统仅标为疑似重复并交给人确认](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/reconciliation-you-can-audit/duplicate-channels.png)
+![跨渠道重复示意：同一笔消费在两个渠道和已有账本中留下相似记录，系统仅标为疑似重复并交给人确认](https://dl.udctl.com/features/blog/reconciliation-you-can-audit/duplicate-channels.png)
 
 ### 先对清楚，再动账本
 
@@ -38,7 +38,7 @@ date: 2026-07-30
 
 可核对，比“自动完成”重要。自动化如果只给一句“已经帮你记好了”，人仍然不知道它漏了什么、合并了什么。分析在前、确认后写入、写完再回读，才让这件事可以放心交出去。
 
-![可核对的对账流程：先分析并展示证据，经人确认后才写入，再回读核对笔数与总额，最后保留记录与原因](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/reconciliation-you-can-audit/auditable-flow.png)
+![可核对的对账流程：先分析并展示证据，经人确认后才写入，再回读核对笔数与总额，最后保留记录与原因](https://dl.udctl.com/features/blog/reconciliation-you-can-audit/auditable-flow.png)
 
 ### 漏记不再意味着从头再来
 

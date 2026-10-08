@@ -10,7 +10,7 @@ Unix has a famous design philosophy: **everything is a file**. Directories, devi
 
 UnDercontrol borrows the same idea, just with a different primitive: **everything is a Task**.
 
-![Everything is a Task](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-management-overview/concept-hero.png)
+![Everything is a Task](https://dl.udctl.com/features/blog/task-management-overview/concept-hero.png)
 
 Most tools treat a "task" as a single line with a checkbox. UnDercontrol never did. Here, a **Task is a universal information container** — it can be a to-do, a document, a reminder, a blog draft, meeting minutes, a decision record, even a wiki page. One data source, organized your way, all in one place.
 
@@ -30,7 +30,7 @@ Every task is made of three layers, each with a design intent — but you're fre
 
 The body is a living document where you keep the complete, coherent narrative; notes record progress over time (session start, each commit, blockers hit); comments are the quick conversation around the content. Clean separation — and all plain text, so both humans and AI read it directly, with no conversion.
 
-![Task detail: Markdown body, tags, status, deadline, notes timeline, and a relation graph at a glance](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-management-overview/task-detail.png)
+![Task detail: Markdown body, tags, status, deadline, notes timeline, and a relation graph at a glance](https://dl.udctl.com/features/blog/task-management-overview/task-detail.png)
 
 A single task detail page makes the point: it's not one line of to-do, but a living document with a Markdown body, tags, status, deadline, a notes timeline, subtasks, and a relation graph.
 
@@ -44,7 +44,7 @@ Because there's only one primitive underneath — the Task — UnDercontrol can 
 - **Tree view**: expand parent-child relationships to see the hierarchy
 - **Graph view**: traverse links, parents, and subtasks as a graph to see how knowledge connects
 
-![The same data, four perspectives: Kanban, List, Calendar, Graph](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-management-overview/multi-view.png)
+![The same data, four perspectives: Kanban, List, Calendar, Graph](https://dl.udctl.com/features/blog/task-management-overview/multi-view.png)
 
 A board isn't "another container" — it's essentially a **saved query**. The same task can appear on many boards at once, with zero duplication. You change the perspective, not the data.
 
@@ -68,7 +68,7 @@ Prefer a "folder" style of organizing? UnDercontrol has that too — **virtual f
 
 It even syncs between local and cloud like Git: `ud pull /Work/Alpha/` checks a virtual directory out into a local folder (creating a `.ud/` to hold sync state, just like `.git/`), edit it with whatever editor you like, and `ud push` sends it back. To move a folder, just move it locally and `ud push` updates the cloud path.
 
-![Virtual folders + AI: organize with a file tree, let AI re-file for you](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-management-overview/virtual-folders.png)
+![Virtual folders + AI: organize with a file tree, let AI re-file for you](https://dl.udctl.com/features/blog/task-management-overview/virtual-folders.png)
 
 What makes organizing truly effortless is **adding AI**. Because the whole structure is plain text plus paths, an AI agent can read your full picture and tidy it up for you:
 
@@ -101,7 +101,7 @@ For collaboration, tasks are shared through **groups** with role-based read/writ
 - **Product/engineering pipeline**: requirements in the task body, progress in notes, review comments in comments; track status flow on a board and see dependencies in the graph.
 - **Content creation**: a blog's Chinese draft, English draft, and social copy each live as a note; the task itself is the Single Source of Truth, and everything published outward is derived from it.
 
-![Graph: tasks woven into a traversable knowledge network](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-management-overview/graph.png)
+![Graph: tasks woven into a traversable knowledge network](https://dl.udctl.com/features/blog/task-management-overview/graph.png)
 
 ### In summary
 

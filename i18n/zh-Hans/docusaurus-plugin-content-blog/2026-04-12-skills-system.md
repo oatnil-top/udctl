@@ -16,7 +16,7 @@ date: 2026-04-12
 
 你可以通过 Web 界面创建和编辑技能，通过 CLI 管理技能，也可以通过 YAML 文件以声明式方式应用技能。markdown 内容支持各种提示词结构：指令、变量、多步骤工作流，满足你的任何使用场景。
 
-![Skills page showing system and custom skills with search and tags](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/skills-system/skills-list.png)
+![Skills page showing system and custom skills with search and tags](https://dl.udctl.com/features/blog/skills-system/skills-list.png)
 
 ## 创建技能
 
@@ -66,7 +66,7 @@ ud prompt pr-review | pbcopy
 
 因为输出的就是标准的 stdout，`ud prompt` 可以与任何从 stdin 读取内容的工具配合使用——Claude Code、其他本地 AI 代理、shell 管道，一切都取决于你的工作流。UnDercontrol 不试图掌控 AI 层，它只是帮你管理好提示词，让你不必为此操心。
 
-![Skill detail view with markdown content and CLI usage commands](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/skills-system/skill-detail.png)
+![Skill detail view with markdown content and CLI usage commands](https://dl.udctl.com/features/blog/skills-system/skill-detail.png)
 
 ## 内置系统技能
 

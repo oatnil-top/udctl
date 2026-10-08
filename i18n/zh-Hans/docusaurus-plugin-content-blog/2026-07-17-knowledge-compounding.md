@@ -4,10 +4,10 @@ description: "建筑学转行程序员，出海新加坡做全栈/DevOps。这�
 authors: [lintao]
 tags: [story]
 date: 2026-07-17
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/knowledge-compounding/concept-1.png
+image: https://dl.udctl.com/features/blog/knowledge-compounding/concept-1.png
 ---
 
-![知识的复利曲线](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/knowledge-compounding/concept-1.png)
+![知识的复利曲线](https://dl.udctl.com/features/blog/knowledge-compounding/concept-1.png)
 
 我是建筑学出身，后来转行做了程序员，再后来离开熟悉的环境，出海新加坡——现在在这边做全栈 / DevOps 工程师。
 
@@ -21,7 +21,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/knowled
 
 这些年里，我的"账户"换了三次：Joplin → Obsidian → UnDercontrol。每一次迁移，都不是喜新厌旧，而是我对"知识应该怎么工作"的理解升了一级。
 
-![两段旅程，一个习惯](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/knowledge-compounding/concept-2.png)
+![两段旅程，一个习惯](https://dl.udctl.com/features/blog/knowledge-compounding/concept-2.png)
 
 ### Joplin 时代：先把东西存下来（Collect）
 

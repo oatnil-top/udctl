@@ -8,7 +8,7 @@ date: 2026-04-28
 
 在选择生产力工具时，一个常见的困境是：Web 端功能强大但离线无法使用，桌面端体验好但数据被锁在本地，CLI 工具对开发者友好但缺少可视化界面。问题的本质是缺少一个统一的数据真实来源（Single Source of Truth）——每个平台各自为政，数据散落在不同角落。UnDercontrol 的答案是：四种形态，一个数据源。而这个数据源完全由你掌控——支持自部署，数据存储在你自己的服务器或本地磁盘，不经过任何第三方，隐私与安全由你自己定义。
 
-![Single Source of Truth 架构](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/slide-sst.png)
+![Single Source of Truth 架构](https://dl.udctl.com/features/blog/multi-platform/slide-sst.png)
 
 <!-- truncate -->
 
@@ -31,7 +31,7 @@ Web 端同时也是 Electron 桌面端的渲染层——同一套代码，零重
 - 团队成员无需安装任何软件，打开链接即可协作
 - 作为所有客户端的数据汇聚点——CLI 推送的文档、桌面端创建的任务、扩展剪藏的网页，全部在 Web 端统一查看和管理
 
-![UnDercontrol Web 应用 Dashboard](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/web-app-dashboard.png)
+![UnDercontrol Web 应用 Dashboard](https://dl.udctl.com/features/blog/multi-platform/web-app-dashboard.png)
 
 ### Electron 桌面端 — 离线优先，本地数据
 
@@ -67,7 +67,7 @@ Web 端同时也是 Electron 桌面端的渲染层——同一套代码，零重
 - 在家用桌面端连接公司服务器，和 Web 端看到的数据完全一致
 - 通过 Daemon 接收远程派发的 AI 任务，本地机器自动执行
 
-![UnDercontrol 任务详情页](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/web-app-task-detail.png)
+![UnDercontrol 任务详情页](https://dl.udctl.com/features/blog/multi-platform/web-app-task-detail.png)
 
 ### CLI 工具 — kubectl 风格，AI Agent 友好
 
@@ -77,7 +77,7 @@ Web 端同时也是 Electron 桌面端的渲染层——同一套代码，零重
 
 直接运行 `ud` 进入全屏 TUI 界面，用键盘浏览和管理任务。
 
-![多平台架构 — Single Source of Truth](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/slide-sst.png)
+![多平台架构 — Single Source of Truth](https://dl.udctl.com/features/blog/multi-platform/slide-sst.png)
 
 **一行命令完成操作**
 
@@ -121,7 +121,7 @@ Chrome 扩展让你把任何网页变成 UnDercontrol 中的任务。
 - Daemon SSE Hub 专门用于向桌面端 Daemon 派发命令
 - 工作区会话状态在桌面端和后端之间自动协调
 
-![四种官方客户端](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/slide-clients.png)
+![四种官方客户端](https://dl.udctl.com/features/blog/multi-platform/slide-clients.png)
 
 ### 同一套代码，一致的体验
 
@@ -144,7 +144,7 @@ UnDercontrol 的多平台策略不是"每个平台写一套"，而是：
 | 实时 SSE | ✅ | ✅ | ❌ | ❌ |
 | AI Agent 友好 | ✅ | ✅ | ✅ | ❌ |
 
-![能力对比表](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/slide-capabilities.png)
+![能力对比表](https://dl.udctl.com/features/blog/multi-platform/slide-capabilities.png)
 
 不止于此——开放的 API 让你构建任何你想要的客户端。
 
@@ -158,7 +158,7 @@ UnDercontrol 的多平台策略不是"每个平台写一套"，而是：
 - **X-UD-Channel 审计** — 自定义 Channel 标识，追踪每个请求来源
 - **CI/CD 友好** — 环境变量配置，无缝接入自动化流水线
 
-![构建自定义客户端](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/slide-custom.png)
+![构建自定义客户端](https://dl.udctl.com/features/blog/multi-platform/slide-custom.png)
 
 **典型场景**
 - 用 Python 写一个 Slack Bot，团队在 Slack 中 `/task` 即可创建和查询 ud 任务

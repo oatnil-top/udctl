@@ -4,7 +4,7 @@ description: 每日定时任务创建一个"描述即 Prompt"的任务,AI Agent 
 authors: [lintao]
 tags: [feature, workflow]
 date: 2026-07-12
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/concept-hero.png
+image: https://dl.udctl.com/features/blog/ai-blog-pipeline/concept-hero.png
 ---
 
 早上八点,我端着咖啡打开看板。Pending 列里躺着一个新任务:
@@ -21,7 +21,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog
 
 <!-- truncate -->
 
-![Kanban board with the blog draft task sitting in the Pending Review column](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/kanban-pending.png)
+![Kanban board with the blog draft task sitting in the Pending Review column](https://dl.udctl.com/features/blog/ai-blog-pipeline/kanban-pending.png)
 
 我读完草稿,在评论区回了一句:"范围太大,写故事细节。"几分钟后,草稿被重写了——你现在读的这篇,就是那次重写的产物。
 
@@ -56,7 +56,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog
 
 整条流水线没有专门的"AI 平台",就是任务系统自己的四个原生能力拼起来的:定时任务、@提及、笔记、评论。
 
-![The 24-hour handoff loop: scheduled job creates the task, mention wakes the agent, draft lands as a note, human reviews in the morning](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/concept-hero.png)
+![The 24-hour handoff loop: scheduled job creates the task, mention wakes the agent, draft lands as a note, human reviews in the morning](https://dl.udctl.com/features/blog/ai-blog-pipeline/concept-hero.png)
 
 **01:00 — 定时任务开闸**
 
@@ -75,7 +75,7 @@ Generate ONE Chinese blog DRAFT for review — do NOT run the full publish pipel
 
 注意这里的设计:**任务描述本身就是 Prompt**。指令、边界("不要发布")、验收标准("置为 pending"),全写在任务里。不需要单独的配置系统——任务就是配置。
 
-![Scheduled Jobs page showing the daily 01:00 blog-draft job](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/scheduled-job.png)
+![Scheduled Jobs page showing the daily 01:00 blog-draft job](https://dl.udctl.com/features/blog/ai-blog-pipeline/scheduled-job.png)
 
 **01:01 — Agent 被 @ 醒**
 
@@ -97,13 +97,13 @@ Generate ONE Chinese blog DRAFT for review — do NOT run the full publish pipel
 
 我的 review 界面就是任务详情页:草稿在笔记里,上下文在描述里,Agent 的工作日志在评论区。我不需要打开任何别的工具。
 
-![Task detail page: the scheduled prompt as description, the draft as a note below](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/task-detail.png)
+![Task detail page: the scheduled prompt as description, the draft as a note below](https://dl.udctl.com/features/blog/ai-blog-pipeline/task-detail.png)
 
 读完草稿,我在评论线程里回了一句话。这句话又触发了 Agent 的新一轮会话——它读到反馈,**用 `note_id` 更新同一条笔记**(不是新建一条,笔记有完整编辑历史,改坏了随时回滚),然后在线程里回复我改了什么。
 
 一来一回,像跟一个异地同事在工单里协作。区别是这个同事凌晨一点上班,而且从不抱怨返工。
 
-![The comment thread: agent reports progress, human replies with one-line feedback, agent confirms the rewrite](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/comment-thread.png)
+![The comment thread: agent reports progress, human replies with one-line feedback, agent confirms the rewrite](https://dl.udctl.com/features/blog/ai-blog-pipeline/comment-thread.png)
 
 ### 为什么交接点是"任务",而不是聊天窗口
 

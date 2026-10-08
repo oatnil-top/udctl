@@ -4,14 +4,14 @@ description: "「Agent 工作台」大多止步于执行层。UnDercontrol 用 E
 authors: [lintao]
 tags: [feature, agents]
 date: 2026-07-14
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/concept-hero.png
+image: https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/concept-hero.png
 ---
 
 「Agent 工作台」这个概念正在升温。越来越多人认同：AI 代理应该像队友一样领任务、报进度、沉淀产出，而不只是聊天框里一问一答的工具。
 
 但有个更进一步的问题很少被谈到——**AI 到底能不能操控平台本身？** 不只是在系统里干活，而是帮你打理这个系统：整理看板、归档旧任务、维护标签、把经验沉淀成可复用的能力。
 
-![Not just a worker — an operator of the platform itself](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/concept-hero.png)
+![Not just a worker — an operator of the platform itself](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/concept-hero.png)
 
 <!-- truncate -->
 
@@ -35,13 +35,13 @@ metadata:
 EOF
 ```
 
-![Everything as Code — tasks, boards, skills, metadata are all Markdown + one CLI](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/concept-eoc.png)
+![Everything as Code — tasks, boards, skills, metadata are all Markdown + one CLI](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/concept-eoc.png)
 
 关键在于：**AI Agent 用来读写代码的那套能力（跑命令、读写文本），原封不动就能读写整个平台。** 它能建任务、拆子任务、改状态、打标签、建看板（看板就是保存的查询）、把一段重复的提示词沉淀成新的 Skill、patch 自定义字段……这些管理动作本身，也是代码。
 
 一句话：AI 不只是平台里的一个「**工人**」，它还能当「**管理员**」——因为管理这件事本身就是可编程的。
 
-![An Engineering board — columns are saved queries the agent can build and reshape](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/app-board.png)
+![An Engineering board — columns are saved queries the agent can build and reshape](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/app-board.png)
 
 **典型场景**
 
@@ -52,7 +52,7 @@ EOF
 
 **Agent 即队友。** 你把需求写成任务、@提及一个 Agent，它自动领取，读取任务描述、Notes、Links 作为上下文，编写代码、运行测试、提交 commit，并把进度写回 Notes。它领到的不是一个黑盒 issue，而是**它自己也能增删改的结构化 Markdown**。
 
-![Task detail — the agent reads the description and writes progress + commits back into the notes timeline](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/app-task.png)
+![Task detail — the agent reads the description and writes progress + commits back into the notes timeline](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/app-task.png)
 
 **守护进程 / 运行时。** Agent 跑在你自己的开发机上（一个后台 **daemon** 通过 SSE 保持连接、实时回传终端输出）。这套远程工作区从 2026 年 4 月起就在打磨，如今 daemon 注册、SSE、多端触发、会话查看都已落地——发起和监控可以来自 Web、桌面应用、CLI，甚至手机。
 
@@ -70,7 +70,7 @@ EOF
 
 当平台本身就是代码，这条界线消失了：AI 能同时帮你分担执行和管理。你的知识库既是**内容**，也是一个**可编程的操作面**。你多一个会干活的队友，也多一个会打理系统的管理员。
 
-![Most tools stop at execution; here AI shares the management layer too](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/concept-layers.png)
+![Most tools stop at execution; here AI shares the management layer too](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/concept-layers.png)
 
 ### 小结
 
@@ -82,4 +82,4 @@ EOF
 
 AI 在 UnDercontrol 里，既是队友，也是管理员。
 
-![Everything as Code — so AI can run the platform, not just work in it](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-workbench-everything-as-code/concept-cta.png)
+![Everything as Code — so AI can run the platform, not just work in it](https://dl.udctl.com/features/blog/agent-workbench-everything-as-code/concept-cta.png)

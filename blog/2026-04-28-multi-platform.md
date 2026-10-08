@@ -8,7 +8,7 @@ date: 2026-04-28
 
 When choosing a productivity tool, you often face a familiar dilemma: web apps are powerful but useless offline, desktop apps feel great but lock your data locally, and CLI tools are developer-friendly but lack a visual interface. The root cause is the absence of a Single Source of Truth — each platform is an island, and your data is scattered across them. UnDercontrol's answer: four form factors, one data source. And that data source is entirely under your control — self-hosted on your own server or stored on your local disk, never passing through any third party. Privacy and security are defined by you.
 
-![Single Source of Truth architecture](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/slide-sst.png)
+![Single Source of Truth architecture](https://dl.udctl.com/features/blog/multi-platform/slide-sst.png)
 
 <!-- truncate -->
 
@@ -31,7 +31,7 @@ The web app also serves as the rendering layer for the Electron desktop app — 
 - Team members collaborate instantly — just open a link, no software to install
 - The convergence point for all clients — docs pushed from CLI, tasks created on desktop, pages clipped by the extension — all viewable and manageable in one place
 
-![UnDercontrol web app dashboard](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/web-app-dashboard.png)
+![UnDercontrol web app dashboard](https://dl.udctl.com/features/blog/multi-platform/web-app-dashboard.png)
 
 ### Electron Desktop App — Offline First, Local Data
 
@@ -67,7 +67,7 @@ The desktop app is far more than a web wrapper. It embeds a full Go backend and 
 - At home, connect the desktop app to your company server — see exactly the same data as the web app
 - Receive remotely dispatched AI tasks via Daemon and execute them automatically on your local machine
 
-![UnDercontrol task detail page](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/web-app-task-detail.png)
+![UnDercontrol task detail page](https://dl.udctl.com/features/blog/multi-platform/web-app-task-detail.png)
 
 ### CLI — kubectl-Style, AI Agent Friendly
 
@@ -77,7 +77,7 @@ The `ud` CLI is a terminal tool designed for developers and automation, using a 
 
 Run `ud` to enter a full-screen TUI for browsing and managing tasks with your keyboard.
 
-![Multi-platform architecture — Single Source of Truth](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/slide-sst.png)
+![Multi-platform architecture — Single Source of Truth](https://dl.udctl.com/features/blog/multi-platform/slide-sst.png)
 
 **One-liner operations**
 
@@ -121,7 +121,7 @@ All clients connected to the same backend — whether browser tabs, the desktop 
 - Daemon SSE Hub dispatches commands to desktop Daemon instances
 - Workspace session state is automatically coordinated between the desktop app and the backend
 
-![Four official clients](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/slide-clients.png)
+![Four official clients](https://dl.udctl.com/features/blog/multi-platform/slide-clients.png)
 
 ### One Codebase, Consistent Experience
 
@@ -144,7 +144,7 @@ UnDercontrol's multi-platform strategy isn't "build once for each platform." Ins
 | Real-time SSE | ✅ | ✅ | ❌ | ❌ |
 | AI Agent friendly | ✅ | ✅ | ✅ | ❌ |
 
-![Capability comparison table](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/slide-capabilities.png)
+![Capability comparison table](https://dl.udctl.com/features/blog/multi-platform/slide-capabilities.png)
 
 And there's more — the open API lets you build any client you want.
 
@@ -158,7 +158,7 @@ Beyond the four official clients, UnDercontrol exposes a full RESTful API. Gener
 - **X-UD-Channel audit** — custom channel identifier to trace every request's origin
 - **CI/CD friendly** — environment variable configuration for seamless automation pipeline integration
 
-![Build your own client](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/multi-platform/slide-custom.png)
+![Build your own client](https://dl.udctl.com/features/blog/multi-platform/slide-custom.png)
 
 **Typical scenarios**
 - Build a Slack Bot in Python — your team types `/task` in Slack to create and query ud tasks

@@ -18,7 +18,7 @@ this document states the same facts in a machine-readable form.
 Desktop binaries are hosted on Cloudflare R2:
 
 ```
-https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/{VERSION}/{FILENAME}
+https://dl.udctl.com/releases/{VERSION}/{FILENAME}
 ```
 
 File names per platform:
@@ -34,9 +34,9 @@ To discover the current `{VERSION}`, fetch the auto-update metadata (plain YAML,
 `version:` on the first line):
 
 ```
-https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/latest/latest-mac.yml
-https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/latest/latest.yml        # Windows
-https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/latest/latest-linux.yml
+https://dl.udctl.com/releases/latest/latest-mac.yml
+https://dl.udctl.com/releases/latest/latest.yml        # Windows
+https://dl.udctl.com/releases/latest/latest-linux.yml
 ```
 
 Only the most recent versions are retained on R2 — always resolve the current
@@ -80,7 +80,7 @@ https://testflight.apple.com/join/st2TnaBF (requires the TestFlight app from
 the App Store).
 
 Android installs from a direct APK download, not from Google Play:
-https://pub-366894d3b9a34981b42199be2ebdad70.r2.dev/android/0.0.20/undercontrol-0.0.20.apk
+https://dl-android.udctl.com/android/0.0.20/undercontrol-0.0.20.apk
 Because the file does not come from the Play Store, the first install asks where
 it came from — tap **Settings → Allow from this source** and the install
 continues. The APK carries the mobile app's own version number, which is

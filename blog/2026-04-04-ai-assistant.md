@@ -10,7 +10,7 @@ The part of personal finance and task management that nobody enjoys is the data 
 
 UnDercontrol's AI assistant is built to eliminate that friction. Here is how it actually works in practice.
 
-![UnDercontrol dashboard — AI assistant integrates across all features](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-assistant/dashboard.png)
+![UnDercontrol dashboard — AI assistant integrates across all features](https://dl.udctl.com/features/blog/ai-assistant/dashboard.png)
 
 ## Snap a Receipt, Skip the Form
 
@@ -36,11 +36,11 @@ The same pattern works for tasks. Instead of filling out a task form, you descri
 - "Buy a birthday gift for Sarah before Friday"
 - "Research self-hosted backup solutions"
 
-![Task list — AI can create and manage tasks from text or voice input](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-assistant/task-list.png)
+![Task list — AI can create and manage tasks from text or voice input](https://dl.udctl.com/features/blog/ai-assistant/task-list.png)
 
 UnDercontrol creates a structured task from the description, including a title, any relevant tags it can infer, and a description. You review it, adjust anything that looks off, and save.
 
-![AI assistant chat interface for logging expenses and creating tasks](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-assistant/ai-chat.png)
+![AI assistant chat interface for logging expenses and creating tasks](https://dl.udctl.com/features/blog/ai-assistant/ai-chat.png)
 
 ## Natural Language Queries
 

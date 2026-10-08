@@ -4,7 +4,7 @@ description: "A zero-cost, full data self-custody setup: the UnDercontrol deskto
 authors: [lintao]
 tags: [tutorial, self-hosting]
 date: 2026-07-26
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/your-desktop-is-the-server/concept-tunnel.png
+image: https://dl.udctl.com/features/blog/your-desktop-is-the-server/concept-tunnel.png
 ---
 
 
@@ -12,7 +12,7 @@ Where your data lives is a fork in the road when you pick a tool. SaaS is the co
 
 Self-custody usually means running your own server, and that is exactly where most people give up. Here is a zero-cost path that skips the server entirely: the UnDercontrol desktop app ships with a full backend and keeps your data in a SQLite file on your own disk; Cloudflare Tunnel exposes that machine to the internet for free; the iOS app connects straight to your own endpoint. Check tasks, jot notes, and log expenses from the subway, while the data itself never lives anywhere but your computer. No public IP, no router port forwarding, and no domain to buy (optional, only if you want a fixed address).
 
-![Architecture: the desktop app embeds a server, cloudflared dials out to Cloudflare's edge, and iOS reaches it over HTTPS from any network](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/your-desktop-is-the-server/concept-tunnel.png)
+![Architecture: the desktop app embeds a server, cloudflared dials out to Cloudflare's edge, and iOS reaches it over HTTPS from any network](https://dl.udctl.com/features/blog/your-desktop-is-the-server/concept-tunnel.png)
 
 <!-- truncate -->
 
@@ -54,7 +54,7 @@ Then one command:
 cloudflared tunnel --url http://localhost:8888
 ```
 
-![Real terminal output: quick tunnel created, and curl against the public address returns healthy](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/your-desktop-is-the-server/shot-terminal-quick-tunnel.png)
+![Real terminal output: quick tunnel created, and curl against the public address returns healthy](https://dl.udctl.com/features/blog/your-desktop-is-the-server/shot-terminal-quick-tunnel.png)
 
 A few seconds later the terminal prints a random `https://xxx.trycloudflare.com` address: your public endpoint, HTTPS included, no Cloudflare account required. Verify from your phone (turn off Wi-Fi so you are on cellular, which proves the path is really public): open `https://xxx.trycloudflare.com/health` in the browser. `healthy` means the whole chain works.
 
@@ -108,7 +108,7 @@ https://xxx.trycloudflare.com/api/v1
 
 The status dot probes as you type: when it turns green with `connected · Personal`, your phone has reached the server on your computer. Tap **Save**, then sign in with the account from step 1: `personal@undercontrol.local` and your password.
 
-![iOS sign-in screen: API server pointing at the trycloudflare address, status connected · Personal](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/your-desktop-is-the-server/shot-ios-connected.png)
+![iOS sign-in screen: API server pointing at the trycloudflare address, status connected · Personal](https://dl.udctl.com/features/blog/your-desktop-is-the-server/shot-ios-connected.png)
 
 What you see on the phone is the data on your computer: tasks, notes, ledgers. Edit on the phone and the desktop has it.
 

@@ -4,14 +4,14 @@ description: "Turn two AI subscriptions into one team: a planner agent splits wo
 authors: [lintao]
 tags: [feature, agents]
 date: 2026-07-19
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/concept-hero.png
+image: https://dl.udctl.com/features/blog/claude-plans-codex-executes/concept-hero.png
 ---
 
 Plenty of developers already work this way: hash out the approach in Claude Code, then copy the conclusion into Codex to implement. The reason is practical, too — you're paying for both subscriptions anyway. Claude is great at planning; letting Codex do the heavy lifting doesn't burn your Claude quota. Both subscriptions earn their keep. The only problem: the "copy-paste" role in the middle is *you*.
 
 **In UnDercontrol, this pipeline works out of the box**: Claude plans, Codex executes, and the task system is the whiteboard they share — you only step in to review at the key points.
 
-![Claude plans, Codex executes — tasks are the shared whiteboard between your AI agents](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/concept-hero.png)
+![Claude plans, Codex executes — tasks are the shared whiteboard between your AI agents](https://dl.udctl.com/features/blog/claude-plans-codex-executes/concept-hero.png)
 
 <!-- truncate -->
 
@@ -23,11 +23,11 @@ Plenty of developers already work this way: hash out the approach in Claude Code
 4. **Codex executes.** Each session picks up one subtask: writes code, runs tests, commits, notes progress back on the task, and marks it `pending` when done.
 5. **You step in at exactly two points.** Approve the plan; review the output.
 
-![From a rough idea to reviewed commits — one pipeline](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/concept-flow.png)
+![From a rough idea to reviewed commits — one pipeline](https://dl.udctl.com/features/blog/claude-plans-codex-executes/concept-flow.png)
 
 The whole collaboration happens on the task itself — the description is the spec, comments are the conversation, notes are the progress log. Here's a real task detail: the planner's acceptance criteria on the left, the three-way comment thread on the right:
 
-![Task detail — the planner writes the spec, the executor reports commits, everything on the record](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/app-task.png)
+![Task detail — the planner writes the spec, the executor reports commits, everything on the record](https://dl.udctl.com/features/blog/claude-plans-codex-executes/app-task.png)
 
 ### Form a squad: Agent Teams
 
@@ -35,7 +35,7 @@ Don't want to conduct two agents by hand every time? Organize them into a **Team
 
 A Team has one **lead** and any number of **members**, and each member carries a delegation hint — "what kind of work routes here." When the lead's session starts, its roster is injected into the prompt automatically — **the lead is born knowing who reports to it, what each specialist is good at, and how to delegate**.
 
-![Agent Teams — a lead plus members with delegation hints, roster auto-injected into the lead's session](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/app-teams.png)
+![Agent Teams — a lead plus members with delegation hints, roster auto-injected into the lead's session](https://dl.udctl.com/features/blog/claude-plans-codex-executes/app-teams.png)
 
 "Claude plans, Codex executes" becomes a one-liner: @mention the dev-team's lead and it arranges the rest. Teams also nest — a member can itself lead another Team, so hierarchy grows naturally while each agent only ever needs to know its direct reports.
 
@@ -43,7 +43,7 @@ A Team has one **lead** and any number of **members**, and each member carries a
 
 Open a board for the big picture: how much got planned, what's executing, what's waiting for review — one glance. Every agent session's terminal output also streams back to the web in real time — on your laptop, or your phone.
 
-![The AI team delivery board — Planning / Executing / Pending Review / Done](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/app-board.png)
+![The AI team delivery board — Planning / Executing / Pending Review / Done](https://dl.udctl.com/features/blog/claude-plans-codex-executes/app-board.png)
 
 ### Typical scenarios
 

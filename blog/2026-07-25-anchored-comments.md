@@ -4,18 +4,18 @@ description: "Anchored comments in UnDercontrol: select a sentence in a task, co
 authors: [lintao]
 tags: [feature, collaboration]
 date: 2026-07-25
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/anchored-comments/concept-anchored.png
+image: https://dl.udctl.com/features/blog/anchored-comments/concept-anchored.png
 ---
 
 You send out a spec and the discussion immediately comes apart from it. Someone replies in Slack: "that field in the third section, is it nullable?" Now you scroll back to the doc, count down to the third section, and guess which field they meant. Read the same message a day later and the context is gone.
 
-![Anchored comments: discussion pinned to the line it is about](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/anchored-comments/concept-anchored.png)
+![Anchored comments: discussion pinned to the line it is about](https://dl.udctl.com/features/blog/anchored-comments/concept-anchored.png)
 
 <!-- truncate -->
 
 Anchored comments in UnDercontrol keep the discussion next to the original text. Select a sentence in the task body, click Comment in the bubble menu, and a comment carrying that quote appears in the right sidebar while the sentence itself turns into a highlight. Click the highlight later and the sidebar jumps to the matching thread. The quote lives on the comment, so the markdown in the task body is never touched. Copy it out or pull it down from the command line and you get exactly what you wrote.
 
-![A highlighted sentence in the task body with its anchored comment thread open in the sidebar](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/anchored-comments/shot-1-anchored-thread.png)
+![A highlighted sentence in the task body with its anchored comment thread open in the sidebar](https://dl.udctl.com/features/blog/anchored-comments/shot-1-anchored-thread.png)
 
 When a discussion is settled, hit Resolve. The highlight disappears from the body, the thread collapses into a single grey line, and you can reopen it whenever you want. Threads update on their own when someone replies, with no page refresh. On a phone there are no highlights and the comments sit below the body.
 
@@ -25,7 +25,7 @@ A reviewer no longer has to write "third section, second sentence". They select 
 
 Once you have been through a spec, the highlights still lit on the page are the parts nobody settled. There is no separate write-up to do afterwards, because the unresolved threads are the to-do list.
 
-![The comments sidebar after a review pass: resolved threads collapsed, unsettled ones still open](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/anchored-comments/shot-2-review-pass.png)
+![The comments sidebar after a review pass: resolved threads collapsed, unsettled ones still open](https://dl.udctl.com/features/blog/anchored-comments/shot-2-review-pass.png)
 
 ### Point at a line and let an agent change it
 
@@ -33,7 +33,7 @@ This is the part that is not like a normal comment section. Select the requireme
 
 People and agents talk in one thread, so you are not relaying messages between two tools.
 
-![A human comment mentions an agent and the agent replies in the same thread with a commit hash](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/anchored-comments/shot-3-agent-thread.png)
+![A human comment mentions an agent and the agent replies in the same thread with a commit hash](https://dl.udctl.com/features/blog/anchored-comments/shot-3-agent-thread.png)
 
 ### Section-by-section discussion on long documents
 

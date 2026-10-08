@@ -4,14 +4,14 @@ description: 用故事的方式走一遍 UnDercontrol 的看板:拖动即改状�
 authors: [lintao]
 tags: [feature, kanban]
 date: 2026-07-13
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-story/hero.png
+image: https://dl.udctl.com/features/blog/kanban-story/hero.png
 ---
 
 周一早上九点,你打开 UnDercontrol,只看了一眼看板,就知道这周该从哪儿下手了。
 
 这是你的副业项目「晨跑」——一个跑步社交 App,现在正处在 Sprint 12。看板上五列卡片一字排开:Todo、进行中、评审中、已上线、完成。哪些还没开始、哪些卡住了、哪些等着别人回复——不用点开任何一个任务,一眼就清楚。这篇文章,我们就跟着你用这一块看板走完一整周。
 
-![一块看板,看清整个项目 —— 拖动卡片,状态自动更新](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-story/hero.png)
+![一块看板,看清整个项目 —— 拖动卡片,状态自动更新](https://dl.udctl.com/features/blog/kanban-story/hero.png)
 
 <!-- truncate -->
 
@@ -21,7 +21,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-
 
 这就是 UnDercontrol 看板的核心:**列就是工作流的阶段,拖动就是状态变更**。卡片挪到哪一列,任务的状态、标签、甚至自定义字段就自动跟着更新。而且这个变化是即时的——你的任务列表里那条任务,同一秒就同步好了。
 
-![Sprint 12 看板全景 —— Todo / In Progress / Review / Deployed / Done 五列卡片](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-story/board-overview.png)
+![Sprint 12 看板全景 —— Todo / In Progress / Review / Deployed / Done 五列卡片](https://dl.udctl.com/features/blog/kanban-story/board-overview.png)
 
 ### 周二:卡片不只是标题
 
@@ -31,7 +31,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-
 
 > **不只是任务**:UnDercontrol 的编辑器是所有文本界面共享的。任务正文、笔记、支出记录、账户备注——你在任何地方写的东西,都是同一套 Markdown 体验。看板上的每一张卡片,背后都是一个能装下完整信息的容器。
 
-![卡片详情页 —— Markdown 正文(需求清单、待确认问题)+ 右侧笔记时间线](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-story/card-detail.png)
+![卡片详情页 —— Markdown 正文(需求清单、待确认问题)+ 右侧笔记时间线](https://dl.udctl.com/features/blog/kanban-story/card-detail.png)
 
 ### 周三:自定义一列,让看板替你做杂活
 
@@ -47,13 +47,13 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-
 
 几分钟后,搭档在这张卡片下留了一条**评论**:"回调 URL 少配了 staging 域名"。你回了一句:"收到,补上了 👍"。评论是轻量的、可串联的讨论——短小、聚焦,你一句我一句就把问题聊清楚了,不用切到 IM,也不会淹没在正文里。正文写"是什么",笔记记"怎么演进",评论则是"就这张卡片临时对齐一下"。
 
-![卡片右侧的评论串 —— 搭档指出回调 URL 问题,你回复已修复](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-story/comments.png)
+![卡片右侧的评论串 —— 搭档指出回调 URL 问题,你回复已修复](https://dl.udctl.com/features/blog/kanban-story/comments.png)
 
 一列还不够。你顺手又自定义了一列 **"已上线"**:筛选条件 `status = 'pending' AND tags CONTAINS 'deployed'`,进入时自动把状态置为 `done`。两列自定义下来,从评审到上线的流程就在看板上跑通了。
 
 这就是看板真正强大的地方——它不只是"看",它替你干活。拖一下卡片,所有的改状态、打标签、通知,一次搞定。
 
-![编辑列对话框 —— 列名、匹配条件、自动生成的查询与动作](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-story/edit-column.png)
+![编辑列对话框 —— 列名、匹配条件、自动生成的查询与动作](https://dl.udctl.com/features/blog/kanban-story/edit-column.png)
 
 ### 周四:列不一定是状态
 
@@ -63,7 +63,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-
 
 **典型场景**:按状态推进日常开发用一块看板;按时间规划优先级用另一块;给某个客户项目再单独开一块。同一批任务,几种视角,各看各的。
 
-![发版冲刺看板 —— 列改成 This Week / Next Week / Backlog,同一批卡片换个视角](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-story/board-release.png)
+![发版冲刺看板 —— 列改成 This Week / Next Week / Backlog,同一批卡片换个视角](https://dl.udctl.com/features/blog/kanban-story/board-release.png)
 
 ### 周五:把看板分享给团队
 
@@ -71,7 +71,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-
 
 没有额外的同步会议,没有"现在做到哪了"的追问。一块共享看板,就是团队对齐的现场。
 
-![分享看板给团队群组 —— 成员只看得到属于群组的任务,读写权限可控](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-story/share.png)
+![分享看板给团队群组 —— 成员只看得到属于群组的任务,读写权限可控](https://dl.udctl.com/features/blog/kanban-story/share.png)
 
 ### 一周的小结
 

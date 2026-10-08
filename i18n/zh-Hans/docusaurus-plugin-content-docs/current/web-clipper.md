@@ -53,7 +53,7 @@ sidebar_position: 8
 ### 第二步：配置扩展
 
 1. 点击 Chrome 工具栏中的 udctl 图标
-2. 输入你的 **API URL** —— 你自己的服务器，例如 `https://ud.example.com`（用测试服的话是 `https://api.oatnil.com`；`https://ud.oatnil.com` 是网页应用，不是 API）
+2. 输入你的 **API URL** —— 你自己的服务器，例如 `https://ud.example.com`（用测试服的话是 `https://api.oatnil.com`；`https://app.udctl.com` 是网页应用，不是 API）
 3. 输入你的 **API Key**（以 `ak_` 开头）
 4. 点击 **Test** 验证连接
 5. 应显示 "Connected as [你的用户名]"

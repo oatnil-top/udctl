@@ -35,7 +35,7 @@ questions that decide how the rest goes, and wait for the answers:
    unclear — ask again instead.
 2. **Do they already have an account?** On their own server, the first account is created
    when the server starts — the self-hosting guide covers it. On the test server, they sign
-   up at `https://ud.oatnil.com`.
+   up at `https://app.udctl.com`.
 
 Once you have both answers, work through the steps below.
 

@@ -234,7 +234,7 @@ function FirstScreen() {
             {/* master 2026-10-07 (ud card 20efddc7): "Read the docs" became these two.
                 Docs stay reachable from the navbar (Docs) and the footer (Getting Started).
                 Try online goes to the hosted app's login, the same entry /download uses. */}
-            <Link className={hero.ctaSecondary} href="https://ud.oatnil.com/#/login">
+            <Link className={hero.ctaSecondary} href="https://app.udctl.com/#/login">
               <Translate id="home5.hero.ctaTryOnline">Try online</Translate>
               <svg
                 viewBox="0 0 24 24"

@@ -53,7 +53,7 @@ The extension icon will appear in the Chrome toolbar.
 ### Step 2: Configure the Extension
 
 1. Click the udctl icon in the Chrome toolbar
-2. Enter your **API URL** — your own server, e.g. `https://ud.example.com` (or `https://api.oatnil.com` if you are on the test server; `https://ud.oatnil.com` is the web app, not the API)
+2. Enter your **API URL** — your own server, e.g. `https://ud.example.com` (or `https://api.oatnil.com` if you are on the test server; `https://app.udctl.com` is the web app, not the API)
 3. Enter your **API Key** (starts with `ak_`)
 4. Click **Test** to verify the connection
 5. You should see "Connected as [your username]"

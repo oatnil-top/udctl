@@ -9,7 +9,7 @@ description: udctl 全部获取方式:桌面版、npm 安装的 ud CLI、Chrome 
 
 ## 网页版
 
-- 地址:https://ud.oatnil.com
+- 地址:https://app.udctl.com
 - 无需安装。不注册账号也能以访客身份试用。
 
 ## 桌面版(macOS / Windows / Linux)

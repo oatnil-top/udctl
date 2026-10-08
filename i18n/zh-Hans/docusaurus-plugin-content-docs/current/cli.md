@@ -81,13 +81,13 @@ ud login --api-url http://localhost:8888 -n desktop
 
 还没有服务器、只想先试试？可以指向 `https://api.oatnil.com` —— 那是我们跑的一台**测试服**，
 用来试用产品，不是托管服务，别把正经数据放上面。先到
-[ud.oatnil.com](https://ud.oatnil.com) 注册：
+[app.udctl.com](https://app.udctl.com) 注册：
 
 ```bash
 ud login --api-url https://api.oatnil.com -n trial
 ```
 
-`https://ud.oatnil.com` 只提供网页应用，传给 `--api-url` 会以 `status 404` 失败；API 地址是
+`https://app.udctl.com` 只提供网页应用，传给 `--api-url` 会以 `status 404` 失败；API 地址是
 `https://api.oatnil.com`。
 
 登录信息保存在 `~/.config/ud/config.yaml`。

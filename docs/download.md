@@ -10,7 +10,7 @@ this document states the same facts in a machine-readable form.
 
 ## Web app
 
-- URL: https://ud.oatnil.com
+- URL: https://app.udctl.com
 - No installation. Visitor trial available without an account.
 
 ## Desktop app (macOS / Windows / Linux)

@@ -10,7 +10,7 @@ date: 2026-07-07
 >
 > **多个仓库,一个 server,随时随地查看编辑。**
 
-![UnDercontrol 云端与本地文件夹通过 ud pull / ud push 双向同步,本地可用 Obsidian、VS Code、AI Agent 等任意工具编辑](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ud-pull-push/concept-1.png)
+![UnDercontrol 云端与本地文件夹通过 ud pull / ud push 双向同步,本地可用 Obsidian、VS Code、AI Agent 等任意工具编辑](https://dl.udctl.com/features/blog/ud-pull-push/concept-1.png)
 
 <!-- truncate -->
 
@@ -47,7 +47,7 @@ ud status
 ud push
 ```
 
-![本地文件夹结构:一个任务是一个文件夹,index.md 是任务正文,每条笔记是独立的 .md 文件,.ud/ 保存同步状态](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ud-pull-push/concept-2.png)
+![本地文件夹结构:一个任务是一个文件夹,index.md 是任务正文,每条笔记是独立的 .md 文件,.ud/ 保存同步状态](https://dl.udctl.com/features/blog/ud-pull-push/concept-2.png)
 
 ### 本地长什么样:任务就是文件夹,笔记就是文件
 

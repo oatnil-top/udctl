@@ -3,11 +3,11 @@ title: "我们只拿你亲手交过来的东西"
 description: "ZCode 把用户整个工作区连同 Git 历史静默上传之后,我把自己的代码从头查了一遍:不扫描你的磁盘,没有埋点 SDK,桌面端不后台联网 —— 以及内容确实会离开你机器的那五个地方,一个不漏。"
 authors: [lintao]
 tags: [privacy, security]
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/privacy-we-only-take-what-you-hand-us/og-hero.png
+image: https://dl.udctl.com/features/blog/privacy-we-only-take-what-you-hand-us/og-hero.png
 date: 2026-09-19
 ---
 
-![我们只拿你亲手交过来的东西](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/privacy-we-only-take-what-you-hand-us/og-hero.png)
+![我们只拿你亲手交过来的东西](https://dl.udctl.com/features/blog/privacy-we-only-take-what-you-hand-us/og-hero.png)
 
 9 月 18 日,有人逆向了智谱的桌面编程助手 ZCode,发现它在用户登录后会把整个工作区在后台打包上传。不只是你正在改的代码,还有完整的 Git 提交历史、LFS 缓存和本地分支记录。被曝光的那个商业项目,一次快照约 313MB、四万两千个文件,`.git` 占了 86.6%。
 

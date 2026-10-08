@@ -4,7 +4,7 @@ description: A daily scheduled job creates a task whose description doubles as a
 authors: [lintao]
 tags: [feature, workflow]
 date: 2026-07-12
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/concept-hero.png
+image: https://dl.udctl.com/features/blog/ai-blog-pipeline/concept-hero.png
 ---
 
 At eight in the morning, coffee in hand, I open my kanban board. Sitting in the Pending column is a new task:
@@ -21,7 +21,7 @@ The author is not a person. It's an AI agent. While I was asleep, it picked a to
 
 <!-- truncate -->
 
-![Kanban board with the blog draft task sitting in the Pending Review column](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/kanban-pending.png)
+![Kanban board with the blog draft task sitting in the Pending Review column](https://dl.udctl.com/features/blog/ai-blog-pipeline/kanban-pending.png)
 
 I read the draft and replied with one line: "Too broad. Find one concrete use case and tell it as a story." A few minutes later, the draft had been rewritten — the post you are reading now is the product of that rewrite.
 
@@ -56,7 +56,7 @@ The answer: all of it lives in the task system.
 
 There is no dedicated "AI platform" here. The pipeline is assembled from four native capabilities of the task system: scheduled jobs, @mentions, notes, and comments.
 
-![The 24-hour handoff loop: scheduled job creates the task, mention wakes the agent, draft lands as a note, human reviews in the morning](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/concept-hero.png)
+![The 24-hour handoff loop: scheduled job creates the task, mention wakes the agent, draft lands as a note, human reviews in the morning](https://dl.udctl.com/features/blog/ai-blog-pipeline/concept-hero.png)
 
 **01:00 — The scheduled job fires**
 
@@ -75,7 +75,7 @@ Generate ONE blog DRAFT for review — do NOT run the full publish pipeline.
 
 Notice the design here: **the task description is the prompt**. Instructions, boundaries ("do NOT publish"), acceptance criteria ("set to pending") — all written into the task. No separate configuration system needed. The task *is* the config.
 
-![Scheduled Jobs page showing the daily 01:00 blog-draft job](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/scheduled-job.png)
+![Scheduled Jobs page showing the daily 01:00 blog-draft job](https://dl.udctl.com/features/blog/ai-blog-pipeline/scheduled-job.png)
 
 **01:01 — The @mention wakes the agent**
 
@@ -97,13 +97,13 @@ The whole run took two minutes, and it happened after I fell asleep.
 
 My review interface is just the task detail page: the draft in a note, the context in the description, the agent's work log in the comment thread. I don't need to open any other tool.
 
-![Task detail page: the scheduled prompt as description, the draft as a note below](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/task-detail.png)
+![Task detail page: the scheduled prompt as description, the draft as a note below](https://dl.udctl.com/features/blog/ai-blog-pipeline/task-detail.png)
 
 I read the draft and replied with one line in the thread. That line triggered a new agent session — it read the feedback, **updated the same note via `note_id`** (not a new note; notes keep full edit history, so a bad rewrite can always be rolled back), then replied in the thread describing what changed.
 
 Back and forth, it feels like collaborating with a remote teammate through a ticket. Except this teammate starts work at 1 A.M. and never complains about rework.
 
-![The comment thread: agent reports progress, human replies with one-line feedback, agent confirms the rewrite](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-blog-pipeline/comment-thread.png)
+![The comment thread: agent reports progress, human replies with one-line feedback, agent confirms the rewrite](https://dl.udctl.com/features/blog/ai-blog-pipeline/comment-thread.png)
 
 ### Why the handoff point is a task, not a chat window
 

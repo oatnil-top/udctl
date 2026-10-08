@@ -18,7 +18,7 @@ Creating a group takes about ten seconds: give it a name, add a description, and
 
 Invite links are flexible. You can set an expiration date so a link becomes invalid after a day or a week — useful when you're adding a temporary collaborator. You can also revoke any link at any time. It's a small detail, but it matters when you care about who has access to your workspace.
 
-![Group management for team collaboration](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/collaboration/groups.png)
+![Group management for team collaboration](https://dl.udctl.com/features/blog/collaboration/groups.png)
 
 ## Role-Based Permissions
 
@@ -44,7 +44,7 @@ Files attached to a shared task are automatically accessible to group members. T
 
 Shared kanban boards integrate directly with the group system. When you create a shared board, it automatically creates a group behind the scenes. The board creator becomes the group admin, and collaborators join as members. This means your team's workflow is always tied to a proper access model — not just an open link that anyone can stumble into.
 
-![Shared kanban board for team collaboration](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/collaboration/shared-board.png)
+![Shared kanban board for team collaboration](https://dl.udctl.com/features/blog/collaboration/shared-board.png)
 
 ## Practical Tips
 

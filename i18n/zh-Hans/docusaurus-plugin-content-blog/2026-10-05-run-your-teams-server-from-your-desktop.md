@@ -4,12 +4,12 @@ description: "udctl 桌面版里带着完整的后端。加一个 license 就是
 authors: [lintao]
 tags: [tutorial, self-hosting]
 date: 2026-10-05
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/03-architecture.jpg
+image: https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/03-architecture.jpg
 ---
 
 udctl(UnDercontrol)桌面版里带着完整的后端。装上它，你的电脑就已经是一台服务器：监听 `localhost:24816`,任务、笔记、账本都存在你自己磁盘上的一个 SQLite 文件里。加一个 license,这台服务器就成了多人团队后端。再加一条 Cloudflare Tunnel,你的手机、笔记本和队友在哪儿都能连上它。不需要 VPS,不需要公网 IP,也不用在路由器上做端口转发。
 
-![示意图：你的电脑上运行 udctl 桌面版，内置后端监听 localhost:24816,数据以 SQLite 文件存在本机磁盘;cloudflared 隧道把它接到公网，手机和团队成员通过 HTTPS 访问](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/03-architecture.jpg)
+![示意图：你的电脑上运行 udctl 桌面版，内置后端监听 localhost:24816,数据以 SQLite 文件存在本机磁盘;cloudflared 隧道把它接到公网，手机和团队成员通过 HTTPS 访问](https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/03-architecture.jpg)
 
 <!-- truncate -->
 
@@ -23,7 +23,7 @@ udctl(UnDercontrol)桌面版里带着完整的后端。装上它，你的电脑�
 
 从 [udctl.com/download](https://udctl.com/download/) 下载:macOS(Apple Silicon 和 Intel)、Windows x64,或 Linux x64 AppImage。桌面版不是套了个窗口的网页。它自带 Go 后端，应用一启动后端就跟着启动。不用拉 Docker 镜像，也不用装数据库。应用装好了，服务器也就装好了。
 
-![udctl 桌面版的看板，有 To do、In progress、Done 三列，数据来自同一台电脑上运行的后端](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/01-desktop-kanban.jpg)
+![udctl 桌面版的看板，有 To do、In progress、Done 三列，数据来自同一台电脑上运行的后端](https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/01-desktop-kanban.jpg)
 
 确认它在运行:
 
@@ -49,7 +49,7 @@ curl http://localhost:24816/health
 
 点 **激活**。后端会重启，需要几秒钟，之后许可证一栏显示档位 **Pro**。第一次激活时，这台机器上已有的数据会转到你刚填的管理员账号下，内置的 personal 账号会被移除。数据不会丢：任务、笔记和记录换的是所有者，内容不变。表单在你点击之前会提示这一点，因为这一步只做一次，而且不能撤销。
 
-![激活后「系统与语言」下的许可证一栏：档位显示 Pro(Active)和到期日期，顶部提示 "Activating... restarting local backend"(截图为英文界面)](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/02-license-pro-active.jpg)
+![激活后「系统与语言」下的许可证一栏：档位显示 Pro(Active)和到期日期，顶部提示 "Activating... restarting local backend"(截图为英文界面)](https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/02-license-pro-active.jpg)
 
 从这里开始你就是服务器管理员了。在 **管理面板 → 用户管理 → 创建用户**(英文界面为 Admin → Access → Users → Create User)给队友开账号。
 
@@ -80,7 +80,7 @@ cloudflared tunnel --url http://localhost:24816
 
 几秒后它会打印一个随机的 `https://<something>.trycloudflare.com` 地址。这就是你的公网入口，自带 HTTPS,而且不需要 Cloudflare 账号。用手机走蜂窝数据(关掉 Wi-Fi,确认请求确实是从外网进来的)打开 `https://<something>.trycloudflare.com/health`,看到 `healthy` 就通了。
 
-![终端里运行 cloudflared tunnel --url http://localhost:24816,输出显示隧道已建立并把流量转到 localhost:24816。图中地址是占位符，真实的快速隧道会打印一个 trycloudflare.com 地址](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/04-cloudflared-tunnel.jpg)
+![终端里运行 cloudflared tunnel --url http://localhost:24816,输出显示隧道已建立并把流量转到 localhost:24816。图中地址是占位符，真实的快速隧道会打印一个 trycloudflare.com 地址](https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/04-cloudflared-tunnel.jpg)
 
 拿到这个地址的人都能打开你的登录页，所以分享之前先给管理员账号设一个正经的密码。
 
@@ -129,7 +129,7 @@ https://ud.example.com/api/v1
 
 现在手机上看到的任务、笔记和账本和桌面版是同一份。在手机上改一个任务，桌面版上也就改了。
 
-![iOS 应用显示 Shipping v1.4 任务列表，状态行为 "connected · Pro · synced":和桌面看板是同一批任务，来自你电脑上的服务器](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/05-phone-synced.jpg)
+![iOS 应用显示 Shipping v1.4 任务列表，状态行为 "connected · Pro · synced":和桌面看板是同一批任务，来自你电脑上的服务器](https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/05-phone-synced.jpg)
 
 ## 不在桌面上跑?
 

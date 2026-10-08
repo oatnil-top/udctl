@@ -4,7 +4,7 @@ description: "任务不该死在 Done 那一刻。Virtual Path 把做完的任�
 authors: [lintao]
 tags: [feature, guide]
 date: 2026-07-18
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/virtual-path-tasks-become-knowledge/concept-1.png
+image: https://dl.udctl.com/features/blog/virtual-path-tasks-become-knowledge/concept-1.png
 ---
 
 我见过太多任务在"Done"的那一刻死掉。卡片一归档，里面的东西就再也没人看了——当时为什么这么设计、踩了什么坑、最后怎么验证的，全埋在里面。过两个月有人问起，只能凭记忆再讲一遍。
@@ -13,7 +13,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/virtual
 
 所以有了 Virtual Path。
 
-![任务的终点不是 Done，而是知识树里的一个位置](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/virtual-path-tasks-become-knowledge/concept-1.png)
+![任务的终点不是 Done，而是知识树里的一个位置](https://dl.udctl.com/features/blog/virtual-path-tasks-become-knowledge/concept-1.png)
 
 <!-- truncate -->
 
@@ -25,7 +25,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/virtual
 
 不值得留的呢？不用管。没归类的任务待在树根和"未归档"区，不会混进你整理好的目录。所以这棵树是挑出来的，不是堆出来的——什么东西配得上一个位置，你说了算。
 
-![Explorer 树 + 任务即文档：左侧是知识树，右侧是一篇沉淀下来的架构文档](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/virtual-path-tasks-become-knowledge/explorer.jpg)
+![Explorer 树 + 任务即文档：左侧是知识树，右侧是一篇沉淀下来的架构文档](https://dl.udctl.com/features/blog/virtual-path-tasks-become-knowledge/explorer.jpg)
 
 架构图、截图、白板照片这些文件也能放进同一个路径，一个专题的文字和素材挨在一起，省得回头去网盘里翻"那张图到底存哪了"。
 
@@ -64,7 +64,7 @@ MyVault/
 
 pull 下来之后，这就是一个完全离线的本地知识库。纯 Markdown 躺在磁盘上，断网能读能改，飞机上照样写，落地一句 `ud push` 同步回去。数据是你的，两份都是。
 
-![vault sync：服务器上的虚拟路径树 ⇄ 本地 Obsidian vault](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/virtual-path-tasks-become-knowledge/concept-2.png)
+![vault sync：服务器上的虚拟路径树 ⇄ 本地 Obsidian vault](https://dl.udctl.com/features/blog/virtual-path-tasks-become-knowledge/concept-2.png)
 
 细节上花了不少功夫，挑几个说：ud 只在文件头上写一行 `ud-id`，其余 frontmatter 原样保留；本地把文件改个名，push 之后任务标题跟着变；Obsidian 里写的 `[[双链]]`，push 时自动翻译成 ud 的 `task://` 链接，pull 时再翻回来，两边点击都能跳转；不想同步的文件写进 `.udignore`，gitignore 语法；冲突处理也是 git 式的——两边都改过的条目会被标记出来默认跳过，绝不悄悄覆盖你的修改。老用户想从旧目录结构切过来，`ud migrate-layout` 一条命令的事。
 
@@ -74,7 +74,7 @@ pull 下来之后，这就是一个完全离线的本地知识库。纯 Markdown
 
 但整理这种批量活，恰好是 Agent 最擅长的。vault 就是个本地文件夹，`ud pull` 之后让 Agent 通读整棵树：重组目录、合并重复、统一命名、把过时的挪进归档。它做的全是普通文件操作，你用 git 或 `ud status` 把改动过一遍目，满意了再 `ud push`。Web 端的 Explorer 立刻变成整理后的样子。
 
-![分层模型：内容层是你的 vault，协作层是 ud 的 overlay](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/virtual-path-tasks-become-knowledge/concept-3.png)
+![分层模型：内容层是你的 vault，协作层是 ud 的 overlay](https://dl.udctl.com/features/blog/virtual-path-tasks-become-knowledge/concept-3.png)
 
 敢这么放手让 Agent 动，是因为分层分得清楚：vault 这层是内容——纯文本、可 git、谁都能改；状态、看板、评论、Notes 时间线是 ud 那层的协作元数据，挂在内容之上，就像 PR 评论不会写进 git tree。Agent 动的是内容层，协作历史一点不丢。
 

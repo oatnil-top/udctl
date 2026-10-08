@@ -10,7 +10,7 @@ Unix 有一句著名的设计哲学：**一切皆文件**。目录、设备、�
 
 UnDercontrol 借用了同样的思路，只不过换了个基本单位：**一切皆任务（Everything is a Task）**。
 
-![一切皆任务](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-management-overview/concept-hero.png)
+![一切皆任务](https://dl.udctl.com/features/blog/task-management-overview/concept-hero.png)
 
 大多数工具把"任务"理解成一行带勾选框的待办。UnDercontrol 从一开始就不这么想。在这里，**任务（Task）是通用的信息容器**——它可以是一条待办、一份文档、一个提醒、一篇博客草稿、一次会议记录、一份决策记录，甚至一个 wiki 页面。一份数据源，按你喜欢的方式组织，所有信息都在一处。
 
@@ -30,7 +30,7 @@ UnDercontrol 借用了同样的思路，只不过换了个基本单位：**一�
 
 正文是活文档,你在这里维护完整、连贯的叙述；笔记记录进展的时间线（会话开始、每次提交、遇到的阻塞）；评论则是围绕内容展开的即时对话。三层分工清晰，又都是纯文本，人和 AI 都能直接读懂,不需要任何转换。
 
-![任务详情页：Markdown 正文、标签、状态、截止日期、笔记时间线与关系图一览](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-management-overview/task-detail.png)
+![任务详情页：Markdown 正文、标签、状态、截止日期、笔记时间线与关系图一览](https://dl.udctl.com/features/blog/task-management-overview/task-detail.png)
 
 一个任务详情页就说明了问题：它不是一行待办，而是一份带 Markdown 正文、标签、状态、截止日期、笔记时间线、子任务与关系图的活文档。
 
@@ -44,7 +44,7 @@ UnDercontrol 借用了同样的思路，只不过换了个基本单位：**一�
 - **树状视图**：沿父子关系展开，梳理任务的层级结构
 - **关系图视图**：把任务之间的链接、父子、子任务当作图来遍历，看清知识的关联
 
-![同一份数据，四种视角：看板、列表、日历、关系图](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-management-overview/multi-view.png)
+![同一份数据，四种视角：看板、列表、日历、关系图](https://dl.udctl.com/features/blog/task-management-overview/multi-view.png)
 
 看板不是"另一个容器"——它本质上是一个**保存下来的查询**。同一个任务可以同时出现在多个看板里，没有任何重复。你换的是视角，不是数据。
 
@@ -68,7 +68,7 @@ UnDercontrol 借用了同样的思路，只不过换了个基本单位：**一�
 
 它还能像 Git 一样在本地和云端之间同步：`ud pull /Work/Alpha/` 把某个虚拟目录检出到本地文件夹（会生成一个 `.ud/` 保存同步状态，就像 `.git/`），本地随便用编辑器改，`ud push` 再推回云端。想换目录，本地把文件夹挪个位置，`ud push` 就更新云端路径。
 
-![虚拟文件夹 + AI：用文件树组织，让 AI 帮你重排](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-management-overview/virtual-folders.png)
+![虚拟文件夹 + AI：用文件树组织，让 AI 帮你重排](https://dl.udctl.com/features/blog/task-management-overview/virtual-folders.png)
 
 真正让组织"超方便"的，是**配上 AI**。因为整个结构就是纯文本 + 路径，AI Agent 能直接读懂你的信息全貌，替你动手整理：
 
@@ -101,7 +101,7 @@ Claude Code、Codex、OpenCode 或任何终端型 Agent 都能通过统一的 CL
 - **产品/工程流水线**：需求写在任务正文里，进展记在笔记里，评审意见留在评论里，用看板跟踪状态流转，用关系图看清任务依赖。
 - **内容创作**：一篇博客的中文稿、英文稿、社交文案各存为一条笔记，任务本身就是"单一事实来源"，对外发布的文件都是从它派生出来的。
 
-![关系图：任务连成一张可遍历的知识网络](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/task-management-overview/graph.png)
+![关系图：任务连成一张可遍历的知识网络](https://dl.udctl.com/features/blog/task-management-overview/graph.png)
 
 ### 小结
 

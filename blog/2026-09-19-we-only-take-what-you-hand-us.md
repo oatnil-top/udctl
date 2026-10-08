@@ -3,11 +3,11 @@ title: "We only take what you hand us"
 description: "After ZCode was found silently uploading whole working directories, Git history included, I went through my own code line by line: no disk scanning, no analytics SDK, no background traffic from the desktop app — plus the five places content really does leave your machine, listed in full."
 authors: [lintao]
 tags: [privacy, security]
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/privacy-we-only-take-what-you-hand-us/og-hero.png
+image: https://dl.udctl.com/features/blog/privacy-we-only-take-what-you-hand-us/og-hero.png
 date: 2026-09-19
 ---
 
-![We only take what you hand us](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/privacy-we-only-take-what-you-hand-us/og-hero.png)
+![We only take what you hand us](https://dl.udctl.com/features/blog/privacy-we-only-take-what-you-hand-us/og-hero.png)
 
 On 18 September, someone reverse-engineered ZCode, Zhipu's desktop coding assistant, and found that once you were signed in it packed your entire working directory and uploaded it in the background. Not just the code you were editing — the full Git commit history, the LFS cache, the local branch records too. For the commercial project that got posted, one snapshot came to roughly 313 MB across forty-two thousand files, with `.git` accounting for 86.6% of it.
 

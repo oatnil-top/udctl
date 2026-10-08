@@ -3,13 +3,13 @@ title: "How Do I Use an AI Agent from the Command Line?"
 description: "Run an AI agent from your terminal in three steps: install a CLI such as Claude Code or Codex, give it a task, and hand it your context with udctl."
 authors: [lintao]
 tags: [cli, ai-agent, guide]
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-agent-command-line/og-hero.png
+image: https://dl.udctl.com/features/blog/ai-agent-command-line/og-hero.png
 date: 2026-09-19
 ---
 
 An AI agent CLI is a program such as Claude Code, Codex or Gemini CLI that runs in your terminal. You describe a task in plain English, it reads files, runs commands and edits code on your machine, and it asks before anything destructive. To use one: install it with a single command, open a terminal in the project directory, and type what you want done. Three steps, and the first two take about a minute.
 
-![An AI agent running in a terminal, reading a task and writing progress back](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-agent-command-line/og-hero.png)
+![An AI agent running in a terminal, reading a task and writing progress back](https://dl.udctl.com/features/blog/ai-agent-command-line/og-hero.png)
 
 <!-- truncate -->
 

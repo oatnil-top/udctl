@@ -18,7 +18,7 @@ A minimal setup looks roughly like this: a backend service with your data direct
 
 The Docker image is designed to be small and predictable. It does not phone home, it does not require an internet connection after the initial pull, and it stores everything in the paths you configure.
 
-![UnDercontrol dashboard — self-hosted and fully under your control](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/self-hosting/dashboard.png)
+![UnDercontrol dashboard — self-hosted and fully under your control](https://dl.udctl.com/features/blog/self-hosting/dashboard.png)
 
 ## Kubernetes for Teams and Power Users
 

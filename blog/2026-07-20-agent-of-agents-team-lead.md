@@ -4,7 +4,7 @@ description: "Three agents didn't triple your output — you became the router. 
 authors: [lintao]
 tags: [feature, agents]
 date: 2026-07-20
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/concept-hero.png
+image: https://dl.udctl.com/features/blog/agent-of-agents-team-lead/concept-hero.png
 ---
 
 You set up three agents expecting three times the output. Instead your day looks like this: copy A's conclusion over to B, remember to chase C, read three sets of output at once, and hold "who is doing what" in your head.
@@ -13,7 +13,7 @@ You set up three agents expecting three times the output. Instead your day looks
 
 That's not a configuration problem, it's an org-structure problem. One person directly managing ten reports doesn't work in human companies either, and the fix was never "hire stronger individuals." The fix is **a layer of management**.
 
-![One human routing N agents versus a lead that routes for you](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/concept-hero.png)
+![One human routing N agents versus a lead that routes for you](https://dl.udctl.com/features/blog/agent-of-agents-team-lead/concept-hero.png)
 
 <!-- truncate -->
 
@@ -29,11 +29,11 @@ That hint is a job description. It's short, but it decides whether work reaches 
 - @infra-ops [remote — mention only] — servers, deploys, DNS
 ```
 
-![A Team — one lead, four members, each with a delegation hint](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/app-teams.png)
+![A Team — one lead, four members, each with a delegation hint](https://dl.udctl.com/features/blog/agent-of-agents-team-lead/app-teams.png)
 
 Here's the part that matters: **the moment a lead's session starts, that roster is injected into its initial prompt.** You don't introduce the team in conversation, and it doesn't rediscover them each time. It is born knowing who reports to it, what each one is good at, and how to hand work off.
 
-![The roster as it lands in the lead's prompt at session init](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/app-injected-prompt.png)
+![The roster as it lands in the lead's prompt at session init](https://dl.udctl.com/features/blog/agent-of-agents-team-lead/app-injected-prompt.png)
 
 Injected alongside it is a plain but consequential instruction: **"As team lead, prefer delegating over implementing yourself. Your job is to coordinate, keep talking to the user, and review the specialist's output. Only implement directly when no member covers the work."**
 
@@ -61,7 +61,7 @@ The move is: create a subtask → `ud link task <parent> <child> --subtask` → 
 
 In one line: **fast work goes to a subagent; anything that needs a record, another machine, or a long runway goes to a subtask plus an @mention.**
 
-![Two delegation channels compared](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/concept-channels.png)
+![Two delegation channels compared](https://dl.udctl.com/features/blog/agent-of-agents-team-lead/concept-channels.png)
 
 ### Recursion: agents of agents of agents
 
@@ -71,7 +71,7 @@ It goes one step further: the default `ud` agent is the **root manager** of the 
 
 You don't have to remember who to @. Just @ `ud` and let it walk down.
 
-![The org tree — each node only knows its direct reports](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/concept-tree.png)
+![The org tree — each node only knows its direct reports](https://dl.udctl.com/features/blog/agent-of-agents-team-lead/concept-tree.png)
 
 ### So your job changes
 

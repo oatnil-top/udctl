@@ -24,7 +24,7 @@ UnDercontrol 的编辑器基于 [Tiptap 3](https://tiptap.dev/) 构建。你可�
 
 在任意位置输入 `/`，即可打开命令菜单。从这里可以插入标题、代码块、表格、Mermaid 图表、清单等——全程无需使用鼠标。
 
-![编辑器中的斜杠命令菜单](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/slide-2.png)
+![编辑器中的斜杠命令菜单](https://dl.udctl.com/features/blog/markdown-features/slide-2.png)
 
 斜杠菜单支持：
 - **标题**（H1–H5）用于文档结构
@@ -38,7 +38,7 @@ UnDercontrol 的编辑器基于 [Tiptap 3](https://tiptap.dev/) 构建。你可�
 
 直接将代码粘贴到任务中。编辑器支持 100+ 种编程语言的语法高亮——从 TypeScript、Go 到 SQL、YAML。
 
-![带语法高亮 TypeScript 代码块的任务](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/api-task-top.png)
+![带语法高亮 TypeScript 代码块的任务](https://dl.udctl.com/features/blog/markdown-features/api-task-top.png)
 
 代码块配有语言选择下拉框和一键复制按钮。无论是记录 API 接口还是保存常用的 Shell 命令，代码都保持清晰可读。
 
@@ -46,7 +46,7 @@ UnDercontrol 的编辑器基于 [Tiptap 3](https://tiptap.dev/) 构建。你可�
 
 最强大的功能之一：在任务描述中直接嵌入 Mermaid 图表。通过斜杠菜单插入 Mermaid 块，编写图表语法，即可实时渲染。
 
-![Mermaid 流程图展示微服务架构](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/arch-task-top.png)
+![Mermaid 流程图展示微服务架构](https://dl.udctl.com/features/blog/markdown-features/arch-task-top.png)
 
 支持的图表类型包括：
 - **流程图** — 系统架构、决策树
@@ -54,7 +54,7 @@ UnDercontrol 的编辑器基于 [Tiptap 3](https://tiptap.dev/) 构建。你可�
 - **类图** — 数据模型、实体关系
 - **状态图** — 工作流状态、生命周期追踪
 
-![Mermaid 时序图展示认证流程](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/api-task-mermaid.png)
+![Mermaid 时序图展示认证流程](https://dl.udctl.com/features/blog/markdown-features/api-task-mermaid.png)
 
 图表查看器支持全屏预览、SVG 下载，以及自动深色/浅色主题切换。
 
@@ -62,13 +62,13 @@ UnDercontrol 的编辑器基于 [Tiptap 3](https://tiptap.dev/) 构建。你可�
 
 需要记录状态码、对比指标或追踪功能矩阵？插入表格后可直接编辑单元格。通过右键菜单添加或删除行列、切换表头行、合并单元格。
 
-![状态码表格和可交互清单](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/api-task-table-checklist.png)
+![状态码表格和可交互清单](https://dl.udctl.com/features/blog/markdown-features/api-task-table-checklist.png)
 
 ### 真正可用的清单
 
 任务列表渲染为可交互的复选框。在渲染视图中直接勾选完成项——无需切换到编辑模式。非常适合追踪子步骤、验收标准或部署清单。
 
-![任务描述中的可交互清单](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/slide-5.png)
+![任务描述中的可交互清单](https://dl.udctl.com/features/blog/markdown-features/slide-5.png)
 
 ### 图片与附件 — 告别 Obsidian 式的资源管理噩梦
 
@@ -88,7 +88,7 @@ UnDercontrol 从根本上解决了这个问题。所有图片和附件通过 `re
 
 尺寸信息以 Obsidian 兼容格式存储（`![描述|s](resource://id)`），点击图片可全屏预览。
 
-![图片大小控件 — S、M、L 预设](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/image-size-controls.png)
+![图片大小控件 — S、M、L 预设](https://dl.udctl.com/features/blog/markdown-features/image-size-controls.png)
 
 ### Draw.io 图表 — 内置可视化绘图
 
@@ -104,17 +104,17 @@ UnDercontrol 内置 Draw.io 编辑器，支持 `.drawio` 和 `.drawio.png` 格�
 - **翻译** — 即时翻译为其他语言
 - **对话** — 针对选中内容提出问题
 
-![功能概览 — 文档编写的全部工具](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/slide-7.png)
+![功能概览 — 文档编写的全部工具](https://dl.udctl.com/features/blog/markdown-features/slide-7.png)
 
 ### 实体链接 — 像 Wiki 一样连接任务
 
 在描述中直接链接到其他任务、笔记、支出、预算和账户，使用 `task://`、`note://` 等自定义协议。链接渲染为可点击的引用——点击即可跳转到关联的实体。
 
-![任务描述中渲染后的实体链接](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/entity-links-rendered.png)
+![任务描述中渲染后的实体链接](https://dl.udctl.com/features/blog/markdown-features/entity-links-rendered.png)
 
 切换到源码模式可以看到原始 markdown——每个链接使用自定义协议，如 `[API Integration Guide](task://189571b0-...)`：
 
-![原始 markdown 展示 task:// 协议链接](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/entity-links-raw.png)
+![原始 markdown 展示 task:// 协议链接](https://dl.udctl.com/features/blog/markdown-features/entity-links-raw.png)
 
 这将你的任务描述转变为一个互联的 Wiki，上下文在相关项目之间自然流转。
 

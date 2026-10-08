@@ -10,7 +10,7 @@ date: 2026-07-07
 >
 > **Many working copies, one server, edit from anywhere.**
 
-![UnDercontrol server and a local folder syncing bidirectionally via ud pull / ud push — edit locally with Obsidian, VS Code, an AI agent, or any tool](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ud-pull-push/concept-1.png)
+![UnDercontrol server and a local folder syncing bidirectionally via ud pull / ud push — edit locally with Obsidian, VS Code, an AI agent, or any tool](https://dl.udctl.com/features/blog/ud-pull-push/concept-1.png)
 
 <!-- truncate -->
 
@@ -47,7 +47,7 @@ ud status
 ud push
 ```
 
-![Local folder layout: one task is one folder, index.md is the task body, every note is its own .md file, and .ud/ holds the sync state](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ud-pull-push/concept-2.png)
+![Local folder layout: one task is one folder, index.md is the task body, every note is its own .md file, and .ud/ holds the sync state](https://dl.udctl.com/features/blog/ud-pull-push/concept-2.png)
 
 ### What it looks like locally: a task is a folder, a note is a file
 

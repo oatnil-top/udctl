@@ -17,7 +17,7 @@ description: udctl 全部获取方式:桌面版、npm 安装的 ud CLI、Chrome 
 桌面安装包托管在 Cloudflare R2:
 
 ```
-https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/{VERSION}/{FILENAME}
+https://dl.udctl.com/releases/{VERSION}/{FILENAME}
 ```
 
 各平台文件名:
@@ -32,9 +32,9 @@ https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/{VERSION}/{FILENAME
 当前的 `{VERSION}` 从自动更新元数据里取(纯 YAML,第一行就是 `version:`):
 
 ```
-https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/latest/latest-mac.yml
-https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/latest/latest.yml        # Windows
-https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/latest/latest-linux.yml
+https://dl.udctl.com/releases/latest/latest-mac.yml
+https://dl.udctl.com/releases/latest/latest.yml        # Windows
+https://dl.udctl.com/releases/latest/latest-linux.yml
 ```
 
 R2 上只保留最近几个版本,所以要先解析出当前版本号,不要把版本号写死。
@@ -73,7 +73,7 @@ iOS 原生应用在公测,通过 TestFlight 链接加入:
 https://testflight.apple.com/join/st2TnaBF(需要先从 App Store 装 TestFlight)。
 
 Android 直接下载 APK 安装,不在 Google Play 上架:
-https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases/android/0.0.20/undercontrol-0.0.20.apk
+https://dl.udctl.com/releases/android/0.0.20/undercontrol-0.0.20.apk
 因为文件不来自 Play 商店,首次安装会问来源,点 **设置 → 允许来自此来源** 即可继续。APK 用的是移动端自己的版本号,与上面的桌面版版本号无关。
 
 另外还有:一键采集用的 [Apple 快捷指令](https://www.icloud.com/shortcuts/4e0becebe3cd48a180940ccbd04d6fa7),以及在手机浏览器里打开网页版。

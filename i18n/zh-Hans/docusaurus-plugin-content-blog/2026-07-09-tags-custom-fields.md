@@ -12,7 +12,7 @@ UnDercontrol 不强加结构。它给你三层可自由组合的工具：**自�
 
 > 这背后是 UnDercontrol 的一个核心理念：**任务不只是待办**，它是承载信息的统一容器。同一个 Markdown 编辑器贯穿任务、备注、账目、账户等所有文本界面 —— 而标签和自定义字段，就是让你在这个容器上叠加「你自己的结构」的方式。
 
-![同一批任务，按标签 / 自定义字段 / 键值对三种维度自由切分](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/concept-1.png)
+![同一批任务，按标签 / 自定义字段 / 键值对三种维度自由切分](https://dl.udctl.com/features/blog/tags-custom-fields/concept-1.png)
 
 <!-- truncate -->
 
@@ -34,7 +34,7 @@ tags CONTAINS_ALL ('work', 'urgent')   -- 同时含 work 和 urgent
 
 **典型场景**：临时来了一批相关任务，先统一贴个 `q3-launch` 标签，之后不管在哪个看板都能用 `tags CONTAINS 'q3-launch'` 一键聚合；等这波做完，标签留着当归档线索，或批量删掉。
 
-![任务详情的标签输入框，展开的历史标签补全建议](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/screenshot-tags.png)
+![任务详情的标签输入框，展开的历史标签补全建议](https://dl.udctl.com/features/blog/tags-custom-fields/screenshot-tags.png)
 
 ## 二、自定义字段：带类型的结构化维度
 
@@ -50,7 +50,7 @@ tags CONTAINS_ALL ('work', 'urgent')   -- 同时含 work 和 urgent
 
 定义时还能设「是否必填」。定义好之后，字段会出现在任务详情里，直接内联填写，值就存在这个任务上。
 
-![自定义字段页与「新建字段」抽屉中的 5 种类型：文本 / 数字 / 单选 / 复选 / 用户](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/screenshot-cf-types.png)
+![自定义字段页与「新建字段」抽屉中的 5 种类型：文本 / 数字 / 单选 / 复选 / 用户](https://dl.udctl.com/features/blog/tags-custom-fields/screenshot-cf-types.png)
 
 ### 按标签限定字段的适用范围
 
@@ -61,7 +61,7 @@ tags CONTAINS_ALL ('work', 'urgent')   -- 同时含 work 和 urgent
 
 于是「标签」和「自定义字段」自然咬合：任务详情页只会显示**跟当前任务标签匹配**的字段，不相关的字段不会来打扰你。给任务贴上 `bug` 标签，「复现步骤」「严重级别」这些字段才冒出来；贴上 `sales`，「客户」「金额」才出现。
 
-![打了 bug 标签的任务，属性区自动显示 Severity、Reviewer 等 bug 专属字段](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/screenshot-cf-on-task.png)
+![打了 bug 标签的任务，属性区自动显示 Severity、Reviewer 等 bug 专属字段](https://dl.udctl.com/features/blog/tags-custom-fields/screenshot-cf-on-task.png)
 
 **典型场景**：团队同时跑「工程 bug」和「销售跟进」两类任务。给 bug 相关字段设作用范围 = `bug` 标签，给销售字段设 = `sales` 标签。同一个看板里，两类任务各自只显示自己那套字段，互不干扰 —— 不用为此拆成两个系统。
 
@@ -71,7 +71,7 @@ tags CONTAINS_ALL ('work', 'urgent')   -- 同时含 work 和 urgent
 
 这层是「自由标签」和「正式自定义字段」之间的缓冲：先随手记下，用多了、成了固定维度，再把它提升成一个带类型的自定义字段。
 
-![任务上的自由键值对：jira、external_id、source，无需事先定义](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/screenshot-extra-metadata.png)
+![任务上的自由键值对：jira、external_id、source，无需事先定义](https://dl.udctl.com/features/blog/tags-custom-fields/screenshot-extra-metadata.png)
 
 **典型场景**：从外部系统同步进来的任务带了一堆零散字段（工单号、来源链接、外部 ID），先原样塞进键值对保留下来；哪个字段后来发现要经常按它筛选，再正式建一个自定义字段。
 
@@ -90,7 +90,7 @@ cf.priority > 5 ORDER BY updated_at DESC -- 高优先级按更新时间排
 
 自定义字段能和内置字段（`status`、`tags`、`deadline` 等）在同一条查询里自由组合。而在 UnDercontrol 里，**看板的每一列本质上就是一条保存下来的查询** —— 所以你可以直接建一列叫「高优先级待办」，条件是 `cf.priority > 5 AND status = 'todo'`，任务只要满足条件就自动落进这一列，不用手动拖。任务搜索页也能把自定义字段作为列显示出来。
 
-![看板列条件构建器：Tags has #bug AND Custom: Severity = critical，生成查询 tags CONTAINS 'bug' AND cf.severity = 'critical'](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/screenshot-board-cf-query.png)
+![看板列条件构建器：Tags has #bug AND Custom: Severity = critical，生成查询 tags CONTAINS 'bug' AND cf.severity = 'critical'](https://dl.udctl.com/features/blog/tags-custom-fields/screenshot-board-cf-query.png)
 
 **典型场景**：给团队搭一个「按客户看」的看板，每列一个客户，列条件用 `cf.client = '...'`；新任务只要填了客户字段就自动归位。同一批任务，换个查询就是「按优先级看」「按部门看」—— 视图随维度切换，数据只有一份。
 
@@ -106,4 +106,4 @@ UnDercontrol 不替你决定任务该有哪些维度，而是给你三层能力�
 
 这一切都建立在 UnDercontrol「任务不只是待办」的理念之上：一个统一的信息容器，一套贯穿所有文本界面的编辑器，加上让你自定义维度的标签与字段。你可以搭配 Claude Code、Codex、OpenCode 或任何基于终端的 Agent 来读写这些结构化数据 —— 但组织方式的主导权，始终在你手里。
 
-![一份数据，多种切法：同一批任务按标签 / cf.priority / cf.client 切成不同看板视图](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/concept-2.png)
+![一份数据，多种切法：同一批任务按标签 / cf.priority / cf.client 切成不同看板视图](https://dl.udctl.com/features/blog/tags-custom-fields/concept-2.png)

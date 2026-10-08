@@ -3,7 +3,7 @@ title: "Why a Ledger Gets Harder to Continue After One Missing Entry"
 description: "A missing entry breaks trust in the ledger. An auditable reconciliation finds omissions, duplicates, refunds, and old-data problems while leaving judgment to the human."
 authors: [lintao]
 tags: [story, agents]
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/reconciliation-you-can-audit/duplicate-channels.png
+image: https://dl.udctl.com/features/blog/reconciliation-you-can-audit/duplicate-channels.png
 date: 2026-07-30
 ---
 
@@ -24,7 +24,7 @@ A recent real reconciliation covered four months, several payment and banking ch
 
 Memory is a poor way to reconstruct any of these. Refunds and undated old records are especially difficult because they do not look like errors. They quietly change the result.
 
-![Cross-channel duplicate: one purchase leaves similar records in two channels and the existing ledger, so it is flagged as a possible duplicate for human confirmation](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/reconciliation-you-can-audit/duplicate-channels.png)
+![Cross-channel duplicate: one purchase leaves similar records in two channels and the existing ledger, so it is flagged as a possible duplicate for human confirmation](https://dl.udctl.com/features/blog/reconciliation-you-can-audit/duplicate-channels.png)
 
 ### Reconcile First, Then Change the Ledger
 
@@ -38,7 +38,7 @@ Writing was not the end. It read the ledger back and checked the resulting count
 
 Auditability matters more than a claim that the work was automatic. If automation says only, “I recorded it for you,” the person still does not know what it missed or merged. Analysis first, approval before writing, and a read-back afterward make the work safe to delegate.
 
-![Auditable reconciliation flow: analyze and show evidence, wait for human confirmation, write approved changes, read back and check, then retain the record and reason](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/reconciliation-you-can-audit/auditable-flow.png)
+![Auditable reconciliation flow: analyze and show evidence, wait for human confirmation, write approved changes, read back and check, then retain the record and reason](https://dl.udctl.com/features/blog/reconciliation-you-can-audit/auditable-flow.png)
 
 ### A Missing Entry No Longer Means Starting Over
 

@@ -4,14 +4,14 @@ description: "Attach files to a task and share one public link — a 6-letter pi
 authors: [lintao]
 tags: [feature, sharing]
 date: 2026-07-24
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/concept-locker.png
+image: https://dl.udctl.com/features/blog/file-drop-share/concept-locker.png
 ---
 
 The computer at a print shop isn't yours, and you're not going to log into anything on it. The usual ways to move a file there are all awkward: messaging apps want a QR scan and a login session, cloud-drive share pages nag you to install their app, and the USB stick is at home.
 
 A task in UnDercontrol is already a container: body text, notes, and file attachments. Generate a public share link for it, and anyone who has the link can read the content and download the files. No account, nothing to install. It works like a parcel locker: you drop things in, get a pickup code, and whoever has the code takes them out.
 
-![Concept: a task working as a parcel locker](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/concept-locker.png)
+![Concept: a task working as a parcel locker](https://dl.udctl.com/features/blog/file-drop-share/concept-locker.png)
 
 <!-- truncate -->
 
@@ -19,7 +19,7 @@ A task in UnDercontrol is already a container: body text, notes, and file attach
 
 Create a task and upload the files in its attachments section. The task body is Markdown, so write the instructions right next to the files. Whoever opens the link sees your print requirements, not a bare file list.
 
-![Task detail: attachments and print notes](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/task-detail.png)
+![Task detail: attachments and print notes](https://dl.udctl.com/features/blog/file-drop-share/task-detail.png)
 
 ### Step 2: generate the share link
 
@@ -30,7 +30,7 @@ Open **Share to Public** in the task menu. Two settings:
 
 Click Generate Link and you get three things at once: the full link, a 6-letter pickup code, and a pre-composed message (Copy Share Message) that carries both, ready to paste into any chat.
 
-![Share dialog: link, pickup code, expiry](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/share-modal.png)
+![Share dialog: link, pickup code, expiry](https://dl.udctl.com/features/blog/file-drop-share/share-modal.png)
 
 ### Step 3: pick up on any device
 
@@ -40,9 +40,9 @@ Three ways in, for three situations:
 - **You have only the code**: open the share entry page and type the 6 letters. Handy when the code was read out loud, or on a public computer where you'd rather not type a long URL.
 - **You're standing next to the person**: the share page shows a QR code; scanning it lands on the same page.
 
-![Public share page: QR code, expiry countdown, downloads](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/share-viewer.png)
+![Public share page: QR code, expiry countdown, downloads](https://dl.udctl.com/features/blog/file-drop-share/share-viewer.png)
 
-![Pickup code entry page](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/code-entry.png)
+![Pickup code entry page](https://dl.udctl.com/features/blog/file-drop-share/code-entry.png)
 
 ### The security details
 

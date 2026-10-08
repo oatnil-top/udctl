@@ -4,14 +4,14 @@ description: "把文件挂在任务上,生成公开分享链接:链接 + 6 位�
 authors: [lintao]
 tags: [feature, sharing]
 date: 2026-07-24
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/concept-locker.png
+image: https://dl.udctl.com/features/blog/file-drop-share/concept-locker.png
 ---
 
 去打印店打印文件,店里的电脑不是你的,你不会在上面登录任何账号。这时候把文件弄过去的常见办法都有点别扭:微信文件传输助手要扫码登录,网盘分享页一半功能在催你装客户端,U 盘不一定随身带。
 
 UnDercontrol 里的任务本来就是个容器——正文、笔记、附件都挂在上面。给任务生成一个公开分享链接,拿到链接的人不用登录、不用装任何东西,打开就能看内容、下载文件。用起来像小区里的快递柜:你把东西放进去,拿到一个取件码,凭码取件。
 
-![概念图:任务作为文件快递柜](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/concept-locker.png)
+![概念图:任务作为文件快递柜](https://dl.udctl.com/features/blog/file-drop-share/concept-locker.png)
 
 <!-- truncate -->
 
@@ -19,7 +19,7 @@ UnDercontrol 里的任务本来就是个容器——正文、笔记、附件都�
 
 新建一个任务,在附件区上传文件。任务正文是 Markdown,顺手把说明写清楚——取件的人打开链接,看到的不只是文件列表,还有你写的打印要求。
 
-![任务详情:附件与打印说明](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/task-detail.png)
+![任务详情:附件与打印说明](https://dl.udctl.com/features/blog/file-drop-share/task-detail.png)
 
 ### 第二步:生成分享链接
 
@@ -30,7 +30,7 @@ UnDercontrol 里的任务本来就是个容器——正文、笔记、附件都�
 
 点 Generate Link,一次拿到三样东西:完整链接、6 位取件码,以及一段拼好的分享消息(Copy Share Message,链接和取件码都在里面,直接粘贴发给对方)。
 
-![分享弹窗:链接、取件码、有效期](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/share-modal.png)
+![分享弹窗:链接、取件码、有效期](https://dl.udctl.com/features/blog/file-drop-share/share-modal.png)
 
 ### 第三步:在任何设备上取件
 
@@ -40,9 +40,9 @@ UnDercontrol 里的任务本来就是个容器——正文、笔记、附件都�
 - **只有取件码**:打开分享入口页,输 6 位字母码。适合口头转述,或者在公用电脑上不想敲长网址
 - **面对面**:分享页右上角自带二维码,手机扫一下就到同一个页面
 
-![公开分享页:二维码、倒计时、附件下载](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/share-viewer.png)
+![公开分享页:二维码、倒计时、附件下载](https://dl.udctl.com/features/blog/file-drop-share/share-viewer.png)
 
-![取件码入口页](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/file-drop-share/code-entry.png)
+![取件码入口页](https://dl.udctl.com/features/blog/file-drop-share/code-entry.png)
 
 ### 安全边界
 

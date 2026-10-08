@@ -4,14 +4,14 @@ description: "0 元实现数据完全自持:UnDercontrol 桌面版内嵌后端 +
 authors: [lintao]
 tags: [tutorial, self-hosting]
 date: 2026-07-26
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/your-desktop-is-the-server/concept-tunnel.png
+image: https://dl.udctl.com/features/blog/your-desktop-is-the-server/concept-tunnel.png
 ---
 
 数据放在谁那里,是选工具时绕不过的一道分岔口。托管服务(SaaS)省事:注册就用,升级、备份、运维都不用操心,代价是数据存在服务商的服务器上。UnDercontrol 也会提供这样的托管服务。但如果你想要的是**数据完全自持**——任务、笔记、账本的原始数据只存在自己的设备上,备份是拷一个文件,迁移是换一台电脑,谁也拿不走——这篇教程就是为你写的。
 
 自持通常意味着自己架服务器,而这正是大多数人放弃的地方。下面走通一条不需要服务器的 0 元路径:UnDercontrol 桌面版自带完整后端,数据以 SQLite 文件落在你自己的磁盘;Cloudflare Tunnel 免费把这台电脑暴露到公网;iOS app 直连你自己的 endpoint。人在地铁上照样看任务、补笔记、记账,而数据的存放位置从头到尾只有一个:你的电脑。不需要公网 IP,不需要路由器端口转发,也不需要买域名(想要固定地址时才可选)。
 
-![架构:桌面版内嵌 server,cloudflared 反向连接到 Cloudflare 边缘,iOS 从任意网络经 HTTPS 访问](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/your-desktop-is-the-server/concept-tunnel.png)
+![架构:桌面版内嵌 server,cloudflared 反向连接到 Cloudflare 边缘,iOS 从任意网络经 HTTPS 访问](https://dl.udctl.com/features/blog/your-desktop-is-the-server/concept-tunnel.png)
 
 <!-- truncate -->
 
@@ -53,7 +53,7 @@ sudo apt install cloudflared
 cloudflared tunnel --url http://localhost:8888
 ```
 
-![终端里的真实输出:quick tunnel 创建成功,curl 公网地址返回 healthy](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/your-desktop-is-the-server/shot-terminal-quick-tunnel.png)
+![终端里的真实输出:quick tunnel 创建成功,curl 公网地址返回 healthy](https://dl.udctl.com/features/blog/your-desktop-is-the-server/shot-terminal-quick-tunnel.png)
 
 几秒后终端会打印一个 `https://xxx.trycloudflare.com` 的随机地址——这就是你的公网 endpoint,自带 HTTPS,连 Cloudflare 账号都不用注册。拿手机验证一下(关掉 Wi-Fi 用流量,确认走的是公网):浏览器访问 `https://xxx.trycloudflare.com/health`,看到 `healthy` 说明整条链路通了。
 
@@ -107,7 +107,7 @@ https://xxx.trycloudflare.com/api/v1
 
 输入时下面的状态点会实时探测:变绿并显示 `connected · Personal`,说明手机已经摸到了你电脑上的 server。点 **Save**,然后用第一步的账号登录:`personal@undercontrol.local` / 你的密码。
 
-![iOS 登录页:API server 指向 trycloudflare 地址,状态 connected · Personal](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/your-desktop-is-the-server/shot-ios-connected.png)
+![iOS 登录页:API server 指向 trycloudflare 地址,状态 connected · Personal](https://dl.udctl.com/features/blog/your-desktop-is-the-server/shot-ios-connected.png)
 
 登录后手机上看到的就是你电脑里的那份数据:任务、笔记、账本,手机上改一条,桌面端就是最新的。
 

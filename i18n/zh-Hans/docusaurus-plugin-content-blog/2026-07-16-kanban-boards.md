@@ -4,7 +4,7 @@ description: "在大部分看板工具里,列就是状态枚举,写死的,所以
 authors: [lintao]
 tags: [feature, kanban]
 date: 2026-07-16
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-boards/concept-hero.png
+image: https://dl.udctl.com/features/blog/kanban-boards/concept-hero.png
 ---
 
 周一早上打开看板,你想知道的是哪些事情要炸了:已经逾期的、这周要交的。看板只会告诉你哪些在进行中。
@@ -13,7 +13,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-
 
 于是看板显示的是工具眼里你的工作,不是你的。你在意的那些维度,它一个都装不下。
 
-![左边是每个工具都给你的三列看板,装不下你在意的维度;右边是你一句话描述、Agent 建出来的贴合需求的看板](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-boards/concept-hero.png)
+![左边是每个工具都给你的三列看板,装不下你在意的维度;右边是你一句话描述、Agent 建出来的贴合需求的看板](https://dl.udctl.com/features/blog/kanban-boards/concept-hero.png)
 
 <!-- truncate -->
 
@@ -44,7 +44,7 @@ UnDercontrol 走的是另一条路。它是一个任务和知识管理工具,日
 
 在一个列就等于状态的工具里,这样两列很难出现。而在这里它们平平无奇,就是默认配置的一部分。
 
-![默认看板的六列,最右边的 Recent Created 和 Recent Updated 两列只按时间排序,不属于任何状态](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-boards/default-board.png)
+![默认看板的六列,最右边的 Recent Created 和 Recent Updated 两列只按时间排序,不属于任何状态](https://dl.udctl.com/features/blog/kanban-boards/default-board.png)
 
 ### 那学费呢?
 
@@ -144,7 +144,7 @@ Dry run — board would be created (nothing persisted):
 
 关键在于**你审阅的是系统给出的结果,不是 Agent 复述它的计划**。Agent 可以说错话,但它没法伪造这一步的输出。所以这件事的可信不是建立在相信 Agent 不会出错上,而是它出错也没关系,因为你先看得见。
 
-![由 Agent 建出来的截止日期雷达看板,逾期、本周、下周三列按时间窗口分组,卡片带截止日期和负责人](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-boards/deadline-radar.png)
+![由 Agent 建出来的截止日期雷达看板,逾期、本周、下周三列按时间窗口分组,卡片带截止日期和负责人](https://dl.udctl.com/features/blog/kanban-boards/deadline-radar.png)
 
 ### 典型场景
 

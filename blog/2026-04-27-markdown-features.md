@@ -24,7 +24,7 @@ The editor also supports switching to Source Mode to view and edit the raw Markd
 
 Type `/` anywhere to open the command menu. Insert headings, code blocks, tables, Mermaid diagrams, checklists, and more — all without touching the mouse.
 
-![Slash command menu in the editor](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/slide-2.png)
+![Slash command menu in the editor](https://dl.udctl.com/features/blog/markdown-features/slide-2.png)
 
 The slash menu supports:
 - **Headings** (H1–H5) for document structure
@@ -38,7 +38,7 @@ The slash menu supports:
 
 Paste code snippets directly into your tasks. The editor supports 100+ programming languages with proper syntax highlighting — from TypeScript and Go to SQL and YAML.
 
-![Task with syntax-highlighted TypeScript code block](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/api-task-top.png)
+![Task with syntax-highlighted TypeScript code block](https://dl.udctl.com/features/blog/markdown-features/api-task-top.png)
 
 Code blocks include a language selector dropdown and a one-click copy button. Your code stays readable and properly formatted, whether you're documenting an API endpoint or saving a useful shell command.
 
@@ -46,7 +46,7 @@ Code blocks include a language selector dropdown and a one-click copy button. Yo
 
 One of the most powerful features: embed [Mermaid](https://mermaid.js.org/) diagrams directly in your task descriptions. Insert a Mermaid block via the slash menu, write your diagram syntax, and it renders live.
 
-![Mermaid flowchart showing microservices architecture](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/arch-task-top.png)
+![Mermaid flowchart showing microservices architecture](https://dl.udctl.com/features/blog/markdown-features/arch-task-top.png)
 
 Supported diagram types include:
 - **Flowcharts** — system architecture, decision trees
@@ -54,7 +54,7 @@ Supported diagram types include:
 - **Class diagrams** — data models, entity relationships
 - **State diagrams** — workflow states, lifecycle tracking
 
-![Mermaid sequence diagram showing authentication flow](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/api-task-mermaid.png)
+![Mermaid sequence diagram showing authentication flow](https://dl.udctl.com/features/blog/markdown-features/api-task-mermaid.png)
 
 The diagram viewer supports fullscreen preview, SVG download, and automatic dark/light theme switching.
 
@@ -62,13 +62,13 @@ The diagram viewer supports fullscreen preview, SVG download, and automatic dark
 
 Need to document status codes, compare metrics, or track a feature matrix? Insert a table and edit cells directly. Add or remove rows and columns, toggle header rows, and merge cells — all from a context menu.
 
-![Table with status codes and interactive checklist](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/api-task-table-checklist.png)
+![Table with status codes and interactive checklist](https://dl.udctl.com/features/blog/markdown-features/api-task-table-checklist.png)
 
 ### Checklists That Actually Work
 
 Task lists render as interactive checkboxes. Check items off directly in the rendered view — no need to switch to edit mode. Great for tracking sub-steps, acceptance criteria, or deployment checklists.
 
-![Interactive checklist in task description](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/slide-5.png)
+![Interactive checklist in task description](https://dl.udctl.com/features/blog/markdown-features/slide-5.png)
 
 ### Images & Attachments — No More Obsidian-Style Resource Management Headaches
 
@@ -88,7 +88,7 @@ Inserted images support three size presets — hover in edit mode to switch:
 
 Size information is stored in Obsidian-compatible format (`![description|s](resource://id)`). Click any image for fullscreen preview.
 
-![Image size controls — S, M, L presets](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/image-size-controls.png)
+![Image size controls — S, M, L presets](https://dl.udctl.com/features/blog/markdown-features/image-size-controls.png)
 
 ### Draw.io Diagrams — Built-in Visual Drawing
 
@@ -104,17 +104,17 @@ Select any text to reveal the bubble menu. Beyond standard formatting (bold, ita
 - **Translate** — translate to another language instantly
 - **Chat** — ask questions about the selected content
 
-![Feature overview — everything you need to document](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/slide-7.png)
+![Feature overview — everything you need to document](https://dl.udctl.com/features/blog/markdown-features/slide-7.png)
 
 ### Entity Links — Connect Tasks Like a Wiki
 
 Link to other tasks, notes, expenses, budgets, and accounts directly in your descriptions using custom protocols like `task://`, `note://`, and more. The links render as clickable references — click to jump straight to the referenced entity.
 
-![Rendered entity links in a task description](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/entity-links-rendered.png)
+![Rendered entity links in a task description](https://dl.udctl.com/features/blog/markdown-features/entity-links-rendered.png)
 
 Switch to source mode to see the raw markdown — each link uses a custom protocol like `[API Integration Guide](task://189571b0-...)`:
 
-![Raw markdown showing task:// protocol links](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/markdown-features/entity-links-raw.png)
+![Raw markdown showing task:// protocol links](https://dl.udctl.com/features/blog/markdown-features/entity-links-raw.png)
 
 This turns your task descriptions into a connected wiki, where context flows naturally between related items.
 

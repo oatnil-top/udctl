@@ -3,7 +3,7 @@ title: "Your context shouldn't live only on someone else's machine"
 description: "Terminal agents keep arriving, and you are still the only one who remembers. A self-hosted workbench where people and agents share one copy of the data, gather it once a day, and keep it on your own disk."
 authors: [lintao]
 tags: [story, agents]
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig0.jpg
+image: https://dl.udctl.com/features/blog/udctl-context/v6-fig0.jpg
 date: 2026-09-12
 ---
 
@@ -13,7 +13,7 @@ date: 2026-09-12
 
 *Rather than re-explaining yourself every morning, let the work you finished land in a library you own, gather it once a day, and let the next agent pick up from there.*
 
-![](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig0.jpg)
+![](https://dl.udctl.com/features/blog/udctl-context/v6-fig0.jpg)
 
 For the past year I've been moving between Claude Code, Codex and OpenCode, and I've written the same set of conventions three times: one copy in this agent's directory, one in that agent's config, one in my own head. Every time I thought that was finally settled. Then I'd open a different terminal and start explaining again.
 
@@ -27,7 +27,7 @@ One of those looks like an efficiency problem and the other like an ownership pr
 
 So I started building my own knowledge base. It began because Obsidian sync kept getting in my way, and because I wanted the data to stay with me: a pile of markdown files I could take anywhere, in a format no single app owned. It grew into a whole workbench, called udctl (formerly UnDercontrol).
 
-![udctl's Explorer: tasks and files in the same tree.](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig1.jpg)
+![udctl's Explorer: tasks and files in the same tree.](https://dl.udctl.com/features/blog/udctl-context/v6-fig1.jpg)
 
 *Fig 1 · udctl's Explorer: tasks and files in the same tree.*
 
@@ -48,7 +48,7 @@ The more of them you run, the harder these get to answer:
 
 The second-to-last one is the expensive one. **What repeated work costs you isn't the extra half hour. It's that the second time through, you have no idea you're doing it again.**
 
-![Before: an agent's memory ended when the session did.](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig2.png)
+![Before: an agent's memory ended when the session did.](https://dl.udctl.com/features/blog/udctl-context/v6-fig2.png)
 
 *Fig 2 · Before: an agent's memory ended when the session did.*
 
@@ -64,7 +64,7 @@ udctl in one line: a self-hosted workbench that runs on your own machine. People
 
 The chain it's trying to complete has five steps. **One container holds it, any agent can read it, it gathers once a day, it settles into long-term memory, and it lands in a directory tree you can open.**
 
-![People and agents share one container: the same card, the same note, the same bytes.](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig3.png)
+![People and agents share one container: the same card, the same note, the same bytes.](https://dl.udctl.com/features/blog/udctl-context/v6-fig3.png)
 
 *Fig 3 · People and agents share one container: the same card, the same note, the same bytes.*
 
@@ -90,7 +90,7 @@ Change it once, and every agent picks it up on its next run.
 
 What that builds is a shared context layer above the individual agents. Write it in one place, and it applies everywhere.
 
-![Reuse across agents: skills, conventions and context go into udctl, then flow back out to each agent.](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig4.png)
+![Reuse across agents: skills, conventions and context go into udctl, then flow back out to each agent.](https://dl.udctl.com/features/blog/udctl-context/v6-fig4.png)
 
 *Fig 4 · Reuse across agents: skills, conventions and context go into udctl, then flow back out to each agent.*
 
@@ -102,7 +102,7 @@ Under that it splits into three layers. The card body is a living document you e
 
 There's one editor. Tasks, notes, expenses, accounts: everywhere you can type, it's the same Markdown editor.
 
-![Card body / notes / comments, three layers, with one editor everywhere you can type.](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig5.jpg)
+![Card body / notes / comments, three layers, with one editor everywhere you can type.](https://dl.udctl.com/features/blog/udctl-context/v6-fig5.jpg)
 
 *Fig 5 · Card body / notes / comments, three layers, with one editor everywhere you can type.*
 
@@ -116,7 +116,7 @@ The moving out is the part that does the work. Without it, "accumulating" is a p
 
 Here are the numbers from my own ledger. For the full 31 days of August 2026, the raw daily entries came to 919,538 characters. The monthly compaction that stays in the near pile and gets re-read every day is 13,506 characters. Not a word of the original is gone. It's in the month card, and I can go read it when I need to.
 
-![Daily entry, archived into the month card on day four, squeezed into a monthly compaction, with durable facts moving into the knowledge-base card.](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig6.png)
+![Daily entry, archived into the month card on day four, squeezed into a monthly compaction, with durable facts moving into the knowledge-base card.](https://dl.udctl.com/features/blog/udctl-context/v6-fig6.png)
 
 *Fig 6 · Daily entry → archived into the month card on day four → squeezed into a monthly compaction → durable facts into the knowledge-base card.*
 
@@ -130,7 +130,7 @@ HTML is worth its own line. Upload a `.html` and opening it in the app gives you
 
 The whole tree can also come down to disk. `ud init /Notes/` binds a local folder to a virtual path, and `ud pull` pulls the cards and files under that path down together, subfolder for subfolder. Cards land as `.md`, with the filename as the title and a single `ud-id` line of frontmatter. Files land as themselves. Your editor, your grep and your git all work on them directly.
 
-![Cards, images and .html side by side on one tree; opening the .html gives you the rendered page.](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig7.jpg)
+![Cards, images and .html side by side on one tree; opening the .html gives you the rendered page.](https://dl.udctl.com/features/blog/udctl-context/v6-fig7.jpg)
 
 *Fig 7 · Cards, images and `.html` side by side on one tree; opening the `.html` gives you the rendered page.*
 

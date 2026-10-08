@@ -22,7 +22,7 @@ date: 2026-04-25
 
 架构由四个部分组成：
 
-![架构：Web UI 通过 REST 连接服务器，服务器通过 SSE 连接守护进程，守护进程通过 PTY 生成 AI 代理](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/remote-workspace/slide-2.png)
+![架构：Web UI 通过 REST 连接服务器，服务器通过 SSE 连接守护进程，守护进程通过 PTY 生成 AI 代理](https://dl.udctl.com/features/blog/remote-workspace/slide-2.png)
 
 **1. Electron 桌面应用** — 运行在你的机器上，充当守护进程。当你在工作区页面注册设备时，应用通过 Server-Sent Events（SSE）连接到 UnDercontrol 服务器，等待接收指令。
 
@@ -48,7 +48,7 @@ npm install -g @anthropic-ai/claude-code
 
 设备注册并上线后，在 Web 界面（或桌面应用本身）打开任意任务，点击操作栏中的地球图标。你会看到已连接的守护进程列表——选择一个，会话即刻开始。
 
-![任务详情页展示任务描述和工作区控制](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/remote-workspace/task-detail.png)
+![任务详情页展示任务描述和工作区控制](https://dl.udctl.com/features/blog/remote-workspace/task-detail.png)
 
 守护进程收到初始化事件后，Electron 主进程在 PTY 窗口中生成 AI 代理。接下来一切自动进行：
 
@@ -61,7 +61,7 @@ npm install -g @anthropic-ai/claude-code
 
 这是最让人满足的部分。当代理在你的机器上运行时，你在浏览器里实时看到它的进度。
 
-![工作流程：从启动守护进程到实时观察进度的五个步骤](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/remote-workspace/slide-3.png)
+![工作流程：从启动守护进程到实时观察进度的五个步骤](https://dl.udctl.com/features/blog/remote-workspace/slide-3.png)
 
 备注随着代理的工作不断涌入：它在读什么、改了什么、提交了哪些文件。你得到了整个会话的运行日志，而完全不需要碰终端。
 
@@ -75,7 +75,7 @@ npm install -g @anthropic-ai/claude-code
 
 远程工作区不是「发射后不管」的模式。你可以在代理运行时与它交互：
 
-![交互控制：发送指令、截图、中断和停止](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/remote-workspace/slide-4.png)
+![交互控制：发送指令、截图、中断和停止](https://dl.udctl.com/features/blog/remote-workspace/slide-4.png)
 
 - **发送指令** — 输入额外的上下文或在任务中途调整代理的方向
 - **截图** — 捕获工作区的当前状态
@@ -88,7 +88,7 @@ npm install -g @anthropic-ai/claude-code
 
 工作区页面提供所有活动会话和已连接守护进程的全局视图。
 
-![工作区仪表盘展示活动会话和已连接守护进程](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/remote-workspace/workspaces-dashboard.png)
+![工作区仪表盘展示活动会话和已连接守护进程](https://dl.udctl.com/features/blog/remote-workspace/workspaces-dashboard.png)
 
 每个会话卡片显示它正在处理的任务、哪个守护进程在运行、已运行多长时间以及最新的备注。守护进程列出了在线/离线状态、机器名称、平台和共享权限。
 
@@ -129,7 +129,7 @@ blocked_commands:
 
 远程工作区将它们合并。你的任务描述*就是*指令。你的浏览器*就是*控制面板。工作在你的机器上发生，使用你的工具，在你的环境中——你只是不需要在终端里才能启动它。
 
-![安全层：工具黑名单、命令黑名单、API Key 认证、自定义配置](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/remote-workspace/slide-5.png)
+![安全层：工具黑名单、命令黑名单、API Key 认证、自定义配置](https://dl.udctl.com/features/blog/remote-workspace/slide-5.png)
 
 对于个人开发者，这意味着更少的上下文切换。写任务、触发代理、审查输出——全在同一个界面。对于团队，这意味着一个共享的工作队列，机器可以接手并执行，同时对正在发生的事情具有完全的可见性。
 

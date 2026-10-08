@@ -51,7 +51,7 @@ import styles from './download.module.css';
 const VERSION: string = versionConfig.version;
 
 const APP_URL = 'https://app.udctl.com';
-const R2_RELEASES = 'https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/releases';
+const R2_RELEASES = 'https://dl.udctl.com/releases';
 const CHROME_STORE_URL =
   'https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog';
 const SHORTCUT_URL = 'https://www.icloud.com/shortcuts/4e0becebe3cd48a180940ccbd04d6fa7';

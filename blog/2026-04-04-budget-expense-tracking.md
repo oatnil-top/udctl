@@ -22,13 +22,13 @@ One-time adjustments fill in the gaps that recurring plans can't cover. Got an u
 
 Expenses in UnDercontrol are first-class records. When you log an expense, you can link it to a specific budget. That link is what powers the "budget vs. actual" view — the expense amount rolls up into the budget's spent total, and it appears in that budget's ledger.
 
-![Transaction list with expense entries](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/budget-expense-tracking/transactions.png)
+![Transaction list with expense entries](https://dl.udctl.com/features/blog/budget-expense-tracking/transactions.png)
 
 This design means you can also have expenses that aren't tied to any budget, which is intentional. Not every transaction needs to be categorized immediately. You can log it, come back later, and link it when it makes sense.
 
 The budget detail page brings everything together: a hero section showing total allocated, total spent, and remaining balance at a glance, plus a spending trend chart that plots your actual spend against the budget line over 7, 30, or 90 days. If you're running a monthly grocery budget and the chart shows you've crossed the allocation line by day 22, that's a clear signal — no mental math required.
 
-![Budget detail with spending trend chart](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/budget-expense-tracking/budget-detail.png)
+![Budget detail with spending trend chart](https://dl.udctl.com/features/blog/budget-expense-tracking/budget-detail.png)
 
 ## Multi-Account Support and the Full Picture
 
@@ -40,7 +40,7 @@ This becomes especially useful when you're managing finances for a small team or
 
 The budget list page is designed to give you a quick read on everything at once. Progress bars, spent and remaining amounts, and a summary sidebar with aggregated totals across all budgets. Search to find specific budgets quickly. A "Show hidden" toggle for budgets you want to archive without deleting.
 
-![Budget overview with progress bars showing spent vs remaining](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/budget-expense-tracking/budget-list.png)
+![Budget overview with progress bars showing spent vs remaining](https://dl.udctl.com/features/blog/budget-expense-tracking/budget-list.png)
 
 Privacy mode deserves a mention: toggle it to hide all monetary amounts across the interface. Useful when you're screen sharing during a meeting and don't need to explain your personal grocery budget to coworkers.
 

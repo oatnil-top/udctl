@@ -46,7 +46,7 @@ Review the following pull request diff and provide feedback on:
 
 This makes skills portable. Check them into your dotfiles repo, version them with the rest of your configuration, and deploy them to a new UnDercontrol instance with a single command.
 
-![Skills page showing system and custom skills with search and tags](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/skills-system/skills-list.png)
+![Skills page showing system and custom skills with search and tags](https://dl.udctl.com/features/blog/skills-system/skills-list.png)
 
 ## Using a Skill — The `ud prompt` Command
 
@@ -66,7 +66,7 @@ ud prompt pr-review | pbcopy
 
 Because it's just stdout, `ud prompt` works with any tool that reads from stdin — Claude Code, other local AI agents, shell pipelines, whatever fits your workflow. UnDercontrol doesn't try to own the AI layer; it just manages the prompts so you don't have to.
 
-![Skill detail view with markdown content and CLI usage commands](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/skills-system/skill-detail.png)
+![Skill detail view with markdown content and CLI usage commands](https://dl.udctl.com/features/blog/skills-system/skill-detail.png)
 
 ## Built-in System Skills
 

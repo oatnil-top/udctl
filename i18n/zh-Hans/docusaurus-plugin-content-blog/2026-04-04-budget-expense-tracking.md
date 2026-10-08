@@ -22,13 +22,13 @@ date: 2026-04-04
 
 在 UnDercontrol 中，消费记录是一等公民。添加一笔支出时，你可以将其关联到某个具体的预算。这个关联关系正是"预算 vs 实际"视图的数据基础——支出金额会汇总到该预算的已花费总额中，并显示在对应预算的账目明细里。
 
-![Transaction list with expense entries](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/budget-expense-tracking/transactions.png)
+![Transaction list with expense entries](https://dl.udctl.com/features/blog/budget-expense-tracking/transactions.png)
 
 这种设计也允许存在不关联任何预算的支出记录，这是有意为之的。并非每笔交易都需要立刻分类。你可以先记下来，之后再回来关联，等到合适的时机处理即可。
 
 预算详情页将所有信息整合在一起：顶部概览区一目了然地展示总分配额、已花费金额和剩余余额；支出趋势图则以 7 天、30 天或 90 天为维度，将实际支出与预算线并排呈现。如果你在追踪月度餐饮预算，图表显示在第 22 天就已突破分配上限，这个信号足够清晰，无需任何心算。
 
-![Budget detail with spending trend chart](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/budget-expense-tracking/budget-detail.png)
+![Budget detail with spending trend chart](https://dl.udctl.com/features/blog/budget-expense-tracking/budget-detail.png)
 
 ## 多账户支持与全局视图
 
@@ -40,7 +40,7 @@ UnDercontrol 的账户系统支持同时追踪多个资金来源——活期账�
 
 预算列表页的设计让你可以一眼掌握全局：进度条、已花费和剩余金额，以及汇总所有预算总额的侧边栏。搜索功能帮助你快速定位特定预算。"显示隐藏项"开关则适用于那些想归档但不想删除的预算。
 
-![Budget overview with progress bars showing spent vs remaining](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/budget-expense-tracking/budget-list.png)
+![Budget overview with progress bars showing spent vs remaining](https://dl.udctl.com/features/blog/budget-expense-tracking/budget-list.png)
 
 隐私模式值得一提：开启后，界面上所有金额数字都会被隐藏。在会议中共享屏幕时非常实用——你不需要向同事解释自己的餐饮预算。
 

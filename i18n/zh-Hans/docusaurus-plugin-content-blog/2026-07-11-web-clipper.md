@@ -4,7 +4,7 @@ description: Web Clipper Chrome 扩展无需登录即可把任意网页一键复
 authors: [lintao]
 tags: [feature, guide]
 date: 2026-07-11
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/concept-copy-markdown.png
+image: https://dl.udctl.com/features/blog/web-clipper/concept-copy-markdown.png
 ---
 
 想把一篇网页文章丢给 AI 总结、翻译、提问,你现在是怎么做的?
@@ -13,7 +13,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-cli
 
 UnDercontrol 的 [**Web Clipper**](/zh-Hans/docs/web-clipper/) Chrome 扩展给了一个更干净的答案:点一下 **Copy Markdown**,当前页面的正文被提取成整洁的 Markdown 进入剪贴板——**无需登录、无需账号、无需任何配置**,装上就能在任何页面用。粘给 Claude、ChatGPT 或任何 AI,它拿到的是纯正文,没有一点噪音。
 
-![Web Clipper 弹窗 — 无需登录即可 Copy Markdown 和本地保存](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/popup-setup.png)
+![Web Clipper 弹窗 — 无需登录即可 Copy Markdown 和本地保存](https://dl.udctl.com/features/blog/web-clipper/popup-setup.png)
 
 <!-- truncate -->
 
@@ -28,7 +28,7 @@ UnDercontrol 的 [**Web Clipper**](/zh-Hans/docs/web-clipper/) Chrome 扩展给�
 
 Markdown 是 AI 的母语——结构清晰、无冗余标记。同一篇文章,贴 Markdown 比贴网页全选复制的内容,让 AI 的理解和回答质量高得多,也省 token。
 
-![网页 → 干净 Markdown → 你的 AI —— 一键完成,无需登录](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/concept-copy-markdown.png)
+![网页 → 干净 Markdown → 你的 AI —— 一键完成,无需登录](https://dl.udctl.com/features/blog/web-clipper/concept-copy-markdown.png)
 
 ## Save to Local:不登录也能存档
 
@@ -43,7 +43,7 @@ Markdown 是 AI 的母语——结构清晰、无冗余标记。同一篇文章,
 
 如果你在用 UnDercontrol(支持登录或 API Key 两种方式连接,自部署实例天然支持),剪藏会更进一步——网页直接变成一条**任务**:
 
-![Web Clipper 就绪视图 — 标题预填、标签、Save Page](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/popup-ready.png)
+![Web Clipper 就绪视图 — 标题预填、标签、Save Page](https://dl.udctl.com/features/blog/web-clipper/popup-ready.png)
 
 - **Markdown 正文写进任务描述**,在任务里直接可读、可编辑
 - **HTML 快照作为附件**挂在任务上,随时还原原页面
@@ -52,7 +52,7 @@ Markdown 是 AI 的母语——结构清晰、无冗余标记。同一篇文章,
 
 下面就是一条真实剪藏出来的任务:描述开头是来源链接,正文是提取好的 Markdown,右侧附件里挂着完整的 HTML 快照:
 
-![剪藏生成的任务 — 描述中是来源链接和 Markdown 正文,附件是 HTML 快照](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/task-detail.png)
+![剪藏生成的任务 — 描述中是来源链接和 Markdown 正文,附件是 HTML 快照](https://dl.udctl.com/features/blog/web-clipper/task-detail.png)
 
 在 UnDercontrol 里,任务本来就不只是待办事项——它是通用的信息容器,网页剪藏只是又一种进入这个容器的方式。
 
@@ -60,7 +60,7 @@ Markdown 是 AI 的母语——结构清晰、无冗余标记。同一篇文章,
 
 Web Clipper 还内置了 **Bilibili 字幕提取**:在 B 站视频页上,扩展会自动识别并亮出 **Save Transcript** 按钮,把 CC 字幕或 AI 生成字幕提取成格式化的 Markdown 文稿——可以直接下载到本地,或存成 UnDercontrol 任务。看完一个技术分享视频,文稿顺手就归档了,丢给 AI 做摘要也是一句话的事。
 
-![检测到 Bilibili 视频 — 一键 Save Transcript](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/popup-bilibili.png)
+![检测到 Bilibili 视频 — 一键 Save Transcript](https://dl.udctl.com/features/blog/web-clipper/popup-bilibili.png)
 
 ## 典型场景
 
@@ -74,7 +74,7 @@ Web Clipper 还内置了 **Bilibili 字幕提取**:在 B 站视频页上,扩展�
 
 从 [Chrome Web Store](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog) 安装即可。**Copy Markdown 和本地保存装上就能用,零配置**;只有"存为任务"需要连接你的 UnDercontrol 服务器——直接登录,或在网页端 **Settings → API Keys** 创建一个 `ak_` 开头的 API Key 填入扩展。
 
-![Login to server — 用户名密码或 API Key,仅"存为任务"需要](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/popup-login.png)
+![Login to server — 用户名密码或 API Key,仅"存为任务"需要](https://dl.udctl.com/features/blog/web-clipper/popup-login.png)
 
 ## 诚实的边界
 

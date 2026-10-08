@@ -4,12 +4,12 @@ description: "The udctl desktop app has a full backend inside it. Add a license 
 authors: [lintao]
 tags: [tutorial, self-hosting]
 date: 2026-10-05
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/03-architecture.jpg
+image: https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/03-architecture.jpg
 ---
 
 The udctl desktop app has a full backend inside it. Install it and your computer is already a server: it listens on `localhost:24816` and keeps tasks, notes and ledgers in a SQLite file on your own disk. Add a license and that same server becomes a multi-user team backend. Add a Cloudflare Tunnel and your phone, your laptop and your teammates can reach it from anywhere. No VPS, no public IP, no router port forwarding.
 
-![Diagram: your computer runs the udctl desktop app with its built-in backend on localhost:24816 and SQLite data on disk; a cloudflared tunnel connects it to the public internet, and your phone and your team reach it over HTTPS](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/03-architecture.jpg)
+![Diagram: your computer runs the udctl desktop app with its built-in backend on localhost:24816 and SQLite data on disk; a cloudflared tunnel connects it to the public internet, and your phone and your team reach it over HTTPS](https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/03-architecture.jpg)
 
 <!-- truncate -->
 
@@ -23,7 +23,7 @@ The 78-second video below walks the whole path. The rest of this post is the sam
 
 Download it from [udctl.com/download](https://udctl.com/download/): macOS (Apple Silicon and Intel), Windows x64, or Linux x64 AppImage. The desktop app is not a web page in a window. It ships the Go backend, and the backend starts with the app. There is no Docker image to pull and no database to set up. Once the app is installed, the server is installed.
 
-![The udctl desktop app showing a kanban board with To do, In progress and Done columns, served by the backend running on the same computer](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/01-desktop-kanban.jpg)
+![The udctl desktop app showing a kanban board with To do, In progress and Done columns, served by the backend running on the same computer](https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/01-desktop-kanban.jpg)
 
 Check that it is up:
 
@@ -49,7 +49,7 @@ For a team, open your profile page, go to **System & Language → License**, and
 
 Click **Activate**. The backend restarts, which takes a few seconds, and the License section shows tier **Pro**. On the first activation the data already on this machine moves to the admin account you just entered, and the built-in personal account is removed. Nothing is lost: your tasks, notes and records change owner, not content. The form warns you before you click, because this step happens once and cannot be undone.
 
-![The License section under System & Language after activation: tier shows Pro (Active) with an expiry date, while a notice at the top reads "Activating... restarting local backend"](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/02-license-pro-active.jpg)
+![The License section under System & Language after activation: tier shows Pro (Active) with an expiry date, while a notice at the top reads "Activating... restarting local backend"](https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/02-license-pro-active.jpg)
 
 From here you are a server admin. Create accounts for teammates under **Admin → Access → Users → Create User**.
 
@@ -80,7 +80,7 @@ cloudflared tunnel --url http://localhost:24816
 
 A few seconds later it prints a random `https://<something>.trycloudflare.com` address. That is your public endpoint, with HTTPS, and it needs no Cloudflare account. Check it from your phone on cellular data (Wi-Fi off, so you know the request really comes in from outside): open `https://<something>.trycloudflare.com/health` and look for `healthy`.
 
-![A terminal running cloudflared tunnel --url http://localhost:24816, which reports the tunnel was created and is routing traffic to localhost:24816. The address shown is a placeholder; a real quick tunnel prints a trycloudflare.com URL](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/04-cloudflared-tunnel.jpg)
+![A terminal running cloudflared tunnel --url http://localhost:24816, which reports the tunnel was created and is routing traffic to localhost:24816. The address shown is a placeholder; a real quick tunnel prints a trycloudflare.com URL](https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/04-cloudflared-tunnel.jpg)
 
 Anyone who has that URL reaches your sign-in page, so give the admin account a real password before you share it.
 
@@ -129,7 +129,7 @@ The app does not add `/api/v1` for you. As you type, a status line checks the ad
 
 The phone now shows the same tasks, notes and ledgers as the desktop. Edit a task on the phone and the desktop has the change.
 
-![The iOS app showing the Shipping v1.4 task list with the status line "connected · Pro · synced": the same tasks as the desktop board, loaded from the server on your computer](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/run-your-teams-server-from-your-desktop/05-phone-synced.jpg)
+![The iOS app showing the Shipping v1.4 task list with the status line "connected · Pro · synced": the same tasks as the desktop board, loaded from the server on your computer](https://dl.udctl.com/features/blog/run-your-teams-server-from-your-desktop/05-phone-synced.jpg)
 
 ## Not on a desktop?
 

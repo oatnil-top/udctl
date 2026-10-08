@@ -4,7 +4,7 @@ description: "In most kanban tools a column is the status enum, hardwired — so
 authors: [lintao]
 tags: [feature, kanban]
 date: 2026-07-16
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-boards/concept-hero.png
+image: https://dl.udctl.com/features/blog/kanban-boards/concept-hero.png
 ---
 
 Monday morning, you open the board. What you want to know is what's about to blow up: what's already overdue, what's due this week. The board only tells you what's In Progress.
@@ -13,7 +13,7 @@ There's a lot it won't show you. You want to see work by client, by sprint, by d
 
 So the board shows you the tool's idea of your work, not yours. The dimensions you care about, it can't hold a single one.
 
-![On the left, the three-column board every tool hands you, which can't hold the dimensions you care about; on the right, the board you described in one sentence and an agent built to fit](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-boards/concept-hero.png)
+![On the left, the three-column board every tool hands you, which can't hold the dimensions you care about; on the right, the board you described in one sentence and an agent built to fit](https://dl.udctl.com/features/blog/kanban-boards/concept-hero.png)
 
 <!-- truncate -->
 
@@ -44,7 +44,7 @@ The last two have no filter at all — they just sort by time, newest first. The
 
 In a tool where a column equals a status, columns like those are hard to express. Here they're unremarkable, part of the default setup.
 
-![The six default columns; the rightmost two, Recent Created and Recent Updated, sort only by time and belong to no status](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-boards/default-board.png)
+![The six default columns; the rightmost two, Recent Created and Recent Updated, sort only by time and belong to no status](https://dl.udctl.com/features/blog/kanban-boards/default-board.png)
 
 ### So what about the tuition?
 
@@ -142,7 +142,7 @@ So the whole thing becomes: you describe it, the agent previews it, you look at 
 
 The key is that **you're reviewing the system's output, not the agent's account of its plan**. The agent can say the wrong thing, but it can't fake this step's output. So the trust here isn't built on the agent never being wrong — it's that being wrong is fine, because you see it first.
 
-![The deadline radar board an agent built — overdue, this week, and next week grouped by time window, cards showing due dates and assignees](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/kanban-boards/deadline-radar.png)
+![The deadline radar board an agent built — overdue, this week, and next week grouped by time window, cards showing due dates and assignees](https://dl.udctl.com/features/blog/kanban-boards/deadline-radar.png)
 
 ### Where this shows up
 

@@ -3,7 +3,7 @@ title: "你的上下文数据资产，不该只躺在别人的机器上"
 description: "终端里的 agent 越来越多，记得住事的还是只有你。一个自托管的工作台：人和 agent 共用同一份数据，每天汇聚一次，落在你自己的盘上。"
 authors: [lintao]
 tags: [story, agents]
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig0.jpg
+image: https://dl.udctl.com/features/blog/udctl-context/v6-fig0.jpg
 date: 2026-09-12
 ---
 
@@ -13,7 +13,7 @@ date: 2026-09-12
 
 *与其每天重讲一遍,不如让干过的活落进一个你自己的库,每天汇聚一次,让下一个 agent 从那儿接着干*
 
-![图0](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig0.jpg)
+![图0](https://dl.udctl.com/features/blog/udctl-context/v6-fig0.jpg)
 
 过去一年,我在 Claude Code、Codex、OpenCode 之间来回换,同一套约定写过三遍——这个 agent 的目录里一份,那个 agent 的配置里一份,还有一份在我自己脑子里。每次都以为这回终于定下来了,换个终端打开,又得重讲。
 
@@ -27,7 +27,7 @@ date: 2026-09-12
 
 于是我开始写自己的知识库。最开始只是因为 Obsidian 同步不顺手,同时我想让数据留在自己手里,一堆 markdown 文件走天下,格式不被哪个软件绑死。写着写着,它长成了整个工作台,叫 udctl(原名 UnDercontrol)。
 
-![图1 · udctl 的 Explorer:任务和文件在同一棵树里。](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig1.jpg)
+![图1 · udctl 的 Explorer:任务和文件在同一棵树里。](https://dl.udctl.com/features/blog/udctl-context/v6-fig1.jpg)
 
 *图1 · udctl 的 Explorer:任务和文件在同一棵树里。*
 
@@ -48,7 +48,7 @@ Claude Code、Codex、OpenCode、Gemini CLI、Cline……这两年终端里的 a
 
 倒数第二条最要命。**重复劳动真正的代价不在多花的那半小时,而在于你第二次做的时候,完全不知道自己在重做。**
 
-![图2 · 过去,agent 的记忆随会话一起结束。](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig2.png)
+![图2 · 过去,agent 的记忆随会话一起结束。](https://dl.udctl.com/features/blog/udctl-context/v6-fig2.png)
 
 *图2 · 过去,agent 的记忆随会话一起结束。*
 
@@ -64,7 +64,7 @@ Claude Code、Codex、OpenCode、Gemini CLI、Cline……这两年终端里的 a
 
 它想走完的链路是五步:**一个容器装下 → 换哪个 agent 都读得到 → 每天汇聚一次 → 沉成长期记忆 → 落进一棵你能打开的目录树。**
 
-![图3 · 人和 agent 共用一个容器:同一份卡、同一份笔记、同一串字节。](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig3.png)
+![图3 · 人和 agent 共用一个容器:同一份卡、同一份笔记、同一串字节。](https://dl.udctl.com/features/blog/udctl-context/v6-fig3.png)
 
 *图3 · 人和 agent 共用一个容器:同一份卡、同一份笔记、同一串字节。*
 
@@ -90,7 +90,7 @@ udctl 把 agent 当成一等公民来管。你能看到:
 
 它想建立的是一层**在各家 agent 之上的公共上下文**:在一个地方写,在所有 agent 那里生效。
 
-![图4 · 跨 agent 复用:skill、约定、上下文收进 udctl,再回流给各个 agent。](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig4.png)
+![图4 · 跨 agent 复用:skill、约定、上下文收进 udctl,再回流给各个 agent。](https://dl.udctl.com/features/blog/udctl-context/v6-fig4.png)
 
 *图4 · 跨 agent 复用:skill、约定、上下文收进 udctl,再回流给各个 agent。*
 
@@ -102,7 +102,7 @@ udctl 把 agent 当成一等公民来管。你能看到:
 
 编辑器只有一套——任务、笔记、账目、账户,所有能写字的地方用的是同一个 Markdown 编辑器。
 
-![图5 · 卡体 / note / comment 三层,所有能写字的地方共用同一个编辑器。](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig5.jpg)
+![图5 · 卡体 / note / comment 三层,所有能写字的地方共用同一个编辑器。](https://dl.udctl.com/features/blog/udctl-context/v6-fig5.jpg)
 
 *图5 · 卡体 / note / comment 三层,所有能写字的地方共用同一个编辑器。*
 
@@ -116,7 +116,7 @@ udctl 把 agent 当成一等公民来管。你能看到:
 
 数是这样的:我自己这一本账本,2026 年 8 月完整 31 天,原始纪要 919,538 个字符;留在近处、每天被重读的月度压缩 13,506 个字符。原文一个字没丢,它在月卡里,要查的时候翻得到。
 
-![图6 · 每日纪要 → 第四天归档进月卡 → 压成月度压缩 → 耐久的事实进知识库卡。](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig6.png)
+![图6 · 每日纪要 → 第四天归档进月卡 → 压成月度压缩 → 耐久的事实进知识库卡。](https://dl.udctl.com/features/blog/udctl-context/v6-fig6.png)
 
 *图6 · 每日纪要 → 第四天归档进月卡 → 压成月度压缩 → 耐久的事实进知识库卡。*
 
@@ -130,7 +130,7 @@ HTML 这条值得单说:上传一个 `.html`,在应用里点开就是渲染好�
 
 这棵树还能整个落到磁盘上。`ud init /Notes/` 把本地一个文件夹绑到某条虚拟路径,`ud pull` 把那条路径底下的卡和文件一起拉下来,子文件夹对子文件夹。卡落成 `.md`,文件名就是标题,frontmatter 只有一行 `ud-id`;文件就是文件本身。你的编辑器、你的 grep、你的 git,全都直接能用。
 
-![图7 · 同一棵树上并排躺着卡、图片和 `.html`,点开 `.html` 就是渲染好的页面。](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/udctl-context/v6-fig7.jpg)
+![图7 · 同一棵树上并排躺着卡、图片和 `.html`,点开 `.html` 就是渲染好的页面。](https://dl.udctl.com/features/blog/udctl-context/v6-fig7.jpg)
 
 *图7 · 同一棵树上并排躺着卡、图片和 `.html`,点开 `.html` 就是渲染好的页面。*
 

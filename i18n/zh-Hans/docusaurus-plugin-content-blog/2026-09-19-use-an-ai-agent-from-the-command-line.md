@@ -3,13 +3,13 @@ title: "怎么在命令行里用 AI agent?"
 description: "三步在终端里跑起一个 AI agent:装一个 CLI(Claude Code、Codex 之类),给它一个任务,再用 udctl 把你的上下文一并交过去。"
 authors: [lintao]
 tags: [cli, ai-agent, guide]
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-agent-command-line/og-hero.png
+image: https://dl.udctl.com/features/blog/ai-agent-command-line/og-hero.png
 date: 2026-09-19
 ---
 
 AI agent CLI 是跑在你终端里的一个程序,比如 Claude Code、Codex、Gemini CLI。你用大白话描述一件事,它读文件、执行命令、在你机器上改代码,任何有破坏性的动作之前都会先问你一句。怎么用:一条命令装上,在项目目录下打开一个终端,把要做的事打进去。三步,前两步大约一分钟。
 
-![终端里的 AI agent:读取任务、写回进度](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-agent-command-line/og-hero.png)
+![终端里的 AI agent:读取任务、写回进度](https://dl.udctl.com/features/blog/ai-agent-command-line/og-hero.png)
 
 <!-- truncate -->
 

@@ -4,7 +4,7 @@ description: "配了三个 agent，产出没翻三倍，你自己成了路由器
 authors: [lintao]
 tags: [feature, agents]
 date: 2026-07-20
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/concept-hero.png
+image: https://dl.udctl.com/features/blog/agent-of-agents-team-lead/concept-hero.png
 ---
 
 你配了三个 agent，本以为效率会翻三倍。结果一天下来，你在做这几件事：把 A 的结论复制给 B、想起来该催 C 了、同时读三份产出、在脑子里维护"谁在干什么"。
@@ -13,7 +13,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-o
 
 这不是配置问题，是组织结构问题。一个人直接带十个下属，在人类公司里也不成立——解法从来不是招更强的员工，而是**多一层管理**。
 
-![一个人指挥 N 个 agent，和让 lead 替你路由](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/concept-hero.png)
+![一个人指挥 N 个 agent，和让 lead 替你路由](https://dl.udctl.com/features/blog/agent-of-agents-team-lead/concept-hero.png)
 
 <!-- truncate -->
 
@@ -29,11 +29,11 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-o
 - @infra-ops [remote — mention only] — 服务器、部署、DNS
 ```
 
-![Team 配置 — 一个 lead、四个成员，每人一条分工提示](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/app-teams.png)
+![Team 配置 — 一个 lead、四个成员，每人一条分工提示](https://dl.udctl.com/features/blog/agent-of-agents-team-lead/app-teams.png)
 
 关键在于：**lead 的会话一启动，这份花名册就被注入到它的初始提示词里**。它不需要你在对话里介绍团队，也不需要每次现学——它天生就知道自己手下有谁、谁擅长什么、以及该怎么把活交出去。
 
-![花名册进入 lead 提示词时的样子](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/app-injected-prompt.png)
+![花名册进入 lead 提示词时的样子](https://dl.udctl.com/features/blog/agent-of-agents-team-lead/app-injected-prompt.png)
 
 同时被注入的还有一句朴素但要命的指令：**"作为 lead，能交给成员的就别自己写。你的工作是协调、跟用户沟通、审专家的产出。只有没人覆盖这块活的时候，才自己动手。"**
 
@@ -61,7 +61,7 @@ lead 先跑一句 `ud describe agent <name> -o prompt` 把成员的身份提示�
 
 一句话记：**要快就用子 agent，要留痕、要跨机器、要跑得久就用子任务 + @。**
 
-![两条委派通道对比](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/concept-channels.png)
+![两条委派通道对比](https://dl.udctl.com/features/blog/agent-of-agents-team-lead/concept-channels.png)
 
 ### 递归：agent 的 agent 的 agent
 
@@ -71,7 +71,7 @@ Team 可以嵌套——一个成员自己也可以是另一个 Team 的 lead。�
 
 你不需要记住该 @ 谁。@ 一下 `ud`，它自己往下找。
 
-![组织树 — 每个节点只认识自己的直属下属](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/agent-of-agents-team-lead/concept-tree.png)
+![组织树 — 每个节点只认识自己的直属下属](https://dl.udctl.com/features/blog/agent-of-agents-team-lead/concept-tree.png)
 
 ### 于是你的工作变了
 

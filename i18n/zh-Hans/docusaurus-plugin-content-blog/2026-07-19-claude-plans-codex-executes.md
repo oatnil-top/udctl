@@ -4,14 +4,14 @@ description: "把两份 AI 订阅编成一个团队：planner 拆解需求写验
 authors: [lintao]
 tags: [feature, agents]
 date: 2026-07-19
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/concept-hero.png
+image: https://dl.udctl.com/features/blog/claude-plans-codex-executes/concept-hero.png
 ---
 
 很多人已经在这么用 AI 了：在 Claude Code 里把方案讨论清楚，再把结论复制到 Codex 里执行。理由也很实际——两家的订阅都买了，Claude 擅长规划，Codex 干活不占 Claude 的额度，两份订阅都物尽其用。唯一的问题是：中间那个"复制粘贴"的角色，是你自己。
 
 **在 UnDercontrol 里，这条流水线是开箱即用的**：Claude 负责规划，Codex 负责执行，任务系统就是它们之间共享的白板——你只需要在关键节点审核。
 
-![Claude 规划、Codex 执行 — 任务是 AI 团队共享的白板](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/concept-hero.png)
+![Claude 规划、Codex 执行 — 任务是 AI 团队共享的白板](https://dl.udctl.com/features/blog/claude-plans-codex-executes/concept-hero.png)
 
 <!-- truncate -->
 
@@ -23,11 +23,11 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-
 4. **Codex 执行。** 每个会话领一个子任务：写代码、跑测试、提交 commit、把进度写回备注，完成后置为 `pending`。
 5. **你只在两个点介入。** 确认拆解、审核产出。
 
-![从一句需求到待审核的 commit — 一条流水线](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/concept-flow.png)
+![从一句需求到待审核的 commit — 一条流水线](https://dl.udctl.com/features/blog/claude-plans-codex-executes/concept-flow.png)
 
 整个协作过程就发生在任务上——描述是 spec，评论是对话，备注是进度日志。下面是一个真实的任务详情：左边是 planner 拆解后的验收标准，右边是三方的评论线程：
 
-![任务详情 — planner 拆解 spec，executor 汇报 commit，全程留痕](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/app-task.png)
+![任务详情 — planner 拆解 spec，executor 汇报 commit，全程留痕](https://dl.udctl.com/features/blog/claude-plans-codex-executes/app-task.png)
 
 ### 编队：Agent Teams
 
@@ -35,7 +35,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-
 
 一个 Team 有一个 **lead** 和若干 **成员**，每个成员带一条"什么活路由给它"的分工提示（delegation hint）。当 lead 的会话启动时，它的花名册会自动注入到提示词里——**lead 天生就知道自己手下有谁、谁擅长什么、怎么委派**。
 
-![Agent Teams — lead + 成员分工提示，花名册自动注入 lead 的会话](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/app-teams.png)
+![Agent Teams — lead + 成员分工提示，花名册自动注入 lead 的会话](https://dl.udctl.com/features/blog/claude-plans-codex-executes/app-teams.png)
 
 于是"Claude 规划、Codex 执行"变成一句话的事：@一下 dev-team 的 lead，剩下的它自己安排。团队还可以嵌套——某个成员自己也可以是另一个 Team 的 lead，层级自然生长，而每个 agent 只需要认识自己的直属下属。
 
@@ -43,7 +43,7 @@ image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-
 
 开一个看板盯全局：拆了多少、执行到哪、几个待审核，一眼看清。每个 agent 会话的终端输出也会实时流回 Web 端——在电脑上、甚至手机上都能看。
 
-![AI 团队交付看板 — Planning / Executing / Pending Review / Done](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/claude-plans-codex-executes/app-board.png)
+![AI 团队交付看板 — Planning / Executing / Pending Review / Done](https://dl.udctl.com/features/blog/claude-plans-codex-executes/app-board.png)
 
 ### 典型场景
 

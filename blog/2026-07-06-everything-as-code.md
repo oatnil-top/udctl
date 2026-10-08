@@ -12,7 +12,7 @@ So why are your **tasks, notes, and todos** still locked inside some SaaS databa
 
 UnDercontrol's answer is **Everything as Code**. Here, a task *is* a piece of Markdown with YAML frontmatter. That's it.
 
-![A task is Markdown: plain text with frontmatter renders into a task card after apply](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/everything-as-code/concept-1.png)
+![A task is Markdown: plain text with frontmatter renders into a task card after apply](https://dl.udctl.com/features/blog/everything-as-code/concept-1.png)
 
 <!-- truncate -->
 
@@ -50,7 +50,7 @@ The rules are exactly like `kubectl apply`: **no id in the frontmatter means cre
 
 Want to export in bulk, edit, and push it all back? `ud get task -o apply` prints your tasks in the same format apply accepts — a lossless round-trip. That means your task list can be processed like code with sed / jq / any script, then applied back in one shot.
 
-![Lossless round-trip: ud get -o apply exports to local md, scripts process it, ud apply pushes it back](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/everything-as-code/concept-2.png)
+![Lossless round-trip: ud get -o apply exports to local md, scripts process it, ud apply pushes it back](https://dl.udctl.com/features/blog/everything-as-code/concept-2.png)
 
 ### Why This Is a Superpower for Developers (and AI)
 
@@ -67,7 +67,7 @@ ud describe task 8b30140e
 
 **3. Scriptable and composable.** A SQL-like query syntax plus kubectl-style verbs (get / describe / apply / delete / patch) turn task management into something you can drop into any automation. Create a task in CI, bulk-retag from a script, generate a weekly report from cron — each is just a few lines of shell.
 
-![Many entry points, one source of truth: CLI, AI agents, and CI scripts all write to the same Markdown data source through ud apply](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/everything-as-code/concept-3.png)
+![Many entry points, one source of truth: CLI, AI agents, and CI scripts all write to the same Markdown data source through ud apply](https://dl.udctl.com/features/blog/everything-as-code/concept-3.png)
 
 ### Not Just Tasks
 

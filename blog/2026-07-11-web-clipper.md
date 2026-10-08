@@ -4,7 +4,7 @@ description: The Web Clipper Chrome extension copies any page as clean Markdown 
 authors: [lintao]
 tags: [feature, guide]
 date: 2026-07-11
-image: https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/concept-copy-markdown.png
+image: https://dl.udctl.com/features/blog/web-clipper/concept-copy-markdown.png
 ---
 
 You want to hand a web article to an AI — to summarize it, translate it, or ask questions about it. How do you do that today?
@@ -13,7 +13,7 @@ Select-all and copy? You paste a mess of navigation bars, ads, recommendation wi
 
 The UnDercontrol [**Web Clipper**](/docs/web-clipper/) Chrome extension gives you a cleaner answer: click **Copy Markdown**, and the page's article content is extracted into tidy Markdown on your clipboard — **no login, no account, no configuration**. Install it and it works on any page. Paste it into Claude, ChatGPT, or any AI, and what it gets is pure content with zero noise.
 
-![Web Clipper popup — Copy Markdown and Save to Local, no login required](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/popup-setup.png)
+![Web Clipper popup — Copy Markdown and Save to Local, no login required](https://dl.udctl.com/features/blog/web-clipper/popup-setup.png)
 
 <!-- truncate -->
 
@@ -28,7 +28,7 @@ This is the extension's most-used feature, and it doesn't depend on an UnDercont
 
 Markdown is an AI's native language — clean structure, no markup noise. For the same article, pasting Markdown instead of a raw select-all copy gets you noticeably better comprehension and answers, and saves tokens too.
 
-![Web page to clean Markdown to your AI — one click, no login](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/concept-copy-markdown.png)
+![Web page to clean Markdown to your AI — one click, no login](https://dl.udctl.com/features/blog/web-clipper/concept-copy-markdown.png)
 
 ## Save to Local: archive without logging in
 
@@ -43,7 +43,7 @@ Links rot and pages get redesigned, but a snapshot is forever the page as it was
 
 If you use UnDercontrol (the extension connects via login or an API key — self-hosted instances work out of the box), clipping goes one step further: the page becomes a **task**.
 
-![Web Clipper ready view — title prefilled, tags, Save Page](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/popup-ready.png)
+![Web Clipper ready view — title prefilled, tags, Save Page](https://dl.udctl.com/features/blog/web-clipper/popup-ready.png)
 
 - **The Markdown content goes into the task description** — readable and editable right inside the task
 - **The HTML snapshot is attached** to the task, so you can always reconstruct the original page
@@ -52,7 +52,7 @@ If you use UnDercontrol (the extension connects via login or an API key — self
 
 Here's a task produced by a real clip: the description starts with the source URL, the body is the extracted Markdown, and the full HTML snapshot hangs off the attachments panel:
 
-![A clipped task — source URL and Markdown in the description, HTML snapshot attached](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/task-detail.png)
+![A clipped task — source URL and Markdown in the description, HTML snapshot attached](https://dl.udctl.com/features/blog/web-clipper/task-detail.png)
 
 In UnDercontrol, a task has never been just a to-do item — it's a universal information container. Web clipping is simply one more way for information to enter it.
 
@@ -60,7 +60,7 @@ In UnDercontrol, a task has never been just a to-do item — it's a universal in
 
 Web Clipper also ships with **Bilibili transcript extraction**: on a Bilibili video page, the extension detects the video and lights up a **Save Transcript** button that turns CC or AI-generated subtitles into a formatted Markdown transcript — download it locally or save it as an UnDercontrol task. Finish a tech talk video, and the transcript is archived in one click; handing it to an AI for a summary is one more.
 
-![Bilibili video detected — Save Transcript in one click](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/popup-bilibili.png)
+![Bilibili video detected — Save Transcript in one click](https://dl.udctl.com/features/blog/web-clipper/popup-bilibili.png)
 
 ## Typical scenarios
 
@@ -74,7 +74,7 @@ Web Clipper also ships with **Bilibili transcript extraction**: on a Bilibili vi
 
 Install from the [Chrome Web Store](https://chromewebstore.google.com/detail/undercontrol-web-clipper/mckkbigikfkoeddpcbhdmpncoljoagog). **Copy Markdown and local save work immediately with zero configuration**; only "save as task" needs a connection to your UnDercontrol server — log in directly, or create an API key (starts with `ak_`) under **Settings → API Keys** in the web app.
 
-![Login to server — username/password or API key, only needed for saving as tasks](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/web-clipper/popup-login.png)
+![Login to server — username/password or API key, only needed for saving as tasks](https://dl.udctl.com/features/blog/web-clipper/popup-login.png)
 
 ## Honest limitations
 

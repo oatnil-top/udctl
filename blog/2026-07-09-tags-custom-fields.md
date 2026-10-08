@@ -12,7 +12,7 @@ UnDercontrol doesn't impose structure. It gives you three composable layers: **f
 
 > This rests on a core UnDercontrol idea: **a task is not just a to-do** — it's a universal container for information. The same Markdown editor runs across tasks, notes, expenses, and accounts — every text surface. Tags and custom fields are how you layer *your own structure* on top of that container.
 
-![The same set of tasks, sliced freely by tags / custom fields / key-value metadata](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/concept-1.png)
+![The same set of tasks, sliced freely by tags / custom fields / key-value metadata](https://dl.udctl.com/features/blog/tags-custom-fields/concept-1.png)
 
 <!-- truncate -->
 
@@ -34,7 +34,7 @@ tags CONTAINS_ALL ('work', 'urgent')   -- has both work and urgent
 
 **Typical scenario**: a batch of related tasks lands on you — slap a shared `q3-launch` tag on all of them, then aggregate them from any board with `tags CONTAINS 'q3-launch'`. When the push is done, keep the tag as an archival breadcrumb, or batch-delete it.
 
-![The task-detail tag input, with the historical-tag autocomplete dropdown expanded](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/screenshot-tags.png)
+![The task-detail tag input, with the historical-tag autocomplete dropdown expanded](https://dl.udctl.com/features/blog/tags-custom-fields/screenshot-tags.png)
 
 ## 2. Custom fields: typed, structured dimensions
 
@@ -50,7 +50,7 @@ On the **Custom Fields** page (`/custom-fields`, also reachable from a task's pr
 
 You can also mark a field required. Once defined, the field shows up in task detail for inline editing, and the value is stored on that task.
 
-![The Custom Fields page and the "New Field" drawer with its 5 types: Text / Number / Select / Checkbox / User](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/screenshot-cf-types.png)
+![The Custom Fields page and the "New Field" drawer with its 5 types: Text / Number / Select / Checkbox / User](https://dl.udctl.com/features/blog/tags-custom-fields/screenshot-cf-types.png)
 
 ### Scope a field by tag
 
@@ -61,7 +61,7 @@ Here's the key design choice: a custom field doesn't have to apply to every task
 
 So "tags" and "custom fields" mesh naturally: a task's detail page only surfaces the fields that **match its tags** — irrelevant fields stay out of your way. Tag a task `bug` and "repro steps" / "severity" appear; tag it `sales` and "client" / "amount" show up instead.
 
-![A task tagged bug: the properties panel automatically shows bug-scoped fields like Severity and Reviewer](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/screenshot-cf-on-task.png)
+![A task tagged bug: the properties panel automatically shows bug-scoped fields like Severity and Reviewer](https://dl.udctl.com/features/blog/tags-custom-fields/screenshot-cf-on-task.png)
 
 **Typical scenario**: a team runs "engineering bugs" and "sales follow-ups" side by side. Scope the bug fields to the `bug` tag and the sales fields to the `sales` tag. In one board, each kind of task shows only its own field set, with no cross-talk — no need to split into two systems.
 
@@ -71,7 +71,7 @@ Not every piece of metadata is worth defining a field for. Task detail also has 
 
 This layer is the buffer between "free tag" and "formal custom field": jot it down first, and once a key gets used often enough to become a stable dimension, promote it to a typed custom field.
 
-![Free key-value pairs on a task: jira, external_id, source — no upfront definition needed](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/screenshot-extra-metadata.png)
+![Free key-value pairs on a task: jira, external_id, source — no upfront definition needed](https://dl.udctl.com/features/blog/tags-custom-fields/screenshot-extra-metadata.png)
 
 **Typical scenario**: tasks synced in from an external system carry a pile of loose fields (ticket number, source link, external ID) — stash them as key-value pairs verbatim. Whichever key later turns out to need frequent filtering, formalize it into a custom field.
 
@@ -90,7 +90,7 @@ cf.priority > 5 ORDER BY updated_at DESC -- high priority, newest first
 
 Custom fields combine freely with built-in fields (`status`, `tags`, `deadline`, …) in one query. And in UnDercontrol, **every kanban column is essentially a saved query** — so you can build a column called "High-priority todos" whose condition is `cf.priority > 5 AND status = 'todo'`, and any task that matches drops into it automatically, no manual dragging. The task search page can surface custom fields as columns too.
 
-![The kanban column condition builder: Tags has #bug AND Custom: Severity = critical, generating the query tags CONTAINS 'bug' AND cf.severity = 'critical'](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/screenshot-board-cf-query.png)
+![The kanban column condition builder: Tags has #bug AND Custom: Severity = critical, generating the query tags CONTAINS 'bug' AND cf.severity = 'critical'](https://dl.udctl.com/features/blog/tags-custom-fields/screenshot-board-cf-query.png)
 
 **Typical scenario**: build a "by client" board for the team, one column per client, each column's condition `cf.client = '...'`; a new task snaps into place the moment its client field is filled. The same set of tasks becomes "by priority" or "by department" with a different query — the view follows the dimension, the data stays single-source.
 
@@ -106,4 +106,4 @@ The common foundation under all three is one query language: `tags CONTAINS_ALL(
 
 All of this rests on UnDercontrol's "a task is not just a to-do" idea: one unified information container, one editor across every text surface, plus tags and fields that let you define your own dimensions. Pair it with Claude Code, Codex, OpenCode, or any terminal-based agent to read and write this structured data — but you always keep the wheel on how it's organized.
 
-![One dataset, many cuts: the same tasks sliced into different kanban views by tag / cf.priority / cf.client](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/tags-custom-fields/concept-2.png)
+![One dataset, many cuts: the same tasks sliced into different kanban views by tag / cf.priority / cf.client](https://dl.udctl.com/features/blog/tags-custom-fields/concept-2.png)

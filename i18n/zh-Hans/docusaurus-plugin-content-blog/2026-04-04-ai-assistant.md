@@ -10,9 +10,9 @@ date: 2026-04-04
 
 UnDercontrol 的 AI 助手正是为了消除这种摩擦而设计的。下面介绍它在实际使用中的具体表现。
 
-![AI assistant chat interface for logging expenses and creating tasks](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-assistant/ai-chat.png)
+![AI assistant chat interface for logging expenses and creating tasks](https://dl.udctl.com/features/blog/ai-assistant/ai-chat.png)
 
-![UnDercontrol dashboard — AI assistant integrates across all features](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-assistant/dashboard.png)
+![UnDercontrol dashboard — AI assistant integrates across all features](https://dl.udctl.com/features/blog/ai-assistant/dashboard.png)
 
 ## 拍张收据，跳过表单
 
@@ -40,7 +40,7 @@ AI 会将描述解析成填好各字段的结构化支出记录，比逐个点�
 
 UnDercontrol 会根据描述生成结构化任务，包括标题、可推断的相关标签以及描述内容。你检查一遍，改掉不准确的地方，保存即可。
 
-![Task list — AI can create and manage tasks from text or voice input](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/ai-assistant/task-list.png)
+![Task list — AI can create and manage tasks from text or voice input](https://dl.udctl.com/features/blog/ai-assistant/task-list.png)
 
 ## 自然语言查询
 

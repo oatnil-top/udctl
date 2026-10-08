@@ -12,7 +12,7 @@ date: 2026-07-06
 
 UnDercontrol 的答案是:**Everything as Code**。在这里,一个任务就是一段带 YAML frontmatter 的 Markdown。仅此而已。
 
-![任务即 Markdown:一段带 frontmatter 的纯文本,apply 后渲染成任务卡片](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/everything-as-code/concept-1.png)
+![任务即 Markdown:一段带 frontmatter 的纯文本,apply 后渲染成任务卡片](https://dl.udctl.com/features/blog/everything-as-code/concept-1.png)
 
 <!-- truncate -->
 
@@ -50,7 +50,7 @@ ud apply -f task.md
 
 想批量导出、改完再灌回去?`ud get task -o apply` 会把任务输出成 apply 能吃的同一种格式,round-trip 无损。这意味着你的任务列表可以像代码一样被 sed / jq / 脚本处理,再一次性 apply 回去。
 
-![无损 round-trip:ud get -o apply 导出成本地 md,脚本处理后再 ud apply 回去](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/everything-as-code/concept-2.png)
+![无损 round-trip:ud get -o apply 导出成本地 md,脚本处理后再 ud apply 回去](https://dl.udctl.com/features/blog/everything-as-code/concept-2.png)
 
 ### 为什么这对开发者(和 AI)是解锁级的
 
@@ -67,7 +67,7 @@ ud describe task 8b30140e
 
 **3. 可脚本化、可组合。** 类 SQL 的查询语法 + kubectl 式的动词(get / describe / apply / delete / patch),让任务管理变成一件能塞进任何自动化流程的事。CI 里建任务、脚本里批量改标签、cron 里生成周报——都只是几行 shell。
 
-![多入口单一真相:CLI、AI agent、CI 脚本都通过 ud apply 写入同一份 Markdown 数据源](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/everything-as-code/concept-3.png)
+![多入口单一真相:CLI、AI agent、CI 脚本都通过 ud apply 写入同一份 Markdown 数据源](https://dl.udctl.com/features/blog/everything-as-code/concept-3.png)
 
 ### 不只是任务
 

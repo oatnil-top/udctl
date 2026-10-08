@@ -30,7 +30,7 @@ Getting an event is one thing. Knowing what to do with it is another. UnDercontr
 
 For example, if a task's status changes from "in progress" to "done," the event carries just that task's updated state. The client merges it into the existing cache. The list re-renders with the new status. Everything else stays untouched.
 
-![Kanban board with live status updates pushed via SSE](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/sse-realtime-sync/kanban-board.png)
+![Kanban board with live status updates pushed via SSE](https://dl.udctl.com/features/blog/sse-realtime-sync/kanban-board.png)
 
 This keeps the UI fast and prevents the jarring full-reload effect you see in apps that refetch aggressively.
 
@@ -44,11 +44,11 @@ The result is that your primary device feels instant, while your secondary devic
 
 Open the same UnDercontrol instance in two browser tabs. Make a change in one. Watch it appear in the other without touching anything.
 
-![Task list view — changes sync in real-time across all connected clients](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/sse-realtime-sync/task-list.png)
+![Task list view — changes sync in real-time across all connected clients](https://dl.udctl.com/features/blog/sse-realtime-sync/task-list.png)
 
 This is particularly useful when you have a budget overview open on one screen and you are logging transactions on another.
 
-![Budget overview — expense changes propagate instantly to all open views](https://pub-35d77f83ee8a41798bb4b2e1831ac70a.r2.dev/features/blog/sse-realtime-sync/budget-overview.png)
+![Budget overview — expense changes propagate instantly to all open views](https://dl.udctl.com/features/blog/sse-realtime-sync/budget-overview.png)
 
 The Electron desktop app participates in the same sync. Changes made through the CLI or the Chrome extension propagate back through SSE to whatever else you have open. The whole multi-platform story depends on this layer working reliably.
 

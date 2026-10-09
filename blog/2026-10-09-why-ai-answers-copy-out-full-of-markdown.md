@@ -72,8 +72,8 @@ Plain text is also cheaper for AI to read. We counted tokens on the document fro
 
 ![The same content, re-read by an AI: Markdown 39 tokens, Word file 814 tokens](https://dl.udctl.com/features/blog/why-ai-answers-copy-out-full-of-markdown/en-06-s5-tokens.jpg)
 
-## UnDercontrol is Markdown too
+## udctl is Markdown too
 
-In UnDercontrol, task descriptions and notes are Markdown, and the same editor is used wherever you write, including expenses and accounts. What you write is plain text, so Claude Code, Codex, OpenCode or any terminal-based agent can read and write it through the ud command line with no conversion step.
+In [udctl](/) (UnDercontrol), task descriptions and notes are Markdown, and the same editor is used wherever you write, including expenses and accounts. What you write is plain text, so Claude Code, Codex, OpenCode or any terminal-based agent can read and write it through the ud command line with no conversion step.
 
 Explore. Capture. Distill. A private workspace for people and AI agents. [udctl.com](https://udctl.com)

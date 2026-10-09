@@ -72,8 +72,8 @@ AI 的回答是一个字一个字流出来的，界面一边收一边渲染。�
 
 ![同样的一份内容让 AI 重新读一遍:Markdown 47 token,Word 文件 813 token](https://dl.udctl.com/features/blog/why-ai-answers-copy-out-full-of-markdown/zh-06-s5-tokens.jpg)
 
-## UnDercontrol 里也是 Markdown
+## udctl 里也是 Markdown
 
-UnDercontrol 的任务正文和笔记都是 Markdown,同一个编辑器也用在记账、账户这些需要写字的地方。你写下的内容是纯文本，Claude Code、Codex、OpenCode 或任何终端里的 agent 都能通过 ud 命令行直接读写，不需要先转换格式。
+[udctl](/)(UnDercontrol)的任务正文和笔记都是 Markdown,同一个编辑器也用在记账、账户这些需要写字的地方。你写下的内容是纯文本，Claude Code、Codex、OpenCode 或任何终端里的 agent 都能通过 ud 命令行直接读写，不需要先转换格式。
 
 探索、记录、沉淀。人与 AI agent 共用的私密工作空间。[udctl.com](https://udctl.com/zh-Hans/)

@@ -43,6 +43,40 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.161.1 (2026-10-10)
+
+**Patch release: short IDs work for every kind of item in the CLI, photos and videos remember when they were taken, and the self-hosted server package on npm downloads only your platform.** One database migration, which only adds a table. **Self-hosted: back up your database, and upgrade the server before the CLI** (see Upgrade Notes).
+
+### Improvements
+
+- **Short IDs everywhere in the CLI.** Any unique beginning of an id now works wherever `ud` takes an id, for every kind of item: boards, projects, custom agents, skills, sessions, resources, scheduled jobs, budgets, accounts, expenses, income and more, not only tasks, notes and comments. There is no fixed minimum length. A prefix that matches several items lists them (short id and name) instead of guessing, and an item that was deleted or has ended is reported as such instead of "not found". Built-in agents are still addressed by their name (for example `alfred`).
+- **Photos and videos remember when they were taken.** For media uploaded from now on, the server keeps the capture time, size, duration and camera reported by the uploading app. The resources list can sort by date taken (items without one come last) and filter by type (image or video) and by a date-taken range, and resource stats can count by month taken. Files uploaded before this version are not back-filled.
+- **Smaller self-hosted server download from npm.** `npm i -g @oatnil/ud-server` now downloads only the server binary for your system instead of all five. If optional dependencies are turned off (`--no-optional`), the installer fetches your platform's binary itself; if it cannot, it stops with the exact package to install rather than installing an empty package.
+
+### Bug Fixes
+
+- **`ud describe note` and `ud delete note` accept short ids** again; a short prefix used to answer "Note not found".
+- **A task in the recycle bin is reported as deleted**, not as an id that never existed.
+
+### Upgrade Notes (self-hosted)
+
+- **Back up your database before upgrading.** One migration runs on first start: `00098` adds the `media_infos` table. It only adds; no existing data is changed or copied into it.
+- **Upgrade the server before the CLI.** A 0.161.1 `ud` sends short ids to the server to resolve, so against an older server a short id (a task's included) can come back as not found. Full ids keep working either way.
+- **npm server installs:** upgrade with `npm i -g @oatnil/ud-server@0.161.1` as before; npm fetches the matching platform package (`@oatnil/ud-server-darwin-arm64`, `-darwin-x64`, `-linux-x64`, `-linux-arm64` or `-win32-x64`) on its own.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.161.1`.
+
+---
+
 ## v0.161.0 (2026-10-09)
 
 **Minor release: try an agent CLI before you rely on it, see which session each dispatch started, resource plugins with a plugin library, and an Excalidraw editor.** Three database migrations, one of which removes a column. **Self-hosted: back up your database before upgrading, and upgrade the CLI together with the server** (see Upgrade Notes).

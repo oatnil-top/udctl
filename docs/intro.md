@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Explore. Capture. Distill. A private workspace for people and AI agents.
 ---
 
 # Welcome to udctl

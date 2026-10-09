@@ -43,6 +43,59 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.161.0 (2026-10-09)
+
+**Minor release: try an agent CLI before you rely on it, see which session each dispatch started, resource plugins with a plugin library, and an Excalidraw editor.** Three database migrations, one of which removes a column. **Self-hosted: back up your database before upgrading, and upgrade the CLI together with the server** (see Upgrade Notes).
+
+### New Features
+
+- **Trial run for an agent CLI.** In the agent CLI edit dialog, a Trial run button under the command runs one turn of the saved command on one of your own online machines (this machine first, a picker when there are several) and shows "Works" with the time taken, or "Failed" with the CLI's own reason. Commands for claude, codex and pi are covered; other shapes show "not covered". The button is disabled while the command has unsaved edits, because the trial runs what is saved.
+- **Dispatch receipts under comments.** A comment that dispatched an agent now shows a receipt row underneath it: which agent picked it up and whether its session is running, failed to start, or was handed to a session that was already running. Shown both in the task's comments and in the conversation thread view.
+- **Pick the agent CLI right where you mention an agent.** When you mention an agent in a comment, the composer shows which CLI it will run with, and a click lets you choose another one for that message only, or create a new one. A CLI can also be named in a link by name, not only by id.
+- **`ud get sessions` has a CLI column** showing the binary and model each session runs on, for example `claude claude-sonnet-5-5`.
+- **A session whose model does not exist fails within seconds.** Before, a CLI command naming a wrong model started normally and was only marked failed after about 90 seconds with a generic message. Now the model error from the first turn fails the session right away, with that error as the reason.
+- **Resource plugins.** Settings has a Resource plugins section: install a single-file HTML plugin that takes over viewing files with the suffixes you choose, or uninstall it. Plugins run in a sandbox with no network access, and you confirm the risk before installing. A Plugin library lists published plugins and installs one in a click, checking the file's hash first; it also offers updates and rolls back when a plugin is reverted, and warns when one you installed has been withdrawn. An official Jupyter notebook (`.ipynb`) viewer is available as an example plugin.
+- **Open with.** A file's detail page and its preview show which viewer it is open with and let you switch to any other one, view it as text, or download it. You can make a choice the default for that file suffix.
+- **Excalidraw.** `.excalidraw` files get a preview, and you can create and edit Excalidraw drawings as resources. Fonts load from the app itself, not from a third-party site.
+- **Diagrams load from the app itself.** The diagram preview and editor for `.drawio` files no longer contact diagrams.net. A Third-party licenses page in the docs lists the components shipped for this.
+- **Calendar: Span view.** A new read-only view draws each card as one block from its kickoff to its deadline, across days, in day, week, month and agenda views.
+- **Queue: delete a queue task** from the list or its detail page.
+
+### Bug Fixes
+
+- **Someone added to a group sees its content at once.** Before, a person added to a group by someone else kept getting "not found" on its shared content for up to an hour. The group's creator also sees the new group immediately now.
+- **The CLI daemon recovers from an expired or revoked sign-in on its own** by refreshing its token, instead of failing with 401 until someone signs in again. The CLI also writes its config file in a way that another `ud` process can never read half-written, and no longer loses a refreshed token when two processes refresh at once.
+- **Switching context in `ud tui`** now really switches: before, after starting with `--context`, the status bar said the context had changed while requests still went to the old one.
+- **An invite code can only be used once.** On PostgreSQL servers, a code could be used for several registrations, because marking it as used failed for longer email addresses. A failed registration now also shows the real reason, for example an invalid invite code.
+- **Queue tasks of a type nothing can run are refused** with a clear error, instead of being created and staying pending forever. The Run Command entry, which created exactly such tasks, is removed from the queue page.
+- **The embedded diagram preview no longer shows a blank page** on servers that serve the web app themselves.
+- **Cleared deadline, kickoff and assignee stay cleared in the mobile app.**
+- **Uninstalling a resource plugin works** even when its file is already gone, and a plugin that fails shows its error in the panel instead of a blank area.
+- **Dates follow the app's language**, not the browser's. The task comments tab is now called Comments, so it is no longer confused with the Conversations sidebar entry. The task detail right panel can scroll to its last row. Many icon-only buttons now have names for screen readers, and the resources pages are translated into Chinese.
+
+### Upgrade Notes (self-hosted)
+
+- **Back up your database before upgrading.** Three migrations run on first start: `00095` widens `invite_codes.used_by`, `00096` adds the `agent_dispatch_receipts` table, and `00097` removes the `agent_configs.agent_cli_args` column.
+- **`00097` cannot be undone.** An agent's model now lives only in the command of the agent CLI it uses. Before the column is removed, every agent with extra CLI arguments gets a private copy of its CLI with those arguments built into the command, and is switched to it. Arguments that cannot be carried over this way (an agent with no CLI chosen, or whose CLI no longer exists) are written to the server log at startup, with the agent id and the value, and then dropped. **Going back to v0.160.x after upgrading needs the database backup**: the older server still expects that column.
+- **Upgrade the CLI together with the server.** Adding someone to a group now signs out their current token so the group shows up at once. A `ud` daemon older than v0.161.0 cannot refresh its token by itself, so after its user is added to a group it fails with 401 until it is upgraded or `ud login` is run again.
+- **The agent edit form no longer has the per-agent CLI options dropdown**, and `ud apply` / `ud describe` no longer carry `agent_cli_args`.
+- **Creating a queue task with a type that has no executor now returns 400** (`QUEUE_TASK_TYPE_NOT_ALLOWED`), including `daemon_exec`.
+- **A comment, note or description that names an agent CLI that does not exist is refused** when it is saved.
+- **The Plugin library is read from GitHub (`raw.githubusercontent.com`) by the browser.** If your users cannot reach it, the library stays empty; installing a plugin file by hand still works.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.161.0`.
+
+---
+
 ## v0.160.4 (2026-10-07)
 
 **Patch release: a backup no longer stops a busy SQLite server from saving, and a self-hosted server whose license has expired now starts in a recovery mode instead of refusing to start.** No new database migrations. **Self-hosted on SQLite and running v0.160.3: upgrade** (see Upgrade Notes).

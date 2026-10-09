@@ -226,8 +226,8 @@ export default function OpenWith(): ReactNode {
                 })}{' '}
                 <code>{t({en: 'Open with', zh: '打开方式'})}</code>{' '}
                 {t({
-                  en: 'button above it shows which viewer is in use and lets you switch to another — plus View as Text and Download, always available.',
-                  zh: '按钮会显示当前使用的查看器，并让你切换到另一个——此外还随时提供“以文本查看”和“下载”。',
+                  en: 'button above it shows which viewer is in use and lets you switch to another — plus View as Text and Download, always available. When more than one plugin can open a file type, each one appears in the menu as its own choice.',
+                  zh: '按钮会显示当前使用的查看器，并让你切换到另一个——此外还随时提供“以文本查看”和“下载”。当同一类文件有不止一个插件能打开时，它们都会各自作为一个选项出现在菜单里。',
                 })}
               </p>
               <h3>{t({en: 'Set a default that follows you', zh: '设置跟随你的默认项'})}</h3>
@@ -264,8 +264,8 @@ export default function OpenWith(): ReactNode {
             <p className={styles.viewersNote}>
               <b>{t({en: 'Anything else?', zh: '其他类型？'})}</b>{' '}
               {t({
-                en: 'Any file type without a built-in viewer shows a download link — until you add a viewer for it with a plugin.',
-                zh: '任何没有内置查看器的文件类型都会显示下载链接——直到你用插件为它添加一个查看器。',
+                en: 'Any file type without a built-in viewer cannot be previewed on its own — instead of a blank preview, udctl tells you no app can open it and points you to the plugin library, beside a download link, so you can add a viewer for it.',
+                zh: '任何没有内置查看器的文件类型都无法自行预览——udctl 不会给你一个空白预览，而是告诉你还没有能打开它的应用，并在下载链接旁边把你指向插件库，让你为它添加一个查看器。',
               })}
             </p>
           </div>

@@ -29,11 +29,16 @@ for example *Image* or *General Diagram*.
 Click it and a short menu appears:
 
 - The viewers that can show this file, with a check mark next to the one in use. Pick
-  another to switch to it right away.
+  another to switch to it right away. If more than one plugin can open this file type, each
+  one is listed here as its own choice.
 - **View as Text** — show the raw contents as plain text. Always available.
 - **Download** — save the file to your computer. Always available.
 
 Switching this way lasts only while you have the file open.
+
+If a viewer or plugin cannot display a file — a damaged file, or a plugin that runs into an
+error — udctl shows a short message in place of the preview instead of a blank frame, and
+keeps **View as Text** and **Download** available so you can still reach the contents.
 
 ## Setting a default
 
@@ -57,7 +62,9 @@ These file types open with a built-in viewer, with nothing to install:
 - Markdown, code and plain text
 - Presentations and HTML pages
 
-Any other file type shows a download link until you add a viewer for it with a plugin.
+Any other file type cannot be previewed on its own yet. Instead of a blank preview, udctl
+tells you no app can open it and points you to the plugin library, next to a download link,
+so you can install a viewer for it.
 
 ## Adding a viewer with a plugin
 
@@ -92,8 +99,14 @@ Go to **Settings → Resource plugins**. There are two ways to add one:
   extensions it should open (for example `.ipynb`), then **Install**.
 
 Either way, udctl shows a short summary of what the plugin can do and asks you to confirm
-first. You can remove a plugin at any time with **Uninstall** on the same settings page.
-Plugins you install are yours alone — they do not change anything for your teammates.
+first. More than one plugin may open the same file type: installing a second viewer for an
+extension another plugin already handles is allowed, and both then appear in the **Open
+with** menu for you to choose between or set one as the default.
+
+You can remove a plugin at any time with **Uninstall** on the same settings page.
+Uninstalling asks you to confirm, then deletes that plugin's own file along with it; your
+own files are never touched, and cancelling leaves everything exactly as it was. Plugins you
+install are yours alone — they do not change anything for your teammates.
 
 ### A ready-made example: Jupyter notebooks
 

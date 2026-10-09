@@ -27,6 +27,10 @@
     "message": "自部署",
     "description": "The label of footer link with label=Self-Host linking to /self-hosting"
   },
+  "link.item.label.Open With": {
+    "message": "打开方式",
+    "description": "The label of footer link with label=Open With linking to /open-with"
+  },
   "link.item.label.Cookbook": {
     "message": "实用手册",
     "description": "The label of footer link with label=Cookbook linking to /docs/cookbook"

@@ -201,6 +201,10 @@ const config: Config = {
               to: '/self-hosting',
             },
             {
+              label: 'Open With',
+              to: '/open-with',
+            },
+            {
               label: 'Cookbook',
               to: '/docs/cookbook',
             },

@@ -20,7 +20,7 @@ which app opens a file.
 > release; if your desktop app does not show the **Open with** control yet, use the web app
 > or update once the next version is out.
 
-## Switching the viewer
+## Switching the viewer {#switching-the-viewer}
 
 Open any file (from the Resources page, or from a file attached to a task). In the header
 above the file you will see an **Open with** button showing the name of the viewer in use,
@@ -103,7 +103,7 @@ plugin library, so the quickest way to try plugins is to open **Settings → Res
 plugins → Plugin library** and install it. Its full source is in the registry:
 [ipynb-viewer in ud-registry](https://github.com/oatnil-top/ud-registry/tree/main/plugins/ipynb-viewer).
 
-## Writing your own plugin
+## Writing your own plugin {#writing-your-own-plugin}
 
 A plugin is one `.html` file with everything inside it — all its scripts, styles and
 images inline, because the sandbox blocks any network request. udctl hands the plugin the
@@ -149,7 +149,7 @@ type needs — as long as every library is bundled into the one file. The
 [Jupyter Notebook Viewer source](https://github.com/oatnil-top/ud-registry/tree/main/plugins/ipynb-viewer)
 is a full example built this way.
 
-## The plugin registry
+## The plugin registry {#the-plugin-registry}
 
 The **registry** is a single public GitHub repository,
 [oatnil-top/ud-registry](https://github.com/oatnil-top/ud-registry), that lists the plugins

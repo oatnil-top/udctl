@@ -17,7 +17,7 @@ sidebar_position: 10.5
 > [app.udctl.com](https://app.udctl.com) 上线。桌面版将在后续版本提供；如果你的桌面版还看不
 > 到**打开方式**控件，请改用网页版，或等下一个版本发布后更新。
 
-## 切换查看器
+## 切换查看器 {#switching-the-viewer}
 
 打开任意文件（从「资源」页，或从任务上附带的文件）。在文件上方的头部，你会看到一个**打开方
 式**按钮，上面写着当前所用查看器的名字，例如*图片*或*通用图表*。
@@ -89,7 +89,7 @@ udctl 会在安装前把一个插件能做什么清楚地告诉你并请你确�
 → 插件库**把它装上。它的完整源码在 registry 里：
 [ud-registry 中的 ipynb-viewer](https://github.com/oatnil-top/ud-registry/tree/main/plugins/ipynb-viewer)。
 
-## 自己写一个插件
+## 自己写一个插件 {#writing-your-own-plugin}
 
 一个插件就是一个 `.html` 文件，所有东西都在里面——它的脚本、样式、图片全部内联，因为沙箱会拦
 掉任何网络请求。udctl 把要显示的文件交给插件，插件负责把它画出来。
@@ -131,7 +131,7 @@ udctl 和你的插件之间的对话只有三条短消息。每条消息都带 `
 [Jupyter Notebook Viewer 源码](https://github.com/oatnil-top/ud-registry/tree/main/plugins/ipynb-viewer)
 就是一个照这种方式做出来的完整例子。
 
-## 插件 registry
+## 插件 registry {#the-plugin-registry}
 
 **registry** 是一个公开的 GitHub 仓库，
 [oatnil-top/ud-registry](https://github.com/oatnil-top/ud-registry)，它列出了所有人都能安装的

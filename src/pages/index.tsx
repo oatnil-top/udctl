@@ -1177,12 +1177,17 @@ export default function Home(): ReactNode {
   // The zh homepage gets the zh social card; every other page falls back to
   // themeConfig.image. react-helmet-async keeps the last og:image, so this
   // overrides the site-wide one instead of adding a second tag.
-  const {i18n: {currentLocale}, siteConfig: {url}} = useDocusaurusContext();
+  const {i18n: {currentLocale}, siteConfig: {url, tagline}} = useDocusaurusContext();
   const socialCard = `${url}/img/social-card${currentLocale === 'zh-Hans' ? '.zh-Hans' : ''}.png`;
+  // The meta description IS the displayed homepage slogan, so a search result or
+  // share card reads exactly like the page (master 2026-10-09). EN reuses
+  // siteConfig.tagline — the same source the hero renders (home5.hero.sub) —
+  // never a pasted copy, which went stale once before (card 674aa679); ZH mirrors
+  // the hero's zh slogan by hand in code.json (homepage.description). This one
+  // string also feeds og:/twitter:description (via Layout) and the JSON-LD below.
   const metaDescription = translate({
     id: 'homepage.description',
-    message:
-      'udctl (UnDercontrol) is a private workspace for people and AI agents: tasks, threads, knowledge, agent definitions and scheduling, all on your own machine.',
+    message: tagline,
     description: 'The homepage meta description',
   });
   return (

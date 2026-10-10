@@ -43,6 +43,39 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.161.2 (2026-10-10)
+
+**Patch release: photo and video thumbnails in the web app, capture times that correct themselves, the CLI labels HEIC and video uploads correctly, and the server now clears out uploads that never finished.** No database migrations. **Self-hosted: upgrade the server before the web app and the mobile app, and read the note on the new daily cleanup** (see Upgrade Notes).
+
+### Improvements
+
+- **Thumbnails for photos and videos in the web app.** When you upload an image or a video from the web app, it makes a small preview and stores it with the file, and it also reads the capture time from the photo (time-zone aware) at upload. Files that were uploaded earlier without a thumbnail or a capture time get them filled in the first time you open them in the web app.
+- **Capture times correct themselves once.** A file uploaded without a known capture time is dated with its upload time for now. The first time an app that can read the real capture time opens it, the real time replaces the placeholder, so the file moves to the right place in the timeline. A capture time that was already real is never changed.
+- **The CLI recognises photos and videos by their content.** `ud upload resource` used to label HEIC photos, and on some systems MP4 and MOV videos, as generic binary files, so they got no preview and no capture time. It now looks at the file itself, so the type is right even when the file has no extension.
+
+### Bug Fixes
+
+- **Uploads that never finished no longer pile up.** An upload that was started but never completed used to stay in your resources forever and count against your storage. The server now removes them once a day (see Upgrade Notes).
+
+### Upgrade Notes (self-hosted)
+
+- **No new database migrations.**
+- **A new daily cleanup is on by default.** Every day at 04:00 (server time) the server deletes uploads that are still unfinished 24 hours after they were started, together with their file, their links to tasks, their media details, and the storage they were counted against. On our own two instances the first run will remove 390 such uploads on one and none on the other; a sample of them had no file behind them. To turn it off, set `PENDING_UPLOAD_CLEANUP_ENABLED=false`; `PENDING_UPLOAD_TTL_HOURS` and `PENDING_UPLOAD_CLEANUP_SCHEDULE` change the age and the time. It only runs when `CRON_ENABLED` is on (the default).
+- **Upgrade the server before the web app and the mobile app.** The new apps send a "fill in only what is missing" update for photo details. An older server does not know that option and treats it as an ordinary update, which can overwrite details a photo already has.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app.** The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.161.2`.
+
+---
+
 ## v0.161.1 (2026-10-10)
 
 **Patch release: short IDs work for every kind of item in the CLI, photos and videos remember when they were taken, and the self-hosted server package on npm downloads only your platform.** One database migration, which only adds a table. **Self-hosted: back up your database, and upgrade the server before the CLI** (see Upgrade Notes).

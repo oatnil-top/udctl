@@ -1161,9 +1161,6 @@
   "selfhosting.deploy.access.k8s": {
     "message": "部署后端 + 前端，使用 SQLite、ClusterIP 和一个 PVC。Chart："
   },
-  "selfhosting.deploy.access.k8sNote": {
-    "message": "注意:chart 目前停在 0.65.2,暂不支持试用 license 与管理员配置，正在更新。"
-  },
   "selfhosting.deploy.access.split": {
     "message": "然后打开 http://localhost:3000 —— 前端将 /api 代理到后端。"
   },

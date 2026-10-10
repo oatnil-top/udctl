@@ -66,9 +66,9 @@ const EN: Labels = {
   proOnly: 'Pro/Max feature',
   hostHint: 'The URL browsers will use to reach the instance — the misconfigured preview below shows what happens when it is missing or invalid.',
   adminHint: 'Login username of the initial admin — Pro/Max refuses to boot without it.',
-  secretHint: 'Random value generated for you — ',
+  secretHint: 'Random value generated for you. Once the instance has started, keep using the same value — ',
   encKeyHint:
-    "Encrypts each user's messenger bot token. Set it once and keep it — unlike JWT_SECRET, changing this one strands every token already stored and each user must paste theirs again.",
+    "Encrypts each user's messenger bot token. Set it once and keep it — changing it strands every token already stored and each user must paste theirs again.",
   regenerate: 'regenerate',
   copy: 'Copy',
   copied: 'Copied',
@@ -94,9 +94,9 @@ const ZH: Labels = {
   proOnly: 'Pro/Max 功能',
   hostHint: '浏览器访问实例所用的 URL——下方的失败预览展示了它缺失或非法时的启动结果。',
   adminHint: '初始管理员的登录用户名——Pro/Max 缺少它会拒绝启动。',
-  secretHint: '已为你生成随机值——',
+  secretHint: '已为你生成随机值。实例启动之后就一直沿用同一个值——',
   encKeyHint:
-    '用于加密每位用户的 IM bot token。设定后就不要再换——和 JWT_SECRET 不同，换掉它会让已经存下的 token 全部解不开，每位用户都得重新粘贴一遍。',
+    '用于加密每位用户的 IM bot token。设定后就不要再换——换掉它会让已经存下的 token 全部解不开，每位用户都得重新粘贴一遍。',
   regenerate: '重新生成',
   copy: '复制',
   copied: '已复制',

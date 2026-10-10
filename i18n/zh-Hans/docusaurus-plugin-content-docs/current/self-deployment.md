@@ -54,6 +54,47 @@ ready banner，直接告诉你去哪打开、用什么账号登录：
 如果配置有误，容器会立即退出，同一份日志里会出现 `STARTUP FAILED` 块，明确指出要修什么——
 缺 `HOST_DOMAIN`、Pro/Max 下缺 `ADMIN_EMAIL`、端口被占用，或某个配置项的值读不懂。密码提示只在账号仍使用出厂默认密码时才会出现。
 
+## 首次启动之前先设置 JWT_SECRET {#jwt-secret}
+
+`JWT_SECRET` 是服务端签发每一个登录 token 所用的密钥。请在实例**第一次启动之前**把它设成一串足够长的
+随机值，并在这个实例的整个生命周期里保持不变。
+
+```bash
+openssl rand -base64 48   # 生成一个值，然后作为 JWT_SECRET 传入
+```
+
+传入方式和其他配置项一样：`docker run -e JWT_SECRET=...`、docker-compose 的 `environment:` 列表、
+`.env` 文件，或 npm 包的 `-jwt-secret` 参数。Homebrew 安装会自动生成一个。
+
+**为什么必须设置。** 不设 `JWT_SECRET` 时服务端照样能启动，但会用编译进二进制里的一个固定默认值签发
+token，这个值是公开的。任何能访问到实例的人都可以用它伪造出合法 token，以任意用户身份登录。本页示例里的
+占位值 `change-me-to-a-random-string` 同样是公开的，请务必替换。
+
+**为什么之后不能再改。** 同一把密钥还用来加密服务端存进数据库的设置：每个存储类的配置（包括首次启动时
+自动创建的本地存储类）、AI provider 的 API key，以及管理设置里保存的密钥类配置。实例已经有数据之后再改
+`JWT_SECRET`，这些值就解不开了：上传和下载文件都会报内部错误，服务端日志里出现 `failed to decrypt config`。
+把它改回原来的值即可恢复。一直跑在默认值上、后来才补设新值的实例，同样属于「改了」。另外所有人都会被登出，
+因为用旧值签发的 token 不再有效。
+
+**启动警告。** 服务端跑在内置默认值上时，会在启动日志末尾打印下面这一段（同时写一条 `WARN` 日志）：
+
+```text
+==============================================================================
+
+  WARNING: JWT_SECRET is not set — using the built-in default
+
+  Every auth token on this instance is signed with the fixed default secret
+  compiled into the binary. That value is public, so anyone can forge a
+  valid token and sign in as any user. Set JWT_SECRET to a long random value
+  (for example: openssl rand -base64 48) via environment variable, .env
+  file, or --jwt-secret, then restart. Changing it signs out existing
+  sessions. Guide: https://udctl.com/docs/self-deployment
+
+==============================================================================
+```
+
+设成任何其他值都不会再出现这段警告，包括上面那个示例占位值，所以没有警告并不等于密钥安全。日志里永远不会打印密钥本身。
+
 ## 裸机部署（npm，无需 Docker）
 
 服务端也以 npm 包发布，Web UI 直接编译进二进制——除了 Node.js 18+ 什么都不用装。
@@ -62,15 +103,18 @@ ready banner，直接告诉你去哪打开、用什么账号登录：
 ```bash
 npm install -g @oatnil/ud-server @oatnil/ud   # 服务端 + CLI
 
-ud-server -host-domain http://localhost:8080 -data-path ./data
+openssl rand -base64 48 > ./jwt-secret   # 只生成一次，保存好，不要重新生成
+ud-server -host-domain http://localhost:8080 -data-path ./data \
+  -jwt-secret "$(cat ./jwt-secret)"
 ```
 
 然后打开 `http://localhost:8080`——终端里会打印与 Docker 相同的 ready banner，
 包含登录凭据。所有数据都在 `./data` 下（SQLite 数据库和上传文件），备份或迁移
-实例就是复制这个目录。
+实例就是复制这个目录，并沿用同一个 `JWT_SECRET`。
 
 - 配置与 Docker 完全一致：[配置参考](/configuration) 里的每个环境变量都同时是
-  CLI 参数（`ud-server -help` 可查看全部）。`HOST_DOMAIN` 是唯一必填项。
+  CLI 参数（`ud-server -help` 可查看全部）。每次启动都要给 `HOST_DOMAIN`
+  和同一个 `JWT_SECRET`（见[首次启动之前先设置 JWT_SECRET](#jwt-secret)）。
 - 许可证同理：启动前 export `LICENSE_TOKEN` / `LICENSE_HOST_SECRET` 即可解锁 Pro 功能。
 - 升级：`npm update -g @oatnil/ud-server`；卸载：`npm uninstall -g @oatnil/ud-server`
   （`./data` 目录不受影响）。
@@ -173,7 +217,7 @@ docker compose up -d
 | 变量 | 是否必填 | 默认值 | 说明 |
 |------|----------|--------|------|
 | `HOST_DOMAIN` | **是** | — | 客户端访问本实例的公开 URL，用于生成文件下载/上传链接，必须可达（如 `http://localhost:3000` 或 `https://ud.example.com`）。 |
-| `JWT_SECRET` | **是** | — | 用于签发认证 token 的随机密钥。 |
+| `JWT_SECRET` | **是** | 内置公开值 | 用于签发认证 token、并加密存进数据库的设置（存储类配置、AI provider key）的随机密钥。首次启动之前设好，实例有数据之后不要再改，见[首次启动之前先设置 JWT_SECRET](#jwt-secret)。 |
 | `ADMIN_EMAIL` | Pro/Max | — | 初始管理员的登录用户名。Pro/Max tier 必填。 |
 | `ADMIN_PASSWORD` | Pro/Max | `admin123` | 初始管理员密码，请务必修改。 |
 | `LICENSE_TOKEN` | Pro/Max | — | 解锁 Pro/Max 功能的许可证 token。 |
@@ -181,7 +225,7 @@ docker compose up -d
 | `PERSONAL_TIER_PASSWORD` | 否 | `personal123` | Personal tier 唯一用户（`personal@undercontrol.local`）的密码。请在**首次启动前**设置：**Start** 自动登录始终读取该变量，用户创建后只改环境变量、或只在应用内改密码，都会导致自动登录失效（两者必须一致；登录名本身不可修改）。 |
 | `PORT` | 否 | `8080` | 服务在容器内监听的端口。 |
 | `REGISTRATION_ENABLED` | 否 | `false` | 允许别人在这个实例上自行注册账号。**默认关闭**——你的管理员账号在启动时由 `ADMIN_EMAIL` 创建，不依赖这个开关，但注册会一律被拒绝，直到你显式打开它。三条建号路径都受它管：注册表单、GitHub/Google 首次登录、访客按钮。仅在启动时生效。 |
-| `UD_ENCRYPTION_KEY` | IM 必需 | — | 用于加密用户密钥（目前是各自的 Telegram bot token）。**任何人连接 IM 之前必须设置**：未设置时「即时通讯」区会拒绝保存 token 并给出说明。视为每个实例永久不变——更换会使已保存的 token 全部失效，用户需要重新粘贴。这比 `JWT_SECRET` 的约束更硬：轮换 `JWT_SECRET` 只是让所有人重新登录一次，轮换这把密钥则会毁掉无法恢复的数据。 |
+| `UD_ENCRYPTION_KEY` | IM 必需 | — | 用于加密用户密钥（目前是各自的 Telegram bot token）。**任何人连接 IM 之前必须设置**：未设置时「即时通讯」区会拒绝保存 token 并给出说明。视为每个实例永久不变——更换会使已保存的 token 全部失效，用户需要重新粘贴。`JWT_SECRET` 同样不能改，原因相近（它加密存储类和 AI provider 设置）。 |
 | `IM_MAX_BYO_BOTS` | 否 | `20` | 本实例最多同时运行多少个用户自带 bot（每个 bot 占用一条长轮询连接）。 |
 | `AI_DAILY_FREE_QUOTA` | 否 | `10` | 每个用户每天（UTC 零点重置）在服务器共享 AI provider 上的免费次数；用户用**自己的** API key 跑的任何操作都不计数。**`0` 表示零额度——共享 provider 上的 AI 操作一律被拒；`-1` 表示不限。**这两个值容易被反着猜，请刻意设置。到额之后：聊天请求会返回额度错误；速记会在铃铛「For You」里出现一条说明被拒原因的通知，并在 Queue Tasks 页面留下一条 **Failed** 记录。 |
 | `CRON_ENABLED` | 否 | `true` | 运行定时任务（清理、备份、计划任务处理、唤醒 agent）。如果这台服务器的数据库来自别处，启动前请设为 `false`——见下。仅在启动时生效。 |
@@ -223,7 +267,7 @@ Alfred 是内置的管家 Agent。用户在网页端任意评论里 @alfred 即�
 
 **运维方只需做一次：**
 
-- 把 `UD_ENCRYPTION_KEY` 设为一串随机密钥（`openssl rand -hex 32`）。bot token 以 AES-256-GCM 加密存储，没有密钥就无法保存；**设好之后，在这个实例的整个生命周期里都不要再改动它。** 和 `JWT_SECRET` 不同——那把密钥轮换一次的代价只是所有人重新登录，而轮换这把密钥会让已经存下的 token 全部失效：密文还在，但没有任何东西能读懂它，每位用户都得重新粘贴自己的 token。
+- 把 `UD_ENCRYPTION_KEY` 设为一串随机密钥（`openssl rand -hex 32`）。bot token 以 AES-256-GCM 加密存储，没有密钥就无法保存；**设好之后，在这个实例的整个生命周期里都不要再改动它。** 轮换这把密钥会让已经存下的 token 全部失效：密文还在，但没有任何东西能读懂它，每位用户都得重新粘贴自己的 token。
   缺失时「即时通讯」区会提示用户联系管理员。之后更换会使已存 token 全部失效，所以请在用户开始使用前定下来。
 - 可选：调整 `IM_MAX_BYO_BOTS`（默认 20），即本实例同时运行的用户 bot 数量上限。
   该值也可在**管理后台 → 系统配置 → Integration** 中随时修改。
@@ -329,6 +373,8 @@ IM 通道默认只对实例所有者开放：`im.multi_user_enabled` 默认为 `
 所有状态都在 `/app/data`（上面挂载的卷）下：SQLite 数据库，以及默认情况下的上传文件。备份该卷即可备份整个实例。
 如果使用外部 PostgreSQL 和 S3，则改为备份它们。
 
+`JWT_SECRET` 要和备份一起保管，但不要放进备份里：恢复出来的实例需要同一个值，才能读出存储和 AI provider 设置。
+
 ## 故障排查
 
 先看 `docker logs undercontrol`：正常启动的日志以上面的 ready banner 结尾；配置有误则以
@@ -338,5 +384,7 @@ IM 通道默认只对实例所有者开放：`im.multi_user_enabled` 默认为 `
   Pro/Max 下缺 `ADMIN_EMAIL`、端口被占用。
 - **`no matching manifest for linux/arm64/v8`** — 更新到最新镜像，现已同时发布 amd64 和 arm64。
 - **不知道去哪登录** — ready banner 里打印了访问 URL 和当前 tier 的登录账号。
+- **上传和下载都报内部错误，日志里是 `failed to decrypt config`** — `JWT_SECRET` 不是这个实例第一次启动时
+  用的值（被改过，或者迁移时没带上）。用原来的值重新启动即可。
 - **文件链接无法访问** — `HOST_DOMAIN` 必须是客户端实际访问实例的 URL，包含协议和端口。
 - 仍无法解决时，携带日志和配置联系支持（去除敏感信息）。

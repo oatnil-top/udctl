@@ -133,8 +133,8 @@ const REFERENCE: Category[] = [
         names: ['JWT_SECRET'],
         badges: [{kind: 'warn', label: {en: 'Set it — default is public', zh: '务必设置——默认值公开'}}],
         desc: {
-          en: 'Secret used to sign login tokens. The default is a publicly known placeholder — anyone who knows it can forge sessions. Always set a long random value on any instance that is not throwaway.',
-          zh: '用于签发登录 token 的密钥。默认值是公开已知的占位符——知道它的人可以伪造会话。任何非一次性的实例都必须设置一个足够长的随机值。',
+          en: 'Secret used to sign login tokens, and to encrypt settings the server stores in its database (every storage class configuration, including the built-in local one, AI provider API keys, and secret admin settings). The default is a publicly known placeholder — anyone who knows it can forge sessions; the server prints a startup warning while it is in use. Set a long random value (`openssl rand -base64 48`) before the first start and keep it: changing it on an instance that has data, including moving off the default, leaves those stored settings unreadable — uploads and downloads fail and the log says `failed to decrypt config` — until the original value is restored. It also signs everyone out.',
+          zh: '用于签发登录 token，并加密服务端存进数据库的设置（每个存储类的配置，包括内置的本地存储类、AI provider 的 API key、管理设置里的密钥类配置）。默认值是公开已知的占位符——知道它的人可以伪造会话；用着默认值时服务端启动会打印警告。请在首次启动之前设一个足够长的随机值（`openssl rand -base64 48`）并一直保持：实例已有数据后再改（包括从默认值改成新值），这些设置就解不开了——上传和下载都会失败，日志里是 `failed to decrypt config`——直到改回原值为止。同时所有人都会被登出。',
         },
         metaDefault: '`your-secret-key`',
         metaFlags: '--jwt-secret',
@@ -146,8 +146,8 @@ const REFERENCE: Category[] = [
           {kind: 'warn', label: {en: 'Set once — never change', zh: '设定后不要更换'}},
         ],
         desc: {
-          en: "Key used to encrypt user-owned secrets at rest — today each user's own messenger bot token. It is a separate key rather than a database setting on purpose: a key kept in the same database as the ciphertext it protects protects nothing. **Set it before anyone connects a messenger**: with no key the messenger paths refuse to store a token (they say so rather than falling back to plaintext), so Alfred and the IM integration cannot be used. Generate a random value — `openssl rand -hex 32` — and treat it as permanent for the life of the instance. It is not like `JWT_SECRET`: changing that one just forces everybody to log in again, while changing this one strands every token already stored, and each user has to paste theirs in again.",
-          zh: '用于加密用户自己的密钥（目前是每位用户的 IM bot token）的密钥。它独立于数据库设置是有意的：把密钥和它保护的密文放在同一个数据库里，等于没有保护。**任何人连接 IM 之前就要设好**：没有这把密钥，IM 相关路径会拒绝保存 token（并明确说明，而不是退回明文存储），Alfred 和 IM 集成都无法使用。请生成一串随机值（`openssl rand -hex 32`），并当作这个实例永久不变的东西。它和 `JWT_SECRET` 不是一回事：换掉 `JWT_SECRET` 最多是所有人重新登录一次，而换掉这把密钥，已经存下的 token 全部解不开，每位用户都得重新粘贴一遍。',
+          en: "Key used to encrypt user-owned secrets at rest — today each user's own messenger bot token. It is a separate key rather than a database setting on purpose: a key kept in the same database as the ciphertext it protects protects nothing. **Set it before anyone connects a messenger**: with no key the messenger paths refuse to store a token (they say so rather than falling back to plaintext), so Alfred and the IM integration cannot be used. Generate a random value — `openssl rand -hex 32` — and treat it as permanent for the life of the instance. Changing it strands every token already stored, and each user has to paste theirs in again. (`JWT_SECRET` must not change either; see its entry.)",
+          zh: '用于加密用户自己的密钥（目前是每位用户的 IM bot token）的密钥。它独立于数据库设置是有意的：把密钥和它保护的密文放在同一个数据库里，等于没有保护。**任何人连接 IM 之前就要设好**：没有这把密钥，IM 相关路径会拒绝保存 token（并明确说明，而不是退回明文存储），Alfred 和 IM 集成都无法使用。请生成一串随机值（`openssl rand -hex 32`），并当作这个实例永久不变的东西。换掉这把密钥，已经存下的 token 全部解不开，每位用户都得重新粘贴一遍。（`JWT_SECRET` 同样不能改，见它那一条。）',
         },
         metaDefault: '—',
         metaFlags: '--encryption-key',
@@ -524,12 +524,12 @@ const UI = {
   minimumItems: {
     en: [
       '`HOST_DOMAIN` — `http://localhost:3000` or your public URL',
-      '`JWT_SECRET` — any random string (the default is a known value)',
+      '`JWT_SECRET` — a random string, set before the first start and never changed (the default is a known value)',
       '`ADMIN_EMAIL` — Pro/Max only; Personal tier needs nothing more',
     ],
     zh: [
       '`HOST_DOMAIN` —— `http://localhost:3000` 或你的公网 URL',
-      '`JWT_SECRET` —— 任意随机字符串（默认值是公开已知的）',
+      '`JWT_SECRET` —— 随机字符串，首次启动前设好、之后不再改（默认值是公开已知的）',
       '`ADMIN_EMAIL` —— 仅 Pro/Max 需要；Personal tier 不需要更多配置',
     ],
   },

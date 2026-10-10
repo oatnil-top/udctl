@@ -62,6 +62,56 @@ missing `ADMIN_EMAIL` on Pro/Max, a port already in use, or a setting whose valu
 not be read. The password hint only appears while the account is still on the shipped
 default password.
 
+## Set JWT_SECRET before the first start {#jwt-secret}
+
+`JWT_SECRET` is the key the server signs every login token with. Set it to a long random
+value before you start the instance for the first time, and keep it for the life of the
+instance.
+
+```bash
+openssl rand -base64 48   # generate a value, then pass it as JWT_SECRET
+```
+
+Pass it like any other setting: `docker run -e JWT_SECRET=...`, the `environment:` list in
+docker-compose, a `.env` file, or `-jwt-secret` for the npm package. The Homebrew install
+generates one for you.
+
+**Why it is required.** With no `JWT_SECRET`, the server still starts, but signs tokens with
+a fixed default that is compiled into the binary and therefore public. Anyone who can reach
+the instance can use it to forge a valid token and sign in as any user. The placeholder
+`change-me-to-a-random-string` in the examples on this page is just as public: replace it.
+
+**Why it must not change later.** The same key also encrypts settings the server stores in
+its database: the configuration of every storage class (including the built-in local one
+created on first start), AI provider API keys, and secret values saved in the admin
+settings. If `JWT_SECRET` changes on an instance that already has data, those values can no
+longer be decrypted: file uploads and downloads fail with an internal error, and the
+server log says `failed to decrypt config`. Setting it to the original value again makes
+them readable again. This also applies to an instance that has been running on the
+default and is then given a new value. Everyone is signed out as well, since tokens signed
+with the old value stop validating.
+
+**The startup warning.** When the server runs on the built-in default, it prints this block
+at the end of its startup log (a matching `WARN` log line is written too):
+
+```text
+==============================================================================
+
+  WARNING: JWT_SECRET is not set — using the built-in default
+
+  Every auth token on this instance is signed with the fixed default secret
+  compiled into the binary. That value is public, so anyone can forge a
+  valid token and sign in as any user. Set JWT_SECRET to a long random value
+  (for example: openssl rand -base64 48) via environment variable, .env
+  file, or --jwt-secret, then restart. Changing it signs out existing
+  sessions. Guide: https://udctl.com/docs/self-deployment
+
+==============================================================================
+```
+
+Any other value silences it, including the example placeholder above, so no warning does
+not by itself mean the secret is safe. The secret is never printed to the log.
+
 ## Bare-metal (npm, no Docker)
 
 The server is also published as an npm package with the web UI compiled into the
@@ -71,16 +121,20 @@ binary — nothing else to install. Requires Node.js 18+. Available for macOS
 ```bash
 npm install -g @oatnil/ud-server @oatnil/ud   # server + CLI
 
-ud-server -host-domain http://localhost:8080 -data-path ./data
+openssl rand -base64 48 > ./jwt-secret   # once; keep it, never regenerate
+ud-server -host-domain http://localhost:8080 -data-path ./data \
+  -jwt-secret "$(cat ./jwt-secret)"
 ```
 
 Then open `http://localhost:8080` — the same ready banner as Docker prints in the
 terminal with the login credentials. Everything lives under `./data` (SQLite database
-and uploads), so backing up or moving the instance is copying that directory.
+and uploads), so backing up or moving the instance is copying that directory and
+keeping the same `JWT_SECRET`.
 
 - Configuration is identical to Docker: every environment variable in the
   [Configuration reference](/configuration) also works as a CLI flag
-  (`ud-server -help` lists them). `HOST_DOMAIN` is the only required setting.
+  (`ud-server -help` lists them). Always give it `HOST_DOMAIN` and the same
+  `JWT_SECRET` on every start (see [Set JWT_SECRET before the first start](#jwt-secret)).
 - Licenses work the same way: export `LICENSE_TOKEN` / `LICENSE_HOST_SECRET`
   before starting to unlock Pro features.
 - Upgrade with `npm update -g @oatnil/ud-server`; uninstall with
@@ -197,7 +251,7 @@ server reads — with an interactive config builder and boot preview — see the
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `HOST_DOMAIN` | **Yes** | — | Public URL clients use to reach this instance. Used to build file download/upload links, so it must be reachable (e.g. `http://localhost:3000` or `https://ud.example.com`). |
-| `JWT_SECRET` | **Yes** | — | Random secret used to sign auth tokens. |
+| `JWT_SECRET` | **Yes** | built-in public value | Random secret used to sign auth tokens and to encrypt stored settings (storage class configuration, AI provider keys). Set it before the first start and never change it on an instance that has data — see [Set JWT_SECRET before the first start](#jwt-secret). |
 | `ADMIN_EMAIL` | Pro/Max | — | Login username of the initial admin user. Required on Pro/Max tier. |
 | `ADMIN_PASSWORD` | Pro/Max | `admin123` | Initial admin password. Change it. |
 | `LICENSE_TOKEN` | Pro/Max | — | License token that unlocks Pro/Max features. |
@@ -205,7 +259,7 @@ server reads — with an interactive config builder and boot preview — see the
 | `PERSONAL_TIER_PASSWORD` | No | `personal123` | Password of the single Personal-tier user (`personal@undercontrol.local`). Set it **before first boot**: the **Start** auto-login always uses this variable, so changing only the env var after the user exists — or changing only the password in-app — breaks auto-login (the two must match; the login name itself cannot be changed). |
 | `PORT` | No | `8080` | Port the server listens on inside the container. |
 | `REGISTRATION_ENABLED` | No | `false` | Lets people create their own accounts on this instance. **Off by default** — your admin account comes from `ADMIN_EMAIL` at startup, so you can log in without it, but sign-ups are refused until you turn it on. Covers all three ways an account can be created: the register form, a first GitHub/Google login, and the visitor button. Applied at boot only. |
-| `UD_ENCRYPTION_KEY` | Messenger | — | Key used to encrypt user-owned secrets at rest — today each user's own messenger bot token. **Required before anyone can connect a messenger**: without it the Messenger section refuses to store a token and says so. Treat it as permanent per instance — changing it strands every stored token and each user must paste theirs again. This is a harder constraint than `JWT_SECRET`: rotating that one only forces everybody to log in again, while rotating this one destroys data you cannot recover. |
+| `UD_ENCRYPTION_KEY` | Messenger | — | Key used to encrypt user-owned secrets at rest — today each user's own messenger bot token. **Required before anyone can connect a messenger**: without it the Messenger section refuses to store a token and says so. Treat it as permanent per instance — changing it strands every stored token and each user must paste theirs again. `JWT_SECRET` must not change either, for a related reason (it encrypts storage and AI provider settings). |
 | `IM_MAX_BYO_BOTS` | No | `20` | How many user-owned messenger bots this instance will run at once. Each holds one long-polling connection. |
 | `AI_DAILY_FREE_QUOTA` | No | `10` | Free AI actions per user per day (resets at UTC midnight) on the server's shared AI providers; anything a user runs on their **own** API key is never counted. **`0` means no free quota at all — every shared-provider AI action is refused; `-1` means unlimited.** These two are easy to guess backwards, so set them deliberately. When someone hits the limit: chat requests fail with a quota error, and a quick capture shows up as a "For You" bell notification explaining the refusal plus a **Failed** row on the Queue Tasks page. |
 | `CRON_ENABLED` | No | `true` | Runs scheduled jobs (cleanup, backups, scheduled-task processing, agent wake-ups). Set it to `false` before starting a server whose database came from somewhere else — see below. Applied at boot only. |
@@ -261,8 +315,7 @@ once more than one person uses an instance.
 - Set `UD_ENCRYPTION_KEY` to a random secret (`openssl rand -hex 32`). Bot tokens are stored
   AES-256-GCM encrypted and cannot be stored at all without it; the Messenger section tells
   users to ask you if it is missing. **Then leave it alone for the life of the instance.**
-  Unlike `JWT_SECRET`, which you can rotate at the cost of one forced re-login, rotating this
-  key strands every token already stored — the ciphertext stays, nothing can read it, and each
+  Rotating this key strands every token already stored — the ciphertext stays, nothing can read it, and each
   user has to paste their token in again.
 - Optionally raise or lower `IM_MAX_BYO_BOTS` (default 20), the number of user bots this
   instance will run at once. It is also editable at runtime in
@@ -402,6 +455,9 @@ All state lives under `/app/data` (mounted as a volume above): the SQLite databa
 default, uploaded files. Back up that volume to back up your instance. If you use external
 PostgreSQL and S3, back those up instead.
 
+Keep a copy of your `JWT_SECRET` with the backup, but not inside it: a restored instance
+needs the same value to read its storage and AI provider settings.
+
 ## Troubleshooting
 
 Start with `docker logs undercontrol`: a healthy boot ends with the ready banner shown
@@ -415,6 +471,9 @@ variable to fix.
   published for both amd64 and arm64.
 - **Don't know where to log in** — the ready banner prints the URL and the login account
   for your tier.
+- **Uploads and downloads fail with an internal error, and the log says `failed to decrypt
+  config`** — `JWT_SECRET` is not the value the instance was first started with (it was
+  changed, or the instance moved without it). Start it again with the original value.
 - **File links are unreachable** — `HOST_DOMAIN` must be the URL clients actually use to
   reach the instance, including scheme and port.
 - If you're still stuck, contact support with the logs and your configuration (remove

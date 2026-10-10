@@ -76,25 +76,6 @@ token，这个值是公开的。任何能访问到实例的人都可以用它伪
 把它改回原来的值即可恢复。一直跑在默认值上、后来才补设新值的实例，同样属于「改了」。另外所有人都会被登出，
 因为用旧值签发的 token 不再有效。
 
-**启动警告。** 服务端跑在内置默认值上时，会在启动日志末尾打印下面这一段（同时写一条 `WARN` 日志）：
-
-```text
-==============================================================================
-
-  WARNING: JWT_SECRET is not set — using the built-in default
-
-  Every auth token on this instance is signed with the fixed default secret
-  compiled into the binary. That value is public, so anyone can forge a
-  valid token and sign in as any user. Set JWT_SECRET to a long random value
-  (for example: openssl rand -base64 48) via environment variable, .env
-  file, or --jwt-secret, then restart. Changing it signs out existing
-  sessions. Guide: https://udctl.com/docs/self-deployment
-
-==============================================================================
-```
-
-设成任何其他值都不会再出现这段警告，包括上面那个示例占位值，所以没有警告并不等于密钥安全。日志里永远不会打印密钥本身。
-
 ## 裸机部署（npm，无需 Docker）
 
 服务端也以 npm 包发布，Web UI 直接编译进二进制——除了 Node.js 18+ 什么都不用装。

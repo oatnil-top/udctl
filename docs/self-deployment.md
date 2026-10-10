@@ -91,27 +91,6 @@ them readable again. This also applies to an instance that has been running on t
 default and is then given a new value. Everyone is signed out as well, since tokens signed
 with the old value stop validating.
 
-**The startup warning.** When the server runs on the built-in default, it prints this block
-at the end of its startup log (a matching `WARN` log line is written too):
-
-```text
-==============================================================================
-
-  WARNING: JWT_SECRET is not set — using the built-in default
-
-  Every auth token on this instance is signed with the fixed default secret
-  compiled into the binary. That value is public, so anyone can forge a
-  valid token and sign in as any user. Set JWT_SECRET to a long random value
-  (for example: openssl rand -base64 48) via environment variable, .env
-  file, or --jwt-secret, then restart. Changing it signs out existing
-  sessions. Guide: https://udctl.com/docs/self-deployment
-
-==============================================================================
-```
-
-Any other value silences it, including the example placeholder above, so no warning does
-not by itself mean the secret is safe. The secret is never printed to the log.
-
 ## Bare-metal (npm, no Docker)
 
 The server is also published as an npm package with the web UI compiled into the

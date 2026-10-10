@@ -60,7 +60,8 @@ ready banner，直接告诉你去哪打开、用什么账号登录：
 随机值，并在这个实例的整个生命周期里保持不变。
 
 ```bash
-openssl rand -base64 48   # 生成一个值，然后作为 JWT_SECRET 传入
+# 生成一个值，然后作为 JWT_SECRET 传入
+openssl rand -base64 48
 ```
 
 传入方式和其他配置项一样：`docker run -e JWT_SECRET=...`、docker-compose 的 `environment:` 列表、
@@ -82,9 +83,11 @@ token，这个值是公开的。任何能访问到实例的人都可以用它伪
 支持 macOS（Intel 和 Apple Silicon）、Linux（x64 和 ARM64）、Windows（x64）。
 
 ```bash
-npm install -g @oatnil/ud-server @oatnil/ud   # 服务端 + CLI
+# 服务端 + CLI
+npm install -g @oatnil/ud-server @oatnil/ud
 
-openssl rand -base64 48 > ./jwt-secret   # 只生成一次，保存好，不要重新生成
+# 只生成一次，保存好，不要重新生成
+openssl rand -base64 48 > ./jwt-secret
 ud-server -host-domain http://localhost:8080 -data-path ./data \
   -jwt-secret "$(cat ./jwt-secret)"
 ```

@@ -9,11 +9,16 @@ sidebar_position: 7
 The `ud apply -f` command lets you create and update resources declaratively from files — similar to `kubectl apply`. The file is the single source of truth: apply it once to create, apply it again (with the ID) to update.
 
 ```bash
-ud apply -f task.md          # create or update a task
-ud apply -f note.md          # create or update a note (auto-detected)
-ud apply -f board.yaml       # create or update a board
-ud apply -f resources.yaml   # apply multiple resources from one file
-cat spec.yaml | ud apply -f - # read from stdin
+# create or update a task
+ud apply -f task.md
+# create or update a note (auto-detected)
+ud apply -f note.md
+# create or update a board
+ud apply -f board.yaml
+# apply multiple resources from one file
+ud apply -f resources.yaml
+# read from stdin
+cat spec.yaml | ud apply -f -
 ```
 
 ---

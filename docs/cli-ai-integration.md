@@ -34,23 +34,29 @@ does the work, and writes progress back where you — and the next agent — can
 Quickstart:
 
 ```bash
-npm install -g @oatnil/ud   # 1. install (Node.js 18+)
-ud login                    # 2. sign in to your server or the hosted workspace
-ud get task                 # 3. confirm you can see your tasks
+# 1. install (Node.js 18+)
+npm install -g @oatnil/ud
+# 2. sign in to your server or the hosted workspace
+ud login
+# 3. confirm you can see your tasks
+ud get task
 ```
 
 Then, in your agent's session, have it run:
 
 ```bash
-ud describe skill ud-cli    # 4. the agent loads the full command reference itself
+# 4. the agent loads the full command reference itself
+ud describe skill ud-cli
 ```
 
 That is the whole setup. The CLI also checks the machine for you and names the exact next
 command for anything still missing:
 
 ```bash
-ud config onboarding          # human-readable checklist
-ud config onboarding --json   # for agents: next_command / requires_human per check
+# human-readable checklist
+ud config onboarding
+# for agents: next_command / requires_human per check
+ud config onboarding --json
 ```
 
 For a from-scratch, agent-driven setup (install, sign-in, skill file), have your agent

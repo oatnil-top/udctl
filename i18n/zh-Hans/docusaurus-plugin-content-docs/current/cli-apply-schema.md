@@ -9,11 +9,16 @@ sidebar_position: 7
 `ud apply -f` 命令让你可以通过文件声明式地创建和更新资源——类似 `kubectl apply`。文件即真相来源：首次 apply 创建，带 ID 再次 apply 则更新。
 
 ```bash
-ud apply -f task.md          # 创建或更新任务
-ud apply -f note.md          # 创建或更新笔记（自动识别）
-ud apply -f board.yaml       # 创建或更新看板
-ud apply -f resources.yaml   # 从一个文件 apply 多个资源
-cat spec.yaml | ud apply -f - # 从标准输入读取
+# 创建或更新任务
+ud apply -f task.md
+# 创建或更新笔记（自动识别）
+ud apply -f note.md
+# 创建或更新看板
+ud apply -f board.yaml
+# 从一个文件 apply 多个资源
+ud apply -f resources.yaml
+# 从标准输入读取
+cat spec.yaml | ud apply -f -
 ```
 
 ---

@@ -22,22 +22,28 @@ Claude Code、Codex、Cursor，以及任何基于终端的 agent，都可以连�
 快速开始：
 
 ```bash
-npm install -g @oatnil/ud   # 1. 安装（需要 Node.js 18+）
-ud login                    # 2. 登录到你自己的服务器或托管工作空间
-ud get task                 # 3. 确认能看到你的任务
+# 1. 安装（需要 Node.js 18+）
+npm install -g @oatnil/ud
+# 2. 登录到你自己的服务器或托管工作空间
+ud login
+# 3. 确认能看到你的任务
+ud get task
 ```
 
 然后在 agent 的会话里，让它执行：
 
 ```bash
-ud describe skill ud-cli    # 4. agent 自己加载完整命令参考
+# 4. agent 自己加载完整命令参考
+ud describe skill ud-cli
 ```
 
 设置到这里就结束了。CLI 也能替你体检这台机器，并为还缺的每一项给出确切的下一条命令：
 
 ```bash
-ud config onboarding          # 人类可读的检查表
-ud config onboarding --json   # 给 agent 用：每项带 next_command / requires_human
+# 人类可读的检查表
+ud config onboarding
+# 给 agent 用：每项带 next_command / requires_human
+ud config onboarding --json
 ```
 
 如果要从零开始、由 agent 代办的完整设置（安装、登录、技能文件），让你的 agent 抓取并按 [https://udctl.com/agent-setup/prompt.md](https://udctl.com/agent-setup/prompt.md) 执行——那份文件是设置流程的唯一权威来源，本节刻意不复述它。

@@ -69,7 +69,8 @@ value before you start the instance for the first time, and keep it for the life
 instance.
 
 ```bash
-openssl rand -base64 48   # generate a value, then pass it as JWT_SECRET
+# generate a value, then pass it as JWT_SECRET
+openssl rand -base64 48
 ```
 
 Pass it like any other setting: `docker run -e JWT_SECRET=...`, the `environment:` list in
@@ -98,9 +99,11 @@ binary — nothing else to install. Requires Node.js 18+. Available for macOS
 (Intel & Apple Silicon), Linux (x64 & ARM64), and Windows (x64).
 
 ```bash
-npm install -g @oatnil/ud-server @oatnil/ud   # server + CLI
+# server + CLI
+npm install -g @oatnil/ud-server @oatnil/ud
 
-openssl rand -base64 48 > ./jwt-secret   # once; keep it, never regenerate
+# once; keep it, never regenerate
+openssl rand -base64 48 > ./jwt-secret
 ud-server -host-domain http://localhost:8080 -data-path ./data \
   -jwt-secret "$(cat ./jwt-secret)"
 ```

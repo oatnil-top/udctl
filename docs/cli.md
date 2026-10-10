@@ -24,7 +24,8 @@ npx @oatnil/ud --help
 
 ```bash
 brew tap oatnil-top/ud
-brew trust oatnil-top/ud   # Homebrew 6 and newer only; older versions have no `trust`
+# Homebrew 6 and newer only; older versions have no `trust`
+brew trust oatnil-top/ud
 brew install ud
 ```
 
@@ -164,9 +165,12 @@ ud describe task 3de
 All commands that accept a task ID support **prefix matching**. You can use the 8-character short IDs shown in `get task` output, or even shorter prefixes as long as they're unique.
 
 ```bash
-ud describe task 3de9f82b    # Full short ID from list
-ud describe task 3de         # Shorter prefix (if unique)
-ud describe task 3de9f82b-fc49-4e84-b288-9ae3174f69ae  # Full UUID also works
+# Full short ID from list
+ud describe task 3de9f82b
+# Shorter prefix (if unique)
+ud describe task 3de
+# Full UUID also works
+ud describe task 3de9f82b-fc49-4e84-b288-9ae3174f69ae
 ```
 
 If a prefix matches multiple tasks, you'll see an error listing the matches:
@@ -181,8 +185,10 @@ Please use a longer prefix
 ### Apply Resource from File
 
 ```bash
-ud apply -f <file>       # .md for tasks/notes, .yaml for other resources
-ud apply -f -            # Read from stdin (auto-detects format)
+# .md for tasks/notes, .yaml for other resources
+ud apply -f <file>
+# Read from stdin (auto-detects format)
+ud apply -f -
 ```
 
 Create or update resources declaratively from files (kubectl-style). Supports all resource types:
@@ -360,7 +366,8 @@ To update an existing note, include its `note_id` in the frontmatter alongside `
 
 ```bash
 ud get notes --task <task-id>
-ud get notes -t <task-id>   # short flag
+# short flag
+ud get notes -t <task-id>
 ```
 
 ### Delete a Note
@@ -744,7 +751,8 @@ ud apply -f update.md
 
 **Solution:** Set the `EDITOR` environment variable:
 ```bash
-export EDITOR=vim  # or nano, code, etc.
+# or nano, code, etc.
+export EDITOR=vim
 ```
 
 ### Invalid Status Error

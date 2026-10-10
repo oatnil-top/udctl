@@ -613,6 +613,16 @@ const METHODS = [
         <a href="https://github.com/oatnil-top/undercontrol-helm" target="_blank" rel="noreferrer">
           github.com/oatnil-top/undercontrol-helm
         </a>
+        {/* The chart pins backend 0.65.2 and has no licenseHostSecret or
+            ADMIN_EMAIL value, so the --set flags above do not yet give a working
+            trial (helm template, 2026-10-10). The chart fix is card 44a0e1d2;
+            drop this note when that ships. */}
+        <br />
+        <b>
+          <Translate id="selfhosting.deploy.access.k8sNote">
+            Note: the chart is currently at 0.65.2 and does not yet support the trial license or admin settings. It is being updated.
+          </Translate>
+        </b>
       </>
     ),
   },

@@ -49,7 +49,8 @@ R2 上只保留最近几个版本,所以要先解析出当前版本号,不要把
 推荐用 npm 安装:
 
 ```bash
-npm install -g @oatnil/ud   # 需要 Node.js 18+
+# 需要 Node.js 18+
+npm install -g @oatnil/ud
 ud --version
 ```
 
@@ -57,7 +58,8 @@ Homebrew 也可以(macOS 与 Linux):
 
 ```bash
 brew tap oatnil-top/ud
-brew trust oatnil-top/ud   # 仅 Homebrew 6 及以上需要
+# 仅 Homebrew 6 及以上需要
+brew trust oatnil-top/ud
 brew install ud
 ```
 

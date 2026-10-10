@@ -53,7 +53,8 @@ Platform notes:
 npm is the recommended channel:
 
 ```bash
-npm install -g @oatnil/ud   # requires Node.js 18+
+# requires Node.js 18+
+npm install -g @oatnil/ud
 ud --version
 ```
 
@@ -61,7 +62,8 @@ Homebrew works too (macOS and Linux):
 
 ```bash
 brew tap oatnil-top/ud
-brew trust oatnil-top/ud   # Homebrew 6 and newer only
+# Homebrew 6 and newer only
+brew trust oatnil-top/ud
 brew install ud
 ```
 

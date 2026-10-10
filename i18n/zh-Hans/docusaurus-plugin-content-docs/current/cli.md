@@ -157,9 +157,12 @@ ud describe task 3de
 所有接受任务 ID 的命令都支持**前缀匹配**。你可以使用 `get task` 显示的 8 位短 ID，或者更短的前缀（只要唯一即可）。
 
 ```bash
-ud describe task 3de9f82b    # 列表中的完整短 ID
-ud describe task 3de         # 更短的前缀（如果唯一）
-ud describe task 3de9f82b-fc49-4e84-b288-9ae3174f69ae  # 完整 UUID 也可以
+# 列表中的完整短 ID
+ud describe task 3de9f82b
+# 更短的前缀（如果唯一）
+ud describe task 3de
+# 完整 UUID 也可以
+ud describe task 3de9f82b-fc49-4e84-b288-9ae3174f69ae
 ```
 
 如果前缀匹配多个任务，会显示错误并列出匹配项：
@@ -174,8 +177,10 @@ Please use a longer prefix
 ### 从文件应用资源
 
 ```bash
-ud apply -f <file>       # .md 用于任务/笔记，.yaml 用于其他资源
-ud apply -f -            # 从标准输入读取（自动检测格式）
+# .md 用于任务/笔记，.yaml 用于其他资源
+ud apply -f <file>
+# 从标准输入读取（自动检测格式）
+ud apply -f -
 ```
 
 从文件声明式地创建或更新资源（kubectl 风格）。支持所有资源类型：
@@ -359,7 +364,8 @@ echo "审查完成" | ud task note add abc123 -
 
 ```bash
 ud task note list <task-id>
-ud task note ls <task-id>  # 别名
+# 别名
+ud task note ls <task-id>
 ```
 
 **输出格式：**
@@ -375,7 +381,8 @@ ud task note ls <task-id>  # 别名
 
 ```bash
 ud task note delete <task-id> <note-id>
-ud task note rm <task-id> <note-id>  # 别名
+# 别名
+ud task note rm <task-id> <note-id>
 ```
 
 **示例：**
@@ -734,7 +741,8 @@ ud apply -f update.md
 
 **解决方案：** 设置 `EDITOR` 环境变量：
 ```bash
-export EDITOR=vim  # 或 nano、code 等
+# 或 nano、code 等
+export EDITOR=vim
 ```
 
 ### 无效状态错误

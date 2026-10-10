@@ -19,3 +19,16 @@
   Content-Type: text/plain; charset=utf-8
 /llms.txt
   Content-Type: text/plain; charset=utf-8
+/auth.md
+  Content-Type: text/plain; charset=utf-8
+
+# Agent discovery (Cloudflare Agent Readiness, ud task 5ac33489). The API catalog is
+# RFC 9727: the file has no extension, so its type must be set here or the asset
+# server guesses application/octet-stream. The homepage advertises it, the OpenAPI
+# description and the agent-facing docs via RFC 8288 Link headers.
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </api/openapi.json>; rel="service-desc", </api/>; rel="service-doc", </llms.txt>; rel="describedby", </auth.md>; rel="describedby"
+/zh-Hans/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </api/openapi.json>; rel="service-desc", </api/>; rel="service-doc", </llms.txt>; rel="describedby", </auth.md>; rel="describedby"

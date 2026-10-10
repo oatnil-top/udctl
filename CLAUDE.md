@@ -62,3 +62,11 @@ sitemap that build produced, then `scripts/indexnow.mjs` POSTs every sitemap URL
 `static/<key>.txt` (public by design; the file's presence is the proof of
 ownership). `npm run indexnow` is a dry run against the live sitemaps. Google
 ignores IndexNow; it still reads the sitemap. Card `df4fe865`.
+
+## Agent readiness (card 5ac33489)
+
+`npm run build` ends with `postbuild` (`scripts/build-markdown.mjs`), which writes an
+`index.md` twin next to every built `index.html`; `worker/index.js` serves it when a page
+URL is requested with `Accept: text/markdown`. `/auth.md` and `/.well-known/api-catalog`
+are static files whose types are set in `static/_headers`, which also puts the RFC 8288
+`Link` header on the two home pages. Check with `POST https://isitagentready.com/api/scan`.

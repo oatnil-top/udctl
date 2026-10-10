@@ -128,7 +128,8 @@ starts in the background and comes back at login:
 
 ```bash
 brew tap oatnil-top/ud
-brew trust oatnil-top/ud          # Homebrew >= 6 only
+# Homebrew >= 6 only
+brew trust oatnil-top/ud
 brew install ud-server
 brew services start ud-server
 ```

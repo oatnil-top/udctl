@@ -148,15 +148,17 @@ volumes:
 const BAREMETAL_NPM = `# no Docker needed — one binary with the web UI built in (requires Node.js 18+)
 npm install -g @oatnil/ud-server @oatnil/ud
 
-# free Pro trial license (valid until ${LICENSE_VALID_UNTIL})
+# free Pro trial license (valid until ${LICENSE_VALID_UNTIL}) + the admin account Pro requires
+export ADMIN_EMAIL=admin@example.com
+export ADMIN_PASSWORD=changeme
 export LICENSE_TOKEN=${LICENSE_TOKEN}
 export LICENSE_HOST_SECRET=${LICENSE_SECRET}
 
 ud-server -host-domain http://localhost:8080 -data-path ./data`;
 
 // The four brew commands are docs/self-deployment.md's Homebrew section (also
-// homebrew-ud/README.md) — change them there first. One deliberate difference:
-// the "Homebrew >= 6 only" note sits on its own line, never after the command.
+// homebrew-ud/README.md) — change them there first. The "Homebrew >= 6 only"
+// note sits on its own line in all three, never after the command.
 // Pasted into macOS zsh (interactivecomments off by default) a trailing
 // comment becomes arguments plus a redirect: `brew trust` gets "#" "Homebrew",
 // exits 1 with "Trust targets must be fully-qualified", the tap stays
@@ -543,6 +545,7 @@ const METHODS = [
     key: 'allinone',
     tab: 'all-in-one · sqlite',
     rec: true,
+    compose: true,
     name: 'docker-compose.yml — all-in-one (SQLite)',
     code: COMPOSE_ALLINONE,
     access: (
@@ -558,7 +561,7 @@ const METHODS = [
     code: BAREMETAL_NPM,
     access: (
       <Translate id="selfhosting.deploy.access.baremetal">
-        Then open http://localhost:8080 and you are logged in — no Docker, the binary serves the web UI itself. Data lives in ./data; upgrade with npm update -g @oatnil/ud-server.
+        Then open http://localhost:8080 and log in as admin@example.com / changeme — no Docker, the binary serves the web UI itself. Data lives in ./data; upgrade with npm update -g @oatnil/ud-server.
       </Translate>
     ),
   },
@@ -576,6 +579,7 @@ const METHODS = [
   {
     key: 'aiopg',
     tab: 'all-in-one · postgres',
+    compose: true,
     name: 'docker-compose.yml — all-in-one + PostgreSQL',
     code: COMPOSE_AIOPG,
     access: (
@@ -587,6 +591,7 @@ const METHODS = [
   {
     key: 'split',
     tab: 'separate fe + be · postgres',
+    compose: true,
     name: 'docker-compose.yml — separate frontend + backend + PostgreSQL',
     code: COMPOSE_SPLIT,
     access: (
@@ -657,19 +662,23 @@ function DeploySection() {
         </Translate>
       </div>
 
-      <div className={styles.runrow}>
-        <div className={styles.runNum}>↑</div>
-        <div>
-          <h3>
-            <Translate id="selfhosting.run.title">Bring it up</Translate>
-          </h3>
-          <p>
-            <Translate id="selfhosting.run.desc">
-              Save the file, then run docker compose up -d. First boot pulls the image and runs migrations automatically.
-            </Translate>
-          </p>
+      {/* Only the compose tabs need a separate "bring it up" step; the npm,
+          brew and helm blocks end with their own start command. */}
+      {'compose' in current && current.compose ? (
+        <div className={styles.runrow}>
+          <div className={styles.runNum}>↑</div>
+          <div>
+            <h3>
+              <Translate id="selfhosting.run.title">Bring it up</Translate>
+            </h3>
+            <p>
+              <Translate id="selfhosting.run.desc">
+                Save the file, then run docker compose up -d. First boot pulls the image and runs migrations automatically.
+              </Translate>
+            </p>
+          </div>
         </div>
-      </div>
+      ) : null}
     </section>
   );
 }

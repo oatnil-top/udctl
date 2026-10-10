@@ -1153,7 +1153,7 @@
     "message": "然后打开 http://localhost:3000 —— 单个容器，SQLite 存储在 ./data。"
   },
   "selfhosting.deploy.access.baremetal": {
-    "message": "然后打开 http://localhost:8080 即已登录 —— 无需 Docker，二进制自带 Web UI。数据存储在 ./data；升级只需 npm update -g @oatnil/ud-server。"
+    "message": "然后打开 http://localhost:8080，用 admin@example.com / changeme 登录 —— 无需 Docker，二进制自带 Web UI。数据存储在 ./data；升级只需 npm update -g @oatnil/ud-server。"
   },
   "selfhosting.deploy.access.brew": {
     "message": "然后打开 http://localhost:8080，用 admin@example.com / changeme 登录 —— 开机登录后会自动再次启动。配置在 $(brew --prefix)/etc/ud-server/.env，数据在 $(brew --prefix)/var/ud-server；brew upgrade ud-server 只替换二进制。brew trust 只有 Homebrew 6 及以上才有 —— 旧版 Homebrew 和 Linuxbrew 跳过这一行。"

@@ -107,7 +107,8 @@ ud-server -host-domain http://localhost:8080 -data-path ./data \
 
 ```bash
 brew tap oatnil-top/ud
-brew trust oatnil-top/ud          # 仅 Homebrew >= 6 需要
+# 仅 Homebrew >= 6 需要
+brew trust oatnil-top/ud
 brew install ud-server
 brew services start ud-server
 ```

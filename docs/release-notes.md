@@ -43,6 +43,39 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.162.0 (2026-10-10)
+
+**Minor release: a Photos page in the web and desktop apps, plus two fixes to how resources are listed.** No database migrations. Self-hosted: upgrade the server before the web app and the desktop app (see Upgrade Notes).
+
+### New Features
+
+- **Photos page.** The web and desktop apps have a new Photos entry in the sidebar. It shows your photos and videos as a timeline grouped by month, newest first, and keeps loading as you scroll. Videos show their length on the thumbnail.
+- **Find and filter photos.** A filter bar narrows the timeline to photos or videos, to files synced from your phone's album, to a range of capture dates, or to a file name. Active filters show as chips you can clear one by one. A year-month index on the right edge jumps straight to a month.
+- **Full-screen viewer.** Click a photo or video to open it full screen. Use the arrow keys or the on-screen arrows to move through the timeline, see the capture details stored with the file, play videos inline, and download the original. HEIC photos, which browsers cannot display, show their thumbnail together with their details and a download button.
+
+### Bug Fixes
+
+- **A date filter now includes the whole end day.** Filtering resources by capture date "up to" a day dropped everything captured after midnight on that day. The whole day is now included. A filter that gives an exact time is unchanged.
+- **Resource lists report the right number of pages when you ask for a large page.** When a request asked for more than 100 items per page, the server returned 100 but computed the page count for the larger number, so clients stopped paging early. The page size and page count in the response now match what was actually returned.
+
+### Upgrade Notes (self-hosted)
+
+- **No new database migrations.** A database backup before any upgrade is still a good habit.
+- **Upgrade the server before the web app and the desktop app.** The Photos page relies on the capture-date fix above; against an older server, choosing an end date or jumping to a month leaves out that day's or that month's last photos.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.162.0`.
+
+---
+
 ## v0.161.2 (2026-10-10)
 
 **Patch release: photo and video thumbnails in the web app, capture times that correct themselves, the CLI labels HEIC and video uploads correctly, and the server now clears out uploads that never finished.** No database migrations. **Self-hosted: upgrade the server before the web app and the mobile app, and read the note on the new daily cleanup** (see Upgrade Notes).

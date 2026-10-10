@@ -183,7 +183,12 @@ EOF
 
 brew services start ud-server`;
 
-const HELM_INSTALL = `# production-grade: HA, autoscaling, rolling updates
+// The chart defaults to SQLite: one backend replica on a ReadWriteOnce PVC with
+// the Recreate strategy, and it ships no HorizontalPodAutoscaler. So the first
+// line must not promise HA / autoscaling / rolling updates for this command
+// (it did until card 4f284f51, 2026-10-10). Check templates/backend-deployment.yaml
+// in oatnil-top/undercontrol-helm before changing it.
+const HELM_INSTALL = `# defaults to SQLite (single replica); HA and rolling updates need PostgreSQL
 helm repo add undercontrol https://oatnil-top.github.io/undercontrol-helm
 helm repo update
 helm install undercontrol undercontrol/undercontrol \\

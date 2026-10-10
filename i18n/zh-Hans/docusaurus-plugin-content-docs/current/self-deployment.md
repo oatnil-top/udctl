@@ -74,7 +74,36 @@ ud-server -host-domain http://localhost:8080 -data-path ./data
 - 许可证同理：启动前 export `LICENSE_TOKEN` / `LICENSE_HOST_SECRET` 即可解锁 Pro 功能。
 - 升级：`npm update -g @oatnil/ud-server`；卸载：`npm uninstall -g @oatnil/ud-server`
   （`./data` 目录不受影响）。
-- 想以服务方式常驻,用 systemd / launchd 包一层即可,和任何单二进制程序一样。
+- 想以服务方式常驻,用 systemd / launchd 包一层即可,和任何单二进制程序一样;或者用下面的 Homebrew 安装，它会替你配好。
+
+## Homebrew（macOS / Linux，以服务方式常驻）
+
+同一个服务端二进制也在 Homebrew tap 里，带 `brew services` 定义，可以后台常驻、登录后自动启动：
+
+```bash
+brew tap oatnil-top/ud
+brew trust oatnil-top/ud          # 仅 Homebrew >= 6 需要
+brew install ud-server
+brew services start ud-server
+```
+
+然后打开 `http://localhost:8080`。文件位置如下（`$(brew --prefix)` 在 Apple Silicon 上是
+`/opt/homebrew`，Intel 上是 `/usr/local`，Linux 上是 `/home/linuxbrew/.linuxbrew`）：
+
+| 内容 | 路径 |
+|---|---|
+| 配置 | `$(brew --prefix)/etc/ud-server/.env` |
+| 数据（SQLite 数据库、上传文件） | `$(brew --prefix)/var/ud-server` |
+| 日志 | `$(brew --prefix)/var/log/ud-server.log` |
+
+- `.env` 里默认写了 `PORT=8080`、`HOST_DOMAIN=http://localhost:8080`、数据目录和本次安装生成的 `JWT_SECRET`;
+  [配置参考](/configuration) 里的任何变量都可以加进去，改完执行 `brew services restart ud-server` 生效。
+- 服务端监听所有网卡，同一网络里的其他机器能访问 8080 端口。要给它们用，把 `HOST_DOMAIN` 改成它们访问的地址。
+- `brew upgrade ud-server` 只替换二进制，配置和数据目录保持不动；升级后执行 `brew services restart ud-server`。
+- 停止：`brew services stop ud-server`。`brew uninstall ud-server` 不会删除配置和数据，
+  要彻底清除请自行删除上面两个目录。
+- `brew services start` 以当前用户身份运行，登录后自动启动；要开机即启动（无需登录）请用
+  `sudo brew services start ud-server`。
 
 ## Pro / Max（多用户）
 

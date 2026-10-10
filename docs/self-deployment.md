@@ -86,7 +86,42 @@ and uploads), so backing up or moving the instance is copying that directory.
 - Upgrade with `npm update -g @oatnil/ud-server`; uninstall with
   `npm uninstall -g @oatnil/ud-server` (your `./data` directory is untouched).
 - To run it as a service, wrap the command in systemd / launchd like any other
-  single binary.
+  single binary, or install it with Homebrew (below), which sets that up for you.
+
+## Homebrew (macOS / Linux, runs as a service)
+
+The same server binary is in the Homebrew tap, with a `brew services` definition so it
+starts in the background and comes back at login:
+
+```bash
+brew tap oatnil-top/ud
+brew trust oatnil-top/ud          # Homebrew >= 6 only
+brew install ud-server
+brew services start ud-server
+```
+
+Then open `http://localhost:8080`. Where things live (`$(brew --prefix)` is
+`/opt/homebrew` on Apple Silicon, `/usr/local` on Intel, `/home/linuxbrew/.linuxbrew` on Linux):
+
+| What | Path |
+|---|---|
+| Configuration | `$(brew --prefix)/etc/ud-server/.env` |
+| Data (SQLite database, uploads) | `$(brew --prefix)/var/ud-server` |
+| Log | `$(brew --prefix)/var/log/ud-server.log` |
+
+- The `.env` file sets `PORT=8080`, `HOST_DOMAIN=http://localhost:8080`, the data
+  path and a `JWT_SECRET` generated for this install; any variable from the
+  [Configuration reference](/configuration) can be added there. Restart to apply:
+  `brew services restart ud-server`.
+- The server listens on all network interfaces, so other machines on your network can
+  reach port 8080. To serve them, set `HOST_DOMAIN` to the URL they use.
+- `brew upgrade ud-server` replaces only the binary; the configuration and data
+  directories are left as they are. Run `brew services restart ud-server` afterwards.
+- Stop with `brew services stop ud-server`; `brew uninstall ud-server` leaves the
+  configuration and data in place, so delete those two directories yourself to remove
+  everything.
+- `brew services start` runs it as your user and starts it when you log in. To start
+  it at boot without a login, use `sudo brew services start ud-server`.
 
 ## Pro / Max (Multi-user)
 

@@ -43,9 +43,54 @@ export default {
       return rangedAsset(request, env);
     }
 
+    const twin = markdownTwinPath(url.pathname);
+    if (twin) return negotiatedPage(request, env, url, twin);
+
     return env.ASSETS.fetch(request);
   },
 };
+
+/**
+ * Markdown for Agents (ud task 5ac33489): a page URL asked for with
+ * `Accept: text/markdown` gets the page's markdown twin, which
+ * scripts/build-markdown.mjs writes next to every index.html at build time.
+ * Anything else, including a page with no twin, gets the HTML exactly as before.
+ * The twin is read whole only to count it for `x-markdown-tokens` (~4 chars per
+ * token, the same rough estimate Cloudflare's converter publishes); no parsing
+ * happens here, which keeps this inside the Free plan's CPU budget.
+ *
+ * Only page URLs negotiate (`/x/` or an extension-less `/x`). Files such as
+ * /llms.txt and /agent-setup/prompt.md are never rewritten, so their deliberate
+ * text/plain type (see static/_headers, card 15455d96) is untouched.
+ */
+function markdownTwinPath(pathname) {
+  if (pathname.endsWith('/')) return `${pathname}index.md`;
+  const last = pathname.slice(pathname.lastIndexOf('/') + 1);
+  return last.includes('.') ? null : `${pathname}/index.md`;
+}
+
+async function negotiatedPage(request, env, url, twin) {
+  const wantsMarkdown = /\btext\/markdown\b/i.test(request.headers.get('Accept') || '');
+  if (wantsMarkdown && (request.method === 'GET' || request.method === 'HEAD')) {
+    const md = await env.ASSETS.fetch(new Request(new URL(twin, url), { method: 'GET' }));
+    if (md.status === 200) {
+      const text = await md.text();
+      const headers = new Headers({
+        'Content-Type': 'text/markdown; charset=utf-8',
+        'Vary': 'Accept',
+        'Cache-Control': 'public, max-age=0, must-revalidate',
+        'x-markdown-tokens': String(Math.ceil(text.length / 4)),
+        'Content-Location': twin,
+      });
+      return new Response(request.method === 'HEAD' ? null : text, { status: 200, headers });
+    }
+  }
+  // Same URL answers two representations, so caches must key on Accept.
+  const res = await env.ASSETS.fetch(request);
+  const headers = new Headers(res.headers);
+  headers.append('Vary', 'Accept');
+  return new Response(res.body, { status: res.status, statusText: res.statusText, headers });
+}
 
 /**
  * Workers Static Assets answers `Range` with a plain 200 and no Accept-Ranges

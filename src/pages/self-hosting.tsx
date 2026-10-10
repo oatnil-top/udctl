@@ -154,6 +154,33 @@ export LICENSE_HOST_SECRET=${LICENSE_SECRET}
 
 ud-server -host-domain http://localhost:8080 -data-path ./data`;
 
+// The four brew commands are docs/self-deployment.md's Homebrew section (also
+// homebrew-ud/README.md) — change them there first. One deliberate difference:
+// the "Homebrew >= 6 only" note sits on its own line, never after the command.
+// Pasted into macOS zsh (interactivecomments off by default) a trailing
+// comment becomes arguments plus a redirect: `brew trust` gets "#" "Homebrew",
+// exits 1 with "Trust targets must be fully-qualified", the tap stays
+// untrusted, and the next `brew install` is refused (measured 2026-10-10). The formula writes
+// $(brew --prefix)/etc/ud-server/.env on install and the service reads it, so
+// the trial license goes into that file before the first start — together with
+// ADMIN_EMAIL, without which a Pro-tier server refuses to boot (measured
+// 2026-10-10 on ud-server 0.161.2: "STARTUP FAILED: ADMIN_EMAIL is not set").
+const BREW_SERVER = `# macOS / Linux — the same binary, run by brew services in the background
+brew tap oatnil-top/ud
+# Homebrew >= 6 only (older Homebrew and Linuxbrew have no trust)
+brew trust oatnil-top/ud
+brew install ud-server
+
+# free Pro trial license (valid until ${LICENSE_VALID_UNTIL}) + the admin account Pro requires
+cat >> "$(brew --prefix)/etc/ud-server/.env" <<EOF
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=changeme
+LICENSE_TOKEN=${LICENSE_TOKEN}
+LICENSE_HOST_SECRET=${LICENSE_SECRET}
+EOF
+
+brew services start ud-server`;
+
 const HELM_INSTALL = `# production-grade: HA, autoscaling, rolling updates
 helm repo add undercontrol https://oatnil-top.github.io/undercontrol-helm
 helm repo update
@@ -532,6 +559,17 @@ const METHODS = [
     access: (
       <Translate id="selfhosting.deploy.access.baremetal">
         Then open http://localhost:8080 and you are logged in — no Docker, the binary serves the web UI itself. Data lives in ./data; upgrade with npm update -g @oatnil/ud-server.
+      </Translate>
+    ),
+  },
+  {
+    key: 'brew',
+    tab: 'homebrew · brew services',
+    name: 'zsh — Homebrew',
+    code: BREW_SERVER,
+    access: (
+      <Translate id="selfhosting.deploy.access.brew">
+        Then open http://localhost:8080 and log in as admin@example.com / changeme — it starts again at login. Configuration is in $(brew --prefix)/etc/ud-server/.env, data in $(brew --prefix)/var/ud-server; brew upgrade ud-server replaces only the binary. brew trust exists only on Homebrew 6 and later — skip that line on older Homebrew and Linuxbrew.
       </Translate>
     ),
   },

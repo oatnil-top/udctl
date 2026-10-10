@@ -17,7 +17,16 @@
  *   2026-07-28), so SmartScreen flags an unknown publisher on first run. The
  *   Windows footnote states that plainly and gives the one step past it — keep
  *   it plain text, never a warning callout.
- * - The CLI ships through npm only (@oatnil/ud). The Homebrew tap is dead.
+ * - The CLI ships through npm (@oatnil/ud) and the Homebrew tap oatnil-top/ud
+ *   (formula `ud`; also `ud-server` and the macOS desktop cask `undercontrol`).
+ *   The tap is updated on every release. Brew commands here are copied from
+ *   homebrew-ud/README.md, never typed by hand. Homebrew is always the
+ *   supplementary card under the primary path (direct downloads / npm), never a
+ *   tab beside it (owner ruling 2026-10-10, card 47dc8754). `brew trust` is said
+ *   once, as a plain footnote in the desktop section.
+ * - The hero's detected-OS row picks the visitor's OS only. macOS gets both
+ *   arch buttons because a browser cannot reliably tell Apple Silicon from
+ *   Intel; an unknown or mobile UA hides the row entirely — never guess.
  * - iOS is in public beta via the TestFlight link below (Beta group, cap 1000
  *   testers). Builds expire after 90 days, so keep TestFlight uploads flowing.
  * - Android ships as a direct apk on R2 (since 0.0.9, 2026-07-28) — NOT through
@@ -37,7 +46,7 @@
  *
  * Owned by the Onboarding Experience Owner.
  */
-import {useState, type ReactNode} from 'react';
+import {useEffect, useState, type ReactNode} from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -67,6 +76,11 @@ const ANDROID_APK_URL = `${R2_RELEASES}/android/${ANDROID_VERSION}/${ANDROID_APK
 const CLI_INSTALL = `# requires Node.js 18+
 npm install -g @oatnil/ud
 ud --version`;
+
+const TAP = 'oatnil-top/ud';
+const CLI_BREW = `# macOS / Linuxbrew
+brew tap ${TAP}
+brew install ud`;
 
 type L = {en: string; zh: string};
 
@@ -106,6 +120,35 @@ const PLATFORMS: PlatformDl[] = [
     file: `undercontrol-desktop-${VERSION}.AppImage`,
   },
 ];
+
+// --- Detected-OS quick row ---
+
+type DetectedOs = 'mac' | 'win' | 'linux';
+
+const OS_NAME: Record<DetectedOs, string> = {mac: 'macOS', win: 'Windows', linux: 'Linux'};
+
+/** Buttons per OS: label + index into PLATFORMS, so file names have one source. */
+const QUICK: Record<DetectedOs, {label: string; platform: number}[]> = {
+  mac: [
+    {label: 'Apple Silicon .dmg', platform: 0},
+    {label: 'Intel .dmg', platform: 1},
+  ],
+  win: [{label: 'Windows x64 .exe', platform: 2}],
+  linux: [{label: 'Linux AppImage', platform: 3}],
+};
+
+/**
+ * OS from a user agent, or null when the row must stay hidden: mobile, or
+ * nothing recognisable. iPadOS Safari sends a desktop Mac UA, so a Mac UA on a
+ * touch device counts as mobile too. Pure, so it is callable without a browser.
+ */
+function detectOs(ua: string, maxTouchPoints = 0): DetectedOs | null {
+  if (/Android|iPhone|iPad|iPod|Mobile/i.test(ua)) return null;
+  if (/Macintosh|Mac OS X/i.test(ua)) return maxTouchPoints > 1 ? null : 'mac';
+  if (/Windows/i.test(ua)) return 'win';
+  if (/Linux/i.test(ua)) return 'linux';
+  return null;
+}
 
 // --- Hero platform census, drawn as a hub ---
 //
@@ -230,6 +273,36 @@ function Terminal({name, code}: {name: string; code: string}) {
 
 // --- Sections ---
 
+/**
+ * The only browser-dependent render on the page. The static HTML never has the
+ * row (SSR knows no user agent); it appears after hydration, so server and
+ * client markup agree and a crawler sees no guessed OS.
+ */
+function QuickRow() {
+  const t = useT();
+  const [os, setOs] = useState<DetectedOs | null>(null);
+  useEffect(() => {
+    setOs(detectOs(navigator.userAgent || '', navigator.maxTouchPoints || 0));
+  }, []);
+  if (!os) return null;
+  return (
+    <div className={styles.quick}>
+      <span className={styles.quickLabel}>
+        {t({en: 'Detected', zh: '检测到'})} {OS_NAME[os]}
+      </span>
+      {QUICK[os].map((q) => (
+        <a key={q.label} className={styles.btnPrimary} href={`${R2_RELEASES}/${VERSION}/${PLATFORMS[q.platform].file}`}>
+          <DownloadIcon size={14} strokeWidth={2} />
+          {q.label}
+        </a>
+      ))}
+      <a className={styles.btnGhost} href="#desktop">
+        {t({en: 'All platforms', zh: '全部平台'})}
+      </a>
+    </div>
+  );
+}
+
 /** One node of the hub. Renders as a plain div when there is nothing to link to. */
 function HubNode({p}: {p: HeroPlatform}) {
   const t = useT();
@@ -286,6 +359,7 @@ function Hero() {
         <a href="#selfhost">{t({en: 'a server you run yourself', zh: '你自己部署的服务器'})}</a>
         {t({en: '.', zh: '。'})}
       </p>
+      <QuickRow />
       {/* Five grid columns: run-on nodes | wires | core | wires | reach-in nodes.
           Below 860px the whole thing turns its axis (see download.module.css) —
           the core moves to the top and the trunk runs down the left. Same
@@ -356,6 +430,15 @@ function DesktopSection() {
           </div>
         ))}
       </div>
+      <Terminal
+        name="zsh — Homebrew (macOS)"
+        code={`${t({
+          en: '# macOS can also install with Homebrew (picks the build for your chip)',
+          zh: '# macOS 也可以用 Homebrew 安装（自动匹配芯片架构）',
+        })}
+brew tap ${TAP}
+brew install --cask undercontrol`}
+      />
       <div className={styles.footnotes}>
         <p className={styles.footnote}>
           <b>Windows:</b>{' '}
@@ -370,6 +453,18 @@ function DesktopSection() {
           <b>Linux:</b>{' '}
           {t({en: 'make the AppImage executable first: ', zh: '先给 AppImage 加执行权限：'})}
           <code>chmod +x undercontrol-desktop-{VERSION}.AppImage</code>
+        </p>
+        <p className={styles.footnote}>
+          <b>Homebrew:</b>{' '}
+          {t({
+            en: 'Homebrew 6 requires trusting a third-party tap once: ',
+            zh: 'Homebrew 6 对第三方 tap 需要先信任一次：',
+          })}
+          <code>brew trust {TAP}</code>
+          {t({
+            en: '. Older Homebrew and Linuxbrew have no trust subcommand — skip it there.',
+            zh: '。旧版 Homebrew 与 Linuxbrew 没有 trust 子命令，跳过即可。',
+          })}
         </p>
       </div>
     </section>
@@ -389,11 +484,14 @@ function CliSection() {
       </h2>
       <p className={styles.lede}>
         {t({
-          en: 'One npm install gives you ud: kubectl-style commands, an interactive TUI, and the interface AI coding agents use to read and write your tasks. npm is the only distribution channel.',
-          zh: '一条 npm 命令装好 ud：kubectl 风格的命令、交互式 TUI，也是 AI 编码 Agent 读写你任务的接口。npm 是唯一分发渠道。',
+          en: 'One command gives you ud: kubectl-style commands, an interactive TUI, and the interface AI coding agents use to read and write your tasks. Install from npm, or from our Homebrew tap on macOS and Linux.',
+          zh: '一条命令装好 ud：kubectl 风格的命令、交互式 TUI，也是 AI 编码 Agent 读写你任务的接口。通过 npm 安装，macOS 和 Linux 也可以用 Homebrew。',
         })}
       </p>
-      <Terminal name="bash — npm" code={CLI_INSTALL} />
+      <div className={styles.termGrid}>
+        <Terminal name="bash — npm" code={CLI_INSTALL} />
+        <Terminal name="zsh — Homebrew" code={CLI_BREW} />
+      </div>
       <div className={styles.btnrow}>
         <Link className={styles.btnGhost} to="/docs/cli">
           {t({en: 'CLI documentation', zh: 'CLI 文档'})}
@@ -522,8 +620,8 @@ function SelfHostSection() {
       <h2 className={styles.h2}>{t({en: 'Or skip our cloud entirely.', zh: '或者，完全不依赖我们的云。'})}</h2>
       <p className={styles.lede}>
         {t({
-          en: 'Every client above also works against a server you run yourself. Pick your path: one all-in-one Docker image (amd64 and arm64), or a bare-metal npm install — a single ud-server binary with the web UI built in. A free Pro trial license (valid until 2027-01-03) is included on the self-hosting page.',
-          zh: '上面的每个客户端都可以连接你自己部署的服务器。两条路径任选：all-in-one Docker 镜像（支持 amd64 和 arm64），或裸机 npm 安装——一个自带 Web UI 的 ud-server 二进制。私有部署页面还附带免费 Pro 试用许可证（有效期至 2027-01-03）。',
+          en: 'Every client above also works against a server you run yourself. Pick your path: one all-in-one Docker image (amd64 and arm64), a bare-metal npm install, or Homebrew with brew services keeping it running — each a single ud-server binary with the web UI built in. A free Pro trial license (valid until 2027-01-03) is included on the self-hosting page.',
+          zh: '上面的每个客户端都可以连接你自己部署的服务器。三条路径任选：all-in-one Docker 镜像（支持 amd64 和 arm64）、裸机 npm 安装，或 Homebrew 配合 brew services 后台常驻——都是一个自带 Web UI 的 ud-server 二进制。私有部署页面还附带免费 Pro 试用许可证（有效期至 2027-01-03）。',
         })}
       </p>
       <div className={styles.btnrow}>

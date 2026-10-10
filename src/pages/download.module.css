@@ -204,3 +204,15 @@ a.node:hover { background: var(--inset); border-color: var(--faint); color: var(
   .plat:nth-child(n+3) { border-bottom: 1px solid var(--border); }
   .plat:last-child { border-bottom: none; }
 }
+
+/* Detected-OS quick row (hero). Rendered only after hydration, so it adds no
+   SSR markup; flex-wrap keeps it inside a 390px viewport. */
+.quick { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.quickLabel { font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+
+/* Two terminal cards side by side (CLI: npm | Homebrew); stacked when narrow. */
+.termGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 26px; }
+.termGrid .term { margin-top: 0; max-width: none; min-width: 0; }
+@media screen and (max-width: 860px) {
+  .termGrid { grid-template-columns: minmax(0, 1fr); }
+}

@@ -1177,17 +1177,18 @@ export default function Home(): ReactNode {
   // The zh homepage gets the zh social card; every other page falls back to
   // themeConfig.image. react-helmet-async keeps the last og:image, so this
   // overrides the site-wide one instead of adding a second tag.
-  const {i18n: {currentLocale}, siteConfig: {url, tagline}} = useDocusaurusContext();
+  const {i18n: {currentLocale}, siteConfig: {url}} = useDocusaurusContext();
   const socialCard = `${url}/img/social-card${currentLocale === 'zh-Hans' ? '.zh-Hans' : ''}.png`;
-  // The meta description IS the displayed homepage slogan, so a search result or
-  // share card reads exactly like the page (master 2026-10-09). EN reuses
-  // siteConfig.tagline — the same source the hero renders (home5.hero.sub) —
-  // never a pasted copy, which went stale once before (card 674aa679); ZH mirrors
-  // the hero's zh slogan by hand in code.json (homepage.description). This one
-  // string also feeds og:/twitter:description (via Layout) and the JSON-LD below.
+  // The meta description is the category-definition sentence written for search
+  // engines and AI answers (sentence A, master 2026-10-11, card 63d43d95), NOT the
+  // hero slogan: it supersedes the 2026-10-09 rule that the two be identical
+  // (card 9dd430df). The hero keeps siteConfig.tagline. Use the sentence verbatim;
+  // the same text lives in docs/intro, static/llms.txt, GitHub, npm and Homebrew.
+  // This one string also feeds og:/twitter:description (via Layout) and the JSON-LD.
   const metaDescription = translate({
     id: 'homepage.description',
-    message: tagline,
+    message:
+      'udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.',
     description: 'The homepage meta description',
   });
   return (
@@ -1202,6 +1203,7 @@ export default function Home(): ReactNode {
         <meta property="og:image" content={socialCard} />
         <meta name="twitter:image" content={socialCard} />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:description" content={metaDescription} />
         <script type="application/ld+json">{homepageJsonLd(metaDescription)}</script>
       </Head>
       <main className={styles.scope}>

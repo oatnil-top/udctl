@@ -660,7 +660,7 @@
     "message": "让你的信息回到掌控之中。"
   },
   "homepage.description": {
-    "message": "探索、记录、沉淀。人与 AI agent 共用的私密工作空间。"
+    "message": "udctl(UnDercontrol)是一个可自托管的工作台，用来管理任务、笔记和开销，带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。"
   },
   "homepage.docs.body": {
     "description": "Homepage: docs.body",
@@ -1570,7 +1570,7 @@
   },
   "subscribe.meta.description": {
     "description": "The subscribe page meta description",
-    "message": "下载 UnderControl 桌面应用，订阅云服务，或在自己的基础设施上自托管。"
+    "message": "下载 UnDercontrol 桌面应用，订阅云服务，或在自己的基础设施上自托管。"
   },
   "subscribe.meta.title": {
     "description": "The subscribe page meta title",
@@ -1853,7 +1853,7 @@
   },
   "subscribe.selfHostedSection.description": {
     "description": "Self-hosted section description",
-    "message": "在您自己的基础设施上部署 UnderControl。您控制数据和托管。"
+    "message": "在您自己的基础设施上部署 UnDercontrol。您控制数据和托管。"
   },
   "subscribe.selfHostedSection.title": {
     "description": "Self-hosted section title",

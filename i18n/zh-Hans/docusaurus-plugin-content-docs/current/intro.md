@@ -6,7 +6,7 @@ sidebar_position: 1
 
 # 欢迎使用 udctl
 
-udctl(UnDercontrol)是人与 AI agent 共用的私密工作空间:任务、对话和知识都存在这里;agent 的定义、技能和跨机器的编排也在这里;一个人不用 agent 照样能用。跑在你自己的机器上。
+udctl(UnDercontrol)是一个可自托管的工作台，用来管理任务、笔记和开销，带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。跑在你自己的机器上。
 
 ## 什么是 udctl？
 

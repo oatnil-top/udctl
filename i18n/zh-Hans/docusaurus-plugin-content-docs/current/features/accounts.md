@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ## What are Accounts?
 
-Accounts in UnderControl help you track all your financial accounts in one place - from checking and savings accounts to credit cards and investments. Think of it as your financial dashboard where you can see all your money at a glance.
+Accounts in UnDercontrol help you track all your financial accounts in one place - from checking and savings accounts to credit cards and investments. Think of it as your financial dashboard where you can see all your money at a glance.
 
 ## Account Types
 
@@ -66,7 +66,7 @@ Click on any account to see:
 - Related expenses (if you've linked expenses to this account)
 
 ### Balance History
-UnderControl automatically tracks when you update account balances, so you can:
+UnDercontrol automatically tracks when you update account balances, so you can:
 - See how your accounts have changed over time
 - Track your financial progress
 - Understand your spending patterns
@@ -110,6 +110,6 @@ Your account balances and history help create reports showing your financial pro
 1. **Add your main accounts first** - Start with checking, savings, and any credit cards
 2. **Set the right account types** - Everyday accounts should be "Budget", investments should be "Off-Budget"
 3. **Enter current balances** - This gives you an accurate starting point
-4. **Update regularly** - Keep balances current as you use UnderControl
+4. **Update regularly** - Keep balances current as you use UnDercontrol
 
 Once you have your accounts set up, you'll have a clear view of your complete financial picture!

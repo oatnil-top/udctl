@@ -1,6 +1,6 @@
 ---
 title: 版本发布记录
-description: UnderControl 完整的版本历史和更新日志
+description: UnDercontrol 完整的版本历史和更新日志
 sidebar_position: 1
 ---
 
@@ -1105,11 +1105,11 @@ brew update && brew upgrade ud # 当初用 Homebrew 装的(同时会装上新的
 
 ---
 
-UnderControl 的版本更新历史和新功能介绍。
+UnDercontrol 的版本更新历史和新功能介绍。
 
 ## 版本号说明
 
-UnderControl 采用**语义化版本号**（格式：主版本号.次版本号.修订号），例如 `v0.19.0`：
+UnDercontrol 采用**语义化版本号**（格式：主版本号.次版本号.修订号），例如 `v0.19.0`：
 
 - **主版本号 0**：表示开发版本，API 和功能可能会有较大变动
 - **次版本号**（如 0.**19**.0）：增加新功能、重大改进或包含破坏性变更时递增
@@ -5047,7 +5047,7 @@ UnderControl 采用**语义化版本号**（格式：主版本号.次版本号.�
 ### 新功能
 
 - 工作区任务面板新增工作区切换下拉菜单
-- 独立编辑器新增"保存到 UnderControl"按钮
+- 独立编辑器新增"保存到 UnDercontrol"按钮
 
 ### 问题修复
 
@@ -6239,7 +6239,7 @@ ud CLI 现在可通过 npm 安装：`npm install -g @oatnil/ud`
 
 #### Web Clipper (Chrome 扩展)
 
-全新 Chrome 浏览器扩展，一键将网页保存为 UnderControl 任务：
+全新 Chrome 浏览器扩展，一键将网页保存为 UnDercontrol 任务：
 
 - 点击扩展图标，编辑标题，保存整个页面
 - 使用 SingleFile 技术将页面捕获为完整的 HTML 快照

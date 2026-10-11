@@ -6,7 +6,7 @@ sidebar_position: 4
 
 ## Overview
 
-The Accounts API provides RESTful endpoints for managing financial accounts in UnderControl. All endpoints require authentication via Bearer token.
+The Accounts API provides RESTful endpoints for managing financial accounts in UnDercontrol. All endpoints require authentication via Bearer token.
 
 ## Authentication
 

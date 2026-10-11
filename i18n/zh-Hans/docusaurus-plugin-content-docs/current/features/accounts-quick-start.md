@@ -6,7 +6,7 @@ sidebar_position: 3
 
 ## Your First 5 Minutes with Accounts
 
-This guide will help you set up your financial accounts in UnderControl and start tracking your money effectively.
+This guide will help you set up your financial accounts in UnDercontrol and start tracking your money effectively.
 
 ## Step 1: Add Your Main Accounts
 
@@ -103,4 +103,4 @@ Once your accounts are set up:
 - **Want to see history?** Click on any account to see balance changes over time
 - **Need privacy?** Toggle "blind mode" to hide dollar amounts
 
-Your accounts are the foundation of good financial tracking in UnderControl. Take a few minutes to set them up correctly, and everything else will be much easier!
+Your accounts are the foundation of good financial tracking in UnDercontrol. Take a few minutes to set them up correctly, and everything else will be much easier!

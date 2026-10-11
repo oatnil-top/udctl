@@ -120,7 +120,7 @@ https://xxx.trycloudflare.com/api/v1
 **1. 先改默认密码。** 所有数据接口都要求登录,而桌面版默认账号密码 `personal123` 是公开已知的——不改就暴露公网,等于把门钥匙贴在门上。桌面版的密码由 `PERSONAL_TIER_PASSWORD` 环境变量控制,macOS 上从终端带着它启动:
 
 ```bash
-PERSONAL_TIER_PASSWORD='你的强密码' /Applications/UnderControl.app/Contents/MacOS/UnderControl
+PERSONAL_TIER_PASSWORD='你的强密码' /Applications/UnDercontrol.app/Contents/MacOS/UnDercontrol
 ```
 
 Windows 在「系统环境变量」里添加 `PERSONAL_TIER_PASSWORD` 后重启 app。之后手机、CLI 都用新密码登录。

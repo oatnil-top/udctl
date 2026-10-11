@@ -121,7 +121,7 @@ Public exposure means anyone with the URL can reach your endpoint. Three things,
 **1. Change the default password first.** Every data endpoint requires login, but the desktop's default password `personal123` is public knowledge. Exposing it unchanged is taping the key to the door. The password comes from the `PERSONAL_TIER_PASSWORD` environment variable; on macOS, launch from a terminal with it set:
 
 ```bash
-PERSONAL_TIER_PASSWORD='your-strong-password' /Applications/UnderControl.app/Contents/MacOS/UnderControl
+PERSONAL_TIER_PASSWORD='your-strong-password' /Applications/UnDercontrol.app/Contents/MacOS/UnDercontrol
 ```
 
 On Windows, add `PERSONAL_TIER_PASSWORD` in System Environment Variables and restart the app. Phone and CLI then log in with the new password.

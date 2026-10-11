@@ -5,18 +5,18 @@ sidebar_position: 2
 
 # 从本地迁移数据到远程服务器
 
-了解如何将本地 UnderControl 桌面端（Personal 版，SQLite 数据库）的数据迁移到远程服务器，实现多设备同步和访问。
+了解如何将本地 UnDercontrol 桌面端（Personal 版，SQLite 数据库）的数据迁移到远程服务器，实现多设备同步和访问。
 
 ## 前提条件
 
-- 已有数据的 UnderControl 桌面端应用
-- 已部署并可访问的远程 UnderControl 服务器（参见 [Docker Compose 部署](/docs/self-deployment)）
+- 已有数据的 UnDercontrol 桌面端应用
+- 已部署并可访问的远程 UnDercontrol 服务器（参见 [Docker Compose 部署](/docs/self-deployment)）
 - 本机已安装 `ud` CLI（[CLI 文档](/docs/cli)）
 - 在本地和远程服务器上都已注册账号
 
 ## 概述
 
-使用 Personal 版 UnderControl 桌面端时，数据存储在本地 SQLite 数据库中。如果你想从多个设备（如笔记本电脑和手机）访问数据，需要将数据迁移到远程服务器。
+使用 Personal 版 UnDercontrol 桌面端时，数据存储在本地 SQLite 数据库中。如果你想从多个设备（如笔记本电脑和手机）访问数据，需要将数据迁移到远程服务器。
 
 `ud migrate` 命令从一个服务器（源）获取数据，并在另一个服务器（目标）上创建，自动处理跨引用的 ID 映射（如费用关联预算）。
 

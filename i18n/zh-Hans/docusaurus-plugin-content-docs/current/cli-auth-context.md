@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # CLI 多账户认证
 
-UnderControl CLI 支持使用 kubectl 风格的上下文系统管理多个账户和 API 端点。这让你可以轻松切换不同的服务器、账户或环境。
+UnDercontrol CLI 支持使用 kubectl 风格的上下文系统管理多个账户和 API 端点。这让你可以轻松切换不同的服务器、账户或环境。
 
 ## 概述
 

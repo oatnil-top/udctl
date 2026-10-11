@@ -6,7 +6,7 @@ sidebar_position: 6
 
 # 查询语法
 
-UnderControl 提供了强大的 SQL 风格查询语法，用于过滤和搜索任务。你可以手动编写查询，也可以让 AI 根据自然语言自动生成。
+UnDercontrol 提供了强大的 SQL 风格查询语法，用于过滤和搜索任务。你可以手动编写查询，也可以让 AI 根据自然语言自动生成。
 
 ## 查询的使用场景
 
@@ -364,7 +364,7 @@ deadline < 'today' AND status != 'done' ORDER BY deadline ASC
 
 ## 在 CLI 中使用查询
 
-UnderControl CLI 支持直接在终端运行查询。这对于脚本编写、自动化和快速查找非常有用，无需离开终端工作流。
+UnDercontrol CLI 支持直接在终端运行查询。这对于脚本编写、自动化和快速查找非常有用，无需离开终端工作流。
 
 ### `ud query`
 
@@ -408,7 +408,7 @@ ud query "status != 'archived'" --page 2 --limit 20
 
 ## AI 驱动的查询
 
-UnderControl 集成了 AI 功能，让查询更加便捷。你无需学习查询语法，直接用自然语言描述需求即可。
+UnDercontrol 集成了 AI 功能，让查询更加便捷。你无需学习查询语法，直接用自然语言描述需求即可。
 
 ### 在 Web 界面中
 

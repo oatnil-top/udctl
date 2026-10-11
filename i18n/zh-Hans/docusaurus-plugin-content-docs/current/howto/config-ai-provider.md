@@ -5,11 +5,11 @@ sidebar_position: 1
 
 # 配置 AI 提供商
 
-了解如何为 UnderControl 添加自己的 AI 提供商，用于 AI 聊天和智能功能（如任务摘要、智能分类）。
+了解如何为 UnDercontrol 添加自己的 AI 提供商，用于 AI 聊天和智能功能（如任务摘要、智能分类）。
 
 ## 前提条件
 
-- UnderControl 账户（已注册用户，非访客）
+- UnDercontrol 账户（已注册用户，非访客）
 - AI 提供商的 API 密钥（OpenAI、GitHub Models 或任何 OpenAI 兼容服务）
 
 ## 步骤

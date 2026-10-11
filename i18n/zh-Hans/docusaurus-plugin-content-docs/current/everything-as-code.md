@@ -1,12 +1,12 @@
 ---
 title: Everything as Code
-description: UnderControl 任务和笔记的开放文件格式规范
+description: UnDercontrol 任务和笔记的开放文件格式规范
 sidebar_position: 3
 ---
 
 # Everything as Code
 
-UnderControl 将任务和笔记存储为**带有 YAML frontmatter 的纯 Markdown 文件**。文件格式由开源的 JSON Schema 定义，发布在 [`ud-schemas`](https://github.com/user/ud-schemas) 仓库中。
+UnDercontrol 将任务和笔记存储为**带有 YAML frontmatter 的纯 Markdown 文件**。文件格式由开源的 JSON Schema 定义，发布在 [`ud-schemas`](https://github.com/user/ud-schemas) 仓库中。
 
 这意味着你的数据始终是：
 - **人类可读** — 使用任何文本编辑器编辑

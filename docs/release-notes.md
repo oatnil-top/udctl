@@ -43,6 +43,46 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.163.0 (2026-10-12)
+
+**Minor release: export your transactions, budgets and accounts to CSV, a malformed member mention is now refused instead of silently lost, and stopping an agent session works the first time.** One database migration: back up your database before upgrading (see Upgrade Notes).
+
+### New Features
+
+- **Export transactions to CSV.** The transactions page has a download button next to the blind-mode toggle. Pick a date range (it starts from the month you drilled into on the chart), see how many rows will be exported, and download a CSV with type, date, title, amount, currency, budget, account, source, description and ID. The Expenses / Incomes / All tab you are on is respected; the title search is not applied. A range with only a start or only an end date is named `from-<date>` or `to-<date>` so it does not read as a single day.
+- **Export budgets to CSV.** The budget page has a download button too. In the monthly view it exports each budget's monthly amount, spent and remaining for the month you pick; in the accumulated view it exports each budget's total, spent, remaining and start date. Overspent budgets keep their negative remaining. Hidden budgets follow the page's show-hidden setting.
+- **Export accounts as a snapshot or as balance history.** The accounts export now opens the same dialog. Choose the current balance snapshot (the export you had before), or the balance history over a date range. While the history is loading the dialog says so, and if it fails to load you see an error instead of an empty export.
+
+### Improvements
+
+- **The same export dialog on all three finance pages.** It closes when you confirm, without a success toast, and its date controls follow the app language. Every CSV is UTF-8 with a BOM so spreadsheet apps open it with the right characters.
+- **Negative amounts export as numbers.** The guard that stops a cell from being run as a spreadsheet formula no longer turns a plain signed number like `-18` into text. Values that start with `=` or `@`, and any non-numeric value starting with `+` or `-`, are still guarded.
+- **The agent CLI editor no longer has an Options section.** Preset argument variants were no longer used by anything since agents got one CLI row per model; the editor now shows only slug, label and command. An apply file that still carries `extra_options` is accepted and the field is ignored; the new CLI prints a one-line deprecation warning.
+
+### Bug Fixes
+
+- **A malformed member mention is refused when you save it.** A mention link with a near-miss shape (missing brackets, a label without `@`, the `member/` part dropped) used to be saved as plain text and notified no one. Saving a task body, note, comment or reply that contains one now fails with an error that shows the correct form. Editing only checks mentions you newly add, so older content is unaffected.
+- **`ud stop session` stops the session the first time.** Stopping a session used to kill only the shell the daemon started, so the agent kept running and could bring the stopped session back. The daemon now ends the agent's whole process group, the CLI waits until the session has really ended, and the server no longer lets a late report revive a stopped session.
+
+### Upgrade Notes (self-hosted)
+
+- **Back up your database before upgrading.** This release ships migration `00099_drop_agent_cli_extra_options`, which removes the `extra_options` column from the agent CLI table. The values in it are deleted and nothing used them. After the migration has run, go back to an older version only by restoring that backup.
+- **Upgrade the server before the CLI.** The stop-session fix has a server half and a CLI half; you need both. After upgrading the CLI, restart the daemon (`ud daemon stop`, then `ud daemon start`) so it runs the new code.
+- **Built-in Alfred prompt.** This release updates Alfred's default prompt. Your existing Alfred keeps its current prompt; the agent's detail page shows the difference from the new default, and "Restore default" replaces the whole prompt with it.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.163.0`.
+
+---
+
 ## v0.162.0 (2026-10-10)
 
 **Minor release: a Photos page in the web and desktop apps, plus two fixes to how resources are listed.** No database migrations. Self-hosted: upgrade the server before the web app and the desktop app (see Upgrade Notes).

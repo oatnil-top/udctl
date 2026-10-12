@@ -13,6 +13,7 @@ import AgentsDemo from '@site/src/components/HeroDemos/AgentsDemo';
 
 import {PlatformGlyph, PlatformGlyphDefs} from '@site/src/components/PlatformGlyphs';
 
+import versionConfig from '../../version.json';
 import styles from './butler.module.css';
 import hero from './home-hero.module.css';
 
@@ -1166,6 +1167,21 @@ function homepageJsonLd(description: string): string {
         downloadUrl: `${url}/download`,
         applicationCategory: 'ProductivityApplication',
         operatingSystem: 'macOS, Windows, Linux, iOS, Android, Web',
+        // version.json is the download pointer the release skill pushes (Phase 3
+        // Step 6) once binaries are live, so the version here moves with it and
+        // is never edited by hand. It is the desktop/web train; mobile and CLI
+        // patch builds can differ.
+        softwareVersion: versionConfig.version,
+        // Wording from blog-writer (card 85ecfe87); English in both locales.
+        featureList: [
+          'kubectl-style CLI (ud get, describe, apply, patch, delete)',
+          'Tasks, notes, accounts, expenses, incomes and budgets in one server',
+          'Kanban boards defined as saved queries',
+          'Dispatch AI coding agents (Claude Code, Codex, OpenCode) from a task comment',
+          'Group sharing with admin and member roles',
+          'Self-hosted with one Docker command (linux/amd64, linux/arm64)',
+          'Web, desktop (macOS, Windows, Linux), iOS beta and Android clients',
+        ],
         offers: {'@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Free for personal use'},
         author: {'@id': `${url}/#organization`},
       },

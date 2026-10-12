@@ -205,6 +205,10 @@ const config: Config = {
               to: '/open-with',
             },
             {
+              label: 'Compare',
+              to: '/compare',
+            },
+            {
               label: 'Cookbook',
               to: '/docs/cookbook',
             },
@@ -216,6 +220,10 @@ const config: Config = {
             {
               label: 'Getting Started',
               to: '/docs/intro',
+            },
+            {
+              label: 'FAQ',
+              to: '/faq',
             },
             {
               label: 'Developers',

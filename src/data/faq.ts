@@ -5,8 +5,8 @@
  * Answers are plain text; `backticks` mark inline code (rendered as <code> on the
  * page, stripped in JSON-LD). Wording is blog-writer's, copied verbatim from ud
  * notes f4a79401 (zh) and fdb3924c (en) on card bb621041, master-approved
- * 2026-10-12; question 13 (ud pull / ud push) added 2026-10-13 at alfred's request
- * in thread 70802823 — fix facts there, not here (card 85ecfe87). Same 13 questions in
+ * 2026-10-12; question 13 (ud pull / ud push) added 2026-10-13 from
+ * note fd52b2ab (alfred, thread 70802823) — fix facts there, not here (card 85ecfe87). Same 13 questions in
  * the same order in both locales.
  */
 export type FaqEntry = {q: string; a: string};

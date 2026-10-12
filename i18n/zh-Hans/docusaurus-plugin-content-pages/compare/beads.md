@@ -1,5 +1,5 @@
 ---
-title: udctl vs Beads
+title: udctl 和 Beads 对比
 description: Beads 和 udctl 都给 AI 编程 agent 提供一份可读写的任务数据,出发点不同。
 ---
 

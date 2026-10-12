@@ -1,5 +1,5 @@
 ---
-title: udctl vs Vibe Kanban
+title: udctl 和 Vibe Kanban 对比
 description: Vibe Kanban 和 udctl 都把看板和 AI 编程 agent 放在一起。
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: udctl vs Taskwarrior + Vikunja
+title: udctl 和 Taskwarrior + Vikunja 对比
 description: 想要「命令行管任务,同时有网页看板」的人,常见做法是 Taskwarrior 管终端、Vikunja 管网页。udctl 用一台服务器同时提供这两样。
 ---
 

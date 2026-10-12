@@ -5,7 +5,8 @@
  * Answers are plain text; `backticks` mark inline code (rendered as <code> on the
  * page, stripped in JSON-LD). Wording is blog-writer's, copied verbatim from ud
  * notes f4a79401 (zh) and fdb3924c (en) on card bb621041, master-approved
- * 2026-10-12 — fix facts there, not here (card 85ecfe87). Same 12 questions in
+ * 2026-10-12; question 13 (ud pull / ud push) added 2026-10-13 at alfred's request
+ * in thread 70802823 — fix facts there, not here (card 85ecfe87). Same 13 questions in
  * the same order in both locales.
  */
 export type FaqEntry = {q: string; a: string};
@@ -58,6 +59,10 @@ export const FAQ_ZH: FaqEntry[] = [
   {
     "q": "我的数据在哪里?",
     "a": "在你自己的机器上:自托管时在你部署的服务器上,用桌面客户端时在它在本机运行的后端里。官方另有一台供试用的测试服务器,它不是托管方案,不要放真实数据。"
+  },
+  {
+    "q": "能把任务放在本地文件夹里编辑吗?能配合 Obsidian 或 git 用吗?",
+    "a": "能。`ud pull /路径/` 把服务器上的一个虚拟路径拉成本地文件夹,一张任务一个 `.md` 文件,文件名是任务标题,笔记在 `notes/` 下;本地改完或新建文件后 `ud push` 推回去,新文件变成新任务。之后再 `ud pull` 只下载变过的部分。这个文件夹可以当 Obsidian 库打开,也可以用 git 管历史;已有的 Obsidian 库可以用 `ud init` 绑定路径后 `ud push` 发到服务器。"
   }
 ];
 
@@ -109,5 +114,9 @@ export const FAQ_EN: FaqEntry[] = [
   {
     "q": "Where is my data?",
     "a": "On your own machines: on the server you deploy when self-hosting, or in the backend the desktop app runs locally. There is also an official test server for trying the product; it is not a hosting plan, so don't keep real data there."
+  },
+  {
+    "q": "Can I edit tasks as files in a local folder, with Obsidian or git?",
+    "a": "Yes. `ud pull /Path/` checks a virtual path on the server out as a local folder: one `.md` file per task, named after the task title, with notes under `notes/`. Edit files or add new ones, then `ud push` sends the changes back and new files become new tasks; later pulls download only what changed. The folder opens as an Obsidian vault and can be kept in git, and an existing Obsidian vault can be published with `ud init` followed by `ud push`."
   }
 ];

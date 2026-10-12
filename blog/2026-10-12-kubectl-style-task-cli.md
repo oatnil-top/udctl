@@ -120,6 +120,60 @@ EOF
 Note created: 91fade3f
 ```
 
+## Pull a whole folder
+
+`apply` handles one file at a time. To edit a batch of tasks in a local folder, use `ud pull` and `ud push`, which work much like `git clone` and `git push`.
+
+Tasks on the server can live under a virtual path such as `/Infra/`. `ud pull` checks that path out into the current directory: one `.md` file per task, named after the task title, with notes under `notes/`:
+
+```
+$ mkdir infra && cd infra
+$ ud pull /Infra/
+  ✓ created: Add retry to the webhook sender.md (task, 0 notes)
+  ✓ created: Rotate the staging TLS certificate.md (task, 1 notes)
+  created a starter .udignore (edit freely; it syncs with the vault)
+Initialized tracking root at .../infra (bound to /Infra/, layout: vault)
+Pulled 2 tasks (1 notes), 0 resources.
+```
+
+The only line ud adds to a file is `ud-id`; the rest is the frontmatter and the task body:
+
+```
+$ cat "Rotate the staging TLS certificate.md"
+---
+ud-id: ca67878b-0652-4ae5-900e-0206a9dd70b0
+status: todo
+tags: [infra, pull-demo]
+---
+Cert expires on the 30th. Renew via the ACME job, then reload ingress.
+```
+
+Edit one file, create another, and push. The new file becomes a new task and the edited file updates the existing one:
+
+```
+$ sed -i "" "s/^status: todo/status: in-progress/" "Rotate the staging TLS certificate.md"
+$ printf -- "---\nstatus: todo\ntags: [infra, pull-demo]\n---\nList every cron job on staging and who owns it.\n" > "Audit the staging cron jobs.md"
+$ ud push --yes
+Will push 2 changes:
+  + new:      Audit the staging cron jobs.md (task)
+  ● modified: Rotate the staging TLS certificate.md (task)
+  ✓ created task: Audit the staging cron jobs (id: 262ebefe)
+  ✓ updated task: Rotate the staging TLS certificate
+Pushed 2 changes.
+```
+
+When someone changes a task in the web app, another `ud pull` downloads only what changed:
+
+```
+$ ud pull
+  ✓ updated: Add retry to the webhook sender.md (task, 0 notes)
+Pulled 1 tasks (0 notes), 0 resources.
+```
+
+If the same task changed on both sides, `ud push` skips it by default; pull first, then resolve it. Deleting a task file locally soft-deletes the task on push, and `ud restore task` brings it back.
+
+That makes a local folder a data source too. Edit the files in VS Code or Vim, keep history with `git commit`, or open the folder as an Obsidian vault, since the default vault layout follows Obsidian's conventions. To go the other way and publish an existing Obsidian vault, bind it with `ud init /Notes/` and run `ud push`.
+
 ## Not just tasks
 
 `ud api-resources` lists what these verbs work on. The first few rows:
@@ -143,7 +197,7 @@ Expenses, accounts, budgets and boards use the same `get`, `describe` and `apply
 
 - AI coding agents in your terminal read and write tasks. Claude Code, Codex, OpenCode, or any agent that can run a shell command reads requirements with `ud describe` and writes a note with `ud apply` when it is done. Input and output are plain text, so no plugin is needed.
 - CI records a release. When the pipeline finishes, `ud apply -f -` writes the change summary as a note on the release task.
-- Task files live in git. Files exported with `-o apply` can be committed, diffed and reviewed, then applied back.
+- Task files live in git. A folder from `ud pull`, or files exported with `-o apply`, can be committed, diffed and reviewed, then sent back with `ud push` or `apply`.
 - Several environments. Give your personal instance, team instance and local test instance a context each and name it with `--context`, the way kubectl handles several clusters.
 
 ## Compared with Taskwarrior
@@ -154,7 +208,7 @@ Taskwarrior is a frequent answer when people ask for a command-line task manager
 |---|---|---|
 | Command shape | `task <filter> <command> <mods>`, e.g. `task 12 modify due:eom`, `task +home list` | `ud <verb> <resource> <id>`, e.g. `ud describe task b1b36c4b` |
 | How you edit | Field by field through command arguments; JSON via `task import` and `task export` | One field with `patch`; a whole file with `apply`, and exports apply back as-is |
-| Where data lives | `taskchampion.sqlite3` on your machine | On a backend you run; the CLI is a client |
+| Where data lives | `taskchampion.sqlite3` on your machine | On a backend you run; the CLI is a client, and `ud pull` can check a path out as a local Markdown folder |
 | Several devices | `task sync` to a TaskChampion sync server, AWS S3 or Google Cloud Storage | Every client talks to the same server; there is no sync step |
 | Other ways in | Command line; third-party interfaces exist | The same data in web, desktop and iOS apps, plus kanban boards |
 | License | MIT, open source | Proprietary; free for individuals and teams of up to 3, larger teams pay by team size |

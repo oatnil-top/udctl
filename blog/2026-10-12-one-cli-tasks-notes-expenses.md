@@ -125,6 +125,7 @@ spec:
 
 - Home repairs, renewals and purchases. The task says what needs doing, the expense says what it cost, and the note connects them. At the end of the year, one task shows everything spent on that job.
 - An AI coding agent in your terminal does the bookkeeping. Claude Code, Codex, OpenCode, or any agent that can run a shell command reads the text of a receipt and writes an expense with `ud apply`. No plugin needed.
+- Write tasks and notes locally. `ud pull /Home/` checks a virtual path on the server out as a local folder, one `.md` file per task with notes under `notes/`. Edit in any editor or in Obsidian, then `ud push` sends it back, and new files become new tasks. Expenses are not part of that folder; record them with `ud apply`.
 - One server for a household or a small team. Tasks, accounts, expenses and budgets can be shared with a group; these are the resources with a `share` action in `ud api-resources`.
 
 ## Compared with Vikunja + Firefly III / Actual Budget

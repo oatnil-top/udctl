@@ -125,6 +125,7 @@ spec:
 
 - 家里的维修、续费、采购:任务记要做什么,开销记花了多少,笔记把两者连起来。年底翻一张任务就能看到这件事前后花的钱。
 - 终端里的 AI 编程 agent 帮你记账。Claude Code、Codex、OpenCode 或任何能跑 shell 的 agent,读一张收据的文字后用 `ud apply` 写一条开销,不需要专门的插件。
+- 任务和笔记在本地写。`ud pull /Home/` 把服务器上的一个虚拟路径拉成本地文件夹,一张任务一个 `.md` 文件,笔记在 `notes/` 下;用编辑器或 Obsidian 改完,`ud push` 推回去,新文件变成新任务。开销不进这个文件夹,还是用 `ud apply` 记。
 - 一个服务器给一家人或一个小团队。任务、账户、开销、预算都能共享给组,对应 `ud api-resources` 里带 `share` 动作的资源。
 
 ## 和 Vikunja + Firefly III / Actual Budget 的组合比

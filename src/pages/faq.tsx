@@ -41,7 +41,7 @@ export default function Faq(): ReactNode {
   const {i18n: {currentLocale}} = useDocusaurusContext();
   const isZh = currentLocale === 'zh-Hans';
   const t = isZh ? COPY.zh : COPY.en;
-  const entries = isZh ? FAQ_ZH : (FAQ_EN ?? FAQ_ZH);
+  const entries = isZh ? FAQ_ZH : FAQ_EN;
   return (
     <Layout title={t.title} description={entries[0].a.replaceAll('`', '')}>
       <Head>

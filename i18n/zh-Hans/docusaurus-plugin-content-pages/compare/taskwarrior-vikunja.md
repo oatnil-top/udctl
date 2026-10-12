@@ -3,7 +3,7 @@ title: udctl vs Taskwarrior + Vikunja
 description: 想要「命令行管任务,同时有网页看板」的人,常见做法是 Taskwarrior 管终端、Vikunja 管网页。udctl 用一台服务器同时提供这两样。
 ---
 
-{/* Placeholder: zh draft from ud note 454d6887 on card bb621041, wording unchanged (card 85ecfe87). The en file gets the English draft once master has reviewed the zh one. */}
+{/* zh text from ud note 454d6887 on card bb621041 (master-approved 2026-10-12, card 85ecfe87); en twin in src/pages/compare/. Fix wording on the card, not here. */}
 
 # udctl 和 Taskwarrior + Vikunja 对比
 

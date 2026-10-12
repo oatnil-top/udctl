@@ -4,9 +4,9 @@
  *
  * Answers are plain text; `backticks` mark inline code (rendered as <code> on the
  * page, stripped in JSON-LD). Wording is blog-writer's, copied verbatim from ud
- * note f4a79401 on card bb621041 — fix facts there, not here (card 85ecfe87).
- * FAQ_EN stays null until the English draft lands; until then the zh text
- * placeholds both locales.
+ * notes f4a79401 (zh) and fdb3924c (en) on card bb621041, master-approved
+ * 2026-10-12 — fix facts there, not here (card 85ecfe87). Same 12 questions in
+ * the same order in both locales.
  */
 export type FaqEntry = {q: string; a: string};
 
@@ -61,4 +61,53 @@ export const FAQ_ZH: FaqEntry[] = [
   }
 ];
 
-export const FAQ_EN: FaqEntry[] | null = null;
+export const FAQ_EN: FaqEntry[] = [
+  {
+    "q": "What is udctl?",
+    "a": "udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment."
+  },
+  {
+    "q": "Is there a kubectl-style command-line tool for task management?",
+    "a": "Yes, udctl's `ud`. It manages tasks with the verbs `get`, `describe`, `apply`, `patch` and `delete`. A task is a Markdown file with frontmatter: export it with `ud get task <id> -o apply`, edit it, and write it back with `ud apply -f`, the same loop as `kubectl get -o yaml` followed by `kubectl apply`."
+  },
+  {
+    "q": "Can terminal AI coding agents like Claude Code or Codex use udctl to manage tasks?",
+    "a": "Yes. An agent reads requirements with `ud describe task <id>` and updates the task or writes a progress note with `ud apply`. Input and output are plain text, so Claude Code, Codex, OpenCode, or any agent that can run a shell command can use it without a plugin."
+  },
+  {
+    "q": "How do I give an AI coding agent a task board that persists across sessions?",
+    "a": "Keep the tasks on a udctl server. Tasks, notes and comments are stored on the server and outlive the agent's session; the next session reads the notes the last one left with `ud describe task <id>`. Boards are saved queries, so people can watch the same tasks in the web app."
+  },
+  {
+    "q": "Can I hand a task to an AI agent from a task comment?",
+    "a": "Yes. @mention an agent in a task comment, and udctl opens a terminal on a machine registered as a daemon (the desktop app, or a machine running `ud daemon start`), starts Claude Code, Codex, OpenCode or another agent on that task, and adds `ud` usage to the agent's system prompt."
+  },
+  {
+    "q": "Can I self-host it? What do I need?",
+    "a": "Yes, with one `docker run` command. The all-in-one image puts the frontend and backend in one container and is published for linux/amd64 and linux/arm64. Personal use needs no license and defaults to SQLite and local file storage. Steps are on /self-hosting and in the deployment guide."
+  },
+  {
+    "q": "Is there a self-hosted tool that handles both tasks and expense tracking?",
+    "a": "Yes. udctl manages tasks, notes, accounts, expenses, incomes and budgets on one server, all with the same `get`, `describe` and `apply` on the command line. A task note can reference a specific expense with an `expense://` link."
+  },
+  {
+    "q": "Does it have kanban boards?",
+    "a": "Yes. A board is a saved query and each column is a condition, such as `status = 'todo' AND tags CONTAINS 'infra'`. The same task can appear on several boards without being copied."
+  },
+  {
+    "q": "Is there an API? Can I automate it?",
+    "a": "There is a REST API; its OpenAPI specification is published at udctl.com/api/. CI jobs and scripts can also call `ud` directly, with the `UD_API_URL` and `UD_TOKEN` environment variables naming the server and credentials."
+  },
+  {
+    "q": "Which clients are there?",
+    "a": "The `ud` command line (installed with Homebrew or npm), the web app, desktop apps for macOS, Windows and Linux, iOS (public beta on TestFlight) and Android (direct APK download)."
+  },
+  {
+    "q": "Is udctl open source? What does it cost?",
+    "a": "It is not open source; udctl is a proprietary product. Self-hosted licenses are priced by team size: individuals and teams of up to 3 are free, up to 20 people is US$49 per month, and larger teams are on the pricing page. There is no per-seat charge."
+  },
+  {
+    "q": "Where is my data?",
+    "a": "On your own machines: on the server you deploy when self-hosting, or in the backend the desktop app runs locally. There is also an official test server for trying the product; it is not a hosting plan, so don't keep real data there."
+  }
+];

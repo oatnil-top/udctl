@@ -1,12 +1,12 @@
 ---
-title: udctl 对比
-description: udctl 与 Beads、Vibe Kanban、Taskwarrior + Vikunja 的事实对照。
+title: udctl compared
+description: Fact-checked comparisons of udctl with Beads, Vibe Kanban, and Taskwarrior + Vikunja.
 ---
 
-{/* Placeholder index for the three compare pages (card 85ecfe87). Link text is each page's title; the en file gets English text with the English drafts. */}
+{/* Index of the compare pages (card 85ecfe87); link text is each page's title. zh twin in i18n/zh-Hans/docusaurus-plugin-content-pages/compare/index.md. */}
 
-# udctl 对比
+# udctl compared
 
-- [udctl 和 Beads 对比](/compare/beads)
-- [udctl 和 Vibe Kanban 对比](/compare/vibe-kanban)
-- [udctl 和 Taskwarrior + Vikunja 对比](/compare/taskwarrior-vikunja)
+- [udctl vs Beads](/compare/beads)
+- [udctl vs Vibe Kanban](/compare/vibe-kanban)
+- [udctl vs Taskwarrior + Vikunja](/compare/taskwarrior-vikunja)

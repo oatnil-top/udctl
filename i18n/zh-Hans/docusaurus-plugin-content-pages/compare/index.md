@@ -3,7 +3,7 @@ title: udctl 对比
 description: udctl 与 Beads、Vibe Kanban、Taskwarrior + Vikunja 的事实对照。
 ---
 
-{/* Placeholder index for the three compare pages (card 85ecfe87). Link text is each page's title; the en file gets English text with the English drafts. */}
+{/* Index of the compare pages (card 85ecfe87); link text is each page's title. en twin in src/pages/compare/index.md. */}
 
 # udctl 对比
 

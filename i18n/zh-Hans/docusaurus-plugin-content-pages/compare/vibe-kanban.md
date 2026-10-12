@@ -3,7 +3,7 @@ title: udctl vs Vibe Kanban
 description: Vibe Kanban 和 udctl 都把看板和 AI 编程 agent 放在一起。
 ---
 
-{/* Placeholder: zh draft from ud note 72edd8ab on card bb621041, wording unchanged (card 85ecfe87). The en file gets the English draft once master has reviewed the zh one. */}
+{/* zh text from ud note 72edd8ab on card bb621041 (master-approved 2026-10-12, card 85ecfe87); en twin in src/pages/compare/. Fix wording on the card, not here. */}
 
 # udctl 和 Vibe Kanban 对比
 

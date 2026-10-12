@@ -3,7 +3,7 @@ title: udctl vs Beads
 description: Beads 和 udctl 都给 AI 编程 agent 提供一份可读写的任务数据,出发点不同。
 ---
 
-{/* Placeholder: zh draft from ud note 58bc2a20 on card bb621041, wording unchanged (card 85ecfe87). The en file gets the English draft once master has reviewed the zh one. */}
+{/* zh text from ud note 58bc2a20 on card bb621041 (master-approved 2026-10-12, card 85ecfe87); en twin in src/pages/compare/. Fix wording on the card, not here. */}
 
 # udctl 和 Beads 对比
 

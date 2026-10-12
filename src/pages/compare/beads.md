@@ -1,31 +1,31 @@
 ---
 title: udctl vs Beads
-description: Beads 和 udctl 都给 AI 编程 agent 提供一份可读写的任务数据,出发点不同。
+description: Beads and udctl both give AI coding agents task data they can read and write, from different starting points.
 ---
 
-{/* Placeholder: zh draft from ud note 58bc2a20 on card bb621041, wording unchanged (card 85ecfe87). The en file gets the English draft once master has reviewed the zh one. */}
+{/* English text from ud note 48f1b63c on card bb621041 (master-approved 2026-10-12, card 85ecfe87); zh twin in i18n/zh-Hans/docusaurus-plugin-content-pages/compare/. Fix wording on the card, not here. */}
 
-# udctl 和 Beads 对比
+# udctl vs Beads
 
-Beads 和 udctl 都给 AI 编程 agent 提供一份可读写的任务数据,出发点不同。Beads 把任务库放进代码仓库,给 agent 当长期记忆;udctl 是一台自托管的服务器,人和 agent 在同一份任务、看板、笔记上协作。
+Beads and udctl both give AI coding agents task data they can read and write, from different starting points. Beads keeps the issue database inside the code repository as long-term memory for the agent. udctl is a self-hosted server where people and agents work on the same tasks, boards and notes.
 
-udctl(UnDercontrol)是一个可自托管的工作台,用来管理任务、笔记和开销,带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。
+udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.
 
-## 事实对照
+## Facts side by side
 
 | | Beads | udctl |
 |---|---|---|
-| 形态 | 命令行 `bd`;README 未列内置网页界面,社区有第三方界面 | 命令行 `ud`,另有网页、桌面、iOS 客户端 |
-| 数据放在哪 | 仓库里的 `.beads/` 目录,存储引擎是 Dolt(带版本的 SQL 数据库) | 你部署的服务器上 |
-| 多机与多人 | `bd dolt push` / `bd dolt pull` 经 git remote 同步;另有实验性的 HTTP 后端 `bd serve`;server 模式支持多个并发写入方 | 所有客户端连同一个服务器;按组共享任务,组内分管理员和成员 |
-| AI 编程 agent 怎么接 | `bd setup` 为 Claude Code、Codex CLI、Cursor 等写好集成;agent 自己调用 `bd create`、`bd ready`、`bd close` 等命令 | agent 调用 `ud` 命令读写任务;也可以在任务评论里 @ 一个 agent,桌面端或 `ud daemon` 在你的机器上开一个终端,启动 Claude Code、Codex、OpenCode 等去做这张任务 |
-| 任务之外 | 依赖关系(`bd dep add`)、记忆(`bd remember`) | 笔记、开销、账户、预算,用同一个 CLI |
-| 许可与价格 | MIT 开源,免费 | 闭源;个人和 3 人以内团队免费,更大团队按规模收费 |
+| Form | Command line `bd`; the README lists no built-in web UI, community UIs exist | Command line `ud`, plus web, desktop and iOS apps |
+| Where data lives | A `.beads/` directory in the repository, stored in Dolt (a version-controlled SQL database) | On the server you deploy |
+| Several machines and people | Sync through a git remote with `bd dolt push` / `bd dolt pull`; an experimental HTTP backend, `bd serve`; server mode supports multiple concurrent writers | Every client talks to the same server; tasks are shared with groups that have admin and member roles |
+| How AI coding agents connect | `bd setup` writes integrations for Claude Code, Codex CLI, Cursor and others; the agent runs `bd create`, `bd ready`, `bd close` and so on | Agents call `ud` commands to read and write tasks. You can also @mention an agent in a task comment: the desktop app or `ud daemon` opens a terminal on your machine and starts Claude Code, Codex, OpenCode or another agent on that task |
+| Beyond tasks | Dependencies (`bd dep add`), memories (`bd remember`) | Notes, expenses, accounts and budgets through the same CLI |
+| License and price | MIT, open source, free | Proprietary; free for individuals and teams of up to 3, larger teams pay by team size |
 
-## 什么情况选谁
+## Which one
 
-- 任务只属于一个代码仓库,希望它跟着代码一起版本化,主要给 agent 自己用,不想维护服务器,选 Beads。
-- 任务跨多个仓库或根本不在仓库里,要让同事在网页或手机上看看板、留评论,想从一条评论把任务派给 agent,选 udctl。
+- If the tasks belong to one repository, you want them versioned with the code, they are mainly for the agent itself, and you don't want to run a server, pick Beads.
+- If tasks span several repositories or live outside any repository, teammates need to see boards and comment from the web or a phone, and you want to hand a task to an agent from a comment, pick udctl.
 
-## 事实来源
-- Beads README 与 license 字段:https://github.com/steveyegge/beads (MIT;Dolt 存储;`bd` 命令;`bd dolt push/pull`;`bd serve` 标注 experimental;`bd setup` 支持的 agent)
+## Sources
+- Beads README and license field: https://github.com/steveyegge/beads (MIT; Dolt storage; `bd` commands; `bd dolt push/pull`; `bd serve` labeled experimental; agents supported by `bd setup`)

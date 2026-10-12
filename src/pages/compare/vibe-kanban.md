@@ -1,38 +1,38 @@
 ---
 title: udctl vs Vibe Kanban
-description: Vibe Kanban 和 udctl 都把看板和 AI 编程 agent 放在一起。
+description: Vibe Kanban and udctl both put a kanban board next to AI coding agents.
 ---
 
-{/* Placeholder: zh draft from ud note 72edd8ab on card bb621041, wording unchanged (card 85ecfe87). The en file gets the English draft once master has reviewed the zh one. */}
+{/* English text from ud note f29b5dad on card bb621041 (master-approved 2026-10-12, card 85ecfe87); zh twin in i18n/zh-Hans/docusaurus-plugin-content-pages/compare/. Fix wording on the card, not here. */}
 
-# udctl 和 Vibe Kanban 对比
+# udctl vs Vibe Kanban
 
-Vibe Kanban 和 udctl 都把看板和 AI 编程 agent 放在一起。Vibe Kanban 是在本机跑的网页应用,每个工作区给 agent 一个 git worktree 和分支;udctl 是一台自托管的服务器,任务、评论、看板在网页、桌面、iOS 和命令行里是同一份。
+Vibe Kanban and udctl both put a kanban board next to AI coding agents. Vibe Kanban is a web app that runs on your machine and gives each agent workspace its own git worktree and branch. udctl is a self-hosted server whose tasks, comments and boards are the same data in the web, desktop, iOS and command-line clients.
 
-udctl(UnDercontrol)是一个可自托管的工作台,用来管理任务、笔记和开销,带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。
+udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.
 
-## 项目现状
+## Project status
 
-Vibe Kanban 背后的公司 bloop 在 2026-04-10 宣布关闭。托管的远程服务保留 30 天后下线,远程的看板 issue、评论、项目和组织随之删除;本地工作区继续可用。项目转为社区维护的开源项目,GitHub 仓库到 2026-09-19 仍有提交。
+bloop, the company behind Vibe Kanban, announced its shutdown on 2026-04-10. The hosted remote services stayed up for 30 days and were then retired, removing remote kanban issues, comments, projects and organisations; local workspaces keep working. The project continues as community-maintained open source, and its GitHub repository had commits as recently as 2026-09-19.
 
-## 事实对照
+## Facts side by side
 
 | | Vibe Kanban | udctl |
 |---|---|---|
-| 形态 | `npx vibe-kanban` 启动,本机后端加网页界面,后端默认只监听 127.0.0.1 | 命令行 `ud`,另有网页、桌面、iOS 客户端 |
-| 数据放在哪 | 本机;托管的远程服务按公告在 30 天后下线 | 你部署的服务器上 |
-| 远程使用 | README 提供经 SSH 远程部署、用隧道暴露网页界面的说明,以及自托管 Cloud 实例的指南 | 服务器本身就是远程的,各客户端直连 |
-| 多人 | README 提到「私下或与团队一起规划」「在看板上分配 issue」,未说明账户与权限模型 | 按组共享任务,组内分管理员和成员 |
-| AI 编程 agent 怎么接 | 支持 Claude Code、Codex、Gemini CLI、GitHub Copilot、Amp、Cursor、OpenCode、Droid、CCR、Qwen Code;每个工作区一个 git worktree 和分支;带 MCP 服务器 | agent 调用 `ud` 命令读写任务;也可以在任务评论里 @ 一个 agent,桌面端或 `ud daemon` 在你的机器上开一个终端,启动 Claude Code、Codex、OpenCode 等去做这张任务 |
-| 任务之外 | README 未列 | 笔记、开销、账户、预算,用同一个 CLI |
-| 许可与价格 | Apache-2.0 开源,免费 | 闭源;个人和 3 人以内团队免费,更大团队按规模收费 |
+| Form | Started with `npx vibe-kanban`; a local backend plus web UI, with the backend listening on 127.0.0.1 by default | Command line `ud`, plus web, desktop and iOS apps |
+| Where data lives | Your machine; per the announcement, hosted remote services were retired after 30 days | On the server you deploy |
+| Remote use | The README covers deploying remotely over SSH with a tunnel for the web UI, and a guide to self-hosting a Cloud instance | The server is remote by design; every client connects to it |
+| Several people | The README mentions planning "either privately or with your team" and assigning issues on a board; it does not describe accounts or permissions | Tasks are shared with groups that have admin and member roles |
+| How AI coding agents connect | Supports Claude Code, Codex, Gemini CLI, GitHub Copilot, Amp, Cursor, OpenCode, Droid, CCR and Qwen Code; one git worktree and branch per workspace; includes an MCP server | Agents call `ud` commands to read and write tasks. You can also @mention an agent in a task comment: the desktop app or `ud daemon` opens a terminal on your machine and starts Claude Code, Codex, OpenCode or another agent on that task |
+| Beyond tasks | Not listed in the README | Notes, expenses, accounts and budgets through the same CLI |
+| License and price | Apache-2.0, open source, free | Proprietary; free for individuals and teams of up to 3, larger teams pay by team size |
 
-## 什么情况选谁
+## Which one
 
-- 一个人在本机并行跑多个 agent,希望每个任务自动隔离在独立的 worktree 和分支里,接受社区维护的节奏,选 Vibe Kanban。
-- 需要一台长期在线、多人共用的服务器,看板和评论在手机上也能看,任务之外还要记笔记和开销,选 udctl。原来用 Vibe Kanban 远程看板的团队,可以把 udctl 部署在自己的机器上替代那部分。
+- If you run several agents in parallel on your own machine, want each task isolated in its own worktree and branch, and are fine with a community-maintained pace, pick Vibe Kanban.
+- If you need an always-on server shared by several people, boards and comments you can read on a phone, and notes and expenses next to your tasks, pick udctl. Teams that relied on Vibe Kanban's remote boards can deploy udctl on their own machine to cover that part.
 
-## 事实来源
-- Vibe Kanban README 与 license 字段:https://github.com/BloopAI/vibe-kanban (npx 启动;HOST 默认 127.0.0.1;支持的 agent 列表;worktree;MCP;SSH 远程与自托管指南;Apache-2.0;「Vibe Kanban is sunsetting」)
-- 关闭公告,2026-04-10:https://www.vibekanban.com/blog/shutdown
-- 最近提交时间:GitHub API pushed_at = 2026-09-19T06:52:48Z
+## Sources
+- Vibe Kanban README and license field: https://github.com/BloopAI/vibe-kanban (npx launch; HOST defaults to 127.0.0.1; supported agents; worktrees; MCP; SSH remote and self-hosting guide; Apache-2.0; "Vibe Kanban is sunsetting")
+- Shutdown announcement, 2026-04-10: https://www.vibekanban.com/blog/shutdown
+- Latest push: GitHub API pushed_at = 2026-09-19T06:52:48Z

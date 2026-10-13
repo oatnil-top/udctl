@@ -34,10 +34,13 @@ udctl 由一位独立开发者加 AI 打造,把管理时间与金钱的工作放
 
 ## 快速开始
 
+第一次来?[快速开始](./getting-started.md)带你从零走到第一张卡片和第一件交给 agent 的活。
+
 准备好部署 udctl 了吗？查看我们的 [自部署指南](./self-deployment.md) 选择适合您需求的部署方法。
 
 ### 快速链接
 
+- [快速开始](./getting-started.md) - 从零到第一张卡片和第一件 agent 的活
 - [自部署指南](./self-deployment.md) - 选择您的部署方法
 - [Docker Compose：本地存储 + SQLite](./self-deployment.md) - 快速入门指南
 - [账户管理](./features/accounts.md) - 了解用户账户

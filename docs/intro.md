@@ -40,10 +40,13 @@ Deploy via Docker Compose for simplicity or Kubernetes for larger setups. Suppor
 
 ## Getting Started
 
+New here? [Getting Started](./getting-started.md) walks you from zero to your first card and your first agent job.
+
 Ready to deploy udctl? Check out our [Self-Deployment Guide](./self-deployment.md) to get started.
 
 ### Quick Links
 
+- [Getting Started](./getting-started.md) - From zero to your first card and first agent job
 - [Self-Deployment Guide](./self-deployment.md) - Choose your deployment method
 - [Docker Compose: Local Storage + SQLite](./self-deployment.md) - Quick start guide
 - [Account Management](./features/accounts.md) - Learn about user accounts

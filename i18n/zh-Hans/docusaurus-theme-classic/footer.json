@@ -41,7 +41,7 @@
   },
   "link.item.label.Getting Started": {
     "message": "快速开始",
-    "description": "The label of footer link with label=Getting Started linking to /docs/intro"
+    "description": "The label of footer link with label=Getting Started linking to /docs/getting-started"
   },
   "link.item.label.FAQ": {
     "message": "常见问题",

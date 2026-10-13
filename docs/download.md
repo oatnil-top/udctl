@@ -6,7 +6,8 @@ description: All udctl distribution channels — desktop apps, CLI, web app, bro
 # Download
 
 All ways to get udctl. Humans should prefer the [Download page](/download);
-this document states the same facts in a machine-readable form.
+this document states the same facts in a machine-readable form. New users: start with
+[Getting Started](/docs/getting-started).
 
 ## Web app
 

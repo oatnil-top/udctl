@@ -5,7 +5,7 @@ description: udctl 全部获取方式:桌面版、npm 安装的 ud CLI、Chrome 
 
 # 下载
 
-获取 udctl 的全部渠道。给人看的请去[下载页](/zh-Hans/download);本页把同样的事实写成机器可读的形式。
+获取 udctl 的全部渠道。给人看的请去[下载页](/zh-Hans/download);本页把同样的事实写成机器可读的形式。第一次使用请先看[快速开始](/zh-Hans/docs/getting-started)。
 
 ## 网页版
 

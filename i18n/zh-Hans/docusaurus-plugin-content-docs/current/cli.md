@@ -76,7 +76,7 @@ ud login
 ud login --api-url https://ud.example.com -n personal
 
 # udctl 桌面版会在你自己的机器上跑一个后端：
-ud login --api-url http://localhost:8888 -n desktop
+ud login --api-url http://localhost:24816 -n desktop
 ```
 
 还没有服务器、只想先试试？可以指向 `https://api.oatnil.com` —— 那是我们跑的一台**测试服**，

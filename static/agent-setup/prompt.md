@@ -35,7 +35,7 @@ for the answers:
    thing you cannot work out on your own — ask, and use the answer everywhere below.
    - **Their own server** — the normal case. A machine or VPS they host, or the
      udctl desktop app, which runs a backend on their own machine at
-     `http://localhost:8888`. Ask them for the URL. Guide:
+     `http://localhost:24816`. Ask them for the URL. Guide:
      `https://udctl.com/self-hosting`.
    - **Or, just trying it out** — if they have no server yet, they can point at
      `https://api.oatnil.com`. Tell them plainly what it is: a **test server** we run so

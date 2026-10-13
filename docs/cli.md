@@ -84,7 +84,7 @@ The server URL comes from the active context (or the `--api-url` flag). To log i
 ud login --api-url https://ud.example.com -n personal
 
 # The udctl desktop app runs a backend on your own machine:
-ud login --api-url http://localhost:8888 -n desktop
+ud login --api-url http://localhost:24816 -n desktop
 ```
 
 No server yet and just want to try udctl? Point at `https://api.oatnil.com` — a

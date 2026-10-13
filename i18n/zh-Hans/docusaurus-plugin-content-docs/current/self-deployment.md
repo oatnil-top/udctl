@@ -4,6 +4,8 @@ sidebar_position: 2
 
 # 自部署指南
 
+第一次用 udctl?[快速开始](./getting-started.md)覆盖从这个容器到第一张卡片、第一件 agent 的活的完整路径。
+
 用一条 Docker 命令即可自部署 udctl。**all-in-one 镜像**把前端和后端打包在同一个容器里，
 无需自己拼装——运行即可打开浏览器使用。
 
@@ -22,7 +24,7 @@ docker run -d --name undercontrol \
   lintao0o0/undercontrol:latest
 ```
 
-然后打开 `http://localhost:3000`，点击 **Start** 即可使用。前端和后端在同一容器中，
+然后打开 `http://localhost:3000`，点击 **登录(Log in)**,用下方就绪横幅里打印的账号登录。前端和后端在同一容器中，
 自动通过 `/api/v1` 连接——无需配置服务器地址。
 
 ### 首次启动 banner

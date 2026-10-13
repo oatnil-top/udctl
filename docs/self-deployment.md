@@ -4,6 +4,9 @@ sidebar_position: 2
 
 # Self-Deployment Guide
 
+First time with udctl? [Getting Started](./getting-started.md) covers the whole path,
+from this container to your first card and your first agent job.
+
 Self-host udctl with a single Docker command. The **all-in-one image** bundles
 the frontend and backend in one container, so there is nothing to wire together — just
 run it and open your browser.
@@ -24,7 +27,8 @@ docker run -d --name undercontrol \
   lintao0o0/undercontrol:latest
 ```
 
-Then open `http://localhost:3000` and click **Start**. The frontend and backend are in
+Then open `http://localhost:3000`, click **Log in** and sign in with the account the
+ready banner below prints. The frontend and backend are in
 the same container and connect automatically via `/api/v1` — no server URL to configure.
 
 ### First-boot banner

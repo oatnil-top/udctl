@@ -236,6 +236,37 @@ ud delete task abc123
 ud delete task 3de9f82b
 ```
 
+### Recycle Bin
+
+Tasks, agents and skills are soft-deleted: `ud delete` moves them to the recycle bin, where you can restore them or delete them for good.
+
+```bash
+# List what is in the bin, one kind at a time
+ud get task --deleted
+ud get agents --deleted
+ud get skills --deleted
+
+# Restore (agents and skills by name or id; a task by id)
+ud restore task abc123
+ud restore agent pr-reviewer
+ud restore skill my-skill
+
+# Permanently delete. Only works on an object already in the bin
+ud delete task abc123 --permanent
+ud delete agent pr-reviewer --permanent
+ud delete skill my-skill --permanent
+```
+
+A restore fails with a 409 if a live object has taken the name in the meantime. Rename or delete that object, then restore again; nothing is renamed for you.
+
+Permanent delete is irreversible, and what it removes depends on the kind:
+
+- **Task**: the task with its notes, comments, attachments, and history.
+- **Agent**: the agent's configuration. Its name becomes available again, and comments it already wrote keep its name as author.
+- **Skill**: the skill itself.
+
+The web app's Trash page lists tasks, agents and skills together, filterable by kind.
+
 ---
 
 ## Working with Tasks

@@ -228,6 +228,37 @@ ud delete task abc123
 ud delete task 3de9f82b
 ```
 
+### 回收站
+
+任务、agent 和 skill 都是软删除：`ud delete` 会把它们移入回收站，之后可以恢复，也可以彻底删除。
+
+```bash
+# 按类型列出回收站中的内容
+ud get task --deleted
+ud get agents --deleted
+ud get skills --deleted
+
+# 恢复（agent 和 skill 可用名称或 id；任务用 id）
+ud restore task abc123
+ud restore agent pr-reviewer
+ud restore skill my-skill
+
+# 彻底删除。只对已经在回收站中的对象有效
+ud delete task abc123 --permanent
+ud delete agent pr-reviewer --permanent
+ud delete skill my-skill --permanent
+```
+
+如果恢复时已有同名的未删除对象，恢复会返回 409。请先重命名或删除那个对象，再重新恢复；系统不会替你改名。
+
+彻底删除不可撤销，删除的内容取决于对象类型：
+
+- **任务**：任务本身及其备注、评论、附件和历史记录。
+- **agent**：agent 的配置。名称可以被重新使用，它此前写下的评论仍显示原作者名。
+- **skill**：skill 本身。
+
+网页端的回收站页面会把任务、agent 和 skill 放在一起展示，并可按类型筛选。
+
 ---
 
 ## 任务命令

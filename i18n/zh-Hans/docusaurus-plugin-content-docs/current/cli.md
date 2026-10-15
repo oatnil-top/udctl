@@ -230,34 +230,40 @@ ud delete task 3de9f82b
 
 ### 回收站
 
-任务、agent 和 skill 都是软删除：`ud delete` 会把它们移入回收站，之后可以恢复，也可以彻底删除。
+任务、agent、skill 和文件都是软删除：`ud delete` 会把它们移入回收站，之后可以恢复，也可以彻底删除。
 
 ```bash
 # 按类型列出回收站中的内容
 ud get task --deleted
 ud get agents --deleted
 ud get skills --deleted
+ud get file --deleted
 
-# 恢复（agent 和 skill 可用名称或 id；任务用 id）
+# 恢复（agent 和 skill 可用名称或 id；任务用 id；文件用原始文件名或 id）
 ud restore task abc123
 ud restore agent pr-reviewer
 ud restore skill my-skill
+ud restore file report.pdf
 
-# 彻底删除。只对已经在回收站中的对象有效
+# 彻底删除。对已经在回收站中的对象有效；文件在未删除时也可以直接彻底删除
 ud delete task abc123 --permanent
 ud delete agent pr-reviewer --permanent
 ud delete skill my-skill --permanent
+ud delete file 3f9c2a1b --permanent
 ```
 
-如果恢复时已有同名的未删除对象，恢复会返回 409。请先重命名或删除那个对象，再重新恢复；系统不会替你改名。
+如果恢复时已有同名的未删除对象，恢复会返回 409。请先重命名或删除那个对象，再重新恢复；系统不会替你改名。多个已删除文件可能同名，此时 `ud restore file` 会列出它们且不恢复任何一个，请改用 id。
 
 彻底删除不可撤销，删除的内容取决于对象类型：
 
 - **任务**：任务本身及其备注、评论、附件和历史记录。
 - **agent**：agent 的配置。名称可以被重新使用，它此前写下的评论仍显示原作者名。
 - **skill**：skill 本身。
+- **文件**：文件本身、缩略图、所有被替换的旧版本以及它与其他对象的关联。占用的存储空间随之释放。
 
-网页端的回收站页面会把任务、agent 和 skill 放在一起展示，并可按类型筛选。
+回收站中的文件在彻底删除之前仍占用你的存储配额。
+
+网页端的回收站页面会把任务、agent、skill 和文件放在一起展示，并可按类型筛选。
 
 ---
 

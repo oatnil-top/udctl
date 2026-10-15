@@ -43,6 +43,8 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+- **Deleting a file now moves it to the recycle bin.** It leaves your lists and attachments, but it keeps counting against your storage quota until you delete it for good. Restore it from the web Trash page or with `ud restore file`. Only a permanent delete (`ud delete file <id> --permanent`) releases the space.
+
 ## v0.163.0 (2026-10-12)
 
 **Minor release: export your transactions, budgets and accounts to CSV, a malformed member mention is now refused instead of silently lost, and stopping an agent session works the first time.** One database migration: back up your database before upgrading (see Upgrade Notes).

@@ -238,34 +238,40 @@ ud delete task 3de9f82b
 
 ### Recycle Bin
 
-Tasks, agents and skills are soft-deleted: `ud delete` moves them to the recycle bin, where you can restore them or delete them for good.
+Tasks, agents, skills and files are soft-deleted: `ud delete` moves them to the recycle bin, where you can restore them or delete them for good.
 
 ```bash
 # List what is in the bin, one kind at a time
 ud get task --deleted
 ud get agents --deleted
 ud get skills --deleted
+ud get file --deleted
 
-# Restore (agents and skills by name or id; a task by id)
+# Restore (agents and skills by name or id; a task by id; a file by its original name or id)
 ud restore task abc123
 ud restore agent pr-reviewer
 ud restore skill my-skill
+ud restore file report.pdf
 
-# Permanently delete. Only works on an object already in the bin
+# Permanently delete. Works on an object already in the bin; a file can also be deleted for good while still live
 ud delete task abc123 --permanent
 ud delete agent pr-reviewer --permanent
 ud delete skill my-skill --permanent
+ud delete file 3f9c2a1b --permanent
 ```
 
-A restore fails with a 409 if a live object has taken the name in the meantime. Rename or delete that object, then restore again; nothing is renamed for you.
+A restore fails with a 409 if a live object has taken the name in the meantime. Rename or delete that object, then restore again; nothing is renamed for you. Several deleted files can share a name; `ud restore file` then lists them and restores none, so pass an id.
 
 Permanent delete is irreversible, and what it removes depends on the kind:
 
 - **Task**: the task with its notes, comments, attachments, and history.
 - **Agent**: the agent's configuration. Its name becomes available again, and comments it already wrote keep its name as author.
 - **Skill**: the skill itself.
+- **File**: the file, its thumbnail, every replaced version and its links to other items. The storage it used is released.
 
-The web app's Trash page lists tasks, agents and skills together, filterable by kind.
+A file in the bin still counts against your storage quota until you delete it for good.
+
+The web app's Trash page lists tasks, agents, skills and files together, filterable by kind.
 
 ---
 

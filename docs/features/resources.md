@@ -75,6 +75,16 @@ ud upload resource ./photo.jpg -t expense -e exp-456
 ud attach resource <resource-id> --entity-type todolist --entity-id abc123
 ```
 
+## Deleting and Restoring
+
+Deleting a file moves it to the recycle bin. It leaves every list, attachment, and timeline, and you can bring it back at any time.
+
+- **Restore**: open the Trash page in the web app, or run `ud restore file <name|id>`.
+- **List the bin**: the Trash page, or `ud get file --deleted`.
+- **Delete for good**: the Trash page, or `ud delete file <id> --permanent`. This also works on a file that is still live.
+
+A file in the bin keeps counting against your storage quota, and so do its earlier versions. Only deleting it for good releases that space. A permanent delete removes the file, its thumbnail, its versions and its links to other items, and it cannot be undone.
+
 ## Storage Quotas
 
 - **Regular users** - 1 GB total storage, 10 MB per file

@@ -43,7 +43,54 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
-- **Deleting a file now moves it to the recycle bin.** It leaves your lists and attachments, but it keeps counting against your storage quota until you delete it for good. Restore it from the web Trash page or with `ud restore file`. Only a permanent delete (`ud delete file <id> --permanent`) releases the space.
+## v0.164.0 (2026-10-15)
+
+**Minor release: one recycle bin for tasks, agents, skills and files, with a Trash page to restore or permanently delete them; convert a note into a task; pinned cards in the Explorer; and copy a calendar slot.** Four database migrations: back up your database before upgrading (see Upgrade Notes).
+
+### New Features
+
+- **Deleting a skill, an agent or a file now moves it to the recycle bin.** Tasks already worked this way. Skills used to be deleted for good; agents were kept but could not be brought back. Everything deleted now waits in the recycle bin until you restore it or delete it permanently. A deleted file leaves your lists and attachments, but it keeps counting against your storage quota until you delete it for good; the storage quota shows how much the recycle bin is using.
+- **A Trash page for everything you deleted.** Open `/trash` (the old task trash link takes you there) to see deleted tasks, agents, skills and files in one list, newest first, with chips to filter by kind and "Load more" for long lists. Restore puts an item back where it was; if its name has been taken in the meantime, you are asked to rename the other one first. "Delete permanently" asks for confirmation inline and cannot be undone.
+- **Recycle bin from the CLI.** `ud restore agent|skill|file <name or id>`, `ud get agents|skills --deleted`, `ud get file --deleted`, and `ud delete agent|skill --permanent` (only for something already in the bin). `ud delete file` now moves the file to the bin; `ud delete file <id> --permanent` deletes it in one step and is the only way to release its storage. A name that matches more than one deleted file lists the candidates instead of picking one.
+- **Convert a note into a task.** Right-click a note and choose "Convert to task": a new card is created from the note's content, and the note is removed only after the card exists. Available to the note's owner.
+- **Pinned cards in the Explorer.** Cards you pin (on any client, including iOS) show in a collapsible section at the top of the Explorer. Right-click a card row to pin or unpin it; right-click a pinned row to open it in a new tab, reveal it, or unpin it.
+- **Copy a calendar slot.** The slot peek has a Copy button, and holding Option (Alt) while dragging a slot drops a copy instead of moving it. The copy is another time slot on the same card.
+- **Change a task's folder from its detail page.** Click the Path row to pick an existing folder, Root, Unfiled, or a new folder; the button next to it reveals the card in the Explorer.
+- **Copy path in the Explorer.** Right-click a folder, card or file row and choose "Copy path". It is for reading and pasting; ud still addresses items by id.
+
+### Improvements
+
+- **The desktop tab close button is always visible**, and clicking it on the last tab closes the window, like Cmd/Ctrl+W.
+- **The agent detail page shows "differs from the system default" as a banner at the top**, so a long Soul Prompt no longer pushes it off screen. The Soul Prompt field moved to the end. On a phone-width screen the header actions wrap below the name so `@name` stays visible.
+- **Faster loading.** The server compresses API responses and the web app's files, and the web app's hashed files are cached by the browser, so a full refresh no longer downloads the whole app again. AI chat replies stream token by token again instead of arriving all at once.
+- **Network errors are shown in your language** instead of a raw "Failed to fetch".
+- **The task path picker** lists prefix matches first, Enter picks the highlighted folder, and Esc closes only the picker.
+- **Desktop: the agent CLI trial run behaves like a real session.** It runs in a terminal with your login shell's setup, so a CLI that works in a session no longer fails the trial for a missing PATH.
+
+### Bug Fixes
+
+- **An expense can no longer point at a budget that does not exist.** A short budget id is resolved to the full one, and an id that matches no budget, or more than one, is refused instead of being saved. AI capture drops a budget it cannot find instead of failing.
+- **`ud config onboarding` can now show the skill row as done.** Its suggested command now writes a skill file that agents can load, using the new `ud describe skill <name> -o skill`. The login hint names the desktop backend's real port, 24816.
+- **CLI: an expense or income `account_id` is described as an account name**, which is what the web app stores, and the TUI shows it in full instead of cutting it to 8 characters.
+
+### Upgrade Notes (self-hosted)
+
+- **Back up your database before upgrading.** This release ships four migrations: `00100_add_derived_from_id_index_to_todolist_items` (an index), `00101_skills_soft_delete`, `00102_agent_configs_recycle_bin` and `00103_resources_soft_delete` (columns for the recycle bin on skills, agents and files). Agents deleted before this release are listed in the recycle bin after the upgrade. After the migrations have run, go back to an older version only by restoring that backup: an older server does not know about deleted skills and files and would show them as live.
+- **Upgrade the server before the web app and the CLI.** The Trash page and the recycle-bin commands call endpoints only this server has; against an older server they fail.
+- **Optional:** if a proxy in front of the server already compresses responses, set `UD_API_COMPRESSION=false` to turn off the server's own compression.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.164.0`.
+
+---
 
 ## v0.163.0 (2026-10-12)
 

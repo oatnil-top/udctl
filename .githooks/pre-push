@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+#
+# pre-push card-prefix gate (task d64b5305).
+#
+# Shared-checkout guard: many agent sessions commit in one working copy. A bare
+# `git push origin main` ships every commit sitting ahead of the remote, so one
+# session can carry another session's (possibly not-ready) commits upstream — on
+# the docs repo a push to main is a live deploy. This hook refuses a push whose
+# outgoing range spans more than one card-id prefix `[xxxxxxxx]`, which is the
+# signature of sweeping up someone else's commits.
+#
+# Distributed via core.hooksPath=.githooks (install-git-hooks.sh); the relative
+# path resolves per-worktree, so every worktree of the repo is covered.
+#
+# Deliberate batch push: set UD_PUSH_ALLOW_MULTI=1.
+
+# No `set -e`: a hook must reach its own exit decision, not die on a grep miss.
+set -u
+
+if [ "${UD_PUSH_ALLOW_MULTI:-}" = "1" ]; then
+  exit 0
+fi
+
+# A card prefix is `[` + 8 hex + `]` at the very start of a commit subject,
+# e.g. `[d8a154e9] onboarding: ...`. Reverts/merges/prefix-less commits carry
+# no card id and simply do not count toward the span.
+prefix_re='^\[[0-9a-f]{8}\]'
+
+all_prefixes=""
+
+# stdin: <local ref> <local oid> <remote ref> <remote oid>, one line per ref.
+while read -r local_ref local_oid remote_ref remote_oid; do
+  # Branch deletion: local oid is all zeros — nothing is being pushed.
+  case "$local_oid" in *[!0]*) ;; *) continue ;; esac
+
+  if printf '%s' "$remote_oid" | grep -q '[^0]'; then
+    # Updating a ref the remote already has: range is remote..local.
+    range="$remote_oid..$local_oid"
+  else
+    # New ref on the remote: everything reachable from local but not already
+    # published on any remote-tracking ref.
+    range="$local_oid --not --remotes"
+  fi
+
+  found=$(git log --format='%s' $range 2>/dev/null | grep -oE "$prefix_re" || true)
+  if [ -n "$found" ]; then
+    all_prefixes="${all_prefixes}${found}
+"
+  fi
+done
+
+distinct=$(printf '%s' "$all_prefixes" | grep -E "$prefix_re" | sort -u)
+count=$(printf '%s\n' "$distinct" | grep -c . || true)
+
+if [ "${count:-0}" -gt 1 ]; then
+  {
+    echo "pre-push blocked: this push spans $count card prefixes:"
+    printf '%s\n' "$distinct" | sed 's/^/    /'
+    echo
+    echo "A bare push here would carry other sessions' commits upstream."
+    echo "Push only your own commit(s) instead, e.g.:"
+    echo "    git push origin <your-commit-sha>:main"
+    echo "(list what is outgoing with: git log --oneline @{push}..HEAD  or  origin/main..HEAD)"
+    echo
+    echo "To push the whole batch on purpose:"
+    echo "    UD_PUSH_ALLOW_MULTI=1 git push origin main"
+  } >&2
+  exit 1
+fi
+
+exit 0

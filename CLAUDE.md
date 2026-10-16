@@ -52,6 +52,13 @@ automatically via Cloudflare Workers Builds on push to `main`. i18n: `en`
   `grep 'id="<id>"' build/configuration/index.html` before believing the
   warning). `docs/self-deployment.md` deep-links `#telegram_bot_token` this way.
 - Commit messages: `[<task-id-prefix>] <type>(<scope>): <message>`.
+- **Pre-push card-prefix gate**: a tracked `pre-push` hook (`.githooks/pre-push`,
+  enabled by `bash scripts/install-git-hooks.sh` once per clone — worktrees
+  inherit it) refuses a push whose range spans more than one `[xxxxxxxx]` card
+  prefix, so a bare `git push origin main` (a live deploy here) can't carry
+  another session's not-ready commit upstream. Push only your own with
+  `git push origin <your-commit-sha>:main`; for a deliberate batch,
+  `UD_PUSH_ALLOW_MULTI=1 git push origin main`.
 
 ## IndexNow (Bing side of "did the crawler see the change")
 

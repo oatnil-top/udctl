@@ -43,6 +43,49 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.165.0 (2026-10-16)
+
+**Minor release: a simpler first-run setup. The welcome dialog is now two sections, the desktop app registers this computer for you on first launch, and one button opens Claude Code with the setup prompt already pasted in.** This release runs no database migrations.
+
+### New Features
+
+- **A two-section setup dialog with a connected screen.** The old three-step wizard is gone. The dialog shows what is already set up and what is left, and switches to a "connected" screen once your agent reports in. The row for registering this computer shows one of three states, so you can tell "done" from "not yet" from "failed".
+- **Desktop: "Open Claude Code here".** The setup dialog can open a terminal in the desktop app with the agent-setup prompt already pasted. It is not submitted for you, and it does not create a card or an agent session on any card.
+- **Desktop: this computer registers itself on first launch.** The main window registers the machine when the app first starts; there is nothing to click.
+- **A "This computer and agents" block in Settings.** It shows three rows for this computer and your agents, matching the state shown in the setup dialog, and the Profile page shows the same CLI readout under Agents.
+- **`ud config onboarding --done`.** Marks setup finished from the CLI. The command also names contexts after the server, reports an agent hint, and has a hooks-consent row.
+- **A Telegram row in `ud config onboarding`.** When Telegram is not available, the row now says why.
+
+### Improvements
+
+- **Desktop: one clear install state for the CLI.** The app works out whether `ud` is installed by the app, installed by you, or not installed, and lets you switch its own link on or off. It never overwrites or removes a `ud` you installed yourself. On Linux the app installs to `~/.local/bin` only and no longer asks for administrator rights; an old `/usr/local/bin/ud` link made by an earlier version is treated as yours and is never removed.
+- **The setup prompt you paste into an agent has a single source**, so the web dialog, the desktop button and the docs site can no longer drift apart.
+- **A smaller desktop installer.** The desktop package no longer ships a second, precompressed copy of the web files.
+- **Welcome card wording** is rewritten (it links to Getting Started and no longer asks you to drag anything), and the built-in `ud-guide` has a section on Alfred.
+
+### Bug Fixes
+
+- **Deleting files on the Resources page, one or in a batch, now removes them from the Explorer sidebar** as well.
+- **`ud delete file --permanent` now works on a file that is already in the recycle bin** when you address it by its full UUID.
+
+### Upgrade Notes (self-hosted)
+
+- **No database changes.** There are no migrations to run and nothing to restore if you go back to the previous version.
+- **Upgrade the server before the apps and the CLI.** The setup dialog reports a connected agent through a new endpoint, `POST /api/v1/onboarding/agent-ready`, which only this server has.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.165.0`.
+
+---
+
 ## v0.164.0 (2026-10-15)
 
 **Minor release: one recycle bin for tasks, agents, skills and files, with a Trash page to restore or permanently delete them; convert a note into a task; pinned cards in the Explorer; and copy a calendar slot.** Four database migrations: back up your database before upgrading (see Upgrade Notes).

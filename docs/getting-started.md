@@ -155,10 +155,33 @@ EOF
 ## 5. Hand your first job to an agent
 
 udctl works with the AI coding agent you already use (Claude Code, Codex, Cursor and
-others): the agent reads and writes your cards through `ud`.
+others): the agent reads and writes your cards through `ud`. The quickest way is to let the
+agent set `ud` up for you — paste this one message into it. It is the same message the
+first-run wizard's **Paste to your agent** box copies:
 
-First give the agent the `ud` instructions, in the project folder you open it in. For
-Claude Code:
+<!-- BEGIN generated: agent paste (web, en) · source ud-vite-app/src/components/onboarding/agent-setup-prompt.ts -->
+```text
+I use udctl, a workspace for my tasks, notes and files. You can read and change it from the terminal with the `ud` command. My udctl server is <YOUR-SERVER-URL> — ask me for the address and use it in every command below.
+
+1. Get `ud`. If the udctl desktop app is on this computer, use the `ud` it ships; otherwise npm install -g @oatnil/ud
+2. Help me sign in. Never ask me for my password or key and never type them for me. Explain these two ways, let me pick, and wait while I do it:
+   a. In my own terminal: ud login --api-url <YOUR-SERVER-URL> -n udctl-<SERVER-HOST> (it asks for my password)
+   b. In udctl, Profile → API Configuration → Create Key, then in my own terminal: ud config set-context udctl-<SERVER-HOST> --api-url <YOUR-SERVER-URL> --api-key <my key>
+   Use the context udctl-<SERVER-HOST> (add --context if it is not current). Never write to a context named `personal`. Name the context after my server: `udctl-` plus the host, plus the port when it is not the default, with dots and colons as hyphens (http://localhost:3300 -> udctl-localhost-3300, https://api.oatnil.com -> udctl-api-oatnil-com).
+3. Learn it: `ud describe skill ud-cli` is the full guide; `ud get skills` lists more.
+4. Run `ud config onboarding --done` once. It tells my udctl window you are connected.
+5. Then be my guide: tell me in a few lines what I can ask you to do with udctl, ask what I am working on this week, and turn my answer into my first cards.
+```
+<!-- END generated: agent paste (web, en) -->
+
+Replace `<YOUR-SERVER-URL>` with your server address from step 1. The agent installs `ud`,
+helps you sign in (you type your own password or key — it never asks for them), learns the
+CLI from its skill, runs `ud config onboarding --done`, and turns what you tell it into your
+first cards.
+
+### Or wire it up by hand
+
+Give the agent the `ud` instructions in the project folder you open it in. For Claude Code:
 
 ```bash
 mkdir -p .claude/skills/ud-cli
@@ -166,9 +189,8 @@ mkdir -p .claude/skills/ud-cli
 ```
 
 Other agents load instructions from other paths (`AGENTS.md`, `.cursor/rules/`, and so
-on); `ud config onboarding` lists them.
-
-Then start the agent in that folder and ask for something real, for example:
+on); `ud config onboarding` lists them. Then start the agent in that folder and ask for
+something real, for example:
 
 ```text
 Use the ud CLI to look at my tasks, then create a card titled "Plan my week"

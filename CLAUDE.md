@@ -34,10 +34,17 @@ automatically via Cloudflare Workers Builds on push to `main`. i18n: `en`
   `go-backend/internal/config/config.go` in the main repo — any variable
   add/rename/default change there must update the page's `REFERENCE` data and the
   ConfigBuilder banner strings in the same task.
-- The homepage "Fetch <url>" agent-setup prompt's source of truth is
-  `static/agent-setup/prompt.md`. It has no mirror: `src/pages/index.tsx` only
-  holds the URL that points at it, and the main repo's `ud-vite-app` home page
-  dropped its copy when `/home` became a single screen. Edit the static file.
+- The homepage "Fetch <url>" agent-setup prompt is served from
+  `static/agent-setup/prompt.md`, but since card `d8a154e9` that file is
+  **generated — do not hand-edit it** (it opens with a provenance stamp saying so).
+  The single source is the template module
+  `ud-vite-app/src/components/onboarding/agent-setup-prompt.ts` in the main repo;
+  the onboarding dialog and Getting Started step 5 (EN + zh-Hans) come from the
+  same module. Change the wording there, then regenerate with
+  `cd ud-vite-app && npm run export:agent-prompt`. `prebuild` runs
+  `scripts/check-agent-prompt.mjs`, which fails the build if `prompt.md` or either
+  Getting Started block drifts from the template render (CANNOT-CHECK, like the
+  agent-guide gate, when the main repo is not checked out beside this one).
 
 ## Conventions
 

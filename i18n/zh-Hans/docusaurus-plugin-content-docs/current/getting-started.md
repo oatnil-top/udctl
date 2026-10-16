@@ -144,9 +144,32 @@ EOF
 
 ## 5. 把第一件活交给 agent
 
-udctl 配合你已经在用的 AI 编程 agent(Claude Code、Codex、Cursor 等):agent 通过 `ud` 读写你的卡片。
+udctl 配合你已经在用的 AI 编程 agent(Claude Code、Codex、Cursor 等):agent 通过 `ud`
+读写你的卡片。最快的办法是让 agent 自己把 `ud` 配好 —— 把下面这段话粘给它。这和首次登录向导里
+**复制给你的 agent** 那个框复制出来的是同一段:
 
-先把 `ud` 的使用说明交给 agent,放在你打开 agent 的那个项目目录里。以 Claude Code 为例:
+<!-- BEGIN generated: agent paste (web, zh) · source ud-vite-app/src/components/onboarding/agent-setup-prompt.ts -->
+```text
+我在用 udctl,一个放我任务、笔记和文件的工作区。你可以在终端用 `ud` 命令读取和修改它。我的 udctl 服务器是 <YOUR-SERVER-URL> —— 问我要地址,下面每条命令都用它。
+
+1. 装好 `ud`。如果这台电脑上有 udctl 桌面版,就用它自带的 `ud`;否则 npm install -g @oatnil/ud
+2. 帮我登录。永远不要问我密码或 key,也不要替我输入。把下面两种方式讲给我听,让我自己选,然后等我做完:
+   a. 在我自己的终端里:ud login --api-url <YOUR-SERVER-URL> -n udctl-<SERVER-HOST>(它会问我密码)
+   b. 在 udctl 里,Profile → API Configuration → Create Key,然后在我自己的终端里:ud config set-context udctl-<SERVER-HOST> --api-url <YOUR-SERVER-URL> --api-key <我的 key>
+   用 udctl-<SERVER-HOST> 这个上下文(如果它不是当前上下文,就加 --context)。永远不要写名为 `personal` 的上下文。按我的服务器给上下文起名:`udctl-` 加主机名,端口不是默认的就加端口,点和冒号都换成连字符(http://localhost:3300 -> udctl-localhost-3300,https://api.oatnil.com -> udctl-api-oatnil-com)。
+3. 先学会用:`ud describe skill ud-cli` 是完整说明;`ud get skills` 列出更多。
+4. 跑一次 `ud config onboarding --done`。它会告诉我的 udctl 窗口你已经连上了。
+5. 然后当我的向导:用几句话告诉我可以让你用 udctl 做些什么,问我这周在忙什么,把我的回答变成我的第一批卡片。
+```
+<!-- END generated: agent paste (web, zh) -->
+
+把 `<YOUR-SERVER-URL>` 换成第 1 步里你的服务器地址。agent 会装好 `ud`、指导你登录(密码或 key
+由你自己输入,它绝不索要),从 skill 学会命令行,跑一次 `ud config onboarding --done`,再把你告诉它的
+事变成你的第一批卡片。
+
+### 或者手动配置
+
+把 `ud` 的使用说明交给 agent,放在你打开 agent 的那个项目目录里。以 Claude Code 为例:
 
 ```bash
 mkdir -p .claude/skills/ud-cli
@@ -154,7 +177,6 @@ mkdir -p .claude/skills/ud-cli
 ```
 
 其他 agent 从别的路径读说明(`AGENTS.md`、`.cursor/rules/` 等),`ud config onboarding` 会列出来。
-
 然后在这个目录里启动 agent,交给它一件实际的事，比如:
 
 ```text

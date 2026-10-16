@@ -1,5 +1,5 @@
 <!-- GENERATED COPY — do not edit here.
-     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one d07161e24
+     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one 87b72da71
      Regenerate: auto/sync-agent-guide.sh -->
 
 # UnDercontrol Guide
@@ -100,6 +100,20 @@ Built-in AI assistant accessible from the app. Capabilities:
 **Agent triggers**: `on_mention`, `on_assign`, `on_subscribe`, `manual`
 
 **Creating custom agents**: Define name, prompt (soul), skills, triggers, session behavior, and optional default tags/board/project.
+
+### Alfred — the workspace butler
+
+Alfred is the built-in agent who coordinates work rather than doing it himself: he
+understands what you want, dispatches it to a suitable agent, tracks it, and relays the
+result. Usually the first agent a new user talks to. Confirm he is present with
+`ud get agents` — like any agent he can be renamed or removed.
+
+Reach him by **Ctrl+Shift+A** (quick input from anywhere in the app), the
+`[Alfred](nav://alfred)` page (full conversation), an `@mention` on any task
+(`[@Alfred](mention://member/<id>)`, id from `ud get agents`), or **Telegram** — connect
+your own bot in **Profile → Messenger** ([@BotFather](https://t.me/BotFather) → paste the
+token → send `/start` to the bot), then message the bot. Each Telegram chat is a
+conversation task whose comment thread is his memory; he replies in plain text.
 
 ### Scheduled Jobs
 

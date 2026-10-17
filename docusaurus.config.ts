@@ -6,6 +6,21 @@ import type * as Preset from '@docusaurus/preset-classic';
 const versionConfig = require('./version.json');
 const VERSION = versionConfig.version;
 
+// The homepage agent-setup pill copies this prompt straight to the clipboard, so a
+// user's coding agent is wired up with ZERO network fetch (ud card cdec4d97 — the old
+// pill copied a `Fetch <url>` command, which made the agent fetch prompt.md, and that
+// fetch was the slow step). Read at build time from the generated single source —
+// static/agent-setup/prompt.md, itself generated from ud-vite-app's agent-setup-prompt
+// template and held byte-identical by the drift gate — so the clipboard payload equals
+// what https://udctl.com/agent-setup/prompt.md serves and there is no second copy to
+// keep in sync. Handed to the page through customFields.agentSetupPrompt.
+const fs = require('node:fs');
+const path = require('node:path');
+const AGENT_SETUP_PROMPT = fs.readFileSync(
+  path.join(__dirname, 'static', 'agent-setup', 'prompt.md'),
+  'utf8',
+);
+
 const config: Config = {
   // Search-facing brand token. 'udctl' is the suffix every page's <title> and
   // og:title carry (theme formats `${page} | ${title}`). Chosen 2026-09-12 (ud task
@@ -36,6 +51,12 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
+
+  // Build-time values the homepage reads (src/pages/index.tsx). agentSetupPrompt is the
+  // verbatim prompt.md the agent-setup pill copies to the clipboard — see its definition above.
+  customFields: {
+    agentSetupPrompt: AGENT_SETUP_PROMPT,
+  },
 
   i18n: {
     defaultLocale: 'en',

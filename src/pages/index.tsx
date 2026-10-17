@@ -44,38 +44,61 @@ import hero from './home-hero.module.css';
 /**
  * Agent onboarding pill.
  *
- * The whole onboarding contract is one line of text an agent can act on:
- * `Fetch <AGENT_SETUP_PROMPT_URL>`. The prompt itself lives in this repo at
- * static/agent-setup/prompt.md and is served straight out of the Workers asset
- * build, so the URL below and the file are the same bytes — there is no second
- * copy to keep in sync. Edit the file in this repo, never here.
+ * One left click copies the WHOLE agent-setup prompt to the clipboard, so the user
+ * pastes it straight into their coding agent and the agent is wired up with no network
+ * fetch (ud card cdec4d97). The pill used to copy a one-line `Fetch <url>` command, which
+ * made the agent go and fetch prompt.md — that fetch was the slow step the owner wanted
+ * gone. The text is the build-time contents of static/agent-setup/prompt.md, read in
+ * docusaurus.config.ts and handed in via customFields.agentSetupPrompt; that file is
+ * generated from ud-vite-app's single source and held byte-identical by the drift gate,
+ * so there is no second copy of the words here.
  *
- * The URL used to be the GitHub raw one, on the theory that oatnil.com's bot
- * protection blocked some agents' fetchers. It points at the docs domain again
- * (task 2b70fc29, owner report 2026-08-18: agents were failing to fetch GitHub
- * content). Measured 2026-08-18 before the switch: no-UA, curl, python-requests,
- * Go-http-client, node-fetch, Claude-User, GPTBot and ChatGPT-User each got
- * `200 text/markdown`, 6019 bytes, from https://udctl.com/agent-setup/prompt.md
- * — no challenge on any of them. If an agent ever does get challenged here, the
- * fix is a Cloudflare WAF/bot-management exception for this path, not another
- * host: the prompt tells the agent it is published at this URL so it can
- * re-verify authenticity, and that self-reference has to stay true.
+ * The element stays an <a href={prompt url}>, not a <button> (task 15455d96): the href is
+ * load-bearing. A text/markdown conversion of this page drops `title` and `onClick`, so
+ * the href is the one path a page-fetching agent has to the prompt — a <button> made it
+ * invisible to exactly that audience. A plain left click copies the full prompt instead
+ * of navigating (human behavior unchanged); modified/middle clicks and non-click fetchers
+ * still get the real URL.
+ *
+ * The URL points at the docs domain, not GitHub raw (task 2b70fc29, owner report
+ * 2026-08-18: agents were failing to fetch GitHub). If an agent is ever challenged
+ * fetching it, the fix is a Cloudflare WAF/bot exception for this path, not another host:
+ * the prompt names its own URL so the agent can re-verify authenticity, and that
+ * self-reference has to stay true.
  */
 const AGENT_SETUP_PROMPT_URL = 'https://udctl.com/agent-setup/prompt.md';
-const AGENT_SETUP_COMMAND = `Fetch ${AGENT_SETUP_PROMPT_URL}`;
 
-/** The Clipboard API needs a secure context; keep the button working over plain http. */
-function copyViaTextarea() {
-  const el = document.createElement('textarea');
-  el.value = AGENT_SETUP_COMMAND;
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand('copy');
-  el.remove();
+/**
+ * The Clipboard API needs a secure context; this keeps the button working over plain
+ * http. Returns false when even execCommand copy is unavailable, so the caller can fall
+ * back to revealing the text for manual selection.
+ */
+function copyViaTextarea(text: string): boolean {
+  try {
+    const el = document.createElement('textarea');
+    el.value = text;
+    // Off-screen so the page does not jump while the text is selected.
+    el.style.position = 'fixed';
+    el.style.top = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    const ok = document.execCommand('copy');
+    el.remove();
+    return ok;
+  } catch {
+    return false;
+  }
 }
 
 function AgentSetupButton() {
+  const {siteConfig} = useDocusaurusContext();
+  const prompt = siteConfig.customFields?.agentSetupPrompt as string;
   const [copied, setCopied] = useState(false);
+  // Last resort (ud card cdec4d97, "要做" 3): clipboard write blocked — insecure context
+  // or denied permission — AND execCommand copy failed too. Reveal the full prompt in a
+  // selectable box so the user can copy it by hand. The pill itself stays compact
+  // (boss feedback 2026-07-26, task b00f9e8f: never print the prompt by default).
+  const [manual, setManual] = useState(false);
 
   useEffect(() => {
     if (!copied) return undefined;
@@ -83,57 +106,69 @@ function AgentSetupButton() {
     return () => clearTimeout(id);
   }, [copied]);
 
+  const fallback = () => {
+    if (!copyViaTextarea(prompt)) {
+      setCopied(false);
+      setManual(true);
+    }
+  };
+
   const copy = () => {
+    setManual(false);
     // Flip the label first: Chrome can leave writeText pending until the document
     // regains focus, so awaiting it would swallow the feedback entirely.
     setCopied(true);
     try {
-      const pending = navigator.clipboard?.writeText(AGENT_SETUP_COMMAND);
+      const pending = navigator.clipboard?.writeText(prompt);
       if (pending) {
-        pending.catch(copyViaTextarea);
+        pending.catch(fallback);
         return;
       }
     } catch {
       // Fall through — no Clipboard API here.
     }
-    copyViaTextarea();
+    fallback();
   };
 
-  // Boss feedback 2026-07-26 (task b00f9e8f): the pill stays compact — never
-  // print the Fetch command itself, only a copy glyph; the command lives in
-  // the title tooltip and the clipboard.
-  //
-  // This is an <a href={prompt url}>, not a <button>, and the href is the
-  // load-bearing part (task 15455d96): a text/markdown conversion of this page
-  // drops `title` and `onClick`, so a <button> made the prompt invisible to
-  // exactly the audience it exists for — a fetched copy of the page carried no
-  // path to prompt.md at all. A plain left click still copies instead of
-  // navigating (the human behavior is unchanged); modified clicks and
-  // non-click fetchers get the real URL.
   const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
     e.preventDefault();
     copy();
   };
+
+  const label = translate({
+    id: 'homepage.hero.agentSetup.aria',
+    message: 'Copy the agent setup prompt',
+  });
+
   return (
-    <a
-      href={AGENT_SETUP_PROMPT_URL}
-      className={styles.agentSetupButton}
-      onClick={onClick}
-      title={AGENT_SETUP_COMMAND}
-      aria-label={translate({
-        id: 'homepage.hero.agentSetup.aria',
-        message: 'Copy the agent setup prompt',
-      })}>
-      <span>
-        {copied ? (
-          <Translate id="homepage.hero.agentSetup.copied">Copied — paste it into your agent</Translate>
-        ) : (
-          <Translate id="homepage.hero.agentSetup.label">Onboard your agent to udctl</Translate>
-        )}
-      </span>
-      <code className={styles.agentSetupCode}>{copied ? '✓' : '⧉'}</code>
-    </a>
+    <>
+      <a
+        href={AGENT_SETUP_PROMPT_URL}
+        className={styles.agentSetupButton}
+        onClick={onClick}
+        title={label}
+        aria-label={label}>
+        <span>
+          {copied ? (
+            <Translate id="homepage.hero.agentSetup.copied">Copied — paste it into your agent</Translate>
+          ) : (
+            <Translate id="homepage.hero.agentSetup.label">Onboard your agent to udctl</Translate>
+          )}
+        </span>
+        <code className={styles.agentSetupCode}>{copied ? '✓' : '⧉'}</code>
+      </a>
+      {manual && (
+        <textarea
+          className={styles.agentSetupManual}
+          readOnly
+          rows={8}
+          value={prompt}
+          aria-label={label}
+          onFocus={(e) => e.currentTarget.select()}
+        />
+      )}
+    </>
   );
 }
 

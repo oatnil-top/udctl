@@ -160,6 +160,8 @@ udctl 配合你已经在用的 AI 编程 agent(Claude Code、Codex、Cursor 等)
 3. 先学会用:`ud describe skill ud-cli` 是完整说明;`ud get skills` 列出更多。
 4. 跑一次 `ud config onboarding --done`。它会告诉我的 udctl 窗口你已经连上了。
 5. 然后当我的向导:用几句话告诉我可以让你用 udctl 做些什么,问我这周在忙什么,把我的回答变成我的第一批卡片。
+
+关于 udctl 的更多信息:官网是 https://udctl.com。想把它部署到我自己的服务器上,自部署指南在 https://udctl.com/zh-Hans/docs/self-deployment/ ,其余文档的索引在 https://udctl.com/llms.txt ,遇到问题先自己去查,再来问我。卡住了,udctl 的 Telegram 群是 https://t.me/+4hZC0GtTe1syYzhl
 ```
 <!-- END generated: agent paste (web, zh) -->
 

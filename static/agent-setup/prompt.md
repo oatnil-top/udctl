@@ -12,3 +12,5 @@ I use udctl, a workspace for my tasks, notes and files. You can read and change 
 3. Learn it: `ud describe skill ud-cli` is the full guide; `ud get skills` lists more.
 4. Run `ud config onboarding --done` once. It tells my udctl window you are connected.
 5. Then be my guide: tell me in a few lines what I can ask you to do with udctl, ask what I am working on this week, and turn my answer into my first cards.
+
+More about udctl: the website is https://udctl.com. To run it on my own server, the self-hosting guide is https://udctl.com/docs/self-deployment/ and https://udctl.com/llms.txt indexes the rest of the docs — look things up there yourself before asking me. If we get stuck, the udctl Telegram group is https://t.me/+4hZC0GtTe1syYzhl

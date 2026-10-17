@@ -43,6 +43,34 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.165.1 (2026-10-17)
+
+**Patch release: the setup dialog fits on one screen on wide windows, the desktop "Open Claude Code here" terminal now opens in front, and the setup prompt you paste into an agent points to more places.** This release runs no database migrations and has no server code changes.
+
+### Improvements
+
+- **The setup dialog shows its two sections side by side on windows 1024 px wide or more**, so setup fits on one screen without scrolling.
+- **Desktop: the terminal from "Open Claude Code here" now comes to the front.** The terminal window is shown and focused when you click, instead of staying behind the app.
+- **The setup prompt you paste into an agent now also points it to the website, the self-hosting guide, `llms.txt` and the Telegram group.**
+
+### Upgrade Notes (self-hosted)
+
+- **No database changes.** There are no migrations to run and nothing to restore if you go back to the previous version.
+- **No server changes.** This release changes the web app, the desktop app and the pasted prompt. There is no required order between the server, the apps and the CLI.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.165.1`.
+
+---
+
 ## v0.165.0 (2026-10-16)
 
 **Minor release: a simpler first-run setup. The welcome dialog is now two sections, the desktop app registers this computer for you on first launch, and one button opens Claude Code with the setup prompt already pasted in.** This release runs no database migrations.

@@ -43,6 +43,43 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.167.0 (2026-10-18)
+
+**Minor release: add a note to any file, and the built-in AI now has a site-wide daily limit and a per-model price.** This release runs two database migrations, both of which only add.
+
+### New Features
+
+- **A description for every file.** A file can now carry a free-text note of up to 4096 characters. Edit it in the file Inspector: click the box and type, and it saves when you click away. Clearing the box removes the note. The file list search now matches a file's name or its description, and `%` and `_` in what you type are matched literally. Writing a description needs the same permission as editing the file, so a group member with read-only access cannot change it.
+- **Set a file's description from the CLI.** `ud apply -f` on a File now accepts a `description`. Leave the key out and the existing note is kept; set it to `""` to clear it; set a non-empty string to replace it. Applying the same text twice changes nothing. A bare `description:` with no value is refused with a message instead of being treated as "keep", so a half-edited file cannot wipe a note by accident. `ud describe file` shows the description, and `-o apply` includes it.
+- **A site-wide daily limit for the built-in AI.** Besides each person's own daily allowance, an administrator can now cap the total the whole server spends per day with `AI_TOTAL_DAILY_FREE_QUOTA`. When the cap is reached the call is refused with the new error `AI_GLOBAL_QUOTA_EXCEEDED` (429) and nobody's own allowance is used up by that refused call. The default is off, so an unconfigured server behaves as before.
+- **A price per built-in AI model.** An administrator sets, per model, how many units one call costs, in the system setting `ai.model_rate_multipliers` (for example `{"openai/gpt-4.1-mini": 1}`). A cost of `0` means "don't charge". The model pickers show a priced model with an `Nx` badge, and show a model that has no price as grayed out and not selectable. Your own provider keys are never charged and are not affected.
+
+### Improvements
+
+- **The built-in AI is now bounded per request.** A request body over 256 KB is refused with the new error `AI_REQUEST_TOO_LARGE` (413), a reply length above 8192 tokens is lowered to 8192, and the model used is always the one the chosen provider is configured with, not whatever the browser asked for. This applies to the built-in providers only; calls made with your own key are passed through untouched.
+- **AI usage now records token counts for the built-in AI chat.** When the built-in provider is Claude, the usage ledger fills in input and output tokens after the reply finishes (or after the connection drops), so the real cost of a call can be compared with the price set for it. It only records; it changes no limit and no price.
+- **The usage counter and the limit message now speak of AI "units" instead of "free uses".**
+
+### Upgrade Notes (self-hosted)
+
+- **Back up your database before upgrading.** Two migrations run on first start and both only add: `00104_add_description_to_resources` adds an empty `description` column to files, and `00105_create_ai_global_usage_counter` adds one new counter table. Neither rewrites existing rows.
+- **The built-in AI refuses every model until you price it.** `ai.model_rate_multipliers` starts as `{}`, and a model with no entry is refused with `AI_MODEL_RATE_NOT_CONFIGURED` (503) before anything is counted. If your server uses a built-in (administrator or startup) AI provider, set the table right after upgrading, for example `{"openai/gpt-4.1-mini": 1}`, as a system administrator under system configuration, and read it back. Until then that provider's models are grayed out in the pickers. Calls that use a person's own key are not affected. A setting that is not a flat object of whole numbers is rejected when you save it.
+- **Optional:** set `ai.rate_check_admin_bypass` to `true` to let administrators call an unpriced model for free (still recorded), and `AI_TOTAL_DAILY_FREE_QUOTA` to cap the whole server per day (`-1`, the default, is off).
+- **Upgrade the server before any client that edits file descriptions.** The description route exists only on 0.167.0 and later servers. A newer web page used against an older server simply shows no price badges and keeps every built-in model selectable.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.167.0`.
+
+---
+
 ## v0.166.0 (2026-10-18)
 
 **Minor release: tag many files at once, declare tags when you upload, and the Telegram and Discord bridge now reaches your own Alfred on a fresh self-hosted server.** This release runs no database migrations.

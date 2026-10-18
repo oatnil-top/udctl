@@ -56,6 +56,10 @@ sidebar_position: 1
 - **内置 AI 聊天现在会记录 token 数。** 当内置 provider 是 Claude 时，回复结束（或连接断开）之后，用量记录会补上输入和输出 token，这样就能拿一次调用的真实成本去对照给它定的价格。它只记录，不改任何额度或价格。
 - **用量计数和额度提示现在说的是 AI「点数」，不再说「免费次数」。**
 
+### 问题修复
+
+- **GitHub 回调地址规则变化后,网页版的 GitHub 登录继续可用。** GitHub 不再接受带 "#" 的回调地址,网页版现在同时接受不带 # 的 /oauth/callback/github 路径,并把登录交给登录页完成。你这边无需任何操作;如果你自建了 GitHub App,请把它的回调地址改成你的应用地址加 /oauth/callback/github。
+
 ### 升级注意(自托管)
 
 - **升级前请先备份数据库。** 首次启动会跑两个迁移，都只是新增：`00104_add_description_to_resources` 给文件加一个空的 `description` 列，`00105_create_ai_global_usage_counter` 新增一张计数表。两者都不改写已有的行。

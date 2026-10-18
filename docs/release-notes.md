@@ -60,6 +60,10 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 - **AI usage now records token counts for the built-in AI chat.** When the built-in provider is Claude, the usage ledger fills in input and output tokens after the reply finishes (or after the connection drops), so the real cost of a call can be compared with the price set for it. It only records; it changes no limit and no price.
 - **The usage counter and the limit message now speak of AI "units" instead of "free uses".**
 
+### Bug Fixes
+
+- **GitHub sign-in on the web app keeps working after GitHub's callback rule change.** GitHub no longer accepts a "#" in a callback address, so the web app now also answers on the plain path /oauth/callback/github and hands the sign-in over to the login page. Nothing to do on your side; if you run your own GitHub App, point its callback at your app's /oauth/callback/github.
+
 ### Upgrade Notes (self-hosted)
 
 - **Back up your database before upgrading.** Two migrations run on first start and both only add: `00104_add_description_to_resources` adds an empty `description` column to files, and `00105_create_ai_global_usage_counter` adds one new counter table. Neither rewrites existing rows.

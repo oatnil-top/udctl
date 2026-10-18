@@ -43,6 +43,43 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.166.0 (2026-10-18)
+
+**Minor release: tag many files at once, declare tags when you upload, and the Telegram and Discord bridge now reaches your own Alfred on a fresh self-hosted server.** This release runs no database migrations.
+
+### New Features
+
+- **Batch tagging for files.** A new `PATCH /api/v1/resources/batch/tags` call adds and removes tags on up to 100 files in one request. It only adds and removes the tags you name and never replaces a file's whole tag set, so tags set at the same moment from elsewhere are not overwritten. The reply lists, per file, whether it was updated, skipped because it already had the result you asked for, or failed (a file in the recycle bin, one that does not exist, or one you may not edit fails on its own without stopping the rest). It needs the same file permission as editing a single file's tags.
+- **Tags at upload time.** Starting an upload can now carry tags. When the uploaded content is identical to a file you already have, the new tags are added to that existing file and its current tags are kept. Uploading the same file again with the same tags changes nothing. An upload with no tags behaves as before.
+
+### Improvements
+
+- **Alfred's default instructions gain a "Reply format" section.** It asks for short, answer-first replies, numbered options with one recommended, and cards and notes written as clickable links instead of bare ids. New users get it automatically. If you already have your own Alfred, your copy is not changed; the agent config page shows "differs from the system default (last changed in v0.166.0)" so you can compare and adopt it yourself.
+
+### Bug Fixes
+
+- **Chatting with Alfred over Telegram, Discord or the quick input now addresses your own Alfred.** Previously these messages were always addressed to one fixed built-in id, which only the first user to claim it owned. On a fresh self-hosted server that id did not exist at all, so the comment was refused with `TASK_MENTION_NO_ACCESS` and the bridge stopped working for every user, admin included. The "is Alfred available" status now checks the same copy.
+- **The docs page on mentions no longer shows a fixed agent id** in its example, since each agent's id differs per user and per instance.
+
+### Upgrade Notes (self-hosted)
+
+- **No database changes.** There are no migrations to run and nothing to restore if you go back to the previous version.
+- **Upgrade the server before any client that uses batch tagging or sends tags with an upload.** The new route and the upload `tags` field exist only on 0.166.0 and later servers.
+- **Alfred's existing copies are not rewritten.** Only newly created Alfred copies get the new "Reply format" section.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.166.0`.
+
+---
+
 ## v0.165.1 (2026-10-17)
 
 **Patch release: the setup dialog fits on one screen on wide windows, the desktop "Open Claude Code here" terminal now opens in front, and the setup prompt you paste into an agent points to more places.** This release runs no database migrations and has no server code changes.

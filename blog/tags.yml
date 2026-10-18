@@ -27,3 +27,8 @@ story:
   label: Story
   permalink: /story
   description: Stories behind UnDercontrol
+
+essay:
+  label: Essay
+  permalink: /essay
+  description: Personal essays and opinions

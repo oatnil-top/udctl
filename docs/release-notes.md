@@ -43,6 +43,55 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.168.0 (2026-10-19)
+
+**Minor release: AI descriptions for images (off by default), a desktop app that holds on to much less memory, and a "Close tab" entry in the tab menu.** This release runs no database migrations.
+
+### New Features
+
+- **AI description for images, off by default.** Profile has a new per-user switch for automatic image description (off until you turn it on) and a picker for the vision model: the built-in tier or one of your own providers. When the switch is on, a newly uploaded image gets a description appended to the file's description, and the file Inspector marks it as written by AI. The Inspector's **Generate description** button writes one on demand whether or not the switch is on; one click adds one description. It needs the same permission as editing the file, and your provider choice and daily allowance apply. The button only appears for images that can be described.
+- **What is sent to the AI.** The small thumbnail the app already makes is sent first. The original is sent only when a file has no thumbnail and is a JPEG, PNG, GIF or WebP of at most 10 MB. Anything else, including SVG, and HEIC without a thumbnail, is not described.
+- **When the provider says no, you see it.** While the switch is on, Profile shows the latest rejection in red, with the provider, the HTTP status and the provider's own words, until a later description succeeds. If you chose the built-in tier but the server has no built-in vision model, Profile says so and asks you to pick your own provider. A rejection that cannot succeed on retry (a 4xx other than 408 and 429) now ends the job instead of being retried.
+- **Desktop: "Close tab" in the tab right-click menu.** It closes the tab the same way the x does.
+- **Desktop: Enter sends in chat inputs.** In the desktop app, Enter sends in comment, reply, compose and session inputs; Cmd/Ctrl+Enter and Shift+Enter insert a newline. Enter while an input method is composing never sends, and an empty draft never sends. The web app keeps Cmd/Ctrl+Enter to send. A sent message now appears at once, and if it fails it stays on screen marked as failed with a retry; a session input puts your text back.
+
+### Improvements
+
+- **The desktop app holds on to much less memory.** Terminal output is no longer copied between windows that do not show it; a finished session's terminal output in the main window is released 60 seconds after the session ends; saved UI state is written at most once a second per setting, and not at all from session windows.
+- **Agent session windows close by themselves.** An agent session's window closes 60 seconds after its process exits (a window you are focused on is kept; terminals you opened yourself are never closed). A session that was wrongly marked lost while its terminal is still alive is reported back as running.
+- **The desktop app writes its renderer memory use to its log once a minute.** It only records; it takes no action.
+
+### Bug Fixes
+
+- **Switching the vision provider back to the built-in tier now saves.** A preference set to an explicit null was rejected as missing.
+- **Generating a thumbnail no longer erases a description written at the same moment.**
+- **A late "running" report no longer revives a session that is already stopped or exited.**
+- **A session corrected from lost back to live shows its output again.**
+
+### Release Statement for Image AI Descriptions
+
+Verbatim from the release ruling on card 55bfbe68 (original wording, Chinese): 「用户级自动描述默认关;手动按钮已暴露缩略图路径;8 图读数发版后当天在 udv 补齐,主体一致丢 2/8 及以上就当天出补丁让手动触发改回送原图。」
+
+In English: the per-user automatic description is off by default; the manual button exposes the thumbnail path; the 8-image reading is completed on udv the same day as the release, and if the subject-match loses 2 of 8 or more, a patch ships that day to make the manual trigger send the original again.
+
+### Upgrade Notes (self-hosted)
+
+- **No database changes.** This release adds no migration.
+- **Upgrade the server before the web and desktop apps.** The Generate description button and the Profile rejection message call routes that exist only on 0.168.0 and later servers. A newer app against an older server simply does not get descriptions.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.168.0`.
+
+---
+
 ## v0.167.0 (2026-10-18)
 
 **Minor release: add a note to any file, and the built-in AI now has a site-wide daily limit and a per-model price.** This release runs two database migrations, both of which only add.

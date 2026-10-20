@@ -43,6 +43,50 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.169.0 (2026-10-20)
+
+**Minor release: the AI chat can open pages for you, admins can set a daily AI allowance per user, and a first version of "ud desktop" lets the CLI drive your desktop app.** This release runs two database migrations; both only add tables.
+
+### New Features
+
+- **AI chat opens pages in place.** Ask the chat to take you somewhere ("open my kanban", "show task 1a2b3c4d") and it goes there in the app instead of only describing the way. It can only open pages of the app itself, one per reply, and a task id must match exactly one task you can see. In the desktop app, a request made from a secondary window opens the page in the main window.
+- **Per-user AI allowance for admins.** A system admin can give one user a daily AI free allowance different from the site-wide one, including unlimited, or reset that user to the site value. There is a new **AI Quota** page in the admin dashboard: it shows the site default and every user with an override, who changed it and when. Users without an override behave exactly as before. Available on Pro and Max servers.
+- **`ud desktop`: let the CLI or an agent act on your desktop app (first version).** `ud desktop open <path>`, `focus`, `close`, `windows`, `list` and `status` send a command to your own desktop app that is online, which runs it and reports back. Only five actions are allowed, commands are rate-limited, the app shows a short toast with a Back button when it moves you, and the **Daemons** page has a switch to turn this off on that computer plus a list of recent commands. `--daemon` picks the computer by id, prefix, alias or machine name. If none of your desktop apps is online, nothing is sent.
+
+### Improvements
+
+- **The AI usage figure tells the truth for admins.** The daily allowance an admin saw used to read "unlimited" even though admins were limited like everyone else. It now shows the limit that actually applies; an admin who should not be limited gets an unlimited override.
+- **Desktop: one window holds the connection to the daemon.** With several windows open, they no longer take the daemon connection from each other about once a second.
+- **Desktop: a slow machine-id lookup no longer stalls the app.** It now gives up after 3 seconds and does not retry for 60 seconds.
+
+### Bug Fixes
+
+- **Links inside AI chat replies are clickable again.** Links to pages of the app (for example a task) showed as grey "[blocked]" text since July.
+- **Windows desktop: no more empty console windows.** Background commands the app runs no longer flash a cmd.exe window.
+
+### Known Issues
+
+- **`ud desktop` ships before its end-to-end acceptance is finished.** The server and desktop halves are in this release, but the remaining checks (many navigations against a real installed app, choosing another computer with `--daemon`) can only be done once this version is installed, so they have not been run yet. The switch on the Daemons page is on by default; turn it off there if you do not want commands to reach that computer.
+
+### Upgrade Notes (self-hosted)
+
+- **Back up the database before upgrading.** Two migrations run on first boot: `desktop_commands` and `ai_user_quota_overrides`. Both only create new tables; nothing existing is changed or dropped.
+- **Upgrade the server before the apps and the CLI.** `ud desktop`, the desktop app's command handling and the AI Quota page call routes that exist only on 0.169.0 and later servers. Against an older server, `ud desktop` does not work and the AI Quota page shows a load error.
+- **No new settings.** No environment variable was added or removed.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.169.0`.
+
+---
+
 ## v0.168.0 (2026-10-19)
 
 **Minor release: AI descriptions for images (off by default), a desktop app that holds on to much less memory, and a "Close tab" entry in the tab menu.** This release runs no database migrations.

@@ -30,7 +30,7 @@ http://localhost:4000/api/v1
 ```
 
 On the test server udctl runs for trying the product, the base is
-`https://api.oatnil.com/api/v1`. Note `https://app.udctl.com` is the web app, not the API:
+`https://api.udctl.com/api/v1`. Note `https://app.udctl.com` is the web app, not the API:
 every API path under it answers 404.
 
 ## Endpoints

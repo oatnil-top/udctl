@@ -29,7 +29,7 @@ https://<your-server>/api/v1
 http://localhost:4000/api/v1
 ```
 
-如果用的是我们跑的那台试用**测试服**，根地址是 `https://api.oatnil.com/api/v1`。注意
+如果用的是我们跑的那台试用**测试服**，根地址是 `https://api.udctl.com/api/v1`。注意
 `https://app.udctl.com` 是网页应用，不是 API：它下面的每个 API 路径都返回 404。
 
 ## Endpoints

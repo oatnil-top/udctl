@@ -1,7 +1,7 @@
 {
   "linkset": [
     {
-      "anchor": "https://api.oatnil.com/api/v1",
+      "anchor": "https://api.udctl.com/api/v1",
       "service-desc": [
         { "href": "https://udctl.com/api/openapi.json", "type": "application/json" }
       ],
@@ -10,7 +10,7 @@
         { "href": "https://udctl.com/docs/api-reference/", "type": "text/html" }
       ],
       "status": [
-        { "href": "https://api.oatnil.com/api/v1/health", "type": "application/json" }
+        { "href": "https://api.udctl.com/api/v1/health", "type": "application/json" }
       ],
       "describedby": [
         { "href": "https://udctl.com/auth.md", "type": "text/plain" },

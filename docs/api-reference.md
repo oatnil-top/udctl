@@ -32,7 +32,7 @@ the ones the web and desktop clients use.
 
 | Instance | Base URL |
 | --- | --- |
-| Hosted | `https://api.oatnil.com` |
+| Hosted | `https://api.udctl.com` |
 | Self-hosted | wherever you deployed it — see [Self-Deployment](./self-deployment.md) |
 
 The specification declares `host: localhost:8888`. That is the code generator's

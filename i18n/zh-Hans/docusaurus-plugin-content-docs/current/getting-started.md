@@ -119,7 +119,7 @@ ud login --api-url http://localhost:3000 -n personal
 | 你选的是 | `--api-url` |
 | --- | --- |
 | Docker(选项 B) | `http://localhost:3000`,或你在 `HOST_DOMAIN` 里填的地址 |
-| 测试服务器(选项 C) | `https://api.oatnil.com`(先在 app.udctl.com 注册) |
+| 测试服务器(选项 C) | `https://api.udctl.com`(先在 app.udctl.com 注册) |
 | 桌面版(选项 A) | 一般不需要：第一次打开工作区时，应用会替你安装命令行并登录(context 名为 `personal`)。手动登录的话地址是 `http://localhost:24816`,密码在 **个人资料 → 密码** 里。 |
 
 看看自己是谁，列出卡片:
@@ -156,7 +156,7 @@ udctl 配合你已经在用的 AI 编程 agent(Claude Code、Codex、Cursor 等)
 2. 帮我登录。永远不要问我密码或 key,也不要替我输入。把下面两种方式讲给我听,让我自己选,然后等我做完:
    a. 在我自己的终端里:ud login --api-url <YOUR-SERVER-URL> -n udctl-<SERVER-HOST>(它会问我密码)
    b. 在 udctl 里,Profile → API Configuration → Create Key,然后在我自己的终端里:ud config set-context udctl-<SERVER-HOST> --api-url <YOUR-SERVER-URL> --api-key <我的 key>
-   用 udctl-<SERVER-HOST> 这个上下文(如果它不是当前上下文,就加 --context)。永远不要写名为 `personal` 的上下文。按我的服务器给上下文起名:`udctl-` 加主机名,端口不是默认的就加端口,点和冒号都换成连字符(http://localhost:3300 -> udctl-localhost-3300,https://api.oatnil.com -> udctl-api-oatnil-com)。
+   用 udctl-<SERVER-HOST> 这个上下文(如果它不是当前上下文,就加 --context)。永远不要写名为 `personal` 的上下文。按我的服务器给上下文起名:`udctl-` 加主机名,端口不是默认的就加端口,点和冒号都换成连字符(http://localhost:3300 -> udctl-localhost-3300,https://api.udctl.com -> udctl-api-udctl-com)。
 3. 先学会用:`ud describe skill ud-cli` 是完整说明;`ud get skills` 列出更多。
 4. 跑一次 `ud config onboarding --done`。它会告诉我的 udctl 窗口你已经连上了。
 5. 然后当我的向导:用几句话告诉我可以让你用 udctl 做些什么,问我这周在忙什么,把我的回答变成我的第一批卡片。

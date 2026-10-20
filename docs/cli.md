@@ -87,16 +87,16 @@ ud login --api-url https://ud.example.com -n personal
 ud login --api-url http://localhost:24816 -n desktop
 ```
 
-No server yet and just want to try udctl? Point at `https://api.oatnil.com` — a
+No server yet and just want to try udctl? Point at `https://api.udctl.com` — a
 **test server** we run for trying the product, not a hosting plan, so don't keep real work
 there. Sign up for it at [app.udctl.com](https://app.udctl.com) first:
 
 ```bash
-ud login --api-url https://api.oatnil.com -n trial
+ud login --api-url https://api.udctl.com -n trial
 ```
 
 `https://app.udctl.com` serves the web app only — passing it to `--api-url` fails with
-`status 404`. The API host is `https://api.oatnil.com`.
+`status 404`. The API host is `https://api.udctl.com`.
 
 You can also pass credentials non-interactively with `-u/--username` and `-p/--password`. Credentials are saved to `~/.config/ud/config.yaml`.
 

@@ -28,7 +28,7 @@ OpenAPI 渲染是 400 个操作的平铺。对已经重写过的那部分 API �
 
 | 实例 | Base URL |
 | --- | --- |
-| 官方托管 | `https://api.oatnil.com` |
+| 官方托管 | `https://api.udctl.com` |
 | 自部署 | 你自己部署的地址 —— 见[自部署](./self-deployment.md) |
 
 规范里写的 `host: localhost:8888` 是代码生成器的开发默认值,不是真实端点,请替换成上表中的地址。

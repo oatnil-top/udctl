@@ -106,8 +106,8 @@ const UI = {
   todayLabel: {en: 'Works today at', zh: '今天可用路径'},
   baseUrl: {en: 'Base URL', zh: '基础地址'},
   baseUrlVal: {
-    en: '`https://api.oatnil.com` (hosted) or wherever you self-host',
-    zh: '`https://api.oatnil.com`(托管版),自部署则是你自己的地址',
+    en: '`https://api.udctl.com` (hosted) or wherever you self-host',
+    zh: '`https://api.udctl.com`(托管版),自部署则是你自己的地址',
   },
   auth: {en: 'Auth', zh: '认证'},
   authVal: {

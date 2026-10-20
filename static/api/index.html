@@ -14,7 +14,7 @@
 
   The spec served here is a byte-for-byte copy of go-backend/docs/swagger.json in
   the ud-all-in-one repo (see docs/api-reference.md for how to refresh it).
-  It is NOT fetched from the live server: https://api.oatnil.com/swagger/doc.json
+  It is NOT fetched from the live server: https://api.udctl.com/swagger/doc.json
   returns 200 with 0 bytes, because the generated docs package is imported only
   under `//go:build dev` (go-backend/cmd/server/swagger_dev.go) and release
   binaries build with `-tags prod`. This page is the working substitute.
@@ -37,7 +37,7 @@
 <body>
 
 <div id="banner">
-  <strong>udctl Backend API</strong> — base URL <code>https://api.oatnil.com</code>.
+  <strong>udctl Backend API</strong> — base URL <code>https://api.udctl.com</code>.
   The <code>host: localhost:8888</code> shown below is the generator's dev default; ignore it.
   Raw spec: <a href="/api/openapi.json">/api/openapi.json</a> ·
   <a href="/docs/api-reference">About this document</a>

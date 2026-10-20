@@ -26,7 +26,7 @@ agents.)
 
 udctl is self-hosted: each person or team runs its own server, so ask your person for
 its URL (for example `https://ud.example.com`, or `http://localhost:8888` for the desktop
-app). `https://api.oatnil.com` is a test server for trying udctl, not a hosting plan; use
+app). `https://api.udctl.com` is a test server for trying udctl, not a hosting plan; use
 it only if your person says so. All API routes live under `/api/v1` on the server URL.
 
 ## Method 1: CLI login

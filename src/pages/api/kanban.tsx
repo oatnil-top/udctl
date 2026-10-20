@@ -65,7 +65,7 @@ const DATA: ApiPageData = {
               label: 'HTTP',
               lang: 'text',
               code: `POST /api/v1/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/columns/col-doing/query HTTP/1.1
-Host: api.oatnil.com
+Host: api.udctl.com
 Authorization: Bearer <token>
 Content-Type: application/json
 
@@ -132,7 +132,7 @@ Content-Type: application/json
               label: 'HTTP',
               lang: 'text',
               code: `POST /api/v1/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/query HTTP/1.1
-Host: api.oatnil.com
+Host: api.udctl.com
 Authorization: Bearer <token>
 Content-Type: application/json
 
@@ -202,7 +202,7 @@ Content-Type: application/json
               label: 'HTTP',
               lang: 'text',
               code: `POST /api/v1/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/tasks HTTP/1.1
-Host: api.oatnil.com
+Host: api.udctl.com
 Authorization: Bearer <token>
 Content-Type: application/json
 
@@ -276,7 +276,7 @@ Content-Type: application/json
               label: 'HTTP',
               lang: 'text',
               code: `POST /api/v1/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/tasks/7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10/move HTTP/1.1
-Host: api.oatnil.com
+Host: api.udctl.com
 Authorization: Bearer <token>
 Content-Type: application/json
 
@@ -351,7 +351,7 @@ Content-Type: application/json
               label: 'HTTP',
               lang: 'text',
               code: `GET /api/v1/boards/7d55a212-30f5-4a41-a5da-b2f7f01f3bb9/summary?preview=2 HTTP/1.1
-Host: api.oatnil.com
+Host: api.udctl.com
 Authorization: Bearer <token>`,
             },
             {
@@ -401,7 +401,7 @@ Authorization: Bearer <token>`,
               label: 'HTTP',
               lang: 'text',
               code: `PATCH /api/v1/tasks/7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10/metadata HTTP/1.1
-Host: api.oatnil.com
+Host: api.udctl.com
 Authorization: Bearer <token>
 Content-Type: application/json
 
@@ -439,7 +439,7 @@ Content-Type: application/json
               label: 'HTTP',
               lang: 'text',
               code: `PATCH /api/v1/tasks/7c2f6a1e-4b09-4d2a-9e51-2f8c3d7b9a10 HTTP/1.1
-Host: api.oatnil.com
+Host: api.udctl.com
 Authorization: Bearer <token>
 Content-Type: application/json
 
@@ -493,7 +493,7 @@ Content-Type: application/json
               label: 'HTTP',
               lang: 'text',
               code: `POST /api/v1/tasks/query HTTP/1.1
-Host: api.oatnil.com
+Host: api.udctl.com
 Authorization: Bearer <token>
 Content-Type: application/json
 
@@ -570,7 +570,7 @@ Content-Type: application/json
               label: 'HTTP',
               lang: 'text',
               code: `POST /api/v1/tasks/3f6d9a52-88a1-4f0e-b1d4-6c1f2e7a9b31/close-sprint HTTP/1.1
-Host: api.oatnil.com
+Host: api.udctl.com
 Authorization: Bearer <token>
 Content-Type: application/json
 

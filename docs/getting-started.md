@@ -128,7 +128,7 @@ It asks for your email and password. Replace the URL with yours:
 | You picked | `--api-url` |
 | --- | --- |
 | Docker (Option B) | `http://localhost:3000`, or the address you gave in `HOST_DOMAIN` |
-| Test server (Option C) | `https://api.oatnil.com` (register at app.udctl.com first) |
+| Test server (Option C) | `https://api.udctl.com` (register at app.udctl.com first) |
 | Desktop app (Option A) | Usually not needed: the app installs the CLI and signs it in for you (context `personal`) the first time you open a workspace. By hand, it is `http://localhost:24816` with the password from **Profile → Password**. |
 
 Check who you are and list your cards:
@@ -167,7 +167,7 @@ I use udctl, a workspace for my tasks, notes and files. You can read and change 
 2. Help me sign in. Never ask me for my password or key and never type them for me. Explain these two ways, let me pick, and wait while I do it:
    a. In my own terminal: ud login --api-url <YOUR-SERVER-URL> -n udctl-<SERVER-HOST> (it asks for my password)
    b. In udctl, Profile → API Configuration → Create Key, then in my own terminal: ud config set-context udctl-<SERVER-HOST> --api-url <YOUR-SERVER-URL> --api-key <my key>
-   Use the context udctl-<SERVER-HOST> (add --context if it is not current). Never write to a context named `personal`. Name the context after my server: `udctl-` plus the host, plus the port when it is not the default, with dots and colons as hyphens (http://localhost:3300 -> udctl-localhost-3300, https://api.oatnil.com -> udctl-api-oatnil-com).
+   Use the context udctl-<SERVER-HOST> (add --context if it is not current). Never write to a context named `personal`. Name the context after my server: `udctl-` plus the host, plus the port when it is not the default, with dots and colons as hyphens (http://localhost:3300 -> udctl-localhost-3300, https://api.udctl.com -> udctl-api-udctl-com).
 3. Learn it: `ud describe skill ud-cli` is the full guide; `ud get skills` lists more.
 4. Run `ud config onboarding --done` once. It tells my udctl window you are connected.
 5. Then be my guide: tell me in a few lines what I can ask you to do with udctl, ask what I am working on this week, and turn my answer into my first cards.

@@ -43,12 +43,32 @@ export default {
       return rangedAsset(request, env);
     }
 
+    if (isCrossOriginDoc(url.pathname)) return withCors(await env.ASSETS.fetch(request));
+
     const twin = markdownTwinPath(url.pathname);
     if (twin) return negotiatedPage(request, env, url, twin);
 
     return env.ASSETS.fetch(request);
   },
 };
+
+/**
+ * The in-app AI assistant (ud task 4c496179) reads the docs from the browser and
+ * from the Electron renderer: list_docs fetches /docs-index.json, get_doc_section
+ * a page's index.md twin (both written by scripts/build-markdown.mjs). `*` rather
+ * than an origin list because the callers include self-hosted web origins we cannot
+ * enumerate and Electron's file:// pages, whose Origin is `null`. These are public
+ * pages read without credentials, so `*` exposes nothing a plain GET doesn't.
+ */
+function isCrossOriginDoc(pathname) {
+  return pathname === '/docs-index.json' || pathname.endsWith('/index.md');
+}
+
+function withCors(res) {
+  const headers = new Headers(res.headers);
+  headers.set('Access-Control-Allow-Origin', '*');
+  return new Response(res.body, { status: res.status, statusText: res.statusText, headers });
+}
 
 /**
  * Markdown for Agents (ud task 5ac33489): a page URL asked for with

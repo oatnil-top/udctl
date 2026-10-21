@@ -84,3 +84,9 @@ ignores IndexNow; it still reads the sitemap. Card `df4fe865`.
 URL is requested with `Accept: text/markdown`. `/auth.md` and `/.well-known/api-catalog`
 are static files whose types are set in `static/_headers`, which also puts the RFC 8288
 `Link` header on the two home pages. Check with `POST https://isitagentready.com/api/scan`.
+
+The same postbuild writes `/docs-index.json` (every `/docs/` page per locale: path, title,
+description). The ud app's AI assistant reads it for `list_docs` and fetches the page's
+`index.md` twin for `get_doc_section` (ud card 4c496179); `worker/index.js` serves both
+with `Access-Control-Allow-Origin: *` for that reason. Renaming or moving a doc page
+changes the path the assistant sees, nothing else needs updating.

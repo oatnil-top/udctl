@@ -20,6 +20,11 @@
  * `<main>`. Site chrome (navbar, footer, sidebar, TOC, breadcrumbs, pagination,
  * heading anchors, buttons) is dropped. Relative links become absolute so the
  * markdown still works after an agent copies it elsewhere.
+ *
+ * Also writes build/docs-index.json: every /docs/ page per locale with its title and
+ * meta description. It is the table of contents behind the in-app AI assistant's
+ * list_docs tool (ud task 4c496179), which then reads a page's index.md twin. The
+ * assistant fetches both cross-origin, so worker/index.js serves them with CORS.
  */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -94,19 +99,55 @@ export function htmlToMarkdown(html, url) {
   return `${head}${body}\n\n---\nSource: ${url}\n`;
 }
 
+// Locale prefix as it appears in the URL; the default locale has none.
+const DOCS_PAGE = /^\/(?:(zh-Hans)\/)?docs\//;
+
+/** One docs-index.json entry: the page path plus what an agent needs to pick it. */
+export function docsIndexEntry(html, pathname) {
+  const tree = unified().use(rehypeParse).parse(html);
+  const text = (node) => (node ? toString(node).replace(/\s+/g, ' ').trim() : '');
+  const h1 = select('article h1', tree) || select('main h1', tree);
+  const title = text(h1) || text(select('title', tree)).replace(/ \| udctl$/, '');
+  const description = select('meta[name="description"]', tree)?.properties?.content || '';
+  return { path: pathname, title, description };
+}
+
+function toString(node) {
+  if (node.type === 'text') return node.value;
+  return (node.children || []).map(toString).join('');
+}
+
 async function main() {
   let written = 0;
   let skipped = 0;
+  const docs = { en: [], 'zh-Hans': [] };
   for await (const file of htmlPages(BUILD_DIR)) {
     const url = pageUrl(file);
-    const md = htmlToMarkdown(await readFile(file, 'utf8'), url);
+    const html = await readFile(file, 'utf8');
+    const md = htmlToMarkdown(html, url);
     if (!md) {
       skipped += 1;
       continue;
     }
     await writeFile(path.join(path.dirname(file), 'index.md'), md);
     written += 1;
+
+    const pathname = new URL(url).pathname;
+    const m = DOCS_PAGE.exec(pathname);
+    if (m) docs[m[1] || 'en'].push(docsIndexEntry(html, pathname));
   }
+  for (const list of Object.values(docs)) list.sort((a, b) => a.path.localeCompare(b.path));
+  // An empty locale would make list_docs answer "no docs" instead of failing loudly.
+  for (const [locale, list] of Object.entries(docs)) {
+    if (list.length === 0) {
+      console.error(`build-markdown: no /docs/ pages found for locale ${locale}`);
+      process.exit(1);
+    }
+  }
+  await writeFile(
+    path.join(BUILD_DIR, 'docs-index.json'),
+    `${JSON.stringify({ origin: SITE, pages: docs }, null, 1)}\n`,
+  );
   // Zero twins means the negotiation silently falls back to HTML everywhere:
   // fail the build instead of shipping that.
   if (written === 0) {
@@ -114,6 +155,7 @@ async function main() {
     process.exit(1);
   }
   console.log(`build-markdown: wrote ${written} markdown twins (${skipped} skipped) under ${BUILD_DIR}`);
+  console.log(`build-markdown: docs-index.json lists ${docs.en.length} en + ${docs['zh-Hans'].length} zh-Hans docs pages`);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) await main();

@@ -43,6 +43,9 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+- **`ud` is no longer seeded as a built-in agent.** An existing `ud` agent is kept as it is, just without the "default" mark; to clean it up, run `ud delete agent ud` (it goes to the trash and can be restored).
+- **New built-in skill-builder.** It appears the next time you enter a workspace. When you @ it, it works through one task with you and then turns it into a skill.
+
 ## v0.170.0 (2026-10-22)
 
 **Minor release: chat on the web and desktop app is steadier (what you send shows up at once and survives switching away), signing out no longer leaves account data behind, and agents get their first prompt sooner.** This release runs one database migration; it only adds a column.

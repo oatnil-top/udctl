@@ -43,6 +43,51 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
 -->
 
+## v0.170.0 (2026-10-22)
+
+**Minor release: chat on the web and desktop app is steadier (what you send shows up at once and survives switching away), signing out no longer leaves account data behind, and agents get their first prompt sooner.** This release runs one database migration; it only adds a column.
+
+### New Features
+
+- **A visible "Agent" mark on comments written by an agent.** This includes an agent that belongs to someone else, so you can tell a person's message from an agent's in a shared thread.
+- **AI chat reads the live docs site.** The assistant's `list_docs` and `get_doc_section` now read udctl.com instead of a copy bundled with the app, so it answers from the current docs. Only udctl.com is fetched, and a page longer than 40,000 characters is cut.
+
+### Improvements
+
+- **Comments you send no longer disappear.** A comment that has not been confirmed by the server yet, and a draft you were typing, survive switching to another thread, closing the panel and pressing Cancel. The server now echoes a client-chosen message id on comments, which is how the app matches your pending row to the saved one.
+- **Chat looks and behaves the same everywhere.** One absolute time format and day separator rows across every chat surface. A conversation thread opens at the bottom without an animation, remembers its threads, and does not yank you down if you scrolled up to read. The subscriber bar keeps its height while loading.
+- **Alfred quick input.** Failed messages stay in the list with a retry, and the first frame comes from cache.
+- **AI chat feels steadier.** It opens at the bottom, leaves you alone if you scrolled up, and keeps your draft. Finished answers render at once with no jump. The question dims until the answer starts, Stop ends the stream immediately, and a failed answer can be retried. Links in answers take the link colour, and links to comments work.
+- **The AI chat opens a page only when you ask to open one,** and when it cannot find what you named it now says the lookup failed instead of saying the task does not exist.
+- **Agents get their first prompt sooner.** The desktop app and the `ud` daemon now confirm a delivered prompt as soon as it is fully on screen instead of waiting out a fixed delay. Measured in the desktop app against Claude Code: a keystroke briefing took about 1.9 s before and about 1.1 s now; a pasted reply about 0.95 s before and about 0.3 s now. This needs the new desktop app, or the new `ud` CLI on the computer that runs your agents.
+- **The `ud` CLI trial server is `https://api.udctl.com`.** Your existing `config.yaml` is not rewritten.
+
+### Bug Fixes
+
+- **Signing out now removes everything that belongs to the account.** Before, only browser storage whose name contained "storage" or "cache" was wiped, so AI chat history, notifications, tags, skills, kanban task lists, prompt history and the quick-note draft stayed behind. Signing out now also reloads the page, so the next person who signs in on the same page does not see the previous account's data. Server address, language, layout and saved accounts are kept.
+- **An API key whose owner is gone or deactivated is refused.** Before, it kept working; a key left over from a deleted admin passed every admin route.
+- **Deleting a user, and the visitor clean-up job, now remove everything that account owned.** Before, only the login and the user row were deleted; their cards, agents and group memberships stayed behind with an owner that no longer exists. An admin can run the same delete on an id whose user row is already gone to clean up leftovers.
+
+### Upgrade Notes (self-hosted)
+
+- **Back up the database before upgrading.** One migration runs on first boot: it adds a `client_message_id` column to the comments table, empty for every existing comment. Nothing existing is changed or dropped.
+- **Upgrade the server before the apps and the CLI.** The updated apps send a client message id with each comment, which only 0.170.0 and later servers store.
+- **No new settings.** No environment variable was added or removed.
+- **Existing API keys of deleted or deactivated accounts stop working.** A live, active key is unaffected.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.170.0`.
+
+---
+
 ## v0.169.0 (2026-10-20)
 
 **Minor release: the AI chat can open pages for you, admins can set a daily AI allowance per user, and a first version of "ud desktop" lets the CLI drive your desktop app.** This release runs two database migrations; both only add tables.

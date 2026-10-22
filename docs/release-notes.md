@@ -61,7 +61,7 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 
 ### Upgrade Notes (self-hosted)
 
-- **No database changes.** Nothing runs against your database on first boot.
+- **No database migration.** The new skill-builder is added to a workspace the next time you enter it.
 - **No new settings.** No environment variable was added or removed.
 - **Accounts that already have a `ud` agent keep it.** Only new accounts stop receiving it.
 

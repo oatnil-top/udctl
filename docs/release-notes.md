@@ -40,11 +40,43 @@ Merged to `main`, not in any published build yet. These ship with the next versi
     3. Then leave the section here with no bullets under it. Deleting the section is how it
        stops being read.
 
-  (Nothing owed right now: every bullet that was listed here was folded into v0.158.0.)
+  (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
-- **`ud` is no longer seeded as a built-in agent.** An existing `ud` agent is kept as it is, just without the "default" mark; to clean it up, run `ud delete agent ud` (it goes to the trash and can be restored).
+## v0.171.0 (2026-10-22)
+
+**Minor release: a new built-in skill-builder agent, new accounts no longer get a built-in `ud` agent, and very large documents stop freezing the app.** This release runs no database migration.
+
+### New Features
+
 - **New built-in skill-builder.** It appears the next time you enter a workspace. When you @ it, it works through one task with you and then turns it into a skill.
+
+### Improvements
+
+- **`ud` is no longer seeded as a built-in agent.** An existing `ud` agent is kept as it is, just without the "default" mark; to clean it up, run `ud delete agent ud` (it goes to the trash and can be restored). New accounts get six default agents, and Alfred hands a procedure gap to skill-builder instead of hiring someone for it.
+- **Large markdown documents no longer freeze the app.** Up to 100,000 characters renders exactly as before. From 100,000 to 500,000 characters it is formatted but code blocks are not syntax highlighted. Above 500,000 characters you see the source text with a notice and can choose "render formatted" up to 2,000,000 characters. Editors skip highlighting above 100,000 characters and open in source mode above 500,000. Measured before the change: 1 MB blocked the page for 5.2 s and 5 MB for 49 s.
+- **Comments you send on the web are matched to their saved copy by an id.** Every web send (thread replies, card replies, new comments, the first message of a new conversation) now carries a client message id, and a pending row is matched by it first, so a comment is not shown twice.
+- **The explorer shows tree-style connector lines** and no longer has the expand chevron.
+- **`ud cook agent` lists the six new default agent names,** and the `ud delete agent` help now points at @alfred.
+
+### Upgrade Notes (self-hosted)
+
+- **No database changes.** Nothing runs against your database on first boot.
+- **No new settings.** No environment variable was added or removed.
+- **Accounts that already have a `ud` agent keep it.** Only new accounts stop receiving it.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.171.0`.
+
+---
 
 ## v0.170.0 (2026-10-22)
 

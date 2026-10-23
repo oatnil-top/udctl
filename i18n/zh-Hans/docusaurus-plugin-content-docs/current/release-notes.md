@@ -39,6 +39,38 @@ sidebar_position: 1
   (目前没有欠着的:曾经列在这里的条目已全部折进 v0.151.0。)
 -->
 
+## v0.172.0 (2026-10-23)
+
+**小版本:`ud get sessions` 现在能列出已停止、已结束的会话,内置的 agent-creator 能创建 agent 团队,也能在一次会话里创建多个 agent。** 本版没有数据库迁移。
+
+### 新功能
+
+- **`ud get sessions --status`。** 以前这个命令只列活会话(外加 24 小时内 lost 的),已停止或已结束的会话按卡查不到。`--status` 可取 `pending`、`running`、`planning`、`awaiting_input`、`stopped`、`exited`、`lost`、`failed`,用逗号分隔或重复传入,可与 `--task`、`--limit`、`--page`、`--all` 组合。例如 `ud get sessions --status stopped --task <卡>` 列出那张卡已停止的会话。不带 `--status` 时和以前完全一样。服务端对应 `GET /workspace/sessions?status=`:带上它就没有 24 小时窗口,未知状态会被拒绝,匹配总数放在 `X-Total-Count` 响应头里。
+- **agent-creator 能创建和更新 agent 团队。** 它的 skill 新增「Agent Teams」一章(团队字段、创建团队、用导出、编辑、再应用的方式更新团队、以及回读成员 id),内置的 `ud-cli` skill 也写进了团队相关命令。
+
+### 改进
+
+- **agent-creator 一次会话能创建多个 agent。** 以前同一次调用里它会拒绝创建第二个;现在可以成批创建,每个 agent 都走完整套流程。agent-creator 的默认 prompt 中英两个版本都有改动。
+
+### 升级注意(自托管)
+
+- **没有数据库迁移。** 不会对你的数据库做任何操作。
+- **没有新增设置。** 没有新增或删除环境变量。
+- **先升级服务端,再升级 CLI。** 新 CLI 的 `ud get sessions --status` 打到旧服务端会直接报错、不显示结果,因为旧服务端不认这个筛选,不会给你一份没过滤的列表。
+
+CLI 要你自己升：发布一个新版本不会让任何人机器上的 `ud` 变新。一共三条路,**只走其中一条**。
+
+```bash
+npm i -g @oatnil/ud # npm 装的
+brew update && brew upgrade ud # Homebrew 装的
+```
+
+**如果你的 `ud` 是从桌面端装的，上面两条都不是你的路 —— 装新版桌面 App 就行**(从下载页装;如果桌面 App 是用 Homebrew 装的，用 `brew upgrade --cask undercontrol`)。App 的「Install ud CLI」把 `/usr/local/bin/ud` 做成了指进 App 包里的符号链接，所以你跑的那个 `ud` 就是 App 里带的那个。
+
+然后确认升上去了:`ud --version` 必须打印 `udctl version 0.172.0`。
+
+---
+
 ## v0.171.0 (2026-10-22)
 
 **小版本:新增内置 skill-builder agent,新账号不再种出内置的 `ud` agent,超大文档不再卡死应用。** 本版没有数据库迁移。

@@ -43,9 +43,45 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.172.1 (2026-10-23)
+
+**Minor release: `ud get sessions` can now list stopped and finished sessions, and the built-in agent-creator can build agent teams and several agents in one session.** This release runs no database migration.
+
+**v0.172.0 was withdrawn and never deployed: its CLI and Linux desktop builds failed a release check. Use v0.172.1, which carries everything listed under v0.172.0 plus the one fix needed to publish them.**
+
+### New Features
+
+- **`ud get sessions --status`.** Until now the command listed only live sessions (plus ones lost in the last 24 hours), so a stopped or exited session could not be found by card. `--status` takes any of `pending`, `running`, `planning`, `awaiting_input`, `stopped`, `exited`, `lost`, `failed`, comma-separated or repeated, and combines with `--task`, `--limit`, `--page` and `--all`. For example `ud get sessions --status stopped --task <card>` lists that card's stopped sessions. Without `--status` nothing changes. The server side is `GET /workspace/sessions?status=`: with it there is no 24-hour window, an unknown status is refused, and the total match count comes back in the `X-Total-Count` header.
+- **agent-creator can create and update agent teams.** Its skill gained an "Agent Teams" part (team fields, creating a team, updating one by export, edit and apply, and a read-back of member ids), and the built-in `ud-cli` skill documents the team commands.
+
+### Improvements
+
+- **agent-creator makes several agents in one session.** It used to refuse a second agent in the same invocation; it now takes a batch and runs each agent through the whole workflow. The default prompt of agent-creator changed in both languages.
+
+### Upgrade Notes (self-hosted)
+
+- **No database migration.** Nothing runs against your database.
+- **No new settings.** No environment variable was added or removed.
+- **Upgrade the server before the CLI.** `ud get sessions --status` against an older server is refused with an error instead of showing an unfiltered list, because that server ignores the filter.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.172.1`.
+
+---
+
 ## v0.172.0 (2026-10-23)
 
 **Minor release: `ud get sessions` can now list stopped and finished sessions, and the built-in agent-creator can build agent teams and several agents in one session.** This release runs no database migration.
+
+**Withdrawn: this version was never deployed and its CLI was never published. Use v0.172.1.**
 
 ### New Features
 

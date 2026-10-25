@@ -16,7 +16,7 @@ This means you can switch between kanban and list views freely without worrying 
 
 ## Getting Started: The All Tasks Board
 
-Every account comes with a built-in "All Tasks" board. Open it and you will see all your tasks organized across six columns: Todo, In Progress, Pending, Stale, Done, and Archived. This board cannot be deleted and it always appears first.
+Every account comes with a built-in "All Tasks" board. Open it and you will see all your tasks organized across eleven columns: Awaiting Decision, Follow-up, Recent Created, Recent Updated, Draft, Todo, In Progress, Pending, Stale, Done, and Archived. This board cannot be deleted and it always appears first.
 
 It is a good place to start. Drag a task from Todo to In Progress, and watch the status update instantly. That is the basic loop — visual placement drives task state, not the other way around.
 

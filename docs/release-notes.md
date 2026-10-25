@@ -43,6 +43,38 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.173.1 (2026-10-25)
+
+**Patch release: a correction to v0.173.0.** The Awaiting Decision and Follow-up columns belong on the built-in All Tasks board, not in the template for new boards. This release runs no database migration.
+
+### Corrections to v0.173.0
+
+- **Correction: the seven-column default for new boards is withdrawn.** v0.173.0 said a board created without columns gets seven columns, including Awaiting Decision and Follow-up. That was not what was intended. A board created without columns now gets four columns split by status: To Do, In Progress, Pending and Done. Boards that already exist are not changed, including any seven-column board you created while v0.173.0 was current.
+- **Awaiting Decision and Follow-up are the first two columns of the built-in All Tasks board.** They keep the fixed tags `awaiting-decision` and `follow-up`; moving a card between them swaps the tag and leaves its status alone. Read them from the CLI with `ud get task --board __system_all_tasks__ --column Follow-up`. Nothing to migrate: the board is built from the server every time it is read, so it shows the two columns after the server upgrade. The `ud-cli` skill, the `ud cook` recipes and the natural-language query hint now say this.
+
+### Bug Fixes
+
+- **Dragging a card on the All Tasks board failed with `KANBAN_BOARD_NOT_FOUND`.** Every move on that board was refused since 2026-09-26. Moves now work there.
+
+### Upgrade Notes (self-hosted)
+
+- **No database migration.** Nothing runs against your database.
+- **No new settings.** No environment variable was added or removed.
+- **Upgrade the server before the CLI and the apps.** The new column layout and the fixed drag come from the server.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.173.1`.
+
+---
+
 ## v0.173.0 (2026-10-25)
 
 **Minor release: a calendar in the CLI (`ud get timeblock`), new boards that start with seven follow-up columns, and a batch of fixes for the monthly bookkeeping workflow.** This release runs no database migration.

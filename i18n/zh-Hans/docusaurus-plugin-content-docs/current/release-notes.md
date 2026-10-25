@@ -39,6 +39,38 @@ sidebar_position: 1
   (目前没有欠着的:曾经列在这里的条目已全部折进 v0.151.0。)
 -->
 
+## v0.173.1 (2026-10-25)
+
+**补丁版本:更正 v0.173.0。** Awaiting Decision 与 Follow-up 两列属于系统自带的 All Tasks 看板,不在新建看板的模板里。本版没有数据库迁移。
+
+### 对 v0.173.0 的更正
+
+- **更正:撤回「新建看板默认 7 列」。** v0.173.0 的说明写了不带 columns 新建看板会得到 7 列(含 Awaiting Decision 与 Follow-up),这不是原本的意思。现在不带 columns 新建看板得到按状态分的 4 列:To Do、In Progress、Pending、Done。已有的看板不变,包括 v0.173.0 期间你已建好的 7 列看板。
+- **Awaiting Decision 与 Follow-up 是系统自带 All Tasks 看板最左的两列。** 它们沿用固定标签 `awaiting-decision` 和 `follow-up`;在两列之间移动卡片会互换标签、不改状态。命令行读取:`ud get task --board __system_all_tasks__ --column Follow-up`。无需迁移:这块看板每次读取时由服务端现造,升级服务端后就能看到两列。`ud-cli` skill、`ud cook` 配方和自然语言查询提示已按此更正。
+
+### 问题修复
+
+- **All Tasks 看板上拖拽卡片报 `KANBAN_BOARD_NOT_FOUND`。** 自 2026-09-26 起这块看板上的任何移动都被拒绝,现已恢复。
+
+### 升级说明(自托管)
+
+- **没有数据库迁移。** 不会对你的数据库做任何操作。
+- **没有新增配置。** 没有增删环境变量。
+- **先升级服务端,再升级命令行和客户端。** 新的列布局和拖拽修复来自服务端。
+
+命令行要你自己升级:发布新版本不会改变任何人机器上的 `ud`。有三条路,**只用其中一条**。
+
+```bash
+npm i -g @oatnil/ud # 用 npm 安装的
+brew update && brew upgrade ud # 用 Homebrew 安装的
+```
+
+**如果你的 `ud` 来自桌面应用,上面两行都不是你的路:请安装新的桌面应用**(从下载页,或用 Homebrew 装的应用执行 `brew upgrade --cask undercontrol`)。应用里的「Install ud CLI」会把 `/usr/local/bin/ud` 做成指向应用包内的符号链接,所以你运行的 `ud` 就是应用自带的那个。
+
+然后确认升级生效:`ud --version` 必须输出 `udctl version 0.173.1`。
+
+---
+
 ## v0.173.0 (2026-10-25)
 
 **小版本:CLI 里有了日历(`ud get timeblock`),新建看板自带七列跟进流程,并修了一批月度记账流程里的问题。** 本版没有数据库迁移。

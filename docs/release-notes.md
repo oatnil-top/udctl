@@ -55,6 +55,7 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 ### Bug Fixes
 
 - **Dragging a card on the All Tasks board failed with `KANBAN_BOARD_NOT_FOUND`.** Every move on that board was refused since 2026-09-26. Moves now work there.
+- **Creating a board with an unknown `board_type` answered 500.** It is a 400 now, and the error names the field.
 
 ### Upgrade Notes (self-hosted)
 

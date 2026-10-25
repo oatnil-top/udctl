@@ -39,6 +39,60 @@ sidebar_position: 1
   (目前没有欠着的:曾经列在这里的条目已全部折进 v0.151.0。)
 -->
 
+## v0.173.0 (2026-10-25)
+
+**小版本:CLI 里有了日历(`ud get timeblock`),新建看板自带七列跟进流程,并修了一批月度记账流程里的问题。** 本版没有数据库迁移。
+
+### 新功能
+
+- **CLI 里的日历:timeblock。** `ud get`、`ud describe`、`ud apply`、`ud delete`、`ud patch` 现在都能操作 `timeblock`(`slot`、`task-slot` 是隐藏别名)。`ud get timeblock --since today --until +7d` 列出你在卡上排好的时段;`-o agenda` 按天排成日程;`--saved-query <查询>` 只看某个已保存查询选中的卡,这就是日历图层的做法。`ud describe task` 和 `ud describe wctx` 新增 Schedule 一节:这张卡的全部 timeblock 和合计时长。找不到时段现在报 `TASK_SLOT_NOT_FOUND`,不再报 `TASK_NOT_FOUND`。服务端对应 `GET /task-slots/{slotId}`,所有 `/task-slots/{slotId}` 路由都认唯一的 id 前缀。
+- **新建看板自带七列。** 不带列新建的看板现在是 Awaiting Decision、Follow-up、To Do、In Progress、Pending、Done、Recent,并有固定标签 `awaiting-decision` 和 `follow-up`。网页里「新建看板」不用再填列。已有看板不变。`ud get task --column` 在该列按截止时间排序时多显示一列 DEADLINE,内置的 `ud-cli` skill 写进了跟进约定,自然语言查询也认这两个标签(比如「等我拍板的有哪些」)。
+- **CLI 里的文件操作。** `ud download file <id> [-o 路径]` 会核对大小和存下来的 sha256/md5,不一致就不留下文件(`--force` 覆盖)。`ud move file` 用 `--from-path` 和 `--to-path` 移动文件夹,或用 id 加 `--to-path` 移动文件,不加 `--yes` 只预览。`ud get file --path <前缀> --recursive` 一次请求列出整个目录树,带 PATH 列。`ud upload resource` 新增 `--content-type` 和 `--on-conflict`。
+- **CLI 里的记账。** `ud get expense` 和 `ud get income` 支持本地筛选 `--since`、`--before`、`--currency`、`--amount`、`--min`、`--max`、`--title`、`--account`、`--budget`。`ud delete` 现在能删支出、收入、账户和预算。`ud apply` 一个 Budget 会写入初始金额和每一条计划与调整,更新预算只能追加。
+- **定时任务建卡能设置更多。** `task_creation` 任务现在能设置卡的路径、项目、关联、负责人和状态,`ud apply` 和 `ud apply -o apply` 都支持;模板新增布局、日期偏移和 `{{prev_month}}`,足够让月度记账卡自己建出来。
+- **iOS 能播放视频附件。** 本地文件存储的下载支持 Range 请求(206)和 HEAD,这是 iOS 播放器需要的。
+
+### 改进
+
+- **API Key:90 天和 1 年。** 网页提供的这两个有效期之前被后端以 400 拒绝,现在都能用了。
+- **日期可以直接写 `YYYY-MM-DD`。** 支出、收入的 `occurredAt` 和资产的 `acquiredAt` / `disposedAt` 接受纯日期,日期写错会返回 400 并点名字段。`ud apply` 里不加引号的 YAML 日期不再被丢掉,`-o apply` 会给日期加引号。
+- **带空格的文件夹能同步。** `ud sync resource` 遇到带空格的文件夹不再报 400,CLI 现在会转义所有拼进查询串的值。
+- **文本预览选对编码。** 资源预览先按声明的字符集解码,再试 UTF-8,再试 GB18030,中文文本文件不再显示成乱码。
+- **创建预算:** 币种不再写死 USD,开始日期可以只写日期,出错时会点名字段并给出提示。
+- **支出和收入显示:** 没有日期的支出显示 `-`,`ud describe` 总会打印 Occurred 和 Budget 两行。
+
+### 问题修复
+
+- **把卡移到另一列** 现在会同时刷新其他显示这张卡的列,看板不会再留着一份过期的副本。
+- **`ud describe` 和 `ud apply -o apply` 只保留 `kickoff` 和 `deadline` 的 UTC 日期,** 所以 describe、编辑、apply 一圈下来会悄悄丢掉具体时刻。现在保留时刻。
+- **没有权限的账号创建 API Key** 现在返回 403 `AUTH_APIKEY_PERMISSION_NOT_HELD`(请求有误则是 400),不再是 500。
+- **`ud sync resource` 会重复上传相同的文件。** 现在同名且内容相同的文件会被跳过,旧文件的元数据也不会再被覆盖。
+
+### 行为变化
+
+- **`ud sync resource` 遇到同名但内容不同的文件,默认替换。** 旧文件进回收站,可以恢复。想两份都留,加 `--on-conflict keep-both`;`ud upload resource` 有同样的开关。
+- **按可为空的列排序时,没有值的卡现在一律排在最后,** SQLite 和 Postgres 都一样,升序降序都一样。以前 SQLite 升序时它们排最前,Postgres 降序时它们排最前。
+
+### 升级注意(自托管)
+
+- **没有数据库迁移。** 不会对你的数据库做任何操作。
+- **没有新增设置。** 没有新增或删除环境变量。
+- **先升级服务端,再升级 CLI 和 App。** 新的 `ud get timeblock`、`ud download file` 等命令会调用旧服务端没有的路由和字段。
+- **已有看板的列不变。** 只有升级之后新建的看板才是七列默认模板。
+
+CLI 要你自己升：发布一个新版本不会让任何人机器上的 `ud` 变新。一共三条路,**只走其中一条**。
+
+```bash
+npm i -g @oatnil/ud # npm 装的
+brew update && brew upgrade ud # Homebrew 装的
+```
+
+**如果你的 `ud` 是从桌面端装的，上面两条都不是你的路 —— 装新版桌面 App 就行**(从下载页装;如果桌面 App 是用 Homebrew 装的，用 `brew upgrade --cask undercontrol`)。App 的「Install ud CLI」把 `/usr/local/bin/ud` 做成了指进 App 包里的符号链接，所以你跑的那个 `ud` 就是 App 里带的那个。
+
+然后确认升上去了:`ud --version` 必须打印 `udctl version 0.173.0`。
+
+---
+
 ## v0.172.1 (2026-10-23)
 
 **小版本:`ud get sessions` 现在能列出已停止、已结束的会话,内置的 agent-creator 能创建 agent 团队,也能在一次会话里创建多个 agent。** 本版没有数据库迁移。

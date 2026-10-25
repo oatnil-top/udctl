@@ -43,6 +43,60 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.173.0 (2026-10-25)
+
+**Minor release: a calendar in the CLI (`ud get timeblock`), new boards that start with seven follow-up columns, and a batch of fixes for the monthly bookkeeping workflow.** This release runs no database migration.
+
+### New Features
+
+- **Calendar in the CLI: timeblocks.** `ud get`, `ud describe`, `ud apply`, `ud delete` and `ud patch` now work on `timeblock` (`slot` and `task-slot` are hidden aliases). `ud get timeblock --since today --until +7d` lists the sittings you scheduled on cards; `-o agenda` prints them as a day-by-day agenda; `--saved-query <query>` limits them to the cards a saved query selects, which is how calendar layers work. `ud describe task` and `ud describe wctx` gain a Schedule section: every timeblock of the card and their total. A missing slot is now reported as `TASK_SLOT_NOT_FOUND` instead of `TASK_NOT_FOUND`. The server side is `GET /task-slots/{slotId}`, and every `/task-slots/{slotId}` route accepts a unique id prefix.
+- **New boards start with seven columns.** A board created without columns now gets Awaiting Decision, Follow-up, To Do, In Progress, Pending, Done and Recent, with the fixed tags `awaiting-decision` and `follow-up`. The web app's "new board" no longer needs a column list. Existing boards are not changed. `ud get task --column` shows a DEADLINE column when the column is ordered by deadline, the built-in `ud-cli` skill documents the follow-up convention, and natural-language queries understand the two tags ("what is waiting for my decision").
+- **Files from the CLI.** `ud download file <id> [-o path]` checks the size and the stored sha256/md5 and leaves nothing behind on a mismatch (`--force` overwrites). `ud move file` moves a folder with `--from-path` and `--to-path`, or ids with `--to-path`, and previews unless you pass `--yes`. `ud get file --path <prefix> --recursive` lists a folder tree in one request with a PATH column. `ud upload resource` takes `--content-type` and `--on-conflict`.
+- **Bookkeeping from the CLI.** `ud get expense` and `ud get income` filter locally with `--since`, `--before`, `--currency`, `--amount`, `--min`, `--max`, `--title`, `--account` and `--budget`. `ud delete` now works on expense, income, account and budget. `ud apply` of a Budget writes the initial amount and every plan and adjustment, and updating a budget is append-only.
+- **Scheduled jobs that create cards can set more.** A `task_creation` job can now set the card's path, projects, links, assignee and status, in `ud apply` and `ud apply -o apply` alike, and templates gain layouts, date offsets and `{{prev_month}}`, which is enough to create the monthly bookkeeping card by itself.
+- **Video attachments play on iOS.** Downloads from local file storage answer range requests (206) and HEAD, which the iOS player needs.
+
+### Improvements
+
+- **API keys: 90 days and 1 year.** The two expiry options the web app offers were refused by the backend with a 400; both are accepted now.
+- **Dates can be written as `YYYY-MM-DD`.** Expense and income `occurredAt` and possession `acquiredAt` / `disposedAt` accept a plain date, and a bad date is a 400 that names the field. In `ud apply`, unquoted YAML dates are no longer dropped, and `-o apply` quotes them.
+- **Folders with spaces in their names sync.** `ud sync resource` no longer fails with a 400 on a folder with spaces, and the CLI now escapes every value it puts in a query string.
+- **Text previews pick the right encoding.** Resource previews decode by the declared charset, else UTF-8, else GB18030, so Chinese text files no longer show as garbage.
+- **Budget creation:** the currency is no longer hard-coded to USD, a date-only start date is accepted, and an error names the field and gives a hint.
+- **Expense and income display:** an expense with no date shows `-`, and `ud describe` always prints the Occurred and Budget lines.
+
+### Bug Fixes
+
+- **Moving a card to another column** now also refreshes any other column that shows the same card, so the board does not show a stale copy.
+- **`ud describe` and `ud apply -o apply` kept only the UTC date of `kickoff` and `deadline`,** so a describe-edit-apply round trip silently dropped the time of day. The time of day is kept now.
+- **Creating an API key as an account that is not allowed to** answers 403 `AUTH_APIKEY_PERMISSION_NOT_HELD` (or 400 for a bad request) instead of 500.
+- **`ud sync resource` re-uploaded identical files.** A same-name file with the same content is now skipped, and the old file's metadata is no longer overwritten.
+
+### Behaviour changes
+
+- **`ud sync resource` replaces by default when a same-name file differs.** The old file goes to the recycle bin, so it can be restored. To keep both, pass `--on-conflict keep-both`; `ud upload resource` has the same flag.
+- **Sorting by a column that can be empty now puts the cards without a value last,** on SQLite and on Postgres, whichever direction you sort. Before, SQLite ascending put them first and Postgres descending put them first.
+
+### Upgrade Notes (self-hosted)
+
+- **No database migration.** Nothing runs against your database.
+- **No new settings.** No environment variable was added or removed.
+- **Upgrade the server before the CLI and the apps.** The new `ud get timeblock`, `ud download file` and the other commands above call routes and fields an older server does not have.
+- **Existing boards keep their columns.** Only boards created after the upgrade get the seven-column default.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.173.0`.
+
+---
+
 ## v0.172.1 (2026-10-23)
 
 **Minor release: `ud get sessions` can now list stopped and finished sessions, and the built-in agent-creator can build agent teams and several agents in one session.** This release runs no database migration.

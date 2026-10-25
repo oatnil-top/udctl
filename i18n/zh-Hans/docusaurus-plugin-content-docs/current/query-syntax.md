@@ -510,6 +510,18 @@ tags IN ('work', 'personal')
 tags CONTAINS_ALL ('work', 'urgent')
 ```
 
+有两个标签含义固定:`awaiting-decision`(等你拍板)和 `follow-up`(需要有人去追)。系统自带的 All Tasks 看板最左两列 Awaiting Decision 与 Follow-up 就按它们取卡，只列未完成的任务:
+
+```sql
+-- Awaiting Decision 列
+tags = 'awaiting-decision' AND status != 'done' AND status != 'archived' ORDER BY updated_at DESC
+
+-- Follow-up 列，截止时间最早的在前
+tags = 'follow-up' AND status != 'done' AND status != 'archived' ORDER BY deadline ASC
+```
+
+命令行读取:`ud get task --board __system_all_tasks__ --column Follow-up`。
+
 ### 文本搜索
 
 ```sql

@@ -150,7 +150,7 @@ spec:
 |------|------|------|------|
 | `name` | string | **是** | 看板名称。 |
 | `board_type` | string | 否 | `private`（默认）或 `shared`。 |
-| `columns` | array | 否 | 有序列定义列表。 |
+| `columns` | array | 否 | 有序列定义列表。新建看板时省略，得到按状态分的默认 4 列:To Do、In Progress、Pending、Done。 |
 | `columns[].name` | string | 是 | 列显示名称。 |
 | `columns[].query` | string | 否 | 过滤查询（如 `status:todo`）。 |
 | `default_tags` | array | 否 | 在此看板中创建新任务时自动添加的标签。 |

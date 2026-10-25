@@ -11,7 +11,12 @@ Kanban Boards give you a visual, column-based way to manage your tasks. Each col
 ## Board Types
 
 ### All Tasks Board
-Every user starts with a built-in "All Tasks" board that shows all your tasks organized into six columns:
+Every user starts with a built-in "All Tasks" board that shows all your tasks in eleven columns, left to right:
+- **Awaiting Decision** - Open tasks tagged `awaiting-decision`: they wait for you to decide. Most recently updated first.
+- **Follow-up** - Open tasks tagged `follow-up`: someone has to chase them. Earliest deadline first.
+- **Recent Created** - Every task, newest first, whatever its status
+- **Recent Updated** - Every task, most recently changed first, whatever its status
+- **Draft** - Tasks tagged `draft`
 - **Todo** - Tasks ready to start
 - **In Progress** - Tasks you're actively working on
 - **Pending** - Tasks waiting on something
@@ -19,7 +24,9 @@ Every user starts with a built-in "All Tasks" board that shows all your tasks or
 - **Done** - Completed tasks
 - **Archived** - Tasks filed away
 
-This board always appears first in your board selector and cannot be deleted.
+"Open" means not done and not archived. Dragging a card into Awaiting Decision or Follow-up adds that column's tag, and dragging it out removes the tag; the card's status does not change. Moving a card from Awaiting Decision to Follow-up therefore swaps one tag for the other. Recent Created and Recent Updated have no filter, only a sort order, so dropping a card on them changes nothing. From the CLI, read a column with `ud get task --board __system_all_tasks__ --column Follow-up`.
+
+The columns of this board are fixed. This board always appears first in your board selector and cannot be deleted.
 
 ### Private Boards
 Create custom boards for specific projects or workflows. Private boards are only visible to you and can show all your tasks filtered through custom column configurations.
@@ -32,7 +39,9 @@ Share a board with a group for team collaboration. Shared boards only show tasks
 1. Open the board selector and click "Create Board"
 2. Give your board a name (like "Sprint 12" or "Home Renovation")
 3. Optionally set default tags that will be auto-applied to tasks created on this board
-4. Your board is created with default status-based columns
+4. Your board is created with four columns split by status: **To Do**, **In Progress**, **Pending** and **Done**. Dragging a card into one of them sets the card to that status.
+
+The Awaiting Decision and Follow-up columns are not part of a new board; they live on the All Tasks board. To have one on your own board, add a column with the query `tags = 'follow-up'` (or `tags = 'awaiting-decision'`). Boards you created earlier keep their columns.
 
 ## Working with Columns
 

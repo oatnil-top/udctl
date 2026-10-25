@@ -27,24 +27,26 @@ UnDercontrol takes a different route. It's a task and knowledge management tool 
 
 As for that tuition, we'll get to how it's waived.
 
-### Even the out-of-the-box board isn't only statuses
+### Even the built-in board isn't only statuses
 
-That sounds like a promise until you see it. Create a new board and two of the six default columns aren't statuses at all:
+That sounds like a promise until you see it. A new board does start plain: four columns split by status, To Do, In Progress, Pending and Done. That's a starting point, not a limit.
+
+![A new board: four columns split by status, To Do, In Progress, Pending and Done](https://dl.udctl.com/features/blog/kanban-boards/default-board.png)
+
+Now open All Tasks, the board every account has. Its first four columns aren't statuses at all:
 
 | Column | What it holds |
 |--------|---------------|
-| To Do | Todo tasks |
-| In Progress | In-progress tasks |
-| Done | Done tasks |
-| Archive | Archived tasks |
+| Awaiting Decision | Open tasks tagged `awaiting-decision`, waiting for you to decide |
+| Follow-up | Open tasks tagged `follow-up`, earliest deadline first |
 | Recent Created | The most recently created, whatever the status |
 | Recent Updated | The most recently touched, whatever the status |
 
-The last two have no filter at all — they just sort by time, newest first. They don't belong to any status. They're a viewpoint.
+The first two are selected by a tag, and dragging a card between them swaps the tag while its status stays where it was. The last two have no filter at all — they just sort by time, newest first. None of the four belongs to a status. They're viewpoints.
 
 In a tool where a column equals a status, columns like those are hard to express. Here they're unremarkable, part of the default setup.
 
-![The six default columns; the rightmost two, Recent Created and Recent Updated, sort only by time and belong to no status](https://dl.udctl.com/features/blog/kanban-boards/default-board.png)
+![The All Tasks board; the leftmost columns, Awaiting Decision and Follow-up, are selected by tag, and the next two sort only by time](https://dl.udctl.com/features/blog/kanban-boards/all-tasks-follow-up.png)
 
 ### So what about the tuition?
 

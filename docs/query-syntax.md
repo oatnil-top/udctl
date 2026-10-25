@@ -513,6 +513,18 @@ tags IN ('work', 'personal')
 tags CONTAINS_ALL ('work', 'urgent')
 ```
 
+Two tags have a fixed meaning: `awaiting-decision` (waiting for you to decide) and `follow-up` (someone has to chase it). They back the first two columns of the built-in All Tasks board, Awaiting Decision and Follow-up, which list open tasks only:
+
+```sql
+-- The Awaiting Decision column
+tags = 'awaiting-decision' AND status != 'done' AND status != 'archived' ORDER BY updated_at DESC
+
+-- The Follow-up column, earliest deadline first
+tags = 'follow-up' AND status != 'done' AND status != 'archived' ORDER BY deadline ASC
+```
+
+From the CLI: `ud get task --board __system_all_tasks__ --column Follow-up`.
+
 ### Text Search
 
 ```sql

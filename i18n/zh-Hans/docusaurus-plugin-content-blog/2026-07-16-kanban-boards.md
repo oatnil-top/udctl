@@ -27,24 +27,26 @@ UnDercontrol 走的是另一条路。它是一个任务和知识管理工具,日
 
 至于那笔学费,后面会讲它是怎么免掉的。
 
-### 连开箱的默认看板都不老实
+### 连系统自带的看板都不老实
 
-这话听起来像在画饼。但你新建一个看板,默认那六列里就有两列不是状态:
+这话听起来像在画饼。新建的看板确实朴素:按状态分 4 列,To Do、In Progress、Pending、Done。但那只是起点,不是上限。
+
+![新建的看板:按状态分的 4 列,To Do、In Progress、Pending、Done](https://dl.udctl.com/features/blog/kanban-boards/default-board.png)
+
+再打开每个账号都有的 All Tasks 看板,最左边四列没有一列是状态:
 
 | 列 | 这一列装什么 |
 |----|-------------|
-| To Do | 待办的 |
-| In Progress | 进行中的 |
-| Done | 完成的 |
-| Archive | 归档的 |
+| Awaiting Decision | 打了 `awaiting-decision` 标签、还没完成的,等你拍板 |
+| Follow-up | 打了 `follow-up` 标签、还没完成的,截止时间最早的在前 |
 | Recent Created | 最近建的,不管什么状态 |
 | Recent Updated | 最近动过的,不管什么状态 |
 
-最后两列没有任何筛选条件,它们只是按时间倒着排。它们不属于任何状态,它们就是一个视角。
+前两列按标签取卡,把卡在这两列之间拖动,换的是标签,状态原地不动。后两列没有任何筛选条件,它们只是按时间倒着排。这四列都不属于任何状态,它们是视角。
 
-在一个列就等于状态的工具里,这样两列很难出现。而在这里它们平平无奇,就是默认配置的一部分。
+在一个列就等于状态的工具里,这样的列很难出现。而在这里它们平平无奇,就是默认配置的一部分。
 
-![默认看板的六列,最右边的 Recent Created 和 Recent Updated 两列只按时间排序,不属于任何状态](https://dl.udctl.com/features/blog/kanban-boards/default-board.png)
+![All Tasks 看板:最左边的 Awaiting Decision 和 Follow-up 按标签取卡,接着两列只按时间排序](https://dl.udctl.com/features/blog/kanban-boards/all-tasks-follow-up.png)
 
 ### 那学费呢?
 

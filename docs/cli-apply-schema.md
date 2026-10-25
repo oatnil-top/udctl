@@ -155,7 +155,7 @@ spec:
 |-------|------|----------|-------------|
 | `name` | string | **yes** | Board name. |
 | `board_type` | string | no | `private` (default) or `shared`. |
-| `columns` | array | no | Ordered list of columns. |
+| `columns` | array | no | Ordered list of columns. Omit it when creating a board to get the default four status columns: To Do, In Progress, Pending, Done. |
 | `columns[].name` | string | yes | Column display name. |
 | `columns[].query` | string | no | Filter query (e.g., `status:todo`). |
 | `default_tags` | array | no | Tags auto-applied to new tasks in this board. |

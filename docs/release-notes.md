@@ -43,6 +43,41 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.174.0 (2026-10-26)
+
+**Minor release with one breaking change in the CLI: the time block resource is now called time slot.** Scripts that use the old names need editing. This release runs no database migration.
+
+### Breaking changes (CLI)
+
+- **`timeblock` is renamed `timeslot`.** The resource name is `timeslot`, and the `kind` in an `ud apply` document is `TimeSlot` instead of `TimeBlock`. Its visible aliases are `timeslots`, `time-slot`, `slot` and `slots`. The old names `timeblock`, `timeblocks`, `time-block` and `tb`, and the kind `TimeBlock`, are no longer recognised: they fail with the same unknown-resource error as any other word. If a script of yours calls `ud get timeblock`, `ud apply` with `kind: TimeBlock`, or `ud describe timeblock`, change it to `timeslot` / `TimeSlot`.
+- **The `ud cook` recipes are renamed:** `schedule-slot`, `move-slot`, `rebind-slot` and `delete-slot`. `this-week`, `layer-agenda` and `export-week` keep their names.
+- **The web app now says "time slot" in English** where it used to say "time block".
+
+### New Features
+
+- **`ud clone <virtual-path> [directory]` checks a virtual path out into a new folder.** It is `mkdir` plus the first `ud pull` in one step, like `git clone`: `ud clone /Work/Alpha/` creates `./Alpha` and pulls everything under `/Work/Alpha/` into it. The folder name defaults to the last segment of the path (made safe for file systems, with each rewrite printed). A destination that is not empty, or that sits inside an existing tracking folder, is refused and nothing is written; the root path `/` needs an explicit directory. After it, `cd` in and use `ud pull`, `ud push` and `ud status` as usual. This is new, not a change to an existing command.
+- **New users get an updated default prompt for Alfred.** It now covers reply format, sending messages to other agents and a few boundaries, and when a project has a lead agent it prefers to route work through that lead. This applies to the Alfred created for a new user. An Alfred that already exists is not overwritten; on an existing instance the Default row of the agent config page may show "differs from the system default (last changed in v0.174.0)", which is only a note that the stock text moved.
+
+### Upgrade Notes (self-hosted)
+
+- **No database migration.** Nothing runs against your database.
+- **No new settings.** No environment variable was added or removed.
+- **Upgrade the server before the CLI and the apps.** The new default Alfred prompt comes from the server.
+- **Update scripts that use the old `timeblock` names when you upgrade the CLI**, as described above.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.174.0`, and `ud clone --help` must print the clone usage.
+
+---
+
 ## v0.173.1 (2026-10-25)
 
 **Patch release: a correction to v0.173.0.** The Awaiting Decision and Follow-up columns belong on the built-in All Tasks board, not in the template for new boards. This release runs no database migration.

@@ -39,6 +39,41 @@ sidebar_position: 1
   (目前没有欠着的:曾经列在这里的条目已全部折进 v0.151.0。)
 -->
 
+## v0.174.0 (2026-10-26)
+
+**次版本,命令行有一处不兼容改动:time block 资源改名为 time slot。** 用了旧名字的脚本需要修改。本版没有数据库迁移。
+
+### 不兼容改动(命令行)
+
+- **`timeblock` 改名为 `timeslot`。** 资源名是 `timeslot`,`ud apply` 文档里的 `kind` 由 `TimeBlock` 改为 `TimeSlot`。可见别名:`timeslots`、`time-slot`、`slot`、`slots`。旧名 `timeblock`、`timeblocks`、`time-block`、`tb` 以及 kind `TimeBlock` 不再识别,和任何未知词一样报未知资源错误。如果你的脚本里有 `ud get timeblock`、`kind: TimeBlock` 的 `ud apply`、`ud describe timeblock`,请改成 `timeslot` / `TimeSlot`。
+- **`ud cook` 配方改名:** `schedule-slot`、`move-slot`、`rebind-slot`、`delete-slot`。`this-week`、`layer-agenda`、`export-week` 名字不变。
+- **网页的英文界面**里原来的 "time block" 现在写作 "time slot"。
+
+### 新功能
+
+- **`ud clone <虚拟路径> [目录]` 把一个虚拟路径检出到新文件夹。** 相当于 `mkdir` 加第一次 `ud pull`,用法像 `git clone`:`ud clone /Work/Alpha/` 会创建 `./Alpha`,并把 `/Work/Alpha/` 下的内容拉进去。目录名默认取路径最后一段(会改成适合文件系统的写法,每处改写都会打印出来)。目标目录非空、或位于已有跟踪文件夹之内会被拒绝且不写入任何文件;根路径 `/` 必须显式给出目录。之后 `cd` 进去照常使用 `ud pull`、`ud push`、`ud status`。这是新命令,没有改动已有命令。
+- **新用户的 Alfred 默认 prompt 更新。** 补进了回复格式、给其他 agent 发消息、几条边界;项目有负责人(lead)时优先经 lead 派工。这只作用于为新用户创建的 Alfred,已有用户的 Alfred 不会被覆盖;已有实例的 agent 配置页里 Default 行可能显示「与系统默认不同(最近一次改动在 v0.174.0)」,这只是在提示出厂文本换了。
+
+### 升级说明(自托管)
+
+- **没有数据库迁移。** 不会对你的数据库做任何操作。
+- **没有新增配置。** 没有增删环境变量。
+- **先升级服务端,再升级命令行和客户端。** 新的 Alfred 默认 prompt 来自服务端。
+- **升级命令行时,同时修改用了旧 `timeblock` 名字的脚本**,改法见上文。
+
+命令行要你自己升级:发布新版本不会改变任何人机器上的 `ud`。有三条路,**只用其中一条**。
+
+```bash
+npm i -g @oatnil/ud # 用 npm 安装的
+brew update && brew upgrade ud # 用 Homebrew 安装的
+```
+
+**如果你的 `ud` 来自桌面应用,上面两行都不是你的路:请安装新的桌面应用**(从下载页,或用 Homebrew 装的应用执行 `brew upgrade --cask undercontrol`)。应用里的「Install ud CLI」会把 `/usr/local/bin/ud` 做成指向应用包内的符号链接,所以你运行的 `ud` 就是应用自带的那个。
+
+然后确认升级生效:`ud --version` 必须输出 `udctl version 0.174.0`,`ud clone --help` 必须能打印 clone 的用法。
+
+---
+
 ## v0.173.1 (2026-10-25)
 
 **补丁版本:更正 v0.173.0。** Awaiting Decision 与 Follow-up 两列属于系统自带的 All Tasks 看板,不在新建看板的模板里。本版没有数据库迁移。

@@ -1,5 +1,5 @@
 <!-- GENERATED COPY — do not edit here.
-     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one 39cc3edbf
+     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one 2bc859667
      Regenerate: auto/sync-agent-guide.sh -->
 
 # UnDercontrol Guide
@@ -97,9 +97,9 @@ Built-in AI assistant accessible from the app. Capabilities:
 **Built-in Agents**: `ud get agents` lists what this instance actually has (including
 `@ud-guide`, you). Do not recite a remembered roster — agents are added and renamed.
 
-**Agent triggers**: `on_mention`, `manual`. Only an @mention (or a reply in its thread) wakes an agent; assigning a card to it does not.
+**Waking an agent**: every agent can be @mentioned and can be started by hand. An @mention (or a reply in its thread) wakes it; assigning a card to it does not.
 
-**Creating custom agents**: Define name, prompt (soul), skills, triggers, session behavior, and optional default tags/board/project.
+**Creating custom agents**: Define name, prompt (soul), skills, session behavior, and optional default tags/board/project.
 
 ### Alfred — the workspace butler
 
@@ -121,7 +121,7 @@ Cron-based automation:
 - **Task creation**: Recurring tasks with template variables (`{{date}}`, `{{weekday}}`, `{{month}}`)
 - **AI task summary**: Automated summaries of task progress
 - **Database backup**: Scheduled backups with retention policies
-- **Agent triggers**: Schedule agents to run periodically
+- **Scheduled agent runs**: Schedule agents to run periodically
 
 Template variables for titles: `{{date}}`, `{{time}}`, `{{datetime}}`, `{{weekday}}`, `{{month}}`, `{{year}}`
 Relative deadline formats: `+2h`, `+1d`, `+7d`, `end_of_day`, `end_of_week`
@@ -275,7 +275,7 @@ is why". An unlabelled command is not an acceptable answer.
 ### AI Agent Automation
 1. Define what you want automated (e.g., daily standup summary)
 2. Create or use an existing agent with appropriate skills
-3. Set up triggers: @mention for on-demand, scheduled job for recurring
+3. Decide how it is woken: @mention for on-demand, scheduled job for recurring
 4. Agent executes in a workspace session and reports results
 5. Review output in comment threads or notes
 

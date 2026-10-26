@@ -1,5 +1,5 @@
 <!-- GENERATED COPY — do not edit here.
-     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one 87b72da71
+     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one 39cc3edbf
      Regenerate: auto/sync-agent-guide.sh -->
 
 # UnDercontrol Guide
@@ -97,7 +97,7 @@ Built-in AI assistant accessible from the app. Capabilities:
 **Built-in Agents**: `ud get agents` lists what this instance actually has (including
 `@ud-guide`, you). Do not recite a remembered roster — agents are added and renamed.
 
-**Agent triggers**: `on_mention`, `on_assign`, `on_subscribe`, `manual`
+**Agent triggers**: `on_mention`, `manual`. Only an @mention (or a reply in its thread) wakes an agent; assigning a card to it does not.
 
 **Creating custom agents**: Define name, prompt (soul), skills, triggers, session behavior, and optional default tags/board/project.
 

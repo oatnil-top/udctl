@@ -43,6 +43,40 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.176.0 (2026-10-26)
+
+**Minor release: text sent into an agent's terminal now follows the CLI the agent really runs, plus fixes for desktop cards with several windows.** This release runs no database migration. It changes the backend, the desktop app and the `ud` daemon, so update all three.
+
+### Improvements
+
+- **Briefings and forwarded replies are delivered the way each agent CLI takes input.** Claude Code gets small spaced chunks, so a long briefing no longer loses text; opencode gets the whole text pasted in one piece. This covers the first briefing, replies forwarded from a card thread, and the short nudge sent to an idle session. It applies in the desktop app and in the `ud` daemon.
+- **An agent is started and judged by the CLI it actually runs, not by the card's tool field.** The daemon now starts only agent CLIs that are in the catalog, in place of the old block list, and the plain-shell switch lets a shell through. The status hooks and the "CLI not found" banner follow the CLI the session runs. The desktop app re-reads the CLI catalog every 30 minutes and whenever its daemon connection comes back.
+- **Desktop: when one card has several workspace windows, each window keeps its own terminal.** Resizing a window and typing in it now reach that window's terminal; before, both went to the first window of the card.
+- **Desktop: the Switch workspace list works with several windows on one card.** The Local row of a card that has other windows open can be clicked, your own row is no longer greyed out (clicking it focuses the window you are in), and session rows show the card title.
+
+### Bug Fixes
+
+- **Run on a card that already has a live session for the same agent now tells you so.** The dialog stays open with a notice instead of doing nothing. This covers the Run dialog on a card and the global and project launchers.
+
+### Upgrade Notes (self-hosted)
+
+- **No database migration runs in this release.**
+- **No new settings.** No environment variable was added or removed.
+- **Upgrade the server before the CLI and the apps,** as with every release.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.176.0`.
+
+---
+
 ## v0.175.0 (2026-10-26)
 
 **Minor release with breaking changes in the CLI, and agent triggers are retired.** Scripts that rely on `ud push` exiting 0, or on an unknown command printing help, need a look. This release runs two database migrations; back up your database before upgrading.

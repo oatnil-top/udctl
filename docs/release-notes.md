@@ -43,6 +43,57 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.175.0 (2026-10-26)
+
+**Minor release with breaking changes in the CLI, and agent triggers are retired.** Scripts that rely on `ud push` exiting 0, or on an unknown command printing help, need a look. This release runs two database migrations; back up your database before upgrading.
+
+### Breaking changes
+
+- **`ud push` exits 3 when it skipped items because of a conflict.** It used to exit 0. A failed or refused item still exits 1.
+- **An unknown command or resource name fails with one line and exit 1.** `ud get foobarx`, `ud describe foobarx abc` and `ud get timeblock` used to print help and exit 0, so a typo read as success. Bare `ud get` and `--help` print exactly what they did before. Three command forms that had been silently printing help work again: `ud get saved-query` (and `sq`), `ud upload`, and `ud grep`.
+- **A file whose frontmatter `ud push` cannot read is refused,** with the reason, and nothing is sent. `ud status` names it. The file is not rewritten.
+- **Agent `triggers` is retired.** Every agent can be @mentioned and started by hand; the field never controlled anything else. A request that still carries `triggers` is accepted and the value is ignored, and `ud apply` of a manifest with `spec.triggers` applies normally and prints one note on stderr. `on_assign` and `on_subscribe` no longer mean anything. API responses keep returning a fixed `triggers` value for a transition period, so older clients keep working. The `TRIGGERS` column is gone from `ud get agents`, the `Triggers` line from `ud describe agent`, and the `triggers` key from `ud describe agent -o apply`.
+
+### New Features
+
+- **Drop files onto the quick note dialog** (web and desktop) to attach them to the new task. Dropped files are listed as pending attachments, can be removed before saving, and are attached when the task is created. An image dropped onto the editor text is still inlined as before.
+- **Every agent appears in the @ list** in the web app, including agents that never had the mention trigger. The agent create and edit forms no longer show the triggers control.
+- **Desktop: `` Cmd+` `` cycles between the app's windows** on macOS. The Window menu now has the standard window role.
+
+### Improvements
+
+- **`ud push` and `ud pull` no longer lose someone else's edit.** While a remote change is unreconciled (a conflict `ud push` skipped, or a conflict `ud pull` held back), the sync token no longer moves forward. Before, the next `ud pull` could say "Already up to date" and the next `ud push` could overwrite the other person's edit with no conflict reported. A consequence: after `ud pull --keep-local`, the next `ud push` still reports the conflict; to make your local copy win, use `ud push --force`.
+- **`ud push` pushes a file you edited a moment ago.** It used to hold back any file changed in the last two seconds, say nothing useful, and exit 0, so edit-then-push left the edits local.
+- **A new `.md` file in a task's notes folder is pushed as a note on that task.** It used to be created as a new task.
+- **`.udignore` stays local.** It is never pushed; a server copy left by an older CLI is ignored.
+- **No more phantom "Remote changes: modified: 1" right after your own push,** which affected every uploaded resource.
+- **Errors are printed once** instead of twice, and runtime errors from `ud init`, `clone`, `pull`, `push` and `status` no longer print the usage block. An unreachable server or a 401/403 adds a "Next:" line.
+- **`ud push` asks nothing when stdin is not a terminal,** and during `--dry-run`. `ud pull --dry-run` lists conflicted items. `ud status` names each remote change and the local file it maps to. Pulled files end with a newline. A new or edited note file is renamed to the name `ud pull` derives from its first line. Deleting a task removes its synced local note files (edited ones are kept).
+- **The built-in skills describe the clone workflow** (clone, edit locally, push) as the default way to edit many cards, and no longer show `ud` subcommands that were removed.
+
+### Bug Fixes
+
+- **Sign-in could be refused right after the server's clock stepped backwards.** A token issued just after a revocation could be stamped one second too early and rejected by the server that issued it. It now waits until the clock is past that point.
+
+### Upgrade Notes (self-hosted)
+
+- **Two database migrations run on first start: 00109 and 00110.** 00109 removes the `on_assign` and `on_subscribe` values from every agent's stored triggers and keeps a copy of the old values in a table named `agent_triggers_backup_00109`. 00110 then drops the `triggers` column from `agent_configs`. **Back up your database before upgrading.** Rolling 00110 back restores an empty column with the default value, not what was in it.
+- **No new settings.** No environment variable was added or removed.
+- **Upgrade the server before the CLI and the apps,** as with every release.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.175.0`, and `ud get foobarx; echo $?` must print one error line and `1`.
+
+---
+
 ## v0.174.0 (2026-10-26)
 
 **Minor release with one breaking change in the CLI: the time block resource is now called time slot.** Scripts that use the old names need editing. This release runs no database migration.

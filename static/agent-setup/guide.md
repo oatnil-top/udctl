@@ -1,5 +1,5 @@
 <!-- GENERATED COPY — do not edit here.
-     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one 2bc859667
+     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one c7bb41866
      Regenerate: auto/sync-agent-guide.sh -->
 
 # UnDercontrol Guide
@@ -57,6 +57,7 @@ Boards are **named views** (saved queries). The same Task can appear in multiple
 - **Columns** defined by query conditions — tasks appear dynamically
 - **Drag-and-drop**: Moving a task between columns intelligently updates its properties to match the target column's conditions
 - **Multiple views**: List, Kanban, Calendar, Tree, Graph, Mindmap
+- **Calendar**: its default view draws a task's TimeSlots (scheduled sittings, `ud cook timeslot`), not its kickoff/deadline
 
 ### Projects
 

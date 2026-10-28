@@ -149,9 +149,27 @@ considers it done — waiting for you, not auto-closing. Agents can @mention eac
 so a lead can delegate a subtask to a member, and the delegation chain never grants an agent
 broader access than you have.
 
+You can pick where it runs this time, the same way you pick a CLI: put a runtime link beside
+the agent, from the **Runtime** section of the `@` menu or typed out:
+
+```
+[@helper](mention://member/<agent-id>) [@server](mention://runtime/server) answer from the server
+[@helper](mention://member/<agent-id>) [@daemon](mention://runtime/daemon) run on one of my machines
+[@helper](mention://member/<agent-id>) [@laptop](mention://runtime/daemon:<daemon-id>) run on that machine
+```
+
+The pick is made from the runtimes the agent's owner allowed. With no runtime link, a new
+conversation starts on the server when the agent may run there, and a conversation that already
+has a session keeps it. Naming a runtime outside what the agent allows starts nothing, and the
+thread says what you asked for and what is allowed. Naming a different runtime than the one the
+conversation is on hands the conversation to a new session there; the old session stops
+answering in this conversation (it keeps its other ones).
+
 Two details worth knowing: a mention only wakes an agent from a **comment** (a mention
-written into a note does not), and mentions are not queued — if the target machine's daemon
-is offline, the delivery is dropped rather than held.
+written into a note does not), and mentions are not queued. If the machine that would run the
+agent is offline, the thread says so right away rather than waiting, and when the agent may
+also run on the server the reply ends with a ready `[@server](mention://runtime/server)` link
+to get the answer from there instead.
 
 ## Example agent workflow
 

@@ -49,6 +49,11 @@ chooses **your own machines first**: a machine shared with you is used only when
 is online. Your agent runs against your files, on hardware you control, whenever that is
 possible at all.
 
+A mention can name the machine itself with a runtime link
+(`[@laptop](mention://runtime/daemon:<daemon-id>)`): that machine or none, if the agent's
+owner allows it. An agent whose allowed runtimes list specific machines only ever lands on
+one of those.
+
 The order after that is: a daemon the agent is pinned to, then the one you last ran a session
 on, then whatever is online. Pinning an agent to a specific daemon in the agent settings
 overrides the preference — on a multi-user instance that pin applies to everyone, which the
@@ -56,7 +61,8 @@ setting says next to the field.
 
 If none of your machines is online, nothing is lost. The message stays in its thread, and the
 bot replies with how to bring one back — open the desktop app, which connects on launch, or run
-`ud daemon start` on any machine you use. Your next message after that starts the session, and
+`ud daemon start` on any machine you use. When the agent may also run on the server, the reply
+ends with a ready `[@server](mention://runtime/server)` link that gets the answer from there now. Your next message after that starts the session, and
 it reads the thread it is bound to, so it sees everything said while nobody was listening.
 There is no queue to drain and nothing replays.
 

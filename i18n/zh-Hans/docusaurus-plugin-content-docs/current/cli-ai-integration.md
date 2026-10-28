@@ -119,7 +119,17 @@ agent 自己干活，但你始终是那道验收关卡。任务上的评论就�
 
 它也用同样的方式回报：进度写进任务的备注（包含 commit），结论写进评论线程，做完之后任务变成 `pending` 状态——等你验收，而不是自动关闭。agent 之间也能互相 @，所以一个 lead 可以把子任务派给成员，而这条委派链永远不会让 agent 拿到比你更大的权限。
 
-两个值得知道的细节：只有**评论**里的 @ 才能唤醒 agent（写在备注里的 @ 不会），并且 @ 不会排队——如果目标机器的 daemon 离线，这次投递会被丢弃，而不是挂起等待。
+这一次在哪里跑，可以像选 CLI 一样指定：在 agent 旁边加一个 runtime 链接，从 `@` 菜单的**运行位置**一栏选，或者直接写出来：
+
+```
+[@helper](mention://member/<agent-id>) [@server](mention://runtime/server) 在服务端回答
+[@helper](mention://member/<agent-id>) [@daemon](mention://runtime/daemon) 在我的某台机器上跑
+[@helper](mention://member/<agent-id>) [@laptop](mention://runtime/daemon:<daemon-id>) 在那台机器上跑
+```
+
+只能在 agent 主人允许的 runtime 里选。不带 runtime 链接时，新对话在 agent 允许服务端的情况下从服务端开始，已经有会话的对话继续用原来的会话。写了 agent 不允许的 runtime 就什么都不启动，线程里会说明你要的是什么、允许的是哪些。写了和这条对话当前不同的 runtime，会在那里新开一个会话接管这条对话；旧会话不再在这条对话里回答（它的其他对话不受影响）。
+
+两个值得知道的细节：只有**评论**里的 @ 才能唤醒 agent（写在备注里的 @ 不会），并且 @ 不会排队。如果要跑 agent 的那台机器离线，线程里会立刻说明，不会无声等待；agent 也允许在服务端运行时，回复末尾会附一个现成的 `[@server](mention://runtime/server)` 链接，发出去就改由服务端回答。
 
 ## AI 工作流示例
 

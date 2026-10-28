@@ -136,8 +136,11 @@ ud cook board
 ## Human-in-the-loop by @mention
 
 Agents work on their own, but you stay the review gate. Comments on a task are the channel:
-**@mention an agent in a task comment and it wakes up** — udctl starts a workspace
-session for it on the machine running your daemon, and the agent picks the task up with the
+**@mention an agent in a task comment and it wakes up**. Where it runs depends on the
+runtime the agent is set to. An agent that runs on the server answers in the thread from the
+server itself, with no machine of yours involved: it can read, search and create tasks and add
+notes, and nothing else (no shell, no files, no internet). An agent that runs on a daemon gets
+a workspace session on the machine running your daemon, and picks the task up with the
 description, notes, and links as context.
 
 It reports back the same way. Progress goes into the task's notes (commits included), the

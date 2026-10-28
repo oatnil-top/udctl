@@ -45,7 +45,7 @@ The CLI is `ud`. Any terminal-based coding agent can drive it with the shell acc
 - **Notes.** Long-form markdown next to the tasks it belongs to, with code blocks, Mermaid diagrams, and bi-directional links.
 - **Finance.** Multi-currency accounts, expenses, budgets, monthly rollups.
 - **Files.** Attach anything to a task, expense, or note; store locally or on S3-compatible storage.
-- **Agent team.** Define agents, hand work to them from a task comment or from chat, and get the result written back to the task. Scheduled jobs run agents on a timer. Alfred, the Telegram butler, is one of those agents.
+- **Agent team.** Define agents, hand work to them from a task comment or from chat, and get the result written back to the task. An agent you create runs on the server by default and answers with no machine of yours involved; give it a daemon runtime when the work needs your machine. Scheduled jobs run agents on a timer. Alfred, the Telegram butler, is one of those agents.
 - **Everything as code.** Tasks, notes, agents, and skills round-trip through `ud apply` as markdown with YAML frontmatter. Schemas: https://github.com/oatnil-top/ud-schemas
 - **Self-hosted.** Your data stays on hardware you control. Nothing phones home.
 

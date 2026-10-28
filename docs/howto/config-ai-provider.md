@@ -45,7 +45,7 @@ Click the **Test Connection** button to verify your API key and configuration ar
 After creating the provider, configure where it can be used:
 
 - **Backend** (toggle): Enable for server-side AI features such as task summaries and smart categorization
-- **Frontend** (toggle): Enable for browser-side AI chat
+- **Frontend** (toggle): Enable for browser-side AI features such as rewriting or translating a selection in the editor
 
 Both toggles will show **Available** when enabled.
 
@@ -61,13 +61,13 @@ You now have a fully configured AI provider. You can:
 
 - Ask questions in a conversation and bring agents in with `@`
 - Get AI-powered task summaries and suggestions (if backend is enabled)
-- Switch between multiple providers in the AI chat dropdown
+- Ask from any page in the floating AI window (Ctrl+J): it shows one of your conversations, the same one you see under **Chats**
 
 ## Tips
 
-- You can add multiple providers and switch between them in the AI chat panel
+- You can add multiple providers
 - Use **Custom (OpenAI-compatible)** provider type for services like GitHub Models, Azure OpenAI, or local LLMs that support the OpenAI API format
-- Conversations need the **Backend** toggle. The **Frontend** toggle covers the floating AI chat (Ctrl+J)
+- Conversations, including the floating AI window (Ctrl+J), need the **Backend** toggle. The **Frontend** toggle covers the editor's AI actions
 - Backend AI features require the provider to be enabled on the backend toggle
 
 ## Related

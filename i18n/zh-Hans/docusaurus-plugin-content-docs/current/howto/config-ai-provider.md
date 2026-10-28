@@ -16,15 +16,11 @@ sidebar_position: 1
 
 ### 步骤 1：进入设置页面
 
-点击左下角的用户名，进入设置页面。
+点击左侧栏最下方的 **设置**。
 
-![步骤 1：进入设置页面](https://dl.udctl.com/features/howto/config-ai-provider/1-goto-config-page.jpg)
+### 步骤 2：打开 AI 与模型
 
-### 步骤 2：打开 AI 配置
-
-在设置侧边栏中，点击 **AI 配置** 选项。
-
-![步骤 2：打开 AI 配置](https://dl.udctl.com/features/howto/config-ai-provider/2-goto-ai-config-section.jpg)
+在设置左边那一列分组里，点击 **AI 与模型**。
 
 ### 步骤 3：添加 AI 提供商
 

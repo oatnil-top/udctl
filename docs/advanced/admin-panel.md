@@ -134,7 +134,7 @@ The admin panel is where you trigger, monitor, and download database backups.
 
 ## Getting Started
 
-1. **Log in as admin** - Access the admin panel from the navigation menu
+1. **Log in as admin** - Open **Settings** at the bottom of the left sidebar, then **Admin** (only admins see it)
 2. **Review the dashboard** - Check system statistics and user counts
 3. **Configure storage** - Set up S3 storage if you haven't already
 4. **Set up OAuth** - Configure at least one OAuth provider for easy user login

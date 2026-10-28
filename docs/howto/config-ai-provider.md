@@ -16,15 +16,11 @@ Learn how to add your own AI provider to udctl for AI chat and smart features li
 
 ### Step 1: Go to Settings
 
-Click your username at the bottom-left corner of the sidebar to open the Settings page.
+Click **Settings** at the bottom of the left sidebar.
 
-![Step 1: Go to Settings](https://dl.udctl.com/features/howto/config-ai-provider/1-goto-config-page.jpg)
+### Step 2: Open AI & models
 
-### Step 2: Open AI Configuration
-
-In the settings sidebar, click the **AI Configuration** section.
-
-![Step 2: Open AI Configuration](https://dl.udctl.com/features/howto/config-ai-provider/2-goto-ai-config-section.jpg)
+In the column of settings groups on the left, click **AI & models**.
 
 ### Step 3: Add an AI Provider
 

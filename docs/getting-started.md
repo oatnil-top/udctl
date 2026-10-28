@@ -91,12 +91,12 @@ After the first sign-in a short wizard opens with three steps:
 2. **Machine**: explains that agents run on a machine of your own, links the desktop
    app, and has a **Paste to your agent** box with setup instructions for your AI
    agent. [Steps 4 and 5](#4-install-the-ud-cli-and-sign-in) below do the same by hand.
-3. **Alfred**: your resident assistant, who hands work to agents. He needs a machine
-   to run on (the desktop app, or the `ud` daemon), so on a plain server you can skip
-   this step for now.
+3. **Alfred**: your resident assistant, who hands work to agents. He works right away,
+   on the server; install the desktop app or the `ud` daemon when you want him and your
+   agents to work on a machine of your own.
 
-Every step can be skipped; **Finish** closes the wizard. You land on the task explorer
-with a **Welcome to UnDercontrol!** card already in it.
+Every step can be skipped; **Finish** closes the wizard. You land on **Conversations**,
+and a **Welcome to UnDercontrol!** card is already in your tasks.
 
 ## 3. Create your first card
 
@@ -166,7 +166,7 @@ I use udctl, a workspace for my tasks, notes and files. You can read and change 
 1. Get `ud`. If the udctl desktop app is on this computer, use the `ud` it ships; otherwise npm install -g @oatnil/ud
 2. Help me sign in. Never ask me for my password or key and never type them for me. Explain these two ways, let me pick, and wait while I do it:
    a. In my own terminal: ud login --api-url <YOUR-SERVER-URL> -n udctl-<SERVER-HOST> (it asks for my password)
-   b. In udctl, Profile → API Configuration → Create Key, then in my own terminal: ud config set-context udctl-<SERVER-HOST> --api-url <YOUR-SERVER-URL> --api-key <my key>
+   b. In udctl, Settings → Account → API Key Management → Create Key, then in my own terminal: ud config set-context udctl-<SERVER-HOST> --api-url <YOUR-SERVER-URL> --api-key <my key>
    Use the context udctl-<SERVER-HOST> (add --context if it is not current). Never write to a context named `personal`. Name the context after my server: `udctl-` plus the host, plus the port when it is not the default, with dots and colons as hyphens (http://localhost:3300 -> udctl-localhost-3300, https://api.udctl.com -> udctl-api-udctl-com).
 3. Learn it: `ud describe skill ud-cli` is the full guide; `ud get skills` lists more.
 4. Run `ud config onboarding --done` once. It tells my udctl window you are connected.

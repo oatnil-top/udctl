@@ -124,7 +124,7 @@ AI summary jobs use the AI assistant to analyze your tasks and generate meaningf
 
 ## Getting Started
 
-1. **Go to Scheduled Jobs** in the navigation menu
+1. **Go to Scheduled Jobs**: click **Settings** at the bottom of the left sidebar, then **Automation → Scheduled Jobs**
 2. **Create a job from a template** - Try "Daily Notes" to see how it works
 3. **Click Run Now** to test your job immediately
 4. **Check your task list** - The auto-created task appears just like any other task

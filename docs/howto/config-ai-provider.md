@@ -53,15 +53,13 @@ Both toggles will show **Available** when enabled.
 
 ### Step 6: Chat with AI
 
-Open any task and click the **AI Chat** panel on the right side. Select your newly configured provider from the dropdown menu to start a conversation.
-
-![Step 6: Chat with AI](https://dl.udctl.com/features/howto/config-ai-provider/6-chat-with-ai-using-this-provider.jpg)
+Open **Chats** in the sidebar and click **New conversation**, then type a question and send it. The answer comes from the provider with the **Backend** toggle on. To bring in an agent, type `@` in the same conversation and pick it, for example Alfred.
 
 ## Result
 
 You now have a fully configured AI provider. You can:
 
-- Use AI chat from any task's detail page
+- Ask questions in a conversation and bring agents in with `@`
 - Get AI-powered task summaries and suggestions (if backend is enabled)
 - Switch between multiple providers in the AI chat dropdown
 
@@ -69,7 +67,7 @@ You now have a fully configured AI provider. You can:
 
 - You can add multiple providers and switch between them in the AI chat panel
 - Use **Custom (OpenAI-compatible)** provider type for services like GitHub Models, Azure OpenAI, or local LLMs that support the OpenAI API format
-- If you only need chat features, enabling just the **Frontend** toggle is sufficient
+- Conversations need the **Backend** toggle. The **Frontend** toggle covers the floating AI chat (Ctrl+J)
 - Backend AI features require the provider to be enabled on the backend toggle
 
 ## Related

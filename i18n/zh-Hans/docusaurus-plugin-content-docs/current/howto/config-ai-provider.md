@@ -53,15 +53,13 @@ sidebar_position: 1
 
 ### 步骤 6：使用 AI 聊天
 
-打开任意任务，点击右侧的 **AI 对话** 面板。在下拉菜单中选择你刚配置的提供商，即可开始对话。
-
-![步骤 6：使用 AI 聊天](https://dl.udctl.com/features/howto/config-ai-provider/6-chat-with-ai-using-this-provider.jpg)
+在侧栏打开 **对话**，点 **新对话**，输入问题后发送。回答来自打开了 **后端** 开关的提供商。想让 agent 加入，在同一个对话里输入 `@` 并选择它，比如 Alfred。
 
 ## 结果
 
 现在你已经配置好了 AI 提供商，可以：
 
-- 在任意任务详情页使用 AI 聊天
+- 在对话里提问，并用 `@` 请 agent 加入
 - 获取 AI 驱动的任务摘要和建议（需启用后端）
 - 在 AI 聊天下拉菜单中切换不同的提供商
 
@@ -69,7 +67,7 @@ sidebar_position: 1
 
 - 你可以添加多个提供商，在 AI 聊天面板中随时切换
 - 使用 **Custom (OpenAI-compatible)** 类型来接入 GitHub Models、Azure OpenAI 或支持 OpenAI API 格式的本地 LLM
-- 如果只需要聊天功能，启用 **前端** 开关即可
+- 对话需要 **后端** 开关；**前端** 开关用于悬浮 AI 聊天(Ctrl+J)
 - 后端 AI 功能需要同时启用后端开关
 
 ## 相关文档

@@ -26,7 +26,10 @@ Track spending across multiple accounts and categories. Export your data anytime
 ### Task Management
 A personal issue tracker with full markdown support, bi-directional linking between tasks and notes, and powerful query syntax for filtering.
 
-### AI Assistant
+### Conversations
+Signing in opens your conversations. Start a new one and ask; the model answers directly. Type `@` and pick an agent such as Alfred to bring it into the same conversation: the header shows it answering, with a Stop button. Chats from Telegram appear in the same list, tagged with where they came from. Every conversation is saved as a task, so you can open it from the task list too.
+
+### Quick Capture
 Send images, text, or voice to the AI to quickly log expenses and create tasks. Seamlessly integrated with Apple Shortcuts for rapid capturing.
 
 ### Resource Management

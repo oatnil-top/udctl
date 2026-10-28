@@ -150,7 +150,7 @@ Expenses can reference tasks, letting you connect spending to specific work item
 Set up recurring jobs to automatically create tasks on a schedule - perfect for daily standups, weekly reviews, or monthly reports.
 
 ### With the AI Assistant
-Use natural language to create tasks, query your task list, or generate tasks from images and text. Every [conversation](../intro.md#conversations) is a task too: `@` an agent there to have it work on a card for you.
+Use natural language to create tasks, query your task list, or generate tasks from images and text. Every [conversation](/docs/intro#conversations) is a task too: `@` an agent there to have it work on a card for you.
 
 ## Getting Started
 

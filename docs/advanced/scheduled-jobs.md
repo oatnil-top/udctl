@@ -26,6 +26,16 @@ Query your existing tasks and let AI generate a summary:
 
 This is great for automated weekly digests, project status reports, or sprint summaries.
 
+### Conversation Message Jobs
+Post a message into a conversation on a schedule, as if you had typed it there. This is how a standing task lives in a conversation: the morning review, a weekly check-in, anything you would otherwise ask by hand at the same time every day.
+
+- **The same conversation every run** (the default): name the conversation's card. Each run adds to the same thread, so the agent answers with everything said there before, and you reply to it in the same place.
+- **A new conversation every run**: turn on *new each run* instead of naming a card. Each run opens a conversation titled with the job's name and the date, for jobs whose history would only make one thread grow without end.
+
+The message mentions the agent you pick and asks your prompt. It is then answered exactly like a message you typed: an agent that can run on the **server** answers with no machine of yours online, and you can name where it runs (`server`, `daemon`, or one machine) the same way you would in a mention. Leave the agent out to mention no one. The job checks when you save it that the conversation, the agent and the runtime are all reachable, and refuses with the reason if not.
+
+A run counts as successful once the message is in the conversation. The answer appears in the conversation, not in the run history; if the agent's machine is offline, the conversation says so and offers the server instead.
+
 ## Creating a Scheduled Job
 
 You have three ways to create a job:

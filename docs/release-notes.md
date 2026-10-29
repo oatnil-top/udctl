@@ -72,6 +72,7 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 ### Upgrade Notes (self-hosted)
 
 - **One database migration runs on first boot** (`00111`): the default for a new file's path changes from `/` to unfiled. Existing files keep their path. On SQLite the migration rebuilds the `resources` table, so back up your database before upgrading.
+- **SQLite databases created before v0.18 lose two old columns on upgrade.** The migration drops the `entity_type` and `entity_id` columns of the `resources` table, and any file association that is not also in `resource_entity_links` is lost. Back up your database before upgrading; the fix comes in the next version.
 - **No new settings.** No environment variable was added or removed.
 - **Upgrade the server before the CLI and the apps,** as with every release. A client that calls the new batch share endpoint against an older server gets "Access denied".
 

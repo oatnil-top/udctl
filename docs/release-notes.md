@@ -43,6 +43,51 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.177.0 (2026-10-29)
+
+**Minor release: share many files with a group in one call, a more forgiving task query, and a handful of fixes in the web app and the CLI.** This release runs one database migration; back up your database before upgrading. It changes the backend, the web app, the desktop app and the `ud` CLI, so update all of them.
+
+### New Features
+
+- **Share many files with a group in one request.** `PATCH /resources/batch/share-group` shares a batch of your own files with a group, all or nothing: if any one of them cannot be shared, none is. Folders are not accepted. This is what a multi-select "share to group" in a client uses; a server without it answers "Access denied".
+- **`ud wctx` prints the default local checkout of the card's path,** and the new `ud download file-version <file-id> <version>` saves an older version of a file as `<name>.v<N><ext>`.
+
+### Improvements
+
+- **Task queries accept any metadata key.** A key that has no custom field defined is compared as text instead of failing the whole query. `BETWEEN` on metadata fields compares by type, and an operator the query cannot handle now returns an error instead of silently matching everything. A `cf.` array filter that cannot work is refused when the query is parsed.
+- **`ud query` checks status values and has `--all`.** A status that does not exist is refused with the list of valid ones. `--all` drops the default status filter and pages through every result. The refusal for an undefined `ud.<name>` key no longer claims the key is unreadable.
+- **Calendar entries written elsewhere show up without a reload** (from the CLI, an agent, or another tab). The built-in agents now put a calendar entry on a card of its own, as a time slot, instead of on a checklist.
+- **A file uploaded with no path is unfiled,** like a task with no path; `/` stays an explicit root. Without `--folder`, `ud upload` now checks for a file of the same name among unfiled files rather than at the root.
+- **Desktop: each row in the workspace window lists names its window** (the session and agent, or Local), and a window that does not hold a session fetches it.
+- **Schedules read better.** A cron such as "every 5 minutes" or "hourly at minute 30" is described in words; a shape the description cannot express is labelled "Custom schedule". A scheduled job the server refuses now answers 400 with a code instead of a 500.
+- **Accessibility:** the AI provider rows (drag handle, edit, delete), the file dropzone input and the API key revoke button now have names for screen readers.
+
+### Bug Fixes
+
+- **An AI provider endpoint typed with `/v1` (or a pasted full path) no longer becomes `/v1/v1/messages`,** in the server and in the browser.
+- **Sending a message works when the web app is opened over plain http on a non-localhost address.** It used a browser function that is only available on https and localhost.
+- **Alfred quick input works for users whose built-in Alfred was not created yet.** Mentioning it used to fail with `TASK_MENTION_NO_ACCESS`; the app now creates it first.
+- **A bad date in a request names the offending field** (`occurredAt`, `acquiredAt`, `disposedAt`) on every supported Go version.
+
+### Upgrade Notes (self-hosted)
+
+- **One database migration runs on first boot** (`00111`): the default for a new file's path changes from `/` to unfiled. Existing files keep their path. On SQLite the migration rebuilds the `resources` table, so back up your database before upgrading.
+- **No new settings.** No environment variable was added or removed.
+- **Upgrade the server before the CLI and the apps,** as with every release. A client that calls the new batch share endpoint against an older server gets "Access denied".
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.177.0`.
+
+---
+
 ## v0.176.0 (2026-10-26)
 
 **Minor release: text sent into an agent's terminal now follows the CLI the agent really runs, plus fixes for desktop cards with several windows.** This release runs no database migration. It changes the backend, the desktop app and the `ud` daemon, so update all three.

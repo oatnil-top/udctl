@@ -19,14 +19,14 @@ Self-custody usually means running your own server, and that is exactly where mo
 
 ## Step 1: Install the desktop app, meet the embedded server
 
-Install the UnDercontrol desktop app (macOS / Windows / Linux) from the [download page](https://oatnil.com/download). It is not a web-page shell: a complete Go backend ships inside, and the moment the app starts, a local server is listening on port 8888 (it moves to the next free port if 8888 is taken), storing data as a SQLite file on your own disk.
+Install the UnDercontrol desktop app (macOS / Windows / Linux) from the [download page](https://oatnil.com/download). It is not a web-page shell: a complete Go backend ships inside, and the moment the app starts, a local server is listening on port 24816 (if that port is taken, the app shows what is holding it instead of moving to another port), storing data as a SQLite file on your own disk.
 
 On first launch you will see "Welcome to UnDercontrol" and a Start button. One click and you are in: the app auto-creates a local account `personal@undercontrol.local` with a random password generated for this install, no registration, no invite code. You will need these credentials on the phone in step 4; the Security section below shows where to find the password.
 
 Confirm the server is alive:
 
 ```bash
-curl http://localhost:8888/health
+curl http://localhost:24816/health
 # {"service":"ud-go-production","status":"healthy"}
 ```
 
@@ -52,7 +52,7 @@ sudo apt install cloudflared
 Then one command:
 
 ```bash
-cloudflared tunnel --url http://localhost:8888
+cloudflared tunnel --url http://localhost:24816
 ```
 
 ![Real terminal output: quick tunnel created, and curl against the public address returns healthy](https://dl.udctl.com/features/blog/your-desktop-is-the-server/shot-terminal-quick-tunnel.png)
@@ -84,7 +84,7 @@ credentials-file: /Users/you/.cloudflared/<tunnel-id>.json
 
 ingress:
   - hostname: ud.example.com
-    service: http://localhost:8888
+    service: http://localhost:24816
   - service: http_status:404
 ```
 
@@ -127,7 +127,7 @@ Public exposure means anyone with the URL can reach your endpoint. Three things,
 
 ## Don't want public exposure at all?
 
-If all you need is "my devices can reach each other", skip the public internet entirely: use a private mesh network tool to put your phone and computer on the same virtual LAN. Install the client on each device and they see each other; your computer gets a virtual-LAN IP, and the iOS app endpoint becomes `http://<virtual-lan-ip>:8888/api/v1` (write `http://` explicitly). Zero public exposure, and the free tiers of these tools are usually plenty for personal use. The mesh setup itself is out of scope here; every vendor's docs cover the phone-plus-computer case.
+If all you need is "my devices can reach each other", skip the public internet entirely: use a private mesh network tool to put your phone and computer on the same virtual LAN. Install the client on each device and they see each other; your computer gets a virtual-LAN IP, and the iOS app endpoint becomes `http://<virtual-lan-ip>:24816/api/v1` (write `http://` explicitly). Zero public exposure, and the free tiers of these tools are usually plenty for personal use. The mesh setup itself is out of scope here; every vendor's docs cover the phone-plus-computer case.
 
 ## After it works
 

@@ -19,14 +19,14 @@ image: https://dl.udctl.com/features/blog/your-desktop-is-the-server/concept-tun
 
 ## 第一步:安装桌面版,确认内嵌 server
 
-从[下载页](https://oatnil.com/download)安装 UnDercontrol 桌面版(macOS / Windows / Linux)。桌面版不是一个网页壳:它内嵌了完整的 Go 后端,启动 app 的同时,一个本地 server 已经在 8888 端口跑起来了(端口被占用时会自动顺延到下一个空闲端口),数据以 SQLite 文件的形式落在你自己的磁盘上。
+从[下载页](https://oatnil.com/download)安装 UnDercontrol 桌面版(macOS / Windows / Linux)。桌面版不是一个网页壳:它内嵌了完整的 Go 后端,启动 app 的同时,一个本地 server 已经在 24816 端口跑起来了(端口被占用时,app 会显示是谁占着,不会换到别的端口),数据以 SQLite 文件的形式落在你自己的磁盘上。
 
 首次打开你会看到「Welcome to UnDercontrol」和一个 Start 按钮——点一下就进入了。桌面版会自动创建一个本地账号 `personal@undercontrol.local`(密码是这台安装随机生成的),不需要注册,也没有邀请码。第四步手机登录要用这组账号,密码在哪里看见「安全提醒」一节。
 
 验证一下 server 活着:
 
 ```bash
-curl http://localhost:8888/health
+curl http://localhost:24816/health
 # {"service":"ud-go-production","status":"healthy"}
 ```
 
@@ -52,7 +52,7 @@ sudo apt install cloudflared
 然后一条命令:
 
 ```bash
-cloudflared tunnel --url http://localhost:8888
+cloudflared tunnel --url http://localhost:24816
 ```
 
 ![终端里的真实输出:quick tunnel 创建成功,curl 公网地址返回 healthy](https://dl.udctl.com/features/blog/your-desktop-is-the-server/shot-terminal-quick-tunnel.png)
@@ -84,7 +84,7 @@ credentials-file: /Users/you/.cloudflared/<tunnel-id>.json
 
 ingress:
   - hostname: ud.example.com
-    service: http://localhost:8888
+    service: http://localhost:24816
   - service: http_status:404
 ```
 
@@ -127,7 +127,7 @@ https://xxx.trycloudflare.com/api/v1
 
 ## 不想暴露公网?
 
-如果你只想「自己的设备互相可达」,可以完全不碰公网:用内网组网工具把手机和电脑拉进同一个虚拟局域网——各设备装上客户端就互相可见,电脑会得到一个虚拟局域网 IP,iOS app 里把 endpoint 填成 `http://<虚拟局域网IP>:8888/api/v1` 就行(记得显式写 `http://`)。零公网暴露,这类工具的免费额度对个人使用通常足够。具体的组网配置这里不展开,各家官方文档都有手机 + 电脑的接入指引。
+如果你只想「自己的设备互相可达」,可以完全不碰公网:用内网组网工具把手机和电脑拉进同一个虚拟局域网——各设备装上客户端就互相可见,电脑会得到一个虚拟局域网 IP,iOS app 里把 endpoint 填成 `http://<虚拟局域网IP>:24816/api/v1` 就行(记得显式写 `http://`)。零公网暴露,这类工具的免费额度对个人使用通常足够。具体的组网配置这里不展开,各家官方文档都有手机 + 电脑的接入指引。
 
 ## 跑通之后
 

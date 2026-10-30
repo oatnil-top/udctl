@@ -43,6 +43,37 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.177.1 (2026-10-30)
+
+**Patch release: fixes the upgrade to v0.177.0 for old SQLite databases and adds a "not yet shared to this group" filter for file lists.** This release runs no new database migration. It changes the backend, so update the server; the apps and the `ud` CLI are unchanged.
+
+### Improvements
+
+- **File lists can leave out what is already shared with a group.** `GET /resources?notGroupId=<group id>` returns only the files that are not shared to that group (unshared files, and files shared to another group). The count follows the same filter, it never shows files outside your own access, and an older server simply ignores the parameter. This is what a "not yet shared to this group" view in a client uses.
+
+### Bug Fixes
+
+- **Upgrading an old SQLite database no longer loses file associations.** Databases created before v0.18 still carry the `entity_type` and `entity_id` columns on the `resources` table. v0.177.0 dropped those columns without first copying what only they held, so a file attached to a task or other item through them lost that attachment. This version copies any missing association into `resource_entity_links` before the migration runs.
+
+### Upgrade Notes (self-hosted)
+
+- **This fixes the upgrade to v0.177.0; it cannot repair a database that already went through it.** If you upgraded an old SQLite database to v0.177.0, the associations it lost are not recovered by installing this version. Restore the backup you took before upgrading, then upgrade straight to this version. If you have not upgraded yet, skip v0.177.0 and go to this one.
+- **No new database migration and no new settings.** No environment variable was added or removed. Back up your database before upgrading, as always.
+- **Upgrade the server before the CLI and the apps,** as with every release.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. This release does not change the CLI. If you want it anyway, there are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.177.1`.
+
+---
+
 ## v0.177.0 (2026-10-29)
 
 **Minor release: share many files with a group in one call, a more forgiving task query, and a handful of fixes in the web app and the CLI.** This release runs one database migration; back up your database before upgrading. It changes the backend, the web app, the desktop app and the `ud` CLI, so update all of them.

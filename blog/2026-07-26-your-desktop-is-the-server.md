@@ -7,6 +7,7 @@ date: 2026-07-26
 image: https://dl.udctl.com/features/blog/your-desktop-is-the-server/concept-tunnel.png
 ---
 
+> **Correction, 2026-10-30:** This post first said the desktop app signs you in with the default password `personal123`, and that changing `PERSONAL_TIER_PASSWORD` before exposing it to the internet was enough. Both are out of date. Before v0.158.0 (2026-09-30), the Personal-tier password could be read from a public endpoint, so changing it did not protect an exposed instance. From v0.158.0 on, no public endpoint returns it, and each desktop install gets its own random password, shown under Settings → General. Use v0.158.0 or later before you expose your desktop. Step 1 and the Security section below are updated.
 
 Where your data lives is a fork in the road when you pick a tool. SaaS is the convenient path: sign up and go, nothing to maintain, at the cost of your data sitting on the provider's servers. UnDercontrol will offer that hosted option too. But if what you want is full data self-custody — tasks, notes, and ledgers stored only on your own devices, where backup means copying a file and migration means moving to another machine — this tutorial is for you.
 
@@ -20,7 +21,7 @@ Self-custody usually means running your own server, and that is exactly where mo
 
 Install the UnDercontrol desktop app (macOS / Windows / Linux) from the [download page](https://oatnil.com/download). It is not a web-page shell: a complete Go backend ships inside, and the moment the app starts, a local server is listening on port 8888 (it moves to the next free port if 8888 is taken), storing data as a SQLite file on your own disk.
 
-On first launch you will see "Welcome to UnDercontrol" and a Start button. One click and you are in: the app auto-creates a local account `personal@undercontrol.local` with the default password `personal123`, no registration, no invite code. Remember these credentials, you will need them on the phone in step 4. And change the default password before exposing anything to the internet; the Security section below shows how.
+On first launch you will see "Welcome to UnDercontrol" and a Start button. One click and you are in: the app auto-creates a local account `personal@undercontrol.local` with a random password generated for this install, no registration, no invite code. You will need these credentials on the phone in step 4; the Security section below shows where to find the password.
 
 Confirm the server is alive:
 
@@ -118,13 +119,7 @@ One detail: iOS requires HTTPS for public domains (Cloudflare Tunnel provides it
 
 Public exposure means anyone with the URL can reach your endpoint. Three things, in order of importance:
 
-**1. Change the default password first.** Every data endpoint requires login, but the desktop's default password `personal123` is public knowledge. Exposing it unchanged is taping the key to the door. The password comes from the `PERSONAL_TIER_PASSWORD` environment variable; on macOS, launch from a terminal with it set:
-
-```bash
-PERSONAL_TIER_PASSWORD='your-strong-password' /Applications/UnDercontrol.app/Contents/MacOS/UnDercontrol
-```
-
-On Windows, add `PERSONAL_TIER_PASSWORD` in System Environment Variables and restart the app. Phone and CLI then log in with the new password.
+**1. Run v0.158.0 or later, and keep the password to yourself.** Every data endpoint requires login. Since v0.158.0 the desktop app generates a random password for each install instead of using a shared default, and no public endpoint returns it. Find it under Settings → General, in the Password row: it is masked by default, the eye icon shows it, and a copy button sits beside it. If someone you did not intend has seen it, press Reset password in the same place: the backend restarts, the old password stops working, and phone and CLI log in with the new one.
 
 **2. A random URL is not a security mechanism.** The trycloudflare address is hard to guess, but do not treat that as protection; think before sharing the link.
 

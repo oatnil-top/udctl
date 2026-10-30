@@ -7,6 +7,8 @@ date: 2026-07-26
 image: https://dl.udctl.com/features/blog/your-desktop-is-the-server/concept-tunnel.png
 ---
 
+> **更正(2026-10-30):** 本文最初写的是桌面版用默认密码 `personal123` 自动登录,以及暴露公网前改掉 `PERSONAL_TIER_PASSWORD` 就够了。这两处都已过时。v0.158.0(2026-09-30)之前,个人版密码可以从一个公开接口读到,所以改密码并不能保护已暴露的实例;从 v0.158.0 起,没有任何公开接口返回密码,桌面版每台安装各自生成随机密码,在「设置 → 通用」里查看。暴露桌面版之前请先升级到 v0.158.0 或更新版本。第一步和「安全提醒」一节已据此更新。
+
 数据放在谁那里,是选工具时绕不过的一道分岔口。托管服务(SaaS)省事:注册就用,升级、备份、运维都不用操心,代价是数据存在服务商的服务器上。UnDercontrol 也会提供这样的托管服务。但如果你想要的是**数据完全自持**——任务、笔记、账本的原始数据只存在自己的设备上,备份是拷一个文件,迁移是换一台电脑,谁也拿不走——这篇教程就是为你写的。
 
 自持通常意味着自己架服务器,而这正是大多数人放弃的地方。下面走通一条不需要服务器的 0 元路径:UnDercontrol 桌面版自带完整后端,数据以 SQLite 文件落在你自己的磁盘;Cloudflare Tunnel 免费把这台电脑暴露到公网;iOS app 直连你自己的 endpoint。人在地铁上照样看任务、补笔记、记账,而数据的存放位置从头到尾只有一个:你的电脑。不需要公网 IP,不需要路由器端口转发,也不需要买域名(想要固定地址时才可选)。
@@ -19,7 +21,7 @@ image: https://dl.udctl.com/features/blog/your-desktop-is-the-server/concept-tun
 
 从[下载页](https://oatnil.com/download)安装 UnDercontrol 桌面版(macOS / Windows / Linux)。桌面版不是一个网页壳:它内嵌了完整的 Go 后端,启动 app 的同时,一个本地 server 已经在 8888 端口跑起来了(端口被占用时会自动顺延到下一个空闲端口),数据以 SQLite 文件的形式落在你自己的磁盘上。
 
-首次打开你会看到「Welcome to UnDercontrol」和一个 Start 按钮——点一下就进入了。桌面版会自动创建一个本地账号 `personal@undercontrol.local`(默认密码 `personal123`),不需要注册,也没有邀请码。记住这组账号,第四步手机登录要用;默认密码在暴露公网前必须改掉,「安全提醒」一节有具体做法。
+首次打开你会看到「Welcome to UnDercontrol」和一个 Start 按钮——点一下就进入了。桌面版会自动创建一个本地账号 `personal@undercontrol.local`(密码是这台安装随机生成的),不需要注册,也没有邀请码。第四步手机登录要用这组账号,密码在哪里看见「安全提醒」一节。
 
 验证一下 server 活着:
 
@@ -117,13 +119,7 @@ https://xxx.trycloudflare.com/api/v1
 
 公网暴露意味着任何拿到 URL 的人都能访问你的 endpoint。三件事,按重要程度排:
 
-**1. 先改默认密码。** 所有数据接口都要求登录,而桌面版默认账号密码 `personal123` 是公开已知的——不改就暴露公网,等于把门钥匙贴在门上。桌面版的密码由 `PERSONAL_TIER_PASSWORD` 环境变量控制,macOS 上从终端带着它启动:
-
-```bash
-PERSONAL_TIER_PASSWORD='你的强密码' /Applications/UnDercontrol.app/Contents/MacOS/UnDercontrol
-```
-
-Windows 在「系统环境变量」里添加 `PERSONAL_TIER_PASSWORD` 后重启 app。之后手机、CLI 都用新密码登录。
+**1. 用 v0.158.0 或更新版本,密码只留给自己。** 所有数据接口都要求登录。从 v0.158.0 起,桌面版每台安装各自生成随机密码,不再共用默认值,也没有任何公开接口返回它。密码在「设置 → 通用」的密码一行:默认打码,点眼睛图标显示,旁边有复制按钮。如果不该看到的人看到了,在同一处点「重置密码」:后端会重启,旧密码失效,之后手机、CLI 都用新密码登录。
 
 **2. 随机 URL 不是安全机制。** trycloudflare 的随机地址不容易被猜到,但不要把它当作保护;分享链接前想清楚。
 

@@ -43,6 +43,57 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.178.0 (2026-11-01)
+
+**Minor release: conversations with agents, agents that run on the server, and a new Explorer window for your files.** This release runs eight database migrations, all of them additive; back up your database before upgrading. It changes the backend, the web app, the desktop app and the `ud` CLI, so update all of them, server first.
+
+### New Features
+
+- **Conversations.** A new Conversations view lives in the main sidebar: start a conversation and the model answers directly, or @mention an agent and it joins, with "X is answering" and a Stop button while it works. Each conversation has its own header (who answers, rename, pin, a grouped More menu), and a "Needs you" list in the sidebar shows conversations where an agent is waiting on you or you were mentioned.
+- **Agents can run on the server.** An agent now declares where it may run: on the server, on any of your daemons, or on one specific daemon. A server-runtime agent answers without a desktop or daemon being online, its steps are recorded and shown live, and they are kept with the card and the thread.
+- **Pick the runtime and the agent CLI in the message.** Right after an agent mention you can choose where it runs and which CLI it uses (the @ menu and the agent chips offer both). A choice outside the agent's range is refused and you are told why; an offline daemon says so and offers the server instead. For a daemon conversation, the header's Stream tab shows its terminal and controls.
+- **Scheduled jobs can post into a conversation** (`conversation_message`) and can wake an agent (`wake_agent_session`); a wake with no live session opens one on the server when the agent's range includes it. `ud cook scheduled-job` has a `wake-agent` recipe.
+- **Explorer window.** `/explorer` is a full file explorer: tree, contents (list or grid), preview and status bar, with kind, date and tag filters kept in the URL, right-click menus, multi-select, Move to, Add tag, Upload and New folder. Empty folders now show. The old Resources list page redirects to the Explorer's Files view, and the Explorer sidebar opens from any page.
+
+### Improvements
+
+- **Enter sends, Ctrl/Cmd+Enter adds a new line, in every message input** on the web and desktop. If you are used to Enter for a new line, this is the one habit that changes.
+- **The floating AI window is a real conversation** instead of its own browser-side chat, so what you say there is kept like any other conversation.
+- **Sidebar refresh:** four topics on top with the picked topic's list below, a folded rail that leads with the global actions, machine tags and the app version in the account menu.
+- **Desktop: a viewer's terminal fills its pane,** and a read-only terminal no longer forces the session to 300x100.
+- **An agent session stopped on Claude's folder-trust prompt fails at once and says so,** instead of waiting.
+- **`ud` daemon: a new session's text input waits for its briefing** before it is typed in.
+- **`GET /daemon` reports each daemon's installed agent CLIs.**
+
+### Bug Fixes
+
+- **`GET /resources?groupId=X` lists only resources shared to group X.**
+- **Task queries on `created_by` / `updated_by`** with `=`, `!=` and `IN` now match the writer of an audit id.
+- **A card's creator in notifications** is the user who created it, not the whole audit id.
+- **Moving from the personal tier to a license** rewrites audit ids correctly, and now also works on Postgres.
+- **AI usage:** built-in OpenAI chat calls and server agent model calls now record their tokens on the usage ledger.
+- **Desktop: "Use ud in any terminal" only removes a link that points at this app's own `ud`,** never another install.
+
+### Upgrade Notes (self-hosted)
+
+- **Eight database migrations run on first boot** (`00112` to `00119`). They add a `runtimes` column to agent configs and new tables for agent turns, their events, leases and recovery, conversations, server sessions and the event relay lease. Nothing is dropped or rewritten. Back up your database before upgrading anyway.
+- **No required new settings.** Three optional environment variables exist for running several backend replicas: `UD_EVENT_FANOUT` (`redis` or `relay`) with `UD_REDIS_URL` for Redis, and `UD_REPLICA_ADDR` (or `POD_IP`) for the relay. A single-instance install needs none of them. `relay` refuses to start on SQLite.
+- **The backend is now built with Go 1.27.** This changes nothing for Docker users.
+- **Upgrade the server before the CLI and the apps,** as with every release. The new conversation and runtime features need the new server.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.178.0`.
+
+---
+
 ## v0.177.1 (2026-10-30)
 
 **Patch release: fixes the upgrade to v0.177.0 for old SQLite databases and adds a "not yet shared to this group" filter for file lists.** This release runs no new database migration. It changes the backend, so update the server; the apps and the `ud` CLI are unchanged.

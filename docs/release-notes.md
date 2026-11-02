@@ -43,6 +43,41 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.180.0 (2026-11-02)
+
+**Minor release: every conversation thread can have its own name, and the Conversations list is easier to read and to work in.** This release runs one database migration, and it only adds a column; back up your database before upgrading. It changes the backend, the web and desktop apps and the `ud` CLI, so update all of them, server first.
+
+### New Features
+
+- **A thread can have its own title.** A root comment (the start of a conversation thread) now carries a title of its own, separate from the card's title. Rename it from the conversation's More menu ("Rename thread"; an empty name clears it), or from the CLI by putting `title` in a comment's front matter: `comment_id` plus `title` with an empty body renames the thread, and `ud describe -o apply` writes the title back out. Anyone who can read the card can rename a thread, the same rule as replying, so an agent answering a daily chat thread can name it.
+
+### Improvements
+
+- **Conversation rows say which thread they are.** A row reads in three lines: the thread's name, or else what it opened with, or else the card title; then the card title when it says something different, where it came from and the people in it besides you (at most three, then "+N"); then the byline as before. Inbox threads use the same row.
+- **The Conversations list opens on "Open".** The filters are now Open (the default), Needs you, With agents, Direct and All. Open, With agents and Direct hide resolved and kept threads. The filtering happens on the server, so the 50 rows on the page are the open ones instead of 50 mixed with finished ones; "All" is still there when you want everything.
+- **One conversation header for every thread**, including threads on ordinary cards: it leads with the thread's name, with the card title after it in small type. A subscriber row sits under it, with mute and unmute. A thread you open from a link is read on its own, and a rename by an agent shows up in the header without a reload.
+- **Stream opens in a drawer beside the conversation on wide screens.** It takes 46% of the width by default, can be dragged to resize (the width is remembered), expands to the whole pane with a Back to drawer button, and closes back to the conversation. Phones keep Stream replacing the conversation.
+- **A chat card is no longer asked to be renamed.** Agents answering the first message of a chat are now told to name the thread instead; the chat card keeps its own title. The first quick input titles its chat card `Alfred · App @your-username`.
+
+### Upgrade Notes (self-hosted)
+
+- **One database migration runs on first boot** (`00120`, on both SQLite and Postgres). It adds a `title` column to comments. Nothing is dropped or rewritten. Back up your database before upgrading anyway.
+- **No new settings.** No environment variable was added or removed.
+- **Upgrade the server before the apps,** as with every release. For thread titles, also upgrade the CLI: an older `ud` told to set a title with no body answers `content is empty`, and a new `ud` cannot set one on an older server.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.180.0`.
+
+---
+
 ## v0.179.0 (2026-11-02)
 
 **Minor release: run one conversation's agent on the server without changing the agent, plus two backend fixes.** No database migration runs in this release. It changes the backend and the web app, so update the server first; the desktop app and the `ud` CLI have no changes.

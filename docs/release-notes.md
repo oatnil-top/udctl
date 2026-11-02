@@ -43,6 +43,37 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.179.0 (2026-11-02)
+
+**Minor release: run one conversation's agent on the server without changing the agent, plus two backend fixes.** No database migration runs in this release. It changes the backend and the web app, so update the server first; the desktop app and the `ud` CLI have no changes.
+
+### Improvements
+
+- **Run one of your agents on the server for a single conversation, even if its settings list only daemons.** When you @mention an agent you own, the runtime picker now also offers Server. Only that one conversation runs there: the agent's own setting stays as it was and its other conversations keep using a daemon. Anyone else who @mentions your agent is still refused outside the runtime range you set, so the control over where your agent may run is unchanged.
+
+### Bug Fixes
+
+- **Moving a card to the path it is already on no longer changes the "updated" time of every card beneath it.** A no-op move used to rewrite the whole subtree and stamp every card in it as just updated, which pushed untouched cards to the top of "recently updated" lists. Nothing about the cards themselves was ever changed.
+- **Postgres: a new, empty conversation now sorts correctly in the conversation list.** When the database session time zone was not UTC, an empty conversation was placed 8 hours too old and sank to the bottom. SQLite installs were not affected.
+
+### Upgrade Notes (self-hosted)
+
+- **No database migration runs, and there are no new settings.** No environment variable was added or removed. As always, back up your database before upgrading.
+- **Upgrade the server before the CLI and the apps,** as with every release.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. This release changes nothing in the CLI, and upgrading it is optional. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.179.0`.
+
+---
+
 ## v0.178.0 (2026-11-01)
 
 **Minor release: conversations with agents, agents that run on the server, and a new Explorer window for your files.** This release runs eight database migrations, all of them additive; back up your database before upgrading. It changes the backend, the web app, the desktop app and the `ud` CLI, so update all of them, server first.

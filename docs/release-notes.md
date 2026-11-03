@@ -43,6 +43,48 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.181.0 (2026-11-03)
+
+**Minor release: the sidebar is now one list you arrange yourself, and "Needs you" shows only the threads that mention you.** No database migration runs in this release. It changes the backend, the web app and the desktop app (which carries the web app inside it), so update the server first; the `ud` CLI has no changes beyond its version number.
+
+### New Features
+
+- **The sidebar is one list that you arrange.** It replaces the topic sidebar, the switcher that showed one group of pages at a time. The list holds pages, blocks and the things you pin (boards, cards, conversations, accounts, budgets, files), in the order you drag them to. Blocks are Needs you, Recent, Boards and Cards, plus three new ones: accounts (name and currency, no balance), "Budget this month" (the share used, in orange when over budget, with a "Log an expense" action that opens the add dialog with that budget chosen) and recent files (the last five you opened, with reveal and download in the row menu).
+- **"Edit sidebar" lets you choose what is in it.** It opens a catalog beside the list (a bottom sheet on phones): tick pages, blocks and pinned things in or out, add dividers and rename them inline ("New group"), drag a page out of the "All" block, or restore the defaults. A new item lands after the last page above the first divider.
+- **Row menus and pins.** Every row has a menu (pin, remove, and "open in new window" in the desktop app). Hovering a board or card shows a pin; on touch screens, press and hold opens the menu without also opening the row.
+- **The folded sidebar is a rail of two-character cells** in the same order as the list. Hover a block cell to peek at its rows without expanding; press Cmd+B to expand or fold the sidebar. Opening the peek closes the floating Explorer panel and the other way around.
+- **More pages in the command palette.** Projects, Tags, Saved Queries and Photos are listed, Cmd+B toggles the sidebar, and every page can also be found by its Chinese sidebar name.
+
+### Improvements
+
+- **"Needs you" lists only what mentions you.** It used to include any card thread where an agent had just finished a turn, shown as "an agent asked you something". It now reads every unread @ of yours, so a mention on an older thread, or one followed by more than 20 newer notifications, no longer disappears. The conversation header's "asked you" line follows the same rule.
+- **The runtime picker never cuts off a runtime name,** and hovering any RUNTIME or CLI row shows its full description.
+
+### Bug Fixes
+
+- **An agent that answers on the server now sees who wrote each comment.** It used to read the author from a longer internal string, so you could appear under an unreadable name and the agent's own earlier replies were counted as if you had written them. In one case the model passed a user id where a card id was expected.
+- **Press and hold on a sidebar row no longer picks "Open".** Letting go a few pixels from where the menu opened used to open the row.
+- **The peek on the rail no longer closes itself** right after it takes over from the floating Explorer, and a press outside closes it.
+
+### Upgrade Notes (self-hosted)
+
+- **No database migration runs in this release,** and **no new settings** were added or removed. Back up your database before upgrading anyway, as with every release.
+- **Upgrade the server before the apps.** The new "Needs you" reads a new endpoint, `GET /notifications/unread-mentions`, which only the 0.181.0 server has.
+- **Your sidebar changes on first load.** The list replaces the topic sidebar and there is no switch to go back. Conversations you have pinned appear in the list.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.181.0`.
+
+---
+
 ## v0.180.0 (2026-11-02)
 
 **Minor release: every conversation thread can have its own name, and the Conversations list is easier to read and to work in.** This release runs one database migration, and it only adds a column; back up your database before upgrading. It changes the backend, the web and desktop apps and the `ud` CLI, so update all of them, server first.

@@ -301,6 +301,24 @@
   "home4.cta.cliRef": {
     "message": "CLI 参考"
   },
+  "home4.cta.gettingStarted": {
+    "message": "快速开始"
+  },
+  "home4.cta.compare": {
+    "message": "对比"
+  },
+  "home4.cta.compareBeads": {
+    "message": "对比 Beads"
+  },
+  "home4.cta.compareTaskwarrior": {
+    "message": "对比 Taskwarrior + Vikunja"
+  },
+  "home4.cta.compareVibeKanban": {
+    "message": "对比 Vibe Kanban"
+  },
+  "home4.cta.faq": {
+    "message": "常见问题"
+  },
   "home4.cta.fine": {
     "message": "个人免费 · 可自托管 · 五分钟跑起来"
   },

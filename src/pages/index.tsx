@@ -1160,6 +1160,32 @@ function CtaSection() {
             <Translate id="home4.cta.apiRef">API reference</Translate>
           </Link>
         </p>
+        {/* SEO internal links (card 1b7788a4): the compare pages, FAQ and Getting Started, as Link so zh gets /zh/. */}
+        <p className={styles.fine}>
+          <Link to="/docs/getting-started/">
+            <Translate id="home4.cta.gettingStarted">Getting started</Translate>
+          </Link>
+          {' · '}
+          <Link to="/compare/">
+            <Translate id="home4.cta.compare">Compare</Translate>
+          </Link>
+          {' · '}
+          <Link to="/compare/beads/">
+            <Translate id="home4.cta.compareBeads">vs Beads</Translate>
+          </Link>
+          {' · '}
+          <Link to="/compare/taskwarrior-vikunja/">
+            <Translate id="home4.cta.compareTaskwarrior">vs Taskwarrior + Vikunja</Translate>
+          </Link>
+          {' · '}
+          <Link to="/compare/vibe-kanban/">
+            <Translate id="home4.cta.compareVibeKanban">vs Vibe Kanban</Translate>
+          </Link>
+          {' · '}
+          <Link to="/faq/">
+            <Translate id="home4.cta.faq">FAQ</Translate>
+          </Link>
+        </p>
       </div>
     </section>
   );

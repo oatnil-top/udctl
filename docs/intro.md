@@ -42,6 +42,8 @@ Deploy via Docker Compose for simplicity or Kubernetes for larger setups. Suppor
 
 New here? [Getting Started](./getting-started.md) walks you from zero to your first card and your first agent job.
 
+Weighing udctl against other tools? See [how udctl compares](/compare/) — [vs Beads](/compare/beads/), [vs Taskwarrior + Vikunja](/compare/taskwarrior-vikunja/), [vs Vibe Kanban](/compare/vibe-kanban/) — or read the [FAQ](/faq/).
+
 Ready to deploy udctl? Check out our [Self-Deployment Guide](./self-deployment.md) to get started.
 
 ### Quick Links

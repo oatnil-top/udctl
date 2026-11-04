@@ -36,6 +36,8 @@ udctl 由一位独立开发者加 AI 打造,把管理时间与金钱的工作放
 
 第一次来?[快速开始](./getting-started.md)带你从零走到第一张卡片和第一件交给 agent 的活。
 
+想把 udctl 和其他工具比一比？看[对比总览](/zh-Hans/compare/)，或分别看 [对比 Beads](/zh-Hans/compare/beads/)、[对比 Taskwarrior + Vikunja](/zh-Hans/compare/taskwarrior-vikunja/)、[对比 Vibe Kanban](/zh-Hans/compare/vibe-kanban/)，也可以读[常见问题](/zh-Hans/faq/)。
+
 准备好部署 udctl 了吗？查看我们的 [自部署指南](./self-deployment.md) 选择适合您需求的部署方法。
 
 ### 快速链接

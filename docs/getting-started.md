@@ -81,7 +81,8 @@ the [Self-Deployment Guide](./self-deployment.md).
 
 Open [app.udctl.com](https://app.udctl.com). The sign-in page offers
 **Visitor (No signup)** to look around, and **Register here** for an account on the
-test server. Data there is for trying the product only.
+test server. Registering needs an invite code; without one, use Visitor to try it.
+Data there is for trying the product only.
 
 ## 2. The first-run wizard
 

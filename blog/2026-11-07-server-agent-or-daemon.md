@@ -1,26 +1,26 @@
 ---
-title: "Server or Daemon: Where Should Your udctl Agent Run?"
+title: "Server or Daemon: Where Should Your UnDercontrol (udctl) Agent Run?"
 title_meta: "Server or Daemon: Where Your Agent Should Run"
-description: "udctl agents can run on the server or on your own machine through a daemon. Here is how to pick: by what the job has to touch."
+description: "UnDercontrol (udctl) agents can run on the server or on your own machine through a daemon. Here is how to pick: by what the job has to touch."
 authors: [lintao]
 tags: [ai-agent, feature, guide]
 image: https://dl.udctl.com/features/blog/server-agent-or-daemon/hero.png
 date: 2026-11-07
 ---
 
-An agent in udctl (UnDercontrol) can now run in two places. Pick **server** when the job lives inside udctl, such as answering from your cards, creating a card, writing a note or posting a scheduled rundown. Your machine can be off for all of these. Pick **daemon** when the job needs your code, your shell, or a coding CLI: Claude Code, Codex, OpenCode, or any terminal-based agent.
+An agent in UnDercontrol (udctl) can now run in two places. Pick **server** when the job lives inside udctl, such as answering from your cards, creating a card, writing a note or posting a scheduled rundown. Your machine can be off for all of these. Pick **daemon** when the job needs your code, your shell, or a coding CLI: Claude Code, Codex, OpenCode, or any terminal-based agent.
 
 ![Two panels. Server runs inside the udctl backend: it is mentioned or scheduled, runs one turn, works with tasks, cards and notes, and replies in the same conversation, while your machine can be off. Daemon runs on a machine of yours, with Claude Code, Codex, OpenCode or any terminal-based agent, your repo, your shell and a terminal you can watch](https://dl.udctl.com/features/blog/server-agent-or-daemon/hero.png)
 
 <!-- truncate -->
 
-{/* VIDEO: embed the English promo film here once it is published. */}
+We made a 58-second video of this: [watch it on YouTube](https://www.youtube.com/watch?v=4mr1paOVkFo). This post is the written version.
 
 ## Get an answer while your laptop is closed
 
 A daemon agent starts on a machine of yours, so it needs one online. A server agent runs inside the udctl backend. You install nothing on your computer, and your computer does not have to be on.
 
-Mention the agent in a conversation and it runs one turn. In that turn it can look up a task, search your tasks, create a card, add a note to a card, and list the agents it can hand work to. Its final message is the reply, in the same conversation. Each step is recorded, shown live, and kept with the card and the thread. The model calls use your own key.
+Mention the agent in a conversation and it runs one turn. In that turn it can look up a task, search your tasks, create a card, and add a note to a card. Its final message is the reply, in the same conversation. Each step is recorded, shown live, and kept with the card and the thread. The model calls use your own key.
 
 A typical case: you are away from your desk and your laptop is shut. You open the web app, mention the agent, ask which release cards are still open, and tell it to add a card for the thing you just remembered.
 
@@ -44,7 +44,7 @@ A daemon agent also has the full `ud` CLI. Notes, expenses and accounts share on
 
 ## Pick by what the job has to touch
 
-![A decision chart. Jobs that touch cards, notes and the conversation go to server. Jobs that touch your code, shell or local tools go to daemon. Jobs that need both go to server first, which creates a card with a mention that starts the daemon agent](https://dl.udctl.com/features/blog/server-agent-or-daemon/choose.png)
+![A decision chart. Jobs that touch cards, notes and the conversation go to server. Jobs that touch your code, shell or local tools go to daemon. When it depends, you pick server or daemon as you send the message](https://dl.udctl.com/features/blog/server-agent-or-daemon/choose-v2.png)
 
 | The job | Pick | Why |
 |---|---|---|
@@ -57,12 +57,6 @@ A daemon agent also has the full `ud` CLI. Notes, expenses and accounts share on
 | Watch the terminal and step in | daemon | The Stream tab exists for daemon conversations |
 
 If you are unsure, ask one question: does this job need a file on my computer? If yes, use daemon. If no, start with server.
-
-## Start a job on the server and finish it on your machine
-
-Some requests begin as a sentence and end as a code change. A server agent can list the agents you can reach, create a card with the requirements, and put a mention of one of them in the card's description. That mention starts the agent. If the agent you named runs on a daemon, the work moves to your machine, and the card already holds what it needs.
-
-A typical case: you describe a flaky test in a conversation and ask the server agent to give it to your coding agent. You get a card link in the reply. The card holds your words and the definition of done, and the coding agent reports back in that card's thread.
 
 ## Change your mind on a single message
 
@@ -86,4 +80,4 @@ We tested this on the hosted site, and both paths work there: mentioning a serve
 4. Start a conversation, type `@` and the agent's name, and ask about your cards.
 5. To put it on a schedule, choose **More > Set as resident conversation**.
 
-On your own instance, "server" means your own backend: see [Self-Hosting](/self-hosting) and [Getting Started](/docs/getting-started). The desktop app's backend runs on your computer, so for answers with the lid closed, use a backend that stays up.
+On your own instance, "server" means your own backend: see [Self-Hosting](/self-hosting) and [Getting Started](/docs/getting-started).

@@ -1,26 +1,24 @@
 ---
-title: "server 还是 daemon:你的 udctl Agent 该跑在哪"
+title: "server 还是 daemon:你的 UnDercontrol(udctl)Agent 该跑在哪"
 title_meta: "server 还是 daemon:Agent 该跑在哪"
-description: "udctl 的 agent 可以跑在服务端,也可以通过 daemon 跑在你自己的机器上。怎么选,看这件事要碰什么。"
+description: "UnDercontrol(udctl)的 agent 可以跑在服务端,也可以通过 daemon 跑在你自己的机器上。怎么选,看这件事要碰什么。"
 authors: [lintao]
 tags: [ai-agent, feature, guide]
 image: https://dl.udctl.com/features/blog/server-agent-or-daemon/hero.png
 date: 2026-11-07
 ---
 
-udctl(UnDercontrol)的 agent 现在有两个地方可以跑。事情都在 udctl 里,比如根据卡片回答问题、建卡、写笔记、定时发一份汇总,选 **server**,这时你的机器可以关着。事情要碰你的代码、你的 shell,或者要用 Claude Code、Codex、OpenCode 等任意终端 agent,选 **daemon**。
+UnDercontrol(udctl)的 agent 现在有两个地方可以跑。事情都在 udctl 里,比如根据卡片回答问题、建卡、写笔记、定时发一份汇总,选 **server**,这时你的机器可以关着。事情要碰你的代码、你的 shell,或者要用 Claude Code、Codex、OpenCode 等任意终端 agent,选 **daemon**。
 
 ![两栏对比。server 跑在 udctl 后端里:被点名或到点时跑一轮,处理任务、卡片和笔记,回到同一条对话,你的机器可以关着。daemon 跑在你自己的机器上,用 Claude Code、Codex、OpenCode 或任意终端 agent,有你的代码仓库、shell 和可以旁观的终端](https://dl.udctl.com/features/blog/server-agent-or-daemon/hero.png)
 
 <!-- truncate -->
 
-{/* VIDEO: 中文宣传片发布后把视频嵌在这里。 */}
-
 ## 电脑合上,也能拿到回答
 
 daemon agent 在你自己的机器上启动,所以要有一台机器在线。server agent 跑在 udctl 后端里,你的电脑上什么都不用装,也不用开着。
 
-在对话里点它的名,它就跑一轮。这一轮里它能查一张卡、搜索你的任务、建卡、给卡加笔记,还能列出可以交活的 agent。它最后那条消息就是回复,落在同一条对话里。每一步都有记录,过程实时可见,并随卡片和线程保留。调模型用的是你自己的 key。
+在对话里点它的名,它就跑一轮。这一轮里它能查一张卡、搜索你的任务、建卡、给卡加笔记。它最后那条消息就是回复,落在同一条对话里。每一步都有记录,过程实时可见,并随卡片和线程保留。调模型用的是你自己的 key。
 
 典型场景:你不在工位,笔记本合着。打开网页版,点 agent 的名,问发版还有哪些卡没做完,再让它把你刚想起来的那件事建成一张卡。
 
@@ -44,7 +42,7 @@ daemon agent 还能用完整的 `ud` CLI。笔记、记账和账户与任务共�
 
 ## 怎么选:看这件事要碰什么
 
-![决策图。只碰卡片、笔记和对话的事选 server。要碰代码、shell 或本地工具的事选 daemon。两边都要碰的事先走 server,由它建卡并在卡里点名,叫起 daemon agent](https://dl.udctl.com/features/blog/server-agent-or-daemon/choose.png)
+![决策图。只碰卡片、笔记和对话的事选 server。要碰代码、shell 或本地工具的事选 daemon。说不准时,发消息的时候选 server 或 daemon](https://dl.udctl.com/features/blog/server-agent-or-daemon/choose-v2.png)
 
 | 这件事 | 选 | 原因 |
 |---|---|---|
@@ -57,12 +55,6 @@ daemon agent 还能用完整的 `ud` CLI。笔记、记账和账户与任务共�
 | 看着终端,随时接手 | daemon | daemon 对话才有「过程」页签 |
 
 拿不准就问一句:这件事要用到我电脑上的文件吗?要用就选 daemon,不用就先从 server 开始。
-
-## 从 server 接活,到你的机器上做完
-
-有些需求开始时只是一句话,最后要改代码。server agent 可以列出你够得着的 agent,建一张写好需求的卡,再在卡片描述里点其中一个的名。这个点名会叫起那个 agent。如果被点名的 agent 跑在 daemon 上,活就到了你的机器上,卡里已经有它要的东西。
-
-典型场景:你在对话里描述一个不稳定的测试,让 server agent 交给你的编码 agent。回复里会带一个卡片链接,卡上有你的原话和完成标准,编码 agent 在这张卡的线程里回报。
 
 ## 选错了,下一条消息就能改
 
@@ -86,4 +78,4 @@ daemon agent 还能用完整的 `ud` CLI。笔记、记账和账户与任务共�
 4. 开一条对话,输入 `@` 和 agent 的名字,问问你的卡片。
 5. 想定时跑,在「更多」里选「设为常驻对话」。
 
-用自己的实例时,「server」就是你自己的后端,见 [自托管](/self-hosting) 和 [快速开始](/docs/getting-started)。桌面版的后端跑在你的电脑上,想合着盖子也能拿到回答,要用一个一直开着的后端。
+用自己的实例时,「server」就是你自己的后端,见 [自托管](/self-hosting) 和 [快速开始](/docs/getting-started)。

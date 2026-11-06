@@ -76,7 +76,8 @@ docker logs undercontrol
 ### 选项 C:浏览器试用
 
 打开 [app.udctl.com](https://app.udctl.com)。登录页上有 **访客(免注册)(Visitor (No signup))**
-可以先随便看看，也可以点 **在此注册(Register here)** 在测试服务器上注册账号。那里的数据只用于试用。
+可以先随便看看，也可以点 **在此注册(Register here)** 在测试服务器上注册账号。注册需要邀请码;没有邀请码可以用访客试用。
+那里的数据只用于试用。
 
 ## 2. 首次登录向导
 

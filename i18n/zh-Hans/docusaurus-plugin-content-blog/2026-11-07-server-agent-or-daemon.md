@@ -1,5 +1,5 @@
 ---
-title: "server 还是 daemon:你的 UnDercontrol(udctl)Agent 该跑在哪"
+title: "server 还是 daemon:Agent 该跑在哪"
 title_meta: "server 还是 daemon:Agent 该跑在哪"
 description: "UnDercontrol(udctl)的 agent 可以跑在服务端,也可以通过 daemon 跑在你自己的机器上。怎么选,看这件事要碰什么。"
 authors: [lintao]
@@ -13,6 +13,8 @@ UnDercontrol(udctl)的 agent 现在有两个地方可以跑。事情都在 udctl
 ![两栏对比。server 跑在 udctl 后端里:被点名或到点时跑一轮,处理任务、卡片和笔记,回到同一条对话,你的机器可以关着。daemon 跑在你自己的机器上,用 Claude Code、Codex、OpenCode 或任意终端 agent,有你的代码仓库、shell 和可以旁观的终端](https://dl.udctl.com/features/blog/server-agent-or-daemon/hero.png)
 
 <!-- truncate -->
+
+我们做了一条 54 秒的视频讲这件事:[在 B 站观看](https://www.bilibili.com/video/BV16J4j6mEiZ)。这篇是文字版。
 
 ## 电脑合上,也能拿到回答
 

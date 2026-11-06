@@ -1,5 +1,5 @@
 <!-- GENERATED COPY — do not edit here.
-     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one c7bb41866
+     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one f60d57fa1
      Regenerate: auto/sync-agent-guide.sh -->
 
 # UnDercontrol Guide
@@ -43,7 +43,7 @@ Convention: If a note or comment produces canonical truth, promote it into the T
 | Assignee | Workload and accountability |
 | Links | Parent-child and peer references (knowledge graph) |
 | Description | Markdown body — the actual content |
-| Custom Metadata | Key-value pairs on a card. Queryable: the built-in `ud.sprint`, `ud.points`, `ud.priority`, `ud.type`, and `cf.<name>` once that custom field is defined. Any other key is stored and shown, and nothing queries it. |
+| Custom Metadata | Key-value pairs on a card. Every key is queryable: the built-in `ud.sprint`, `ud.points`, `ud.priority`, `ud.type`; `cf.<name>` is typed (number/date) once that custom field is defined; any other key, or an undefined `cf.<name>`, compares as a string. |
 
 **Task Relationships:**
 - **Peer Link** — Bidirectional association between two tasks
@@ -129,7 +129,7 @@ Relative deadline formats: `+2h`, `+1d`, `+7d`, `end_of_day`, `end_of_week`
 
 ### Query Syntax
 
-SQL-like filtering for tasks. Available fields: `id`, `title`, `description`, `status`, `tags`, `assignee`, `kickoff`, `deadline`, `created_at`, `updated_at`, the built-in `ud.sprint`, `ud.points`, `ud.priority`, `ud.type`, and custom fields via `cf.<name>`. (`ud.projects` is stored on the card but is not queryable.)
+SQL-like filtering for tasks. Available fields: `id`, `title`, `description`, `status`, `tags`, `assignee`, `kickoff`, `deadline`, `created_at`, `updated_at`, the built-in `ud.sprint`, `ud.points`, `ud.priority`, `ud.type`, and any metadata key. A key with no definition compares as a string; `cf.<name>` is typed (number/date) once that custom field is defined. (`ud.projects` is stored on the card but is not queryable.)
 
 **Operators**: `=`, `!=`, `>`, `<`, `>=`, `<=`, `IN`, `LIKE`, `ILIKE`, `CONTAINS`, `NOT CONTAINS`, `CONTAINS_ALL`, `BETWEEN`, `IS NULL`, `IS NOT NULL`
 
@@ -145,7 +145,7 @@ title ILIKE '%auth%' OR description ILIKE '%auth%'
 ud.sprint = '<sprint-task-id>' AND status = 'in-progress'
 ```
 
-**Two ways a query answers with a lie instead of an error**: status values are hyphenated, so `status = 'in_progress'` is not a syntax error — it returns an empty list, which reads exactly like "nothing is in progress"; and `cf.<name>` resolves only against a custom field you have defined — undefined, the whole query fails with `TASK_INVALID_QUERY`. `cf.` and `ud.` are separate keys, not two spellings of one: sprint membership is `ud.sprint`, and its value is the sprint card's own task id.
+**A bad status errors, a bad key does not**: status values are hyphenated and checked, so `status = 'in_progress'` fails with `invalid status "in_progress": must be one of todo, in-progress, pending, stale, done, archived`; but a misspelled metadata key, or an undefined `cf.<name>`, is not an error — it matches nothing, which reads exactly like "no such cards". `cf.` and `ud.` are separate keys, not two spellings of one: sprint membership is `ud.sprint`, and its value is the sprint card's own task id.
 
 **Common queries:**
 - Overdue: `deadline < today AND status != 'done'`

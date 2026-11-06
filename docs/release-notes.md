@@ -43,6 +43,56 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.182.0 (2026-11-06)
+
+**Minor release: agents, machines, skills, teams and prompts move onto one page, and every dispatch now tells you where it ran, or why it could not.** One database migration runs (it only adds). It changes the backend, the web app, the desktop app and the `ud` CLI, so update the server first.
+
+### New Features
+
+- **One Agents page with six sections.** `/agents` now holds teams, agents, skills, machines, agent CLIs and prompts. Each section opens its detail and edit form in a drawer and warns before you lose unsaved changes, including when you press the browser's Back or Forward button. Every old address (the six old tabs included) lands on its section, and "Agents and machines" has its own entry in the sidebar.
+- **Dispatch receipts say where a mention ran.** A receipt now carries the agent's name, the machine, the folder, the failure reason if there was one, and a link to the session. Open a row to see why that folder was chosen. A mention answered on the server now leaves a receipt too, and the receipt says whose machine it was.
+- **See where a mention will land before you send it.** The agent drawer and the project page preview the machine and folder a mention would use, without starting anything. The manual Run dialog shows a read-only preview of its folder, says when it assumed an empty card, and says so when the project list could not be loaded. The history of folders a path has run in appears on the project page.
+- **`ud describe session` prints the machine reason and where the folder came from.** The record is stored on the session when it starts. This release only records the choice; which machine and folder get picked is unchanged.
+
+### Improvements
+
+- **A folder that cannot be entered is refused with its own reason.** The desktop app and the CLI daemon now tell the server whether the folder was not found, was not a folder, or could not be opened (a permissions problem), and the reply that lands on the card says where the folder came from and how to fix it. The reply names a fix a person can do: no "@ that machine" advice, a file in the way, and one fix under a one-line title. Machines on an older version keep working and report the old, shorter reason.
+- **The Workspaces page groups failed sessions as Exited.** They used to show as Idle with a Stop button.
+- **The sidebar's folded rail shows icons** instead of two-character labels, and scheduled jobs and queue tasks are listed under automation.
+- **Desktop: the workspace window no longer hosts the Explorer sidebar,** and **Cmd/Ctrl+Shift+M takes you back to the main window from any window.**
+- **Quick note is wide enough for the whole toolbar, and any file can be dropped on it.** The dialog is now 640 px wide, so the editor toolbar fits on one line. Files with no extension or an unknown type used to be rejected when attached (here and in the task detail); they now attach. Folders are skipped with a message, a failed attachment no longer leaves an empty entry on the card, and all failed file names are listed in one message.
+- **Query help is accurate about custom fields.** `ud query` accepts any metadata key; a key with no definition is compared as a string, and `cf.X` is typed (number/date) once `X` is defined. A misspelled key matches nothing, without an error.
+- **CLI commands in the app render verbatim** (repeated spaces no longer collapse), and the icon-only buttons on the agents page have accessible names.
+
+### Bug Fixes
+
+- **You can no longer start another person's agent by id.** "Run as" in the Run dialog, a scheduled job that names an agent, and a scheduled job's assignee used to accept an agent the caller could not reach. They now answer exactly as they do for an agent that does not exist. Your own agents, and people and agents you share a group with, work as before.
+- **A new card can only be assigned to someone its creator can address.** Creating a card through the API, `ud apply`, a board, or a scheduled job with an assignee you cannot reach now fails with "No such user to assign this task to."
+- **A failed session read no longer shows up as a failed start.** The receipts request now reports the error, and the page keeps the receipts it already had instead of replacing them with nothing.
+- **A server that is down or a sign-in that has lapsed no longer locks you out of the app.** A cached app on a backend that was not answering looked normal but had no account row, so there was no way to Settings to sign out or repair it. The account row now shows without a profile, a banner says the server is unreachable (or that your sign-in cannot be confirmed) and offers Retry, Settings and Sign in again, and the desktop app can restart its own backend from the banner. A server that hangs shows the banner within about 10 seconds, and when it answers again the page refreshes what is on screen. A token refresh that could not complete no longer signs you out.
+- **The Run dialog closes itself when "Manage CLIs…" takes you to another page.** The hub's sticky bar no longer shows scrolled rows above it.
+
+### Upgrade Notes (self-hosted)
+
+- **One database migration runs (00121).** It adds three nullable columns (the configured folder, the exit reason code and how the folder was resolved) and one index to the workspace sessions table. It only adds. Back up your database before upgrading, as with every release.
+- **Upgrade the server before the apps.** The new previews read three new endpoints, `GET /api/v1/workspace/landing-preview`, `/cwd-machines` and `/cwd-preview`, which only a 0.182.0 server has.
+- **A sign-in that expired no longer clears the app's local cache.** When the app signs you out because the session expired, it now keeps the cached data and unsent drafts (the quick-note draft, for one). If the same person signs back in, with a password or through Google or GitHub, everything is still there. If someone else signs in, the app clears the kept data and reloads, so nothing of the previous person is shown. Signing out yourself still clears everything at once. On a shared computer, the previous person's cached data stays on disk after an expiry until the next sign-in.
+- **Failure reasons and the folder a machine actually used need the new desktop app or CLI.** Older machines still start sessions; their failures keep the older wording.
+- **Scheduled jobs and cards with an assignee the owner cannot reach are now refused.** If you have scheduled jobs that set an assignee, check them before upgrading.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.182.0`.
+
+---
+
 ## v0.181.0 (2026-11-03)
 
 **Minor release: the sidebar is now one list you arrange yourself, and "Needs you" shows only the threads that mention you.** No database migration runs in this release. It changes the backend, the web app and the desktop app (which carries the web app inside it), so update the server first; the `ud` CLI has no changes beyond its version number.

@@ -43,6 +43,49 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.183.0 (2026-11-07)
+
+**Minor release: agents can ask you a question you answer with a click, Slack joins Telegram as a messenger, and agents that call each other now stop instead of running away.** Four database migrations run (00122 to 00125). It changes the backend, the web app and the `ud` CLI, so update the server first.
+
+### New Features
+
+- **Slack as a messenger.** The Messenger page has a Slack column with a three-step connect. Each person connects their own Slack app; Slack sends events to a per-bot address on your server, so the server needs a public HTTPS address (without one there is no connect button). A message that @-mentions the bot, or is a direct message, reaches your agent; to link your Slack account send `link CODE` (no leading slash: Slack takes a slash as its own command). Replies post with link previews turned off.
+- **Slack channel digests.** An agent can read a Slack channel with your own bot through the `slack_channel_history` tool and summarize it (a sample `slack-digest` agent shows how; create an agent first). The channel text is shown to the model but is not kept in the stored event log.
+- **An agent's question can be answered with a click.** When an agent asks a question in a comment, the options draw as rows in the task page, the thread panel and the list. A click sends an ordinary reply; multiple choice ticks locally until you press Send selected; the Other row fills the reply box and what you type goes after the pick link. Agents are told how to write these questions, and `ud cook comment ask-choice` has the recipe.
+
+### Improvements
+
+- **A new user with no AI model is told so, and can get to the fix.** The reply to a first message links to the AI settings page (on IM and mobile it stays a plain sentence), and the first-run dialog says chat needs a model. A user with no machine is told how to start one instead of getting an offline receipt.
+- **A new account speaks the language its browser does.** The first reply used to come back in English for Chinese users. An explicit language choice still wins.
+- **Alfred shows Online when a message would be answered.** It used to read Offline for a user who had a model but no running session yet, and Online for a session on a closed laptop. Older clients keep the old reading until they update.
+- **A comment written with Slack channel text in view is marked untrusted.** Its links stay as plain text with one line saying why, in the thread, the list and notifications.
+
+### Bug Fixes
+
+- **Agents answering each other stop at 30 replies in a row,** per thread, including through notes, descriptions and new top-level comments on the same card. A person's message resets the count and the thread is told once when it stops. This was measured at a turn every 2.5 seconds between two agents naming each other.
+- **An owner's agents share a budget of server turns:** 60 in 10 minutes. At the limit agent-triggered turns stop, the owner is told once, and the owner's next message reopens it. What a person or a scheduled job asks for always runs.
+- **Slack channel text can no longer dispatch or write in a later turn.** A reply written with channel text in view dispatches nobody, and a thread holding one starts its next turn with writes off until you speak. A Slack account link belongs to one bot instead of the whole server. A daemon agent is not started into such a thread, and in one, a channel is read only if you named it.
+
+### Upgrade Notes (self-hosted)
+
+- **Four database migrations run (00122 to 00125).** They add columns (Slack secrets and ids on messenger bots, an untrusted mark on comments, a reply-chain count on agent turns). 00124 also adds a bot to each Slack account link, fills it from that owner's Slack bot, and replaces the unique index on account links, so it is not add-only. Back up your database before upgrading, as with every release.
+- **Upgrade the server before the apps.** The web app reads the new `needs_model` and `can_answer` fields of `GET /api/v1/alfred/status`; an older server does not send them.
+- **Slack is not hardened against everything.** Text from a Slack channel is untrusted input to a model. This release stops it from dispatching other agents or writing in later turns, but the security review recorded known remaining limits, which the project owner accepted on 2026-11-07, and they are not fixed in this release. Connect Slack only for channels and workspaces you trust that far.
+- No new environment variables.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.183.0`.
+
+---
+
 ## v0.182.1 (2026-11-06)
 
 **v0.182.0 was tagged but never deployed:** a check in CI that our local pre-release run did not include failed after the tag was cut. v0.182.1 is the same release plus that one internal fix (no behavior change for users), and everything below is what v0.182.0 would have contained. If you already installed or pulled 0.182.0, update to 0.182.1.

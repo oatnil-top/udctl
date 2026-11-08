@@ -92,21 +92,22 @@ tmux 会话名只读任务的 `metadata.tmuxSession`，未设置则不使用 tmu
 
 | 组件 | 位置 | 职责 |
 |------|------|------|
-| `workspace-manager.js` | Electron 主进程 | 为每个任务创建 BrowserWindow + PTY |
-| `preload/index.js` | Electron 预加载脚本 | 通过 contextBridge 暴露 `workspaceApi` |
-| `workspace.ts` | Vite 应用 | 渲染进程的类型化 API 封装 |
-| `TaskActions.tsx` | Vite 应用 | 按钮 + 看板配置解析 |
+| Workspaces 页面 / 会话控件 | Vite 应用 | 注册 daemon；在任务上启动会话（`POST /workspace/init`） |
+| 后端工作区处理器 | Go 后端 | 解析 cwd / tmux / 启动命令（单一事实来源）；通过 SSE 推送 `workspace_init` |
+| `daemon-connector.js` | Electron 主进程 | 通过 SSE 接收 `workspace_init`；调用 `createWorkspaceWindow` |
+| `workspace-manager.js` | Electron 主进程 | 为每个会话创建 BrowserWindow + PTY |
+| `preload/index.js` | Electron 预加载脚本 | 通过 contextBridge 暴露 `workspaceApi`（PTY 读写、窗口控制） |
 | 工作区页面 | Vite 应用 | 分屏布局 + xterm.js 终端 |
 
 ### 数据流
 
 ```
-TaskActions（点击）
-  → 解析看板 metadata（projectDir、tmuxSession）
-  → openWorkspace(taskId, { cwd, tmuxSession })
-  → IPC invoke 'workspace:open'
-  → workspace-manager 创建 BrowserWindow + 启动 PTY
-  → PTY 在第一个 shell 提示符出现时发送 claude 命令
+启动会话（Vite 应用）
+  → POST /workspace/init { task_id, daemon_id }
+  → 后端解析 cwd / tmux / 启动命令（单一事实来源）
+  → SSE 'workspace_init' → 目标 daemon（Electron 主进程）
+  → daemon-connector → workspace-manager.createWorkspaceWindow
+  → 创建 BrowserWindow + 启动 PTY；用下发的命令启动 Agent
   → PTY 输出 → IPC → xterm.js 渲染
   → 用户键盘输入 → IPC → PTY stdin
 ```
@@ -115,8 +116,6 @@ TaskActions（点击）
 
 | 通道 | 方向 | 用途 |
 |------|------|------|
-| `workspace:open` | 渲染 → 主 | 打开工作区窗口 |
-| `workspace:close` | 渲染 → 主 | 关闭工作区窗口 |
 | `workspace:pty-data` | 主 → 渲染 | PTY 标准输出数据 |
 | `workspace:pty-input` | 渲染 → 主 | 用户键盘输入 |
 | `workspace:pty-resize` | 渲染 → 主 | 终端大小调整事件 |
@@ -125,7 +124,7 @@ TaskActions（点击）
 
 ### 窗口管理
 
-- **每个任务一个窗口**：重复打开同一任务会聚焦已有窗口
+- **每个任务一个窗口**（手动会话）：再次启动同一任务会聚焦已有窗口；Agent 启动的会话各自一个窗口
 - **位置持久化**：窗口位置保存在 `~/.undercontrol/workspace-positions.json`
 - **级联定位**：新窗口相对上一个偏移 30px
 - **关闭时清理**：窗口关闭时终止 PTY 进程
@@ -134,7 +133,7 @@ TaskActions（点击）
 
 ### Shell 启动
 
-工作区启动一个非登录 shell（快速启动），并增强环境变量：
+工作区启动一个登录 + 交互式 shell，并增强环境变量：
 
 - `TERM=xterm-256color` 支持完整颜色
 - `COLORTERM=truecolor` 支持 24 位真彩色
@@ -142,21 +141,9 @@ TaskActions（点击）
 
 ### 命令执行
 
-Claude 命令在第一个提示符出现后发送到 shell（通过检测首次 PTY 数据事件），确保 shell 就绪后再执行：
+启动命令由前端/后端组装（主进程里旧的 `buildAgentCommand` 已删除），随 `workspace_init` 事件下发给 daemon。Agent 启动时，ud CLI 的技能上下文会追加到它的系统提示中（`ud prompt` → `--append-system-prompt`），用户无需安装 `/init-task` 技能文件。
 
-```bash
-# 不使用 tmux：
-claude --dangerously-skip-permissions --append-system-prompt "$(ud prompt)" \
-  "Initialize and implement task <task-id>. Start by running: ud describe task <task-id>"
-
-# 配置了 tmux 会话时：
-tmux new-session -As <会话名> 'claude --dangerously-skip-permissions \
-  --append-system-prompt "$(ud prompt)" "Initialize and implement task <task-id>..."'
-```
-
-`ud prompt` 命令输出完整的 ud CLI 技能指令，通过 `--append-system-prompt` 追加到 Claude 的系统提示中。用户无需安装 `/init-task` 技能文件。
-
-Claude Code 退出后，shell 保持活跃，可以继续运行其他命令。
+Agent 退出后，shell 保持活跃，可以继续运行其他命令。
 
 ## 故障排除
 

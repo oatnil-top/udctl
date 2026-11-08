@@ -22,7 +22,7 @@ sidebar_position: 6
 ## 快速开始
 
 1. 打开 Electron 桌面应用
-2. 进入看板设置（齿轮图标），配置 **项目目录**
+2. 把任务或它所在的看板关联到一个 **Project**，Project 的目录指向你的代码（可选，推荐）
 3. 打开该看板上的任意任务
 4. 点击操作栏中的 **终端图标**
 5. 工作区窗口打开，Claude Code 自动开始实现任务
@@ -40,24 +40,30 @@ sidebar_position: 6
 打开桌面 App 即自动上线，或在任意常用机器上执行 `ud daemon start`。之后你的下一条消息会启动会话，
 而它会读取所绑定的线程，因此能看到离线期间说过的一切。没有队列要排空，也不会重放。
 
-## 看板配置
+## 会话配置
 
-每个看板在其 metadata 中存储工作区设置。在看板标题栏的齿轮图标点击打开设置抽屉进行配置。
+会话在哪个目录运行、是否包进 tmux，配置在**任务**和它关联的 **Project** 上，不在看板上。后端在解析会话参数时读取这些配置。
 
-### 项目目录
+### 工作目录
 
-工作区终端的工作目录。设置后，该看板上所有任务的工作区终端都会以此为起始目录。
+会话在关联 **Project** 的目录下启动：先看任务自己关联的 Project，再看看板关联的 Project。任务也可以带自己的 `metadata.cwd`，它优先于任何 Project。
 
-**示例**：设置为 `/Users/me/projects/my-app`，Claude Code 将在该目录下运行，可以访问你的项目文件。
+**示例**：把看板关联到目录为 `/Users/me/projects/my-app` 的 Project，该看板上任务的会话都会在这个目录下运行，Agent 可以访问你的项目文件。
 
-如果未设置，终端默认使用 HOME 目录。
+如果都没有解析出目录，会话回退到 `~/.undercontrol/workspace`（一个专用沙箱）。
 
 ### Tmux 会话
 
-可选配置。设置后，Claude Code 命令会被包装在指定名称的 tmux 会话中：
+可选，按任务配置。设置任务的 `metadata.tmuxSession`：
 
 ```bash
-tmux new-session -As <会话名> 'claude --dangerously-skip-permissions --append-system-prompt "$(ud prompt)" "Initialize and implement task <task-id>..."'
+ud patch task <task-id> --set tmuxSession=<会话名>
+```
+
+设置后，启动命令会被包装在指定名称的 tmux 会话中。实际会话名是 `<会话名>-<task-slug>`（追加任务 slug，避免不同任务共用一个会话）：
+
+```bash
+tmux new-session -As <会话名>-<task-slug> '<agent 启动命令>'
 ```
 
 **行为说明**：
@@ -70,16 +76,15 @@ tmux new-session -As <会话名> 'claude --dangerously-skip-permissions --append
 
 ## 配置解析链
 
-工作区选项从任务所在的看板解析：
+cwd 由**后端**统一解析（单一事实来源），随 `workspace_init` 事件下发：
 
 ```
-任务 → findTaskCurrentBoard(task, boards) → board.metadata.projectDir → 终端 cwd
-任务 → findTaskCurrentBoard(task, boards) → board.metadata.tmuxSession → tmux 会话名
+显式 cwd → 任务 metadata.cwd → 任务的 Project → Agent（或请求）的 Project
+  → 看板的 Project → 你的 Default Project
+回退：~/.undercontrol/workspace（专用沙箱，限制 Agent 的访问范围）
 ```
 
-**回退值**：如果未找到看板配置，终端使用 HOME 作为工作目录，且不使用 tmux。
-
-任务与看板的映射通过 `findTaskCurrentBoard()` 函数实现，该函数检查哪个看板的列查询匹配该任务。
+tmux 会话名只读任务的 `metadata.tmuxSession`，未设置则不使用 tmux。
 
 ## 架构
 
@@ -157,9 +162,9 @@ Claude Code 退出后，shell 保持活跃，可以继续运行其他命令。
 
 ### 终端显示错误的目录
 
-**问题**：终端在 HOME 目录启动，而不是项目目录。
+**问题**：会话在沙箱（`~/.undercontrol/workspace`）启动，而不是项目目录。
 
-**解决方案**：检查看板设置中是否配置了项目目录。任务必须在该看板上（通过列查询匹配）。更改看板设置后，可能需要重启 Electron 应用以使主进程更改生效。
+**解决方案**：检查任务或它所在的看板是否关联了带目录的 Project，或任务是否设置了 `metadata.cwd`。后端在会话启动时解析 cwd，所以要在启动会话前保存好关联。
 
 ### node-pty 启动错误
 
@@ -171,7 +176,7 @@ Claude Code 退出后，shell 保持活跃，可以继续运行其他命令。
 
 **问题**：关闭工作区窗口后 Claude Code 会话被终止。
 
-**解决方案**：确保在看板设置中配置了 **Tmux 会话** 字段。如果未配置，关闭窗口时 PTY 进程会被直接终止。配置了 tmux 后，关闭窗口只是断开 tmux 客户端，会话在后台继续运行。
+**解决方案**：启动会话前设置任务的 `metadata.tmuxSession`（`ud patch task <task-id> --set tmuxSession=<会话名>`）。未设置时，关闭窗口会终止 PTY 的整个进程组，Agent 一并退出。设置了 tmux 后，关闭窗口只是断开 tmux 客户端，tmux 会话在后台继续运行。
 
 ### 窗口打开但终端空白
 

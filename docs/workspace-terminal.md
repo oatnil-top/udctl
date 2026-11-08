@@ -22,7 +22,7 @@ The terminal uses `ud prompt` to inject the ud CLI skill instructions into the a
 ## Quick Start
 
 1. On the **Workspaces** page, register this device as a daemon (the app detects your machine name and platform and connects to the backend over SSE)
-2. Set a **Project Directory** in the board settings (gear icon) — optional but recommended
+2. Link the task, or its board, to a **Project** whose directory points at your code — optional but recommended
 3. Open any task, pick an online daemon in the workspace session area, and **start a session**
 4. The desktop app on that daemon opens a workspace window with the agent ready to implement the task
 
@@ -60,21 +60,27 @@ bot replies with how to bring one back — open the desktop app, which connects 
 it reads the thread it is bound to, so it sees everything said while nobody was listening.
 There is no queue to drain and nothing replays.
 
-## Board Configuration
+## Session Configuration
 
-Each kanban board stores workspace settings in its metadata (configure them in the board settings drawer — gear icon on the board header). The backend reads these when resolving session parameters.
+Where a session runs and how it is wrapped is configured on the **task** and its **Project**, not on the board. The backend reads these when resolving session parameters.
 
-### Project Directory
+### Working Directory
 
-The working directory for workspace sessions. When set, sessions for tasks on this board start in this directory.
+Sessions start in the directory of a linked **Project**: the task's own project first, then the board's project. A task can also carry its own `metadata.cwd`, which beats any project.
 
-**Example**: Set to `/Users/me/projects/my-app` and the agent runs with that as its working directory, giving it access to your project files.
+**Example**: Link the board to a Project whose directory is `/Users/me/projects/my-app` and every session for its tasks runs there, giving the agent access to your project files.
 
-If not set, the session falls back to `~/.undercontrol/workspace` (a dedicated sandbox).
+If nothing resolves, the session falls back to `~/.undercontrol/workspace` (a dedicated sandbox).
 
 ### Tmux Session
 
-Optional. When configured, the launch command is wrapped in a named tmux session. The actual session name is `<name>-<task-slug>` (a task slug is appended so different tasks don't share a session):
+Optional, per task. Set the task's `metadata.tmuxSession`:
+
+```bash
+ud patch task <task-id> --set tmuxSession=<name>
+```
+
+When set, the launch command is wrapped in a named tmux session. The actual session name is `<name>-<task-slug>` (a task slug is appended so different tasks don't share a session):
 
 ```bash
 tmux new-session -As <name>-<task-slug> '<agent launch command>'
@@ -93,7 +99,8 @@ This is useful for long-running implementations where you want the agent session
 The cwd is resolved by the **backend** (single source of truth) and delivered with the `workspace_init` event. The daemon only expands `~` and applies the fallback when it's empty:
 
 ```
-explicit cwd → task metadata.cwd → board metadata.projectDir
+explicit cwd → task metadata.cwd → task's project → agent's (or request's) project
+  → board's project → your Default project
 fallback: ~/.undercontrol/workspace   (a dedicated sandbox that limits the agent's access scope)
 ```
 
@@ -162,7 +169,7 @@ After the agent exits, the shell remains alive so you can run additional command
 
 **Problem**: The session starts in the sandbox (`~/.undercontrol/workspace`) instead of the project directory.
 
-**Solution**: Check that the board has a Project Directory configured in its settings, and that the task is on that board (matched by column queries). The backend resolves the cwd from board/task metadata, so the setting must be saved before you start the session.
+**Solution**: Check that the task, or the board it is on, is linked to a Project with a directory, or that the task has `metadata.cwd`. The backend resolves the cwd when the session starts, so the link must be saved before you start it.
 
 ### node-pty errors on startup
 
@@ -174,7 +181,7 @@ After the agent exits, the shell remains alive so you can run additional command
 
 **Problem**: Closing the workspace window kills the agent session.
 
-**Solution**: Make sure the **Tmux Session** field is configured in the board settings. Without it, the PTY process is killed directly when the window closes. With tmux, only the tmux client detaches — the session continues in the background.
+**Solution**: Set the task's `metadata.tmuxSession` (`ud patch task <task-id> --set tmuxSession=<name>`) before starting the session. Without it, closing the window kills the PTY's whole process group, agent included. With tmux, only the tmux client goes away — the tmux session continues in the background.
 
 ### Window opens but terminal is blank
 

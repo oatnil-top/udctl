@@ -43,6 +43,51 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.184.0 (2026-11-08)
+
+**Minor release: a comment with several questions is answered in one reply, the Ask Alfred panel shows what is dispatched and what is waiting on you, and a sign-in as a different account no longer leaves the previous account's data on the page.** It changes the backend, the web app, the desktop app and the `ud` CLI, so update the server first.
+
+### New Features
+
+- **One reply can answer several questions.** When an agent puts two or more questions in one comment, a single-choice click ticks the option instead of sending, and the comment sends one reply (the asker's mention, then every pick in question order) once every question is ticked, or when you press **Send answers** (it shows how many are ticked, such as 2/3). A comment with a multiple-choice question is sent by that button only. Changing an already answered question sends a one-pick reply straight away.
+- **A recommended option is shown as a tag.** An option whose label ends in （推荐） is drawn with a Recommended tag; the suffix is removed from the label that is sent back.
+- **The Ask Alfred panel shows what is dispatched and what is waiting for you.** A **Dispatched N** band lists the cards an agent is working on right now (up to 5, then "N more"), and a **Follow-ups N · due k** band lists the cards in the Follow-up column of the All Tasks board; overdue and today's cards are always shown, the rest open with a click. A band with nothing in it is hidden. The follow-up band reads every page of the column, refreshes when a task changes and every 60 seconds while the panel is open.
+
+### Improvements
+
+- **Choice questions have one send entry.** The line above the reply box only says that ticks are unsent; it no longer carries its own send button, and a rule separates the questions.
+- **A choice line that misses the syntax says why.** A comment with a `choice://` line that does not match the option syntax (for example a question id longer than 12 characters) used to show as raw text with no explanation; it now shows one muted line naming the rules for the question id and the value.
+- **The writer of a malformed choice line hears about it.** Creating, replying to or updating a comment returns a `warnings` list naming each such line and what is wrong with it, and `ud apply` prints it after "Comment created". It is a warning, not a refusal, so text that merely describes the syntax is still accepted.
+- **Pick labels keep words in brackets.** A label such as "303 像素中文字体（开源许可）" used to be cut at the first bracket when your pick was sent back; now only a trailing （推荐） is dropped.
+- **"Other" carries the right comment's ticks.** When two comments reuse the same question id, typing an "other" answer carries the ticks of the comment whose "other" you clicked, not the earlier one. With no click and two comments holding that id, nothing is carried.
+- **Desktop: a link clicked in the Ask Alfred panel opens in the main window.** A repeat click used to focus a hidden window and leave you on a window with no card.
+- **IM day threads are named by their date.** A daily IM thread is shown as "date · thread name" in the sidebar, pinned list, floating window, header and pop-out window, using the date in your own time zone. `GET /conversations` now returns that day as a `day` field; an older server does not send it, so update the server first.
+- **A member's name may contain spaces in a mention.** `[@Skill Builder](mention://member/<id>)` used to be refused as a malformed mention (HTTP 400 `TASK_MENTION_MALFORMED`).
+- **The built-in Alfred prompt changed (English and Chinese).** Its reply format now asks for `choice://` option links and for marking the recommendation with （推荐）, and it names the two tags behind the first two columns of the All Tasks board, awaiting-decision and follow-up. The config page shows the prompt as changed in v0.184.0. The `ud-cli` skill now says where a person's id comes from when you need to @ them.
+
+### Bug Fixes
+
+- **Signing in as someone else no longer carries the previous account's data.** The page used to wait for the profile before reloading; if the profile request failed, the reload was skipped and the new account's tokens sat on a page that still held the previous account's memory, which was then written into the new account's storage. The page now clears, stores the tokens and reloads in one step on every sign-in path, and switching accounts clears before its reload.
+
+### Upgrade Notes (self-hosted)
+
+- **There is nothing to migrate in this release's database.** Back up your database before upgrading, as with every release.
+- **Upgrade the server before the apps.** The web app reads the new `day` field of the conversation list; an older server does not send it, so IM day threads keep their old names until the server is updated.
+- No new environment variables.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.184.0`.
+
+---
+
 ## v0.183.0 (2026-11-07)
 
 **Minor release: agents can ask you a question you answer with a click, Slack joins Telegram as a messenger, and agents that call each other now stop instead of running away.** Four database migrations run (00122 to 00125). It changes the backend, the web app and the `ud` CLI, so update the server first.

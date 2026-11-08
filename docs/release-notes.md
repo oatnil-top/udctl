@@ -43,6 +43,38 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.184.1 (2026-11-09)
+
+**Patch release: the desktop app starts again.** 0.184.0's macOS and Windows desktop packages stopped at launch with "Cannot find module '@xterm/headless'"; this release ships packages that contain it. It also carries the board-settings cleanup that was already on `main`, which changes the backend, the web app, the desktop app and the `ud` CLI, so update the server first.
+
+### Bug Fixes
+
+- **Desktop: the app no longer fails to start with "A JavaScript error occurred in the main process / Cannot find module '@xterm/headless'".** The 0.184.0 macOS and Windows packages were built without that module. If you installed 0.184.0, install 0.184.1 over it; your data is untouched. The desktop build now refuses to produce a package whose main process needs a module the package does not contain.
+
+### Improvements
+
+- **Boards no longer configure where an agent session runs.** The board settings and the create/edit board dialogs keep only Scope Tags, Project and Kanban Prompt; the board-level folder override, tmux session, CLI context and implementation tool are gone. A session's folder now comes from the task, then from the board's project and your default project; its tmux session and CLI context come from the task only, and its agent CLI from the task, then your own default. The workspace view and the failure receipt list five folder layers instead of six, and `ud describe session` numbers them the same way.
+- **Messages an agent receives from a comment are shorter.** They now carry the header and the comment body only; the extra "Recall" line is gone.
+
+### Upgrade Notes (self-hosted)
+
+- **One migration runs on first boot and it removes data.** It deletes the board-level `projectDir`, `tmuxSession`, `cliContext` and `implTool` settings from every board. Nothing else changes and no column is dropped, but rolling back to 0.184.0 does not bring those settings back. If a board relied on them, after upgrading set the folder on the board's project or on its tasks, and the tmux session, CLI context or agent CLI on its tasks. Back up your database before upgrading, as with every release.
+- **Upgrade the server before the apps.** The workspace view reads a new `board` field on a session's folder record to name the board; an older server does not send it.
+- No new environment variables.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.184.1`.
+
+---
+
 ## v0.184.0 (2026-11-08)
 
 **Minor release: a comment with several questions is answered in one reply, the Ask Alfred panel shows what is dispatched and what is waiting on you, and a sign-in as a different account no longer leaves the previous account's data on the page.** It changes the backend, the web app, the desktop app and the `ud` CLI, so update the server first.

@@ -43,6 +43,45 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.185.0 (2026-11-09)
+
+**Minor release: the Ask Alfred desktop panel is redesigned, and a chat that lost its card or its thread no longer fails every message.** It changes the backend, the web app, the desktop app and the `ud` CLI, so update the server first.
+
+### New Features
+
+- **The Ask Alfred panel is redesigned.** A title bar shows presence, the daemon that answers, the summon hotkey and an **Open full conversation** link; the transcript sits in a 760px column; the context (cards, files) is a 280px right column on wide windows and chips below on narrow ones; a thinking row shows how long you have waited; and the key hints fade three seconds after each summon.
+- **Attachments in the composer are single tokens.** An image or card you add appears as a tile or pill above the text and as one token in the draft. Backspace, Delete, Ctrl-D, Ctrl-H, Option-Delete and Cmd-Z or Ctrl-Z act on a whole token, and the caret can no longer land inside one and split it.
+- **Follow-up rows in the panel have an ask button.** One click puts that follow-up into the message box as a draft, so you can edit it before sending.
+
+### Improvements
+
+- **"Open full conversation" is always in the title row.** It used to be missing until the conversation had a comment today; before a thread exists it opens the conversations page in the main window.
+- **The title names the daemon once a reply lands.** After the first message started a session, the title kept saying Online; it now re-reads the status when the reply arrives. With no daemon picked yet it still says Online.
+- **Sessions no longer show an "implementation tool" row.** The session detail, `ud describe session` and session search drop it: it was always the default (`claude`), not the tool the session ran, and searching "claude" used to match every session. The launch command still shows the real program.
+
+### Bug Fixes
+
+- **Deleting the Alfred chat card no longer breaks the chat for good.** Every quick input used to fail with `TASK_NOT_FOUND`; the conversation now opens a new chat card for the same chat and writes the message there. Restoring the old card later changes nothing for that chat.
+- **Deleting today's Alfred thread root no longer breaks quick input until tomorrow.** Messages used to fail with `TASK_COMMENT_NOT_FOUND` until the day turned over; the message now opens a fresh root comment.
+
+### Upgrade Notes (self-hosted)
+
+- **This release adds no database migration and no environment variable.** Back up your database before upgrading, as with every release.
+- **Upgrade the server before the apps.** The two chat fixes are server-side; the panel redesign is in the web and desktop apps.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.185.0`.
+
+---
+
 ## v0.184.1 (2026-11-09)
 
 **Patch release: the desktop app starts again.** 0.184.0's macOS and Windows desktop packages stopped at launch with "Cannot find module '@xterm/headless'"; this release ships packages that contain it. It also carries the board-settings cleanup that was already on `main`, which changes the backend, the web app, the desktop app and the `ud` CLI, so update the server first.

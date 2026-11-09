@@ -84,6 +84,27 @@ brew install ud`;
 
 type L = {en: string; zh: string};
 
+// Click analytics -> GA4 (card 925a4a3a). Standard events + standard params so the
+// Data API can read them without registered custom dimensions. Docusaurus's gtag
+// plugin injects window.gtag; absent (SSR, blocked, dev) = silent no-op.
+// .exe is NOT sent by hand: enhanced measurement already records its file_download,
+// and a second event would double the count. dl.udctl.com is a subdomain of
+// udctl.com, so GA4 treats it as on-site and records no outbound click for it.
+type Gtag = (command: 'event', name: string, params: Record<string, string>) => void;
+
+function gaEvent(name: string, params: Record<string, string>) {
+  const gtag = (typeof window !== 'undefined' ? (window as {gtag?: Gtag}).gtag : undefined);
+  if (typeof gtag === 'function') gtag('event', name, params);
+}
+
+/** file_download for dmg / AppImage / apk; skips .exe (see above). */
+function trackDownload(url: string) {
+  const file = url.slice(url.lastIndexOf('/') + 1);
+  const ext = file.slice(file.lastIndexOf('.') + 1);
+  if (ext === 'exe') return;
+  gaEvent('file_download', {file_name: file, file_extension: ext, link_url: url});
+}
+
 function useT() {
   const {i18n} = useDocusaurusContext();
   const zh = i18n.currentLocale === 'zh-Hans';
@@ -224,10 +245,11 @@ const HUB_REACH_IN: HeroPlatform[] = [
 ];
 
 
-function CopyBtn({text}: {text: string}) {
+function CopyBtn({text, item}: {text: string; item: string}) {
   const t = useT();
   const [copied, setCopied] = useState(false);
   const onCopy = () => {
+    gaEvent('select_content', {content_type: 'install_command', item_id: item});
     if (navigator.clipboard?.writeText) {
       navigator.clipboard.writeText(text).then(
         () => {
@@ -246,7 +268,7 @@ function CopyBtn({text}: {text: string}) {
   );
 }
 
-function Terminal({name, code}: {name: string; code: string}) {
+function Terminal({name, code, item}: {name: string; code: string; item: string}) {
   return (
     <div className={styles.term}>
       <div className={styles.termBar}>
@@ -256,7 +278,7 @@ function Terminal({name, code}: {name: string; code: string}) {
           <i />
         </span>
         <span className={styles.termName}>{name}</span>
-        <CopyBtn text={code.replace(/^#.*\n/gm, '')} />
+        <CopyBtn text={code.replace(/^#.*\n/gm, '')} item={item} />
       </div>
       <div className={styles.termBody}>
         <pre>
@@ -291,7 +313,11 @@ function QuickRow() {
         {t({en: 'Detected', zh: '检测到'})} {OS_NAME[os]}
       </span>
       {QUICK[os].map((q) => (
-        <a key={q.label} className={styles.btnPrimary} href={`${R2_RELEASES}/${VERSION}/${PLATFORMS[q.platform].file}`}>
+        <a
+          key={q.label}
+          className={styles.btnPrimary}
+          href={`${R2_RELEASES}/${VERSION}/${PLATFORMS[q.platform].file}`}
+          onClick={(e) => trackDownload(e.currentTarget.href)}>
           <DownloadIcon size={14} strokeWidth={2} />
           {q.label}
         </a>
@@ -422,7 +448,10 @@ function DesktopSection() {
             <h3 className={styles.platOs}>{t(p.os)}</h3>
             <div className={styles.platArch}>{p.arch}</div>
             <div className={styles.platSpacer} />
-            <a className={styles.platBtn} href={`${R2_RELEASES}/${VERSION}/${p.file}`}>
+            <a
+              className={styles.platBtn}
+              href={`${R2_RELEASES}/${VERSION}/${p.file}`}
+              onClick={(e) => trackDownload(e.currentTarget.href)}>
               <DownloadIcon size={14} strokeWidth={2} />
               {t({en: 'Download', zh: '下载'})}
             </a>
@@ -432,6 +461,7 @@ function DesktopSection() {
       </div>
       <Terminal
         name="zsh — Homebrew (macOS)"
+        item="brew-cask"
         code={`${t({
           en: '# macOS can also install with Homebrew (picks the build for your chip)',
           zh: '# macOS 也可以用 Homebrew 安装（自动匹配芯片架构）',
@@ -489,8 +519,8 @@ function CliSection() {
         })}
       </p>
       <div className={styles.termGrid}>
-        <Terminal name="bash — npm" code={CLI_INSTALL} />
-        <Terminal name="zsh — Homebrew" code={CLI_BREW} />
+        <Terminal name="bash — npm" item="npm" code={CLI_INSTALL} />
+        <Terminal name="zsh — Homebrew" item="brew-cli" code={CLI_BREW} />
       </div>
       <div className={styles.btnrow}>
         <Link className={styles.btnGhost} to="/docs/cli">
@@ -585,7 +615,7 @@ function MobileSection() {
           {/* Wrapped so the file name hangs off its own button rather than
               floating between the two, which the column gap alone would do. */}
           <div>
-            <a className={styles.btnPrimary} href={ANDROID_APK_URL}>
+            <a className={styles.btnPrimary} href={ANDROID_APK_URL} onClick={() => trackDownload(ANDROID_APK_URL)}>
               <DownloadIcon size={14} strokeWidth={2} />
               {t({en: 'Download the Android APK', zh: '下载 Android APK'})}
             </a>

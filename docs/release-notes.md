@@ -43,6 +43,49 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.186.0 (2026-11-11)
+
+**Minor release: conversations open in a side chat next to your work, a conversation can show its card beside the thread, and messages render tables and code blocks.** It changes the web app, the desktop app and the `ud` CLI; the server only carries the updated license text, so the order of upgrades does not matter this time.
+
+### New Features
+
+- **Side chat.** On the desktop layout a conversation now opens in a narrow column inside the sidebar (or beside the folded rail) instead of taking over the page, so you can keep a board or card open while you talk. Every conversation entry (the conversation list, Needs you and Recent rows, pinned conversations, New) follows the same rule; Cmd or Ctrl-click still opens a new tab. The column's width can be dragged (320 to 560px) and is remembered. Phones and pages without a sidebar keep the floating window.
+- **Ctrl+J and Ask AI open the side chat on the desktop**, on the last conversation of this window or a new one with the cursor in it; pressing again closes it. On a conversation page Ctrl+J focuses that page's input.
+- **Conversations list in the sidebar.** A Conversations action (with the Needs you count) swaps the expanded sidebar's lower half between navigation and all conversations; with the sidebar folded the list docks beside the rail at a width you can drag.
+- **Card pane on the conversation page.** The card a conversation is about shows in a column beside the thread. A card link in a message opens there instead of leaving the page; the pane head has previous and next, a card switcher (this thread's card, cards the conversation mentions, recently opened, and search), open full page and close. On narrow pages the card covers the thread and "Conversation" brings it back.
+- **Tables and code blocks in messages.** Markdown tables and fenced code blocks in conversation messages render as a table and a code block, and scroll sideways in narrow places instead of stretching them. Headings and images are still shown as plain text.
+
+### Improvements
+
+- **The board and the card page no longer fold the sidebar while a side chat is open**, and leaving the board keeps the fold when a chat is open in the dock.
+- **A clipped row of conversation filter chips fades at the side that has more**, instead of cutting a label in half.
+- **The pending reply stays "X is answering"** until the reply lands; the "Still waiting, you can keep typing" hint after a minute is gone, since the title already shows the status.
+- **The folded sidebar rail no longer shows an Edit sidebar button.**
+- **`ud upload`, `ud attach` and `ud apply` of a resource with `--entity-type task` now attach the file to the card.** `task` is read as `todolist` (a note on stderr says so) and the card id is resolved, or the command fails. Before, the command reported success while the card never showed the file.
+- **The web app no longer loads the Cloudflare Web Analytics beacon**, and the license no longer contains a clause about collecting usage data, analytics or telemetry. The product collects none.
+
+### Bug Fixes
+
+- **Switching cards with the description editor open no longer carries the draft over.** Moving from card A to card B with unsaved text in A's editor used to keep the editor open on B, and its save wrote A's text into B. A's draft is now saved back to A and B opens with its own description.
+
+### Upgrade Notes (self-hosted)
+
+- **This release adds no database migration and no environment variable.** Back up your database before upgrading, as with every release.
+- **The server changes only in its license text**, so servers, apps and the CLI can be upgraded in any order. The new features are in the web app (built into the all-in-one image) and the desktop app.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.186.0`.
+
+---
+
 ## v0.185.0 (2026-11-09)
 
 **Minor release: the Ask Alfred desktop panel is redesigned, and a chat that lost its card or its thread no longer fails every message.** It changes the backend, the web app, the desktop app and the `ud` CLI, so update the server first.

@@ -9,7 +9,7 @@ description: Beads and udctl both give AI coding agents task data they can read 
 
 Beads and udctl both give AI coding agents task data they can read and write, from different starting points. Beads keeps the issue database inside the code repository as long-term memory for the agent. udctl is a self-hosted server where people and agents work on the same tasks, boards and notes.
 
-udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.
+udctl is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.
 
 ## Facts side by side
 

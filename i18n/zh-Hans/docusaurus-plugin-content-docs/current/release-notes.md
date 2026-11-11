@@ -1,6 +1,6 @@
 ---
 title: 版本发布记录
-description: UnDercontrol 完整的版本历史和更新日志
+description: udctl 完整的版本历史和更新日志
 sidebar_position: 1
 ---
 
@@ -2333,11 +2333,11 @@ brew update && brew upgrade ud # 当初用 Homebrew 装的(同时会装上新的
 
 ---
 
-UnDercontrol 的版本更新历史和新功能介绍。
+udctl 的版本更新历史和新功能介绍。
 
 ## 版本号说明
 
-UnDercontrol 采用**语义化版本号**（格式：主版本号.次版本号.修订号），例如 `v0.19.0`：
+udctl 采用**语义化版本号**（格式：主版本号.次版本号.修订号），例如 `v0.19.0`：
 
 - **主版本号 0**：表示开发版本，API 和功能可能会有较大变动
 - **次版本号**（如 0.**19**.0）：增加新功能、重大改进或包含破坏性变更时递增

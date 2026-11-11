@@ -9,7 +9,7 @@ description: Beads 和 udctl 都给 AI 编程 agent 提供一份可读写的任�
 
 Beads 和 udctl 都给 AI 编程 agent 提供一份可读写的任务数据,出发点不同。Beads 把任务库放进代码仓库,给 agent 当长期记忆;udctl 是一台自托管的服务器,人和 agent 在同一份任务、看板、笔记上协作。
 
-udctl(UnDercontrol)是一个可自托管的工作台,用来管理任务、笔记和开销,带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。
+udctl 是一个可自托管的工作台,用来管理任务、笔记和开销,带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。
 
 ## 事实对照
 

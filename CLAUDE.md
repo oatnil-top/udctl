@@ -1,4 +1,4 @@
-# UnDercontrol Docs Site (ud-docs)
+# udctl Docs Site (ud-docs)
 
 Docusaurus site served at https://udctl.com — the canonical host since 2026-09-12
 (epic `f02f82bb`). `oatnil.com` and `www.udctl.com` 301 to it, and so does the
@@ -48,7 +48,7 @@ automatically via Cloudflare Workers Builds on push to `main`. i18n: `en`
 
 ## Conventions
 
-- The product name is **udctl**; **UnDercontrol** (capital U and D) is its full name, written once as `udctl (UnDercontrol)`, never as "formerly". Positioning and copy rules: ud card 38c286b2. It is proprietary —
+- The product name is **udctl**, lowercase everywhere (also at the start of a sentence). The former full name **UnDercontrol** is no longer used, not as `udctl (UnDercontrol)` and not as "formerly" (owner ruling 2026-11-12, ud card 02206f64); it stays only in literal identifiers and quoted output (`UnDercontrol.app`, the backend ready banner) and in dated blog posts and release notes. Positioning and copy rules: ud card 38c286b2. It is proprietary —
   never describe it as open-source.
 - Verify changes with `npm run build` (builds both locales; broken links fail
   the build). Pre-existing broken-anchor warnings on `/privacy`,

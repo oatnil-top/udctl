@@ -23,10 +23,10 @@ Usage
     python3 scripts/social-card.py --write
         Overwrite the two files in static/img.
 
-Expected (2026-09-20, ud-docs add1e63, macOS 26, Pillow 11.3.0):
+Expected (2026-11-12, after card 02206f64 dropped the former full name from the footer; macOS 26, Pillow 11.3.0):
     --verify prints "identical" for both cards;
-    --write reproduces md5 569bd52516d7b1b894cc94f2806fec8c (en) and
-    d12855be4237cc043e958ba8287b5490 (zh). Pixel identity is the claim that
+    --write reproduces md5 d0850bbbeac081abb649f0375b7b1944 (en) and
+    59f52dcfdcc79d1c368ecd5de0693f3b (zh). Pixel identity is the claim that
     matters; the md5 also depends on Pillow's PNG encoder.
 """
 import argparse
@@ -52,13 +52,13 @@ CARDS = {
         ("udctl", FONT_MENLO, 150, (0, 0, 0), (88, 150)),
         ("Explore. Capture. Distill.", FONT_HELVETICA, 46, (0, 0, 0), (80, 360)),
         ("A private workspace for people and AI agents.", FONT_HELVETICA, 36, (60, 60, 60), (80, 424)),
-        ("udctl.com  ·  udctl (UnDercontrol)  ·  free for personal use", FONT_HELVETICA, 26, (120, 120, 120), (80, 516)),
+        ("udctl.com  ·  free for personal use", FONT_HELVETICA, 26, (120, 120, 120), (80, 516)),
     ],
     "social-card.zh-Hans.png": [
         ("udctl", FONT_MENLO, 150, (0, 0, 0), (88, 150)),
         ("探索、记录、沉淀。", FONT_HIRAGINO, 44, (0, 0, 0), (80, 360)),
         ("人与 AI agent 共用的私密工作空间。", FONT_HIRAGINO, 34, (60, 60, 60), (80, 424)),
-        ("udctl.com  ·  udctl(UnDercontrol)  ·  个人使用免费", FONT_HIRAGINO, 24, (120, 120, 120), (80, 516)),
+        ("udctl.com  ·  个人使用免费", FONT_HIRAGINO, 24, (120, 120, 120), (80, 516)),
     ],
 }
 # Two 2px black rules, x 80..1120, at rows 78-79 and 548-549.

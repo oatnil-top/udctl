@@ -14,7 +14,7 @@ export type FaqEntry = {q: string; a: string};
 export const FAQ_ZH: FaqEntry[] = [
   {
     "q": "udctl 是什么?",
-    "a": "udctl(UnDercontrol)是一个可自托管的工作台,用来管理任务、笔记和开销,带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。"
+    "a": "udctl 是一个可自托管的工作台,用来管理任务、笔记和开销,带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。"
   },
   {
     "q": "有没有 kubectl 风格的任务管理命令行工具?",
@@ -69,7 +69,7 @@ export const FAQ_ZH: FaqEntry[] = [
 export const FAQ_EN: FaqEntry[] = [
   {
     "q": "What is udctl?",
-    "a": "udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment."
+    "a": "udctl is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment."
   },
   {
     "q": "Is there a kubectl-style command-line tool for task management?",

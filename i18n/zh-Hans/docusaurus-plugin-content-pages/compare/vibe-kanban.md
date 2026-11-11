@@ -9,7 +9,7 @@ description: Vibe Kanban 和 udctl 都把看板和 AI 编程 agent 放在一起�
 
 Vibe Kanban 和 udctl 都把看板和 AI 编程 agent 放在一起。Vibe Kanban 是在本机跑的网页应用,每个工作区给 agent 一个 git worktree 和分支;udctl 是一台自托管的服务器,任务、评论、看板在网页、桌面、iOS 和命令行里是同一份。
 
-udctl(UnDercontrol)是一个可自托管的工作台,用来管理任务、笔记和开销,带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。
+udctl 是一个可自托管的工作台,用来管理任务、笔记和开销,带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。
 
 ## 项目现状
 

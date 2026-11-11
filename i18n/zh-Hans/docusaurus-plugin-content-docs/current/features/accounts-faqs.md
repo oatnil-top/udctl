@@ -59,7 +59,7 @@ Yes, add them as **Off-Budget accounts**. While you can't spend this money day-t
 
 ### My bank account shows available balance vs actual balance. Which do I use?
 
-Use your **actual balance** (also called "current balance"). Don't include pending transactions or overdraft protection in your UnDercontrol balance.
+Use your **actual balance** (also called "current balance"). Don't include pending transactions or overdraft protection in your udctl balance.
 
 ### I have foreign currency accounts. How does this work?
 
@@ -77,11 +77,11 @@ Currently, enter the equivalent amount in your primary currency. For example, if
 
 ### What if I forget to update balances?
 
-No problem! UnDercontrol doesn't automatically sync with your bank, so it relies on you to keep it current. Just update when you remember - your history will still be valuable.
+No problem! udctl doesn't automatically sync with your bank, so it relies on you to keep it current. Just update when you remember - your history will still be valuable.
 
 ### Can I connect my bank accounts automatically?
 
-Not currently. UnDercontrol requires manual balance updates. This gives you more control and privacy, but means you need to update balances yourself.
+Not currently. udctl requires manual balance updates. This gives you more control and privacy, but means you need to update balances yourself.
 
 ### How do I handle cash?
 
@@ -104,7 +104,7 @@ Turn it on/off with the eye icon on your accounts page.
 
 ### Is my financial data secure?
 
-Yes. UnDercontrol uses industry-standard security practices:
+Yes. udctl uses industry-standard security practices:
 - All data is encrypted
 - You can only see your own accounts
 - No sharing between users without permission
@@ -157,7 +157,7 @@ For now, convert everything to your primary currency and enter the equivalent am
 
 Account data export isn't currently available, but it's on the roadmap for future updates.
 
-### What happens to my data if I stop using UnDercontrol?
+### What happens to my data if I stop using udctl?
 
 Your data belongs to you. While there's no export feature yet, your account information isn't locked in - you can always manually record the balances elsewhere if needed.
 

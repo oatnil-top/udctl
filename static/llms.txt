@@ -1,8 +1,8 @@
-# udctl (UnDercontrol)
+# udctl
 
-> udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.
+> udctl is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.
 
-udctl was formerly named UnDercontrol; udctl.com is the canonical host and oatnil.com redirects here. The CLI installs with `npm install -g @oatnil/ud` (Node.js 18+).
+udctl.com is the canonical host and oatnil.com redirects here. The CLI installs with `npm install -g @oatnil/ud` (Node.js 18+).
 
 ## Start here
 

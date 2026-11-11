@@ -1193,8 +1193,8 @@ function CtaSection() {
 
 /**
  * Structured data for the homepage (audit efb0ebf3 #6). Two nodes in one graph:
- * the Organization is what search engines attach the brand ("udctl", formerly
- * "UnDercontrol") and the sameAs profiles to; the SoftwareApplication is what
+ * the Organization is what search engines attach the brand ("udctl"; no alternateName since
+ * the 2026-11-12 ruling, ud card 02206f64) and the sameAs profiles to; the SoftwareApplication is what
  * lets a result carry the app category / price / platforms. `name` is not
  * translated on purpose — the brand token is the same in every locale — while
  * the description reuses the localized meta description so the two never drift.
@@ -1208,7 +1208,6 @@ function homepageJsonLd(description: string): string {
         '@type': 'Organization',
         '@id': `${url}/#organization`,
         name: 'udctl',
-        alternateName: 'UnDercontrol',
         url,
         logo: `${url}/img/favicon.svg`,
         sameAs: [
@@ -1222,7 +1221,6 @@ function homepageJsonLd(description: string): string {
         '@type': 'SoftwareApplication',
         '@id': `${url}/#software`,
         name: 'udctl',
-        alternateName: 'UnDercontrol',
         description,
         url,
         downloadUrl: `${url}/download`,
@@ -1265,7 +1263,7 @@ export default function Home(): ReactNode {
   const metaDescription = translate({
     id: 'homepage.description',
     message:
-      'udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.',
+      'udctl is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.',
     description: 'The homepage meta description',
   });
   return (

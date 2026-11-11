@@ -6,7 +6,7 @@ sidebar_position: 1
 
 # 欢迎使用 udctl
 
-udctl(UnDercontrol)是一个可自托管的工作台，用来管理任务、笔记和开销，带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。跑在你自己的机器上。
+udctl 是一个可自托管的工作台，用来管理任务、笔记和开销，带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。跑在你自己的机器上。
 
 ## 什么是 udctl？
 

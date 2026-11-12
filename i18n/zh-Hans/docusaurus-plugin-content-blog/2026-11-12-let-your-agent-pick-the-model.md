@@ -30,11 +30,11 @@ B 站:[BV1GdWQ6FEEt](https://www.bilibili.com/video/BV1GdWQ6FEEt) · 英文版�
 
 ## 每个模型就是一行命令，用什么模型一眼看得到
 
-在 udctl 里，每个模型是一行 Agent CLI,模型就写在命令里。比如 `claude-fable` 这一行就是 `claude --dangerously-skip-permissions --model fable`,`claude-haiku` 是同一条命令换成 `--model haiku`。
+在 udctl 里，每个模型是一行 agent CLI,模型就写在命令里。比如 `claude-fable` 这一行就是 `claude --dangerously-skip-permissions --model fable`,`claude-haiku` 是同一条命令换成 `--model haiku`。
 
 不只是 Claude。Codex、Pi,你电脑上装了哪个，就能挂哪个;列表底下点「New CLI...」再加一行。Claude Code、Codex、OpenCode,或任何在终端里跑的 agent 都是这样接进来的。
 
-![设置页的 Agent CLI 列表:Codex、Pi,以及 Fable、Haiku、Opus、Sonnet 四行 Claude Code,每行命令末尾的 --model 参数标了出来](https://dl.udctl.com/features/blog/let-your-agent-pick-the-model/02-agent-cli-list.jpg)
+![设置页的 agent CLI 列表:Codex、Pi,以及 Fable、Haiku、Opus、Sonnet 四行 Claude Code,每行命令末尾的 --model 参数标了出来](https://dl.udctl.com/features/blog/let-your-agent-pick-the-model/02-agent-cli-list.jpg)
 
 ## 常用的分工，配一次就不用再管
 
@@ -88,7 +88,7 @@ Alfred 读了规则，自己拆卡、自己派。那一次真跑的结果：
 
 ## 自己搭一套：三步
 
-1. **把模型挂成 CLI。** 设置里的 Agent CLI,每个模型一行，模型写在命令里。
+1. **把模型挂成 CLI。** 设置里的 agent CLI,每个模型一行，模型写在命令里。
 2. **给每个 agent 选默认。** agent 编辑表单里的「Runs with」。
 3. **在 Global Instructions 里写一条选模型的规则。** 写清楚什么样的活用哪一行;然后把活交给 Alfred,说一句「派出去」。
 

@@ -31,11 +31,11 @@ We made a 100-second video of this. The dispatches in it come from a real run. T
 
 ## Each model is one command, so you can see what runs
 
-In udctl, each model is its own Agent CLI, with the model right in the command. The `claude-fable` row is `claude --dangerously-skip-permissions --model fable`; `claude-haiku` is the same command with `--model haiku`.
+In udctl, each model is its own agent CLI, with the model right in the command. The `claude-fable` row is `claude --dangerously-skip-permissions --model fable`; `claude-haiku` is the same command with `--model haiku`.
 
 It's not just Claude. Codex, Pi: whatever is installed on your machine, you can add, with "New CLI..." at the bottom of the list. Claude Code, Codex, OpenCode, or any terminal-based agent plugs in the same way.
 
-![The Agent CLI list in settings: Codex, Pi, and four Claude Code rows for Fable, Haiku, Opus and Sonnet, with the --model flag at the end of each command underlined](https://dl.udctl.com/features/blog/let-your-agent-pick-the-model/02-agent-cli-list.jpg)
+![The agent CLI list in settings: Codex, Pi, and four Claude Code rows for Fable, Haiku, Opus and Sonnet, with the --model flag at the end of each command underlined](https://dl.udctl.com/features/blog/let-your-agent-pick-the-model/02-agent-cli-list.jpg)
 
 ## Set the usual split once and stop thinking about it
 
@@ -89,7 +89,7 @@ It applies to that one message only. The agent's default stays as it is, and the
 
 ## Set it up yourself: three steps
 
-1. **Add each model as a CLI.** One row per model under Agent CLI in settings, with the model in the command.
+1. **Add each model as a CLI.** One row per model under agent CLI in settings, with the model in the command.
 2. **Give each agent a default.** "Runs with" in the agent's edit form.
 3. **Write a model-choice rule in Global Instructions.** Say which kind of job gets which CLI, then hand the work to Alfred with one sentence: "Dispatch these."
 

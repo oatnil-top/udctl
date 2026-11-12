@@ -7,7 +7,7 @@ udctl.com is the canonical host and oatnil.com redirects here. The CLI installs 
 ## Start here
 
 - [Agent setup prompt](https://udctl.com/agent-setup/prompt.md): paste-ready onboarding prompt for an AI agent — install, pick a server, `ud login`, first commands. Served as plain text/markdown.
-- [Product guide for agents](https://udctl.com/agent-setup/guide.md): the built-in product guide corpus — core concepts (tasks, notes, comments, boards, queries), how to answer product questions, CLI usage patterns. Served as plain text/markdown.
+- [Product guide for agents](https://udctl.com/agent-setup/guide.md): product guide corpus — core concepts (tasks, notes, comments, boards, queries), how to answer product questions, CLI usage patterns. Served as plain text/markdown.
 - [Download and install](https://udctl.com/download/): desktop, web, mobile, CLI — every install path with exact commands and artifact names.
 
 ## Reference

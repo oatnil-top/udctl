@@ -1,6 +1,6 @@
-<!-- GENERATED COPY — do not edit here.
-     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one 70d644f34
-     Regenerate: auto/sync-agent-guide.sh -->
+<!-- Source of truth: this file, edited here in docusaurus-opensource.
+     Until card 6aa386af it was generated from the ud-guide skill, which is deleted;
+     Alfred now answers product questions from the docs on udctl.com. -->
 
 # udctl Guide
 

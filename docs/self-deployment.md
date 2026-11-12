@@ -439,8 +439,8 @@ messengers; scale the frontend freely either way.
 ## When Alfred reads udctl.com {#alfred-reads-udctl-com}
 
 From v0.188.0, Alfred answers questions about how to use udctl from the official docs
-on udctl.com instead of from a built-in copy. On a self-hosted instance this is the one
-case where something you run reaches udctl.com, so here is exactly what happens.
+on udctl.com instead of from a built-in copy. If you self-host and care about
+which requests leave your network, here is exactly what this one does.
 
 - **When**: only when someone asks Alfred a product question ("how do I create a board?")
   and that Alfred session runs on a daemon. Nothing happens on a timer or in the

@@ -1193,7 +1193,7 @@ function CtaSection() {
 
 /**
  * Structured data for the homepage (audit efb0ebf3 #6). Two nodes in one graph:
- * the Organization is what search engines attach the brand ("udctl", formerly
+ * the Organization is what search engines attach the brand ("udctl", read
  * "UnDercontrol") and the sameAs profiles to; the SoftwareApplication is what
  * lets a result carry the app category / price / platforms. `name` is not
  * translated on purpose — the brand token is the same in every locale — while

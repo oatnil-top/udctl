@@ -3,7 +3,7 @@
 Not an agent? You might be looking for https://udctl.com/docs/advanced/api-keys/.
 
 You are an agent. This document tells you how to get a credential for a udctl
-server and how to use it. It is written for AI agents (Claude Code, Codex,
+(UnDercontrol) server and how to use it. It is written for AI agents (Claude Code, Codex,
 Cursor and similar) acting for a person who has an account on that server.
 
 ## Registration

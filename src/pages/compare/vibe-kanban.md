@@ -9,7 +9,7 @@ description: Vibe Kanban and udctl both put a kanban board next to AI coding age
 
 Vibe Kanban and udctl both put a kanban board next to AI coding agents. Vibe Kanban is a web app that runs on your machine and gives each agent workspace its own git worktree and branch. udctl is a self-hosted server whose tasks, comments and boards are the same data in the web, desktop, iOS and command-line clients.
 
-udctl is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.
+udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.
 
 ## Project status
 

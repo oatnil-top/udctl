@@ -27,7 +27,7 @@ const config: Config = {
   // f02f82bb): 'ud' and 'undercontrol' cannot be ranked for (two letters / the
   // phrase "under control"), 'udctl' has no competing owner anywhere we checked.
   // Since the rename (same day, same task) the navbar, h1 and body copy say udctl
-  // too. The former full name UnDercontrol is no longer used (owner ruling 2026-11-12, ud card 02206f64).
+  // too; UnDercontrol is the full name, written once as "udctl (UnDercontrol)" (ud card 38c286b2).
   title: 'udctl',
   tagline: 'Explore. Capture. Distill. A private workspace for people and AI agents.',
   favicon: 'img/favicon.svg',
@@ -299,7 +299,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} udctl Project · v${VERSION}`,
+      copyright: `Copyright © ${new Date().getFullYear()} UnDercontrol Project · v${VERSION}`,
     },
     prism: {
       theme: prismThemes.github,

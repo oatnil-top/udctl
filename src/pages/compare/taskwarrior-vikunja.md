@@ -9,7 +9,7 @@ description: People who want tasks on the command line and a kanban board on the
 
 People who want tasks on the command line and a kanban board on the web often pair Taskwarrior for the terminal with Vikunja for the browser. udctl provides both from one server.
 
-udctl is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.
+udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.
 
 ## Facts side by side
 

@@ -9,7 +9,7 @@ description: 想要「命令行管任务,同时有网页看板」的人,常见�
 
 想要「命令行管任务,同时有网页看板」的人,常见做法是 Taskwarrior 管终端、Vikunja 管网页。udctl 用一台服务器同时提供这两样。
 
-udctl 是一个可自托管的工作台,用来管理任务、笔记和开销,带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。
+udctl(UnDercontrol)是一个可自托管的工作台,用来管理任务、笔记和开销,带 kubectl 风格的命令行(`ud`),还能在任务评论里直接派活给 AI 编程 agent。
 
 ## 事实对照
 

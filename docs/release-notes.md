@@ -43,6 +43,61 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.187.0 (2026-11-12)
+
+**Minor release: a pass over the first-run and everyday web screens (22 items), the product reads udctl (UnDercontrol) everywhere, and the server answers faster.** It changes the backend, the web app, the desktop app and the `ud` CLI, so update the server first.
+
+### New Features
+
+- **Onboarding asks one thing first:** do you already use a command-line agent, or do you want to chat first. The wizard follows the interface language, and reopening it from Settings opens it in place.
+- **Add AI provider has one-click vendor presets** and Chinese capability labels; the add button sits inside the empty state.
+- **The comment box shows a leading @agent as a recipient chip**, has Chinese labels, and its @ menu opens on your Alfred. Two Backspaces remove a chip.
+- **An empty conversation list shows three starter rows**, a line above the new-conversation box tells you when no model is configured, and a reply in that state says "not configured".
+- **On a phone-width screen** a labelled top bar replaces the handles on the left edge, the kanban pages one column per swipe, and the calendar toolbar folds the view and basis switches into one dropdown.
+- **The agent editor shows the daemon or server preference** and keeps it when you toggle an entry off and on.
+- **New accounts' Alfred runs on a daemon when one is online**, and on the server otherwise.
+
+### Improvements
+
+- **Task detail and the kanban preview open with the comments panel showing**, under a labelled divider; the description takes the height of its content.
+- **The system board shows its four status columns by default**, with translated column names; conversation cards no longer appear in status columns. Folding the board is kept for the session only, and the create-task dialog is 640px wide.
+- **The login page shows a wrong-password hint inline**, has no empty divider and a solid primary button.
+- **Sidebar:** the "all" block is titled More pages, without a count, and every expanded nav row starts with an icon.
+- **Calendar:** the mini month follows the interface language; the layer query text moves into the row's hover title and seeded preset queries are shown in your language.
+- **The 404 page is translated.** Signed in, it stays in the app with a Back to conversations link; signed out, it is a standalone page with Back to home.
+- **Notifications show relative times in your language** (zh: 4 分钟前, 2 小时前, 3 天前); the agents page has a plainer system-default hint and a translated filter placeholder.
+- **The product is called udctl (UnDercontrol)** in the interface, built-in prompts and skills; Alfred and agent are named consistently, including in Chinese.
+- **Markdown bodies past 500K characters open in source mode** in the viewer, the inline editor and the editor window, and large `.md` files no longer freeze the window while parsing.
+- **Faster:** the web app's first load is about a third of its former size, typing in a thread no longer re-renders its messages, dragging the Explorer splitter is smoother, the Explorer, task lists and kanban columns read less from the database (two new indexes), and API-key requests skip the password hash for a key verified within the last 45 seconds. Revoking, expiring or removing a key's owner from a group still takes effect on the next request.
+- **The desktop app asks SQLite for a smaller page cache** (2000 KiB instead of 64 MiB), which lowers its memory use.
+- **A signed-in browser paints the account's language at startup** instead of flipping to it a moment later.
+- **The web app resolves api.oatnil.com as api.udctl.com**, the first step of the domain move.
+
+### Bug Fixes
+
+- **A failed session whose terminal is still alive is stopped and its window closed** (desktop). A session started with `--briefing` is no longer closed by the 90-second no-response check.
+- **Opening the create-task dialog without presets no longer loops** (a "Maximum update depth" error in the web app).
+- **A group that is no longer active no longer hides all of a user's groups.** Deleting an account also removes its memberships in inactive groups.
+
+### Upgrade Notes (self-hosted)
+
+- **Two database migrations run on first boot (00127, 00128, SQLite and Postgres).** 00127 adds two indexes (`queue_tasks`, `todolist_items`); 00128 only drops indexes that a development build of 00127 may have created, and does nothing on a normal database. Back up your database before upgrading, as with every release.
+- **One new optional environment variable, `UD_SQLITE_CACHE_SIZE_KIB`**, sets the SQLite page cache in KiB. Leave it unset to keep the 64 MiB default; the desktop app sets 2000 itself.
+- **Update the server before the apps and the CLI.** The new web and desktop apps use server changes from this release: lighter kanban and Explorer reads, and Alfred running on a daemon first.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.187.0`.
+
+---
+
 ## v0.186.0 (2026-11-11)
 
 **Minor release: conversations open in a side chat next to your work, a conversation can show its card beside the thread, and messages render tables and code blocks.** It changes the web app, the desktop app and the `ud` CLI; the server only carries the updated license text, so the order of upgrades does not matter this time.

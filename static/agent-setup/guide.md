@@ -1,5 +1,5 @@
 <!-- GENERATED COPY — do not edit here.
-     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one b85b54886
+     Source: go-backend/internal/domain/core/skill/builtin/ud-guide.md @ ud-all-in-one 70d644f34
      Regenerate: auto/sync-agent-guide.sh -->
 
 # udctl Guide
@@ -96,7 +96,7 @@ Built-in AI assistant accessible from the app. Capabilities:
 **Architecture**: Web/Desktop/CLI → Daemon (background service on your machine) → AI Agent (Claude Code, Codex, etc.)
 
 **Built-in Agents**: `ud get agents` lists what this instance actually has (including
-`@ud-guide`, you). Do not recite a remembered roster — agents are added and renamed.
+Alfred, who answers product questions from this guide). Do not recite a remembered roster — agents are added and renamed.
 
 **Waking an agent**: every agent can be @mentioned and can be started by hand. An @mention (or a reply in its thread) wakes it; assigning a card to it does not.
 

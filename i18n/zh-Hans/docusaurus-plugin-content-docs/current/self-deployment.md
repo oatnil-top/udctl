@@ -355,6 +355,24 @@ IM 通道默认只对实例所有者开放：`im.multi_user_enabled` 默认为 `
 各开一条长轮询，而 Telegram 只允许一个消费者，多副本同时轮询会互相抢消息。有用户连接 IM 时请只跑一个后端副本；
 前端无论如何都可以自由扩缩。
 
+## Alfred 什么时候会访问 udctl.com {#alfred-reads-udctl-com}
+
+从 v0.188.0 起,Alfred 回答「udctl 怎么用」这类问题时，照 udctl.com 上的官方文档回答，不再用内置的一份副本。
+在自部署实例上，这是你运行的东西唯一会访问 udctl.com 的情形，具体如下。
+
+- **什么时候**:只在有人问 Alfred 产品用法(比如「怎么建看板」),且这个 Alfred 会话跑在 daemon 上时。
+  没有定时任务，不在后台进行;其他问题和派工不会触发。
+- **访问什么**:对公开页面的普通 HTTPS GET:先读 `https://udctl.com/llms.txt`,再读它列出的、和问题相关的页面
+  (`https://udctl.com/docs/` 下的页面和 `https://udctl.com/agent-setup/guide.md`)。
+  不发送你工作区里的任何东西：没有任务内容、没有账号数据、没有 token。
+- **从哪里发出**:daemon 所在的机器，经由 daemon 运行的 agent CLI 的网页读取工具。udctl 服务端，以及桌面端、
+  网页端、手机端都不为此向 udctl.com 发请求。
+- **服务端运行时**:跑在服务端的 Alfred 会话完全不能联网。它会说明读不了文档，只答有把握的部分，
+  并给出 `https://udctl.com/docs/intro/` 链接。
+- **已有账号**:v0.188.0 之前创建的 Alfred 保留旧提示词，不会这样做，直到在该 agent 的页面把提示词恢复为默认。
+
+想避免：不要问 Alfred 产品用法问题，自己去看 `https://udctl.com/docs/intro/` 的文档即可。没有关闭它的设置项。
+
 ## 数据与备份
 
 所有状态都在 `/app/data`（上面挂载的卷）下：SQLite 数据库，以及默认情况下的上传文件。备份该卷即可备份整个实例。

@@ -436,6 +436,31 @@ its own long poll per user bot, and Telegram allows one consumer per bot, so sev
 polling the same bots steal each other's messages. Run one backend replica if users connect
 messengers; scale the frontend freely either way.
 
+## When Alfred reads udctl.com {#alfred-reads-udctl-com}
+
+From v0.188.0, Alfred answers questions about how to use udctl from the official docs
+on udctl.com instead of from a built-in copy. On a self-hosted instance this is the one
+case where something you run reaches udctl.com, so here is exactly what happens.
+
+- **When**: only when someone asks Alfred a product question ("how do I create a board?")
+  and that Alfred session runs on a daemon. Nothing happens on a timer or in the
+  background, and other questions and work do not trigger it.
+- **What**: plain HTTPS GET requests for public pages: `https://udctl.com/llms.txt`,
+  then the pages it lists that fit the question (pages under `https://udctl.com/docs/`
+  and `https://udctl.com/agent-setup/guide.md`). Nothing from your workspace is sent:
+  no task content, no account data, no token.
+- **From where**: the daemon's machine, through the web-fetch tool of the agent CLI the
+  daemon runs. The udctl server and the desktop, web and mobile apps send no request
+  to udctl.com for this.
+- **Server runtime**: an Alfred session that runs on the server cannot reach the internet
+  at all. It says it cannot read the docs, answers only what it is sure of, and links
+  `https://udctl.com/docs/intro/`.
+- **Existing accounts**: an Alfred created before v0.188.0 keeps its old prompt and does
+  not do this until its prompt is restored to the default on the agent's page.
+
+To avoid it, do not ask Alfred product questions; read the docs at
+`https://udctl.com/docs/intro/` yourself instead. There is no setting that turns it off.
+
 ## Data & Backup
 
 All state lives under `/app/data` (mounted as a volume above): the SQLite database and, by

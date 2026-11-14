@@ -43,6 +43,46 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.188.0 (2026-11-14)
+
+**Minor release: the desktop app draws its own title bar with a check-for-updates button, workspace sessions are checked with the server every time they start, and the direct-answer assistant is called Alfred everywhere.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** a new desktop app or `ud` daemon refuses to start sessions against an older server.
+
+### New Features
+
+- **The desktop app draws its own title bar** on macOS and Windows, with a Check for updates button in it. The button shows at launch and after each check's result, then fades out; hover over the right end of the bar to bring it back. A known newer release keeps a dot on it across restarts. Checking stays something you trigger. Linux and secondary windows keep the native frame.
+- **The photo viewer has a Details button** that opens the file's resource detail page.
+- **The recycle bin is back in the sidebar's More pages block** (resources group), and can be pinned. Settings > Data keeps its link.
+
+### Improvements
+
+- **Before starting a workspace session, the desktop app and the `ud` daemon ask the server whether the agent CLI may run.** They no longer judge from a copy of the CLI catalog. If the server cannot be reached, the session is refused, and the reason is written in the session's receipt. Your local `allowed_tools` narrowing and the rule that a plain shell is never started are unchanged.
+- **The direct-answer assistant is named Alfred** in the conversation list, in notifications (which used to show no name) and in the transcript an agent reads when it joins a thread. It used to say "Assistant".
+- **Alfred answers product questions from the docs on udctl.com.** On a daemon it reads https://udctl.com/llms.txt and the pages it lists, and cites the page it used. On the server, where it cannot fetch pages, it links the docs and suggests a daemon. New accounts no longer get a separate ud-guide agent, and the built-in ud-guide skill is removed. Existing ud-guide agents stay as ordinary agents. Alfred's default prompt changed, so an Alfred you have edited shows "differs from the system default (last changed in v0.188.0)".
+- **When you mention an agent with a different CLI and it already has a session on that card**, it now says in its reply that it is still on its current CLI, instead of switching silently.
+
+### Bug Fixes
+
+- **A failed workspace session whose terminal is still alive is stopped and its window closed** (desktop). In v0.187.0 the stop request failed on every try, so such sessions were never closed.
+- **After the desktop app restarted, every new session was refused with "agent CLI catalog unavailable on this daemon"** until you opened the Agent CLI settings page. Sessions now start without that step.
+
+### Upgrade Notes (self-hosted)
+
+- **Update the server before the apps and the CLI.** This release adds one server endpoint, `POST /api/v1/agent-clis/launch-check`. The new desktop app and the new `ud` daemon call it before every workspace session, and refuse the session when the call fails, so against an older server no session starts.
+- No database migrations and no new environment variables. Back up your database before upgrading, as with every release.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.188.0`.
+
+---
+
 ## v0.187.0 (2026-11-12)
 
 **Minor release: a pass over the first-run and everyday web screens (22 items), the product reads udctl (UnDercontrol) everywhere, and the server answers faster.** It changes the backend, the web app, the desktop app and the `ud` CLI, so update the server first.

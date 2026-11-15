@@ -1077,6 +1077,9 @@
   "privacy.sections.thirdParties.p1": {
     "message": "AI 功能会把内容发给模型供应商。当你使用内置助手，或者对任务、笔记、图片使用 AI 操作时，你提交的文字以及它处理的那条内容会被发给大语言模型供应商来生成回答。具体是哪家取决于配置：云服务使用服务端配置的供应商（OpenAI 或 Anthropic 兼容的接口），你也可以把应用指向你自己的供应商。我们不会用你的内容训练任何模型；供应商拿到内容后怎么处理，受该供应商自己的条款约束。如果你在意这一点，可以配置自己的供应商，或者改用桌面应用、自托管实例。"
   },
+  "privacy.sections.thirdParties.p1b": {
+    "message": "桌面版和自托管实例默认不向 udctl.com 发送任何内容；如果你开启了 udctl.com 提供的 AI，你和 Alfred 的对话以及 Alfred 读取的卡片内容会经 udctl.com 转给模型服务商。udctl.com 的访问日志会记录来源 IP 和请求时间，不记录对话内容。"
+  },
   "privacy.sections.thirdParties.p2": {
     "message": "本网站使用 Google Analytics。oatnil.com —— 也就是你正在读这一页的这个官网与文档站 —— 加载了 Google Analytics（衡量 ID G-B3E5P48S9Y），并开启了 IP 匿名化，用来统计页面访问量。各个应用端不加载它，任何地方都没有广告或跨站追踪。"
   },

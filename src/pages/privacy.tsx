@@ -146,6 +146,11 @@ function PolicyContent() {
           <Translate key="p1" id="privacy.sections.thirdParties.p1">
             {"AI features send content to a model provider. When you use the built-in assistant, or an AI action on a task, a note or an image, the text you submit and the item it acts on are sent to a large-language-model provider so it can answer. Which provider depends on configuration: the cloud service uses a provider configured on the server (an OpenAI- or Anthropic-compatible API), and you can point the app at your own provider instead. We do not use your content to train any model; what a provider does with what it receives is governed by that provider\u2019s own terms. If that matters to you, configure your own provider, or use the desktop app or a self-hosted instance."}
           </Translate>,
+          // p1b: same wording as the in-app privacy page (ud-vite-app pages.json
+          // privacy.sections.thirdParties.p1b), ud card 62586f49.
+          <Translate key="p1b" id="privacy.sections.thirdParties.p1b">
+            {"The desktop app and self-hosted instances send nothing to udctl.com by default. If you turn on the AI provided by udctl.com, your conversation with Alfred and the cards Alfred reads are passed through udctl.com to the model provider. udctl.com's access log records the source IP address and request time, not the conversation content."}
+          </Translate>,
           <Translate key="p2" id="privacy.sections.thirdParties.p2">
             {"This website uses Google Analytics. oatnil.com \u2014 the marketing and documentation site you are reading this on \u2014 loads Google Analytics (measurement ID G-B3E5P48S9Y) with IP anonymisation enabled, to count page views. The apps do not load it, and there is no advertising or cross-site tracking anywhere."}
           </Translate>,

@@ -43,6 +43,43 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.189.0 (2026-11-15)
+
+**Minor release: `ud desktop` can open any app page, an agent's open request now asks before it moves your window, and a 404 inside the desktop app reports itself.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** the new `ud` asks the server which desktop to use, and an older server does not have that endpoint.
+
+### New Features
+
+- **`ud desktop pages` lists the app pages and `ud desktop open page <key>` opens one.** The list comes from the server (`GET /api/v1/app-pages`, `GET /api/v1/app-pages/<key>`), and the command palette's page list is now generated from the same source.
+- **`ud desktop` asks the server which desktop to use** instead of guessing from the local machine. `ud desktop focus workspace` and `ud desktop close workspace` take a session short id.
+- **Receipts say where the desktop landed.** `ud desktop` prints the final path and the page title; landing on the not-found page is reported as `PAGE_NOT_FOUND`, and a malformed path as `PATH_MALFORMED` rather than `PATH_NOT_ALLOWED`. `ud desktop open path /tasks/<id>` checks the card first, and a path with whitespace is escaped for you.
+- **The web app's 404 page declares itself from the first paint and sets its own title**, which is what lets the desktop tell a missing page from a loaded one.
+
+### Improvements
+
+- **An agent's `ud desktop open` no longer moves your window by itself.** Without `--user-requested` the desktop only shows a prompt naming the agent and the target; you click Open to get it in a new tab, and the command returns `done prompted` immediately. With `--user-requested` (the open verbs: task, path, page) it navigates and raises the window as before. The recent-commands list tells prompted opens from shown ones, and the prompt's close button shows without hovering.
+- **In the desktop app, `/tasks/<x>` opens a card window only when `<x>` is a full UUID.** Calendar, search, graph and timeline open as page windows.
+- **A receipt's page title waits for the page to declare it**, so it no longer reports the title of the page you were on.
+
+### Upgrade Notes (self-hosted)
+
+- **Update the server before the apps and the CLI.** The new `ud` calls `GET /daemon/desktop-targets` and the app-pages endpoints; against an older server `ud desktop` commands fail.
+- **Behavior change for scripts and agents: `ud desktop open` without `--user-requested` now only prompts and does not open anything.** Add `--user-requested` where the person has just asked to see the page.
+- **Two database migrations run on first boot (00129, 00130, SQLite and Postgres).** Both only add columns to the desktop-commands table (landing path and title, and the user-requested and prompted flags). Back up your database before upgrading, as with every release.
+- **One new optional environment variable, `UD_SERVER_AGENT_DESKTOP_TOOL`**, default off. It lets an agent running on the server (including Alfred answering in the app) show a card, board or app page in your desktop app. Leave it unset to keep that off; nothing in this release turns it on.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.189.0`.
+
+---
+
 ## v0.188.0 (2026-11-14)
 
 **Minor release: the desktop app draws its own title bar with a check-for-updates button, workspace sessions are checked with the server every time they start, and the direct-answer assistant is called Alfred everywhere.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** a new desktop app or `ud` daemon refuses to start sessions against an older server.

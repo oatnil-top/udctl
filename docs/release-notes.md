@@ -43,6 +43,40 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.190.0 (2026-11-15)
+
+**Minor release: Settings is one scrollable page again, with a section list on the left, and the pages that used to live inside Settings are plain pages of their own.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** the new web and desktop apps ask the server about features that an older server does not have.
+
+### Improvements
+
+- **Settings is a single page again.** All twelve sections show at once in heading order (account, appearance and language, AI and models), so Cmd+F finds any setting. A column on the left (a strip on phones) lists the sections as anchors under the three headings and highlights the one in view; admins also get an Admin entry. Old `/profile?section=` and `highlight=` links still land on their section.
+- **Agents and machines, automation (scheduled jobs and the task queue), data (custom fields and the recycle bin) and groups are no longer inside Settings.** They keep their addresses as ordinary pages. Open them from the sidebar's All page or the command palette, which now also lists agents, scheduled jobs, the task queue, the recycle bin and Obsidian import. On the desktop app, Obsidian import sits in the sidebar's resources group.
+- **The task detail page's divider rail shows icons only**, with a tooltip and an accessible name on each button, and the column is narrower.
+- **Desktop control moved out of the built-in `ud-cli` skill into its own `ud-desktop` skill**, so an agent only loads it when it needs to open a page in your desktop app.
+
+### Bug Fixes
+
+- **On a shared conversation card, an agent's request to open something in the desktop app is honoured only for the person who asked.** Before, a member could start a turn and the card owner's later message could let the request run and move the member's desktop window.
+
+### Upgrade Notes (self-hosted)
+
+- **Update the server before the apps and the CLI.**
+- **One database migration runs on first boot (00131, SQLite and Postgres).** It only adds tables, used by a feature that stays off in this release. Back up your database before upgrading, as with every release.
+- **No new environment variable needs to be set**, and no existing one changes meaning.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.190.0`.
+
+---
+
 ## v0.189.0 (2026-11-15)
 
 **Minor release: `ud desktop` can open any app page, an agent's open request now asks before it moves your window, and a 404 inside the desktop app reports itself.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** the new `ud` asks the server which desktop to use, and an older server does not have that endpoint.

@@ -58,6 +58,10 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 
 - **On a shared conversation card, an agent's request to open something in the desktop app is honoured only for the person who asked.** Before, a member could start a turn and the card owner's later message could let the request run and move the member's desktop window.
 
+### Known Issues
+
+- **The "Use the AI provided by udctl.com" option is shown but is not open yet.** On the desktop app or a single-user install with no AI model, the option appears wherever Alfred has no model. Clicking **Turn on** shows "Couldn't connect to udctl.com" and nothing is turned on. Use your own API key for now. Once the service opens, the same button works with no app update. See [The AI Provided by udctl.com](/docs/features/udctl-ai).
+
 ### Upgrade Notes (self-hosted)
 
 - **Update the server before the apps and the CLI.**

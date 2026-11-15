@@ -4,6 +4,10 @@ sidebar_position: 12
 
 # The AI Provided by udctl.com
 
+:::note Not open yet
+The AI provided by udctl.com is not open yet. Until it opens, clicking **Turn on** shows "Couldn't connect to udctl.com" and nothing is turned on; in the meantime you can use your own API key. Once it opens, the same button works with no app update, and this note will be removed.
+:::
+
 Alfred needs an AI model to answer. On the desktop app or a single-user self-hosted install with no model of your own, you can turn on the AI provided by udctl.com instead of adding an API key. No sign-up is needed.
 
 It is off until you turn it on. Before that, the app sends nothing to udctl.com.

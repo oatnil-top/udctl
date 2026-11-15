@@ -1,12 +1,9 @@
 ---
 sidebar_position: 12
+description: Alfred 要有 AI 模型才能回答。桌面版或单人自托管实例上还没有自己的模型时，可以不填 API key,直接开启 udctl.com 提供的 AI。不用注册。
 ---
 
 # udctl.com 提供的 AI
-
-:::note 尚未开放
-udctl.com 提供的 AI 尚未开放。开放之前，点「开启」会提示「连接 udctl.com 没有成功」,不会开启任何东西;这期间可以先用你自己的 API key。开放之后，同一个按钮直接可用，不需要更新应用，届时这条说明会撤掉。
-:::
 
 Alfred 要有 AI 模型才能回答。桌面版或单人自托管实例上还没有自己的模型时，可以不填 API key,直接开启 udctl.com 提供的 AI。不用注册。
 

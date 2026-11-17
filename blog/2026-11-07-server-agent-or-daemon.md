@@ -28,7 +28,7 @@ New agents run on the server by default. Agents you already had keep running whe
 
 ## Get a morning rundown without leaving a machine on
 
-Open a conversation, choose **More**, then **Set as resident conversation**, and give it a schedule and a message. When the time comes, the server posts that message into the conversation, the agent runs one turn, and the answer stays there. The same job appears under **Settings > Automation**.
+Open a conversation, choose **More**, then **Set as resident conversation**, and give it a schedule and a message. When the time comes, the server posts that message into the conversation, the agent runs one turn, and the answer stays there. The same job also appears on the **Scheduled Jobs** page, under **More pages > Automation** in the sidebar.
 
 In our promo film the schedule is every day at 9 AM and the message asks for the open cards tagged `release`. At 09:00 the agent answers with all five, and which one to do first, with no machine online.
 

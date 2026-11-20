@@ -64,7 +64,7 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 - **Files:** an mp4's Kind reads Video, the Storage line follows the store's own stats and refreshes after an upload, and the Unfiled group in the explorer sidebar can be collapsed (folded by default).
 - **Editor:** blocks you did not touch are saved exactly as written, blocks with no blank line between them keep it, and a paragraph's bare line break is no longer rewritten. Loading content can no longer be undone, so Cmd-Z right after entering edit cannot empty the description. A failed save keeps what you typed, and the failure toast now sits above every dialog. Images that resolve while you type no longer overwrite your text.
 - **Scheduled backups apply their retention days to their own backups after each successful upload.**
-- **Shared notes: the owner's share-link list skips revoked links.**
+- **Share links show visitors only the files granted to that link.** Ticking "Allow attachments" when you create a link grants the files attached to the card at that moment. Files added later, and files a note embeds, have to be granted one by one in the share dialog, which lists each link's grants and the files visitors cannot see. A file that is not granted shows "this image is not shared" on the visitor page. Files that visitors drop on a link are never visible to other visitors, the public download no longer accepts a shortened file id, and the owner's share-link list skips revoked links.
 - **Chinese kanban text:** 18 kanban strings that showed English defaults in Chinese are restored.
 - **System config Test for S3 makes a real bucket check, and the OCR test reports "Not verified"** instead of passing.
 - **The built-in Alfred and the `ud-cli` skill now say to start at `ud describe systemconfiglist` for instance-level settings.**
@@ -79,9 +79,10 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 ### Upgrade Notes (self-hosted)
 
 - **Update the server before the apps and the CLI.**
-- **Two database migrations run on first boot (00132 and 00133, SQLite and Postgres).** Back up your database before upgrading, as with every release.
+- **Three database migrations run on first boot (00132, 00133 and 00134, SQLite and Postgres).** Back up your database before upgrading, as with every release.
   - **00132 changes data.** Expenses and income whose account was stored by name are rewritten to that account's id, when exactly one of the owner's accounts has that exact name. Records whose account was deleted, renamed, or has a duplicate name are left as they were; they simply do not appear in any account's list. 00132 cannot be undone, and rolling back leaves the ids in place.
   - **00133 does nothing.** It reserves a migration number for a feature that was withdrawn before release.
+  - **00134 adds a table of share-link grants and fills it** with what each still-valid share link showed before the upgrade, so existing links keep showing the same files and nothing new appears. **From then on, a file attached to a card after the upgrade does not show on an existing link until you grant it** in the share dialog.
 - **No new environment variable needs to be set**, and no existing one changes meaning.
 
 The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.

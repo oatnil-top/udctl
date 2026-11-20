@@ -43,6 +43,69 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.191.0 (2026-11-21)
+
+**Minor release: the macOS desktop app can update itself, an account's page shows only that account's transactions, `ud api-resources` lists every resource, and the macOS desktop app is a normal Dock and Cmd+Tab citizen again.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** the new web and desktop apps ask the server for the account filter, which an older server does not have.
+
+### New Features
+
+- **An account's detail page lists only that account's expenses and income**, with a read-only summary (number of entries, this month in and out) on the account list and detail pages. `GET /expense` and `GET /income` take `?account_id=`; an `account_id` that matches no account no longer returns every record.
+- **The macOS desktop app can update itself.** Click **Check for updates** in the title bar or open **Settings > Software Update**; the app downloads the new version with real progress and installs it only when you click **Restart to update** (it asks first if workspace sessions are running). Right before installing it copies your database into `update-backups` in your data directory and keeps the newest two copies; if the copy cannot be made, the update is not installed. The app never checks in the background and sends no account or device information. Windows and Linux still open the download page. See [Update the Desktop App, and Go Back](./howto/update-and-roll-back-desktop.md).
+- **`ud move file --unfiled`** moves a file back to Unfiled (the move API accepts an empty path for it).
+- **`ud api-resources` lists every resource, including `systemconfiglist`, and has an ACCESS column.** `ud cook` and `ud explain` accept resource names in any letter case.
+- **Add expense and income dialogs take a date, an account and a currency**, require an amount above zero, and fall back to a localized title.
+
+### Improvements
+
+- **Account references on expenses and income are stored as account ids.** The web detail pages show the account name and write the id; the CLI help says "id or exact name, stored as id". Deleted accounts show a marker instead of a bare id. See Upgrade Notes for the migration that converts existing records.
+- **Budgets:** the monthly view shows each budget's month quota and marks non-monthly periods; overspend shows the real percent and "over"; the detail page opens on the current month and drops empty rows; "Edit Budget" opens a rename dialog; the quarterly option, which the server never accepted, is gone.
+- **macOS desktop: UD is back in the Dock and in Cmd+Tab**, and switching between the app's own windows with the window-cycling shortcut works again. The quick panel no longer turns the app into a background app.
+- **Desktop title bars follow the UD theme**, and windows that are already open follow a theme switched in another window without reloading.
+- **Desktop: the terminal window is no longer clipped after another viewer resized the terminal**, and Ctrl+Q in the Alfred panel hands over to the window switcher. The session window has a draggable task panel and terminal split (remembered per machine, double-click resets) and editable description and notes.
+- **Files:** an mp4's Kind reads Video, the Storage line follows the store's own stats and refreshes after an upload, and the Unfiled group in the explorer sidebar can be collapsed (folded by default).
+- **Editor:** blocks you did not touch are saved exactly as written, blocks with no blank line between them keep it, and a paragraph's bare line break is no longer rewritten. Loading content can no longer be undone, so Cmd-Z right after entering edit cannot empty the description. A failed save keeps what you typed, and the failure toast now sits above every dialog. Images that resolve while you type no longer overwrite your text.
+- **Scheduled backups apply their retention days to their own backups after each successful upload.**
+- **Share links show visitors only the files granted to that link.** Ticking "Allow attachments" when you create a link grants the files attached to the card at that moment. Files added later, and files a note embeds, have to be granted one by one in the share dialog, which lists each link's grants and the files visitors cannot see. A file that is not granted shows "this image is not shared" on the visitor page. Files that visitors drop on a link are never visible to other visitors, the public download no longer accepts a shortened file id, and the owner's share-link list skips revoked links.
+- **Members of a group can read the history of an account shared with that group.** History written before the account was shared is visible too, and unsharing hides it again. On Postgres, members used to see none of it; on SQLite they saw only rows written after the share. Nobody outside the group sees any of it.
+- **Photo and file search says what it matches:** the Photos search chip, the clear-filter label and the `ud` resource search help say "file name or description" instead of "filename only".
+- **Chinese kanban text:** 18 kanban strings that showed English defaults in Chinese are restored.
+- **System config Test for S3 makes a real bucket check, and the OCR test reports "Not verified"** instead of passing.
+- **The built-in Alfred and the `ud-cli` skill now say to start at `ud describe systemconfiglist` for instance-level settings.**
+
+### Bug Fixes
+
+- **Things created switched off now stay off.** A scheduled job, group, group invite, share invitation, skill, kanban board, system config, AI provider, share link or API key created with its on/off flag false used to be stored as on (for example the preset data-cleanup job came up enabled). They are stored as you asked.
+- **`ud apply` of a scheduled job honours `spec.enabled` on both create and update.** This one needs the new CLI.
+- **Concurrent preference changes no longer lose each other.** Two clients changing different preference keys at the same moment both land, and the first write of a new preference no longer fails when two arrive together.
+- **Disposing of a possession reports a failed income write with an error code** instead of a bare success, and the dispose dialog defaults to the current time when the chosen day is today.
+- **`ud migrate` drops an account reference it cannot resolve instead of failing the whole record, and reports it.** The AI expense capture does the same, and explains a missing model with a link to AI settings.
+- **Security:** the spreadsheet preview runs in a sandbox with no permissions, and frontend and Go dependencies were upgraded (the Go vulnerability scan went from 15 findings to 0).
+- **Correction to v0.190.0:** the notes said the moved pages open from the sidebar's "All" page. They are under the sidebar's **More pages > Automation**, and the Chinese name of scheduled jobs is **计划作业**, not 定时任务.
+
+### Upgrade Notes (self-hosted)
+
+- **Update the server before the apps and the CLI.**
+- **Four database migrations run on first boot (00132, 00133, 00134 and 00135, SQLite and Postgres).** Back up your database before upgrading, as with every release.
+  - **00132 changes data.** Expenses and income whose account was stored by name are rewritten to that account's id, when exactly one of the owner's accounts has that exact name. Records whose account was deleted, renamed, or has a duplicate name are left as they were; they simply do not appear in any account's list. 00132 cannot be undone, and rolling back leaves the ids in place.
+  - **00133 does nothing.** It reserves a migration number for a feature that was withdrawn before release.
+  - **00135 changes data.** Account history rows take the group of their account, so members of a shared account's group can read its history (see Improvements). A history row whose account no longer exists gets no group. It cannot be undone, and rolling back leaves the rows as they are.
+  - **00134 adds a table of share-link grants and fills it** with what each still-valid share link showed before the upgrade, so existing links keep showing the same files and nothing new appears. **From then on, a file attached to a card after the upgrade does not show on an existing link until you grant it** in the share dialog.
+- **Moving to 0.191.0 itself is a manual install on desktop** (download page, or `brew upgrade --cask undercontrol`): older apps cannot update themselves. From 0.191.0 on, the macOS app offers updates in-app.
+- **No new environment variable needs to be set**, and no existing one changes meaning.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.191.0`.
+
+---
+
 ## v0.190.0 (2026-11-15)
 
 **Minor release: Settings is one scrollable page again, with a section list on the left, and the pages that used to live inside Settings are plain pages of their own.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** the new web and desktop apps ask the server about features that an older server does not have.

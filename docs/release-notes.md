@@ -64,7 +64,7 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 - **Files:** an mp4's Kind reads Video, the Storage line follows the store's own stats and refreshes after an upload, and the Unfiled group in the explorer sidebar can be collapsed (folded by default).
 - **Editor:** blocks you did not touch are saved exactly as written, blocks with no blank line between them keep it, and a paragraph's bare line break is no longer rewritten. Loading content can no longer be undone, so Cmd-Z right after entering edit cannot empty the description. A failed save keeps what you typed, and the failure toast now sits above every dialog. Images that resolve while you type no longer overwrite your text.
 - **Scheduled backups apply their retention days to their own backups after each successful upload.**
-- **Shared notes: visitors can load photos the note embeds**, and the owner's share-link list skips revoked links.
+- **Shared notes: the owner's share-link list skips revoked links.**
 - **Chinese kanban text:** 18 kanban strings that showed English defaults in Chinese are restored.
 - **System config Test for S3 makes a real bucket check, and the OCR test reports "Not verified"** instead of passing.
 - **The built-in Alfred and the `ud-cli` skill now say to start at `ud describe systemconfiglist` for instance-level settings.**

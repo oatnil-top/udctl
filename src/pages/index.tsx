@@ -1273,10 +1273,11 @@ export default function Home(): ReactNode {
   // `${headline} | udctl` cut off before the name (master 2026-11-22, card
   // 88ddfef5). So Layout gets no title prop (the theme would append ` | udctl`)
   // and the tags are set here; this <Head> renders after the theme's and wins.
-  // Keep it within ~39 Latin characters / ~20 CJK. Wording follows docs/intro.
+  // Keep it within ~33 Latin characters / ~20 CJK: 39 still lost three letters
+  // on a 402pt-wide iPhone 17. Wording follows docs/intro.
   const pageTitle = translate({
     id: 'homepage.title',
-    message: 'udctl - Workspace for you and AI agents',
+    message: 'udctl - Workspace with AI agents',
     description: 'The homepage <title>, complete (no site-name suffix is appended). Must start with udctl and stay short enough for a phone address bar.',
   });
   return (

@@ -43,6 +43,50 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.193.0 (2026-11-22)
+
+**Minor release: a file keeps stable version numbers and can be restored to an older version, an open preview shows a file's new content as soon as it is replaced, an admin can give an API key system administration for at most 7 days, and the Finance and Dashboard switches are gone.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** the new web and desktop apps call the restore endpoint, which an older server does not have.
+
+### New Features
+
+- **File versions: a dialog to look at, restore, download and delete older versions.** Open it from the new Versions row on a file's page, from the preview, from an HTML embed in a card, from the explorer pane, or from the history link on the "new version" bar. The current version is on top; every row shows its stored number, the time to the minute, who made it and its size. Select a row to preview that version in place, with a toggle between the current one and the selected one. Restore asks once, then makes that version current again: the version it replaces is kept under its own number, the restored one leaves the history list and the file takes the next number. Restoring does not change the storage you are billed for. Download saves `name.vN.ext`.
+- **`ud restore file-version <id> <n>`** makes a replaced version current again; the receipt names the old, new and kept numbers. `ud describe file <id> --history` now starts with the current version (`vN`, since, by) and lists the replaced versions newest first, with their stored numbers, when each became current (local time with its UTC offset) and who made it so. When an agent replaces a file on a person's behalf, the history names the agent.
+- **An admin account can give an API key `system:admin`.** The create-key dialog shows a "System administration" box to admin accounts only: it is off by default, it is not part of "select all", and ticking it shows a red warning and limits the expiry to 1 hour, 1 day or 7 days (default 1 day). Keys that carry it are marked in the key list. The server enforces the cap: `POST /auth/api-keys` with `system:admin` and any other expiry, or none, answers `400 AUTH_APIKEY_ADMIN_EXPIRY_TOO_LONG`. A non-admin account still gets `403`. Keys without `system:admin` are unchanged.
+
+### Improvements
+
+- **An open preview follows a replaced file.** When a file's content is replaced, previews, the resource page, the explorer pane and HTML or image embeds in card bodies show the new version. An HTML document loads behind the current one and takes its place at the position you were reading, unless you have already clicked or typed in it, in which case a bar offers the new version. PDF, video and audio always go through the bar. An editor never reloads on its own and tells you the file changed elsewhere.
+- **Login: the account field is marked as a username and the password field in link dialogs as the current password**, so password managers offer to fill them.
+
+### Bug Fixes
+
+- **Desktop: the Done button of the sidebar's Edit panel can be clicked.** On macOS and Windows the panel started under the title bar's drag area, which swallowed the click; it now starts below the title bar.
+
+### Removed
+
+- **The Finance and Dashboard switches in Settings are gone, and so is the Features section.** The Dashboard switch gated nothing. Finance is now listed in the sidebar, in the edit-mode catalog, in the command palette and for the AI navigate tool like any other page, for everyone: if you had switched Finance off, the sidebar now shows Accounts (the Finance pages) again. To hide a page, use the sidebar's edit mode. Default currency moved to Settings > System & Language.
+
+### Upgrade Notes (self-hosted)
+
+- **Update the server before the apps and the CLI.**
+- **One database migration, 00137 (SQLite and Postgres), runs on first boot.** Back up your database before upgrading, as with every release. It adds a stored version number to each replaced file version and fills it with the numbers the history showed before, so nothing you see changes at the upgrade. From then on the numbers are fixed: deleting a version leaves a gap in the numbering (for example v1, v3) instead of renumbering the rest. That is by design.
+- **No new environment variable needs to be set.**
+- **iOS is not part of this release.**
+- **Desktop: install the new app by hand** (download page, or `brew upgrade --cask undercontrol`) unless the installed one is 0.191.0 or later, which updates in-app.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.193.0`.
+
+---
+
 ## v0.192.0 (2026-11-22)
 
 **Minor release: a new desktop install connects to the official server by default, the official site can open sign-up without an invite code, and sign-ups per day can be capped, with an invite-a-friend bonus on daily AI points.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** the new web and desktop apps read sign-up state fields that an older server does not send.

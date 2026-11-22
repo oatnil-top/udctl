@@ -63,7 +63,7 @@ Use your **actual balance** (also called "current balance"). Don't include pendi
 
 ### I have foreign currency accounts. How does this work?
 
-Currently, enter the equivalent amount in your primary currency. For example, if you have €1,000 and primarily use USD, enter approximately $1,100 (depending on current exchange rates).
+Pick the account's currency when you create it and enter the balance in that currency: a €1,000 account is entered as 1,000 EUR. Totals are reported per currency, so balances in different currencies are never added together.
 
 ## Daily Use Questions
 
@@ -151,7 +151,7 @@ Not currently, but you can use consistent naming:
 
 ### How do I track multiple currencies?
 
-For now, convert everything to your primary currency and enter the equivalent amounts. Native multi-currency support is planned for the future.
+Give each account its own currency. Totals, summaries and cash-flow figures are kept per currency. Rolling everything up into one display currency uses the exchange rates configured in system settings, which is a Pro feature; the Personal tier shows the per-currency breakdown.
 
 ### Can I export my account data?
 

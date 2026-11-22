@@ -19,5 +19,5 @@ udctl.com is the canonical host and oatnil.com redirects here. The CLI installs 
 ## Optional
 
 - [Self-hosting guide](https://udctl.com/docs/self-deployment/): run the whole thing on your own machine.
-- [Pricing and license tiers](https://udctl.com/subscribe/): self-hosted license prices by team-size band; free for personal use.
+- [Pricing and license tiers](https://udctl.com/docs/pricing/): self-hosted license prices by team-size band; free for personal use.
 - [Release notes](https://udctl.com/docs/release-notes/)

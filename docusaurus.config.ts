@@ -238,6 +238,12 @@ const config: Config = {
         {
           title: 'Docs',
           items: [
+            // The one site-wide link (home page included) to the "What is udctl" page;
+            // the navbar's Docs entry lands on Getting Started, not here (ud card b286380c).
+            {
+              label: 'What is udctl',
+              to: '/docs/intro',
+            },
             {
               label: 'Getting Started',
               to: '/docs/getting-started',

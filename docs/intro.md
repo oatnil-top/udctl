@@ -1,62 +1,73 @@
 ---
 sidebar_position: 1
-description: Explore. Capture. Distill. A private workspace for people and AI agents.
+sidebar_label: What is udctl?
+title: "What is udctl? A private workspace for you and your AI agents"
+description: udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (ud) and AI coding agents you dispatch from a task comment.
 ---
 
-# Welcome to udctl
+# What is udctl?
 
 udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment. On your own hardware.
 
-## What is udctl?
+It is a private workspace that you and your AI agents share. One place holds what usually ends up split across an issue tracker like Jira, a Markdown vault like Obsidian, a personal ledger, and a console for running agents.
 
-Built by an indie developer + AI, udctl gives you a unified workspace for managing your money and time without relying on third-party services:
+## What it does
 
-- **Budget & Expense Tracking**: Create budgets, log expenses, and monitor your spending
-- **Task & Issue Tracker**: A lightweight issue tracker with markdown editing, bi-directional linking, and query syntax for advanced filtering
-- **AI-Driven Workflows**: Snap photos, send text or voice, and let AI log expenses or create tasks automatically. Integrates with Apple Shortcuts for one-click capture
-- **Resource Management**: Upload and attach files to tasks, expenses, or notes. Store locally or on S3-compatible storage
-- **Self-Hosted**: Deploy on your own infrastructure — your data never leaves your control
-- **Multi-Platform**: Access via web app, desktop app (macOS, Windows, Linux), or CLI
+| Area | What you get |
+| --- | --- |
+| Task management | Tasks, kanban boards, a backlog and sprints |
+| Knowledge base | Markdown cards and notes, two-way links between cards, a graph view |
+| AI agents | Hand a task to Claude Code, Codex or another terminal agent from a comment; the session runs on your machine |
+| CLI | `ud`, a kubectl-style command for everything in the workspace |
+| File sync | `ud pull` and `ud push` keep a folder of local Markdown files in step with the workspace, in both directions |
+| Finance | Accounts, budgets, expenses and income, with totals kept per currency |
+| Calendar | A calendar with time slots, and a Gantt view for each board |
 
-## Key Features
+## The `ud` CLI
 
-### Budget & Expenses
-Track spending across multiple accounts and categories. Export your data anytime — no vendor lock-in.
+The command-line tool is called `ud`, and it works the way `kubectl` does: a verb, a resource type, an id.
 
-### Task Management
-A personal issue tracker with full markdown support, bi-directional linking between tasks and notes, and powerful query syntax for filtering.
+```bash
+# List tasks
+ud get tasks
+# Show one task
+ud describe task <id>
+# Create or update a task from a file
+ud apply -f task.md
+# Delete a task (it goes to the recycle bin)
+ud delete task <id>
+```
 
-### AI Assistant
-Send images, text, or voice to the AI to quickly log expenses and create tasks. Seamlessly integrated with Apple Shortcuts for rapid capturing.
+The full command set is in the [CLI guide](./cli.md).
 
-### Resource Management
-Upload files via drag-and-drop, paste, or file selection. Attach resources to any task, expense, or note. Choose between local storage or remote S3.
+## Built for AI agents
 
-### CLI Tool
-Manage tasks and record progress directly from the terminal with the `ud` command-line tool. It doubles as an [AI agent CLI](./cli-ai-integration.md): Claude Code, Cursor, and Codex can read and write your tasks through the same commands.
+Any agent that can run a shell command can use `ud`, so Claude Code, Codex and Cursor work against the same data you do:
 
-### Flexible Deployment
-Deploy via Docker Compose for simplicity or Kubernetes for larger setups. Supports SQLite for single-user and PostgreSQL for multi-user environments.
+- An agent reads a task's requirements with `ud describe task`.
+- An agent updates the task's status when the work moves.
+- An agent records its progress as notes on the task.
+- Different agents share one set of tasks and one knowledge base.
 
-## Getting Started
+[AI agent CLI](./cli-ai-integration.md) covers the setup, and [Workspace Terminal](./workspace-terminal.md) covers running an agent session next to the task it is working on.
 
-New here? [Getting Started](./getting-started.md) walks you from zero to your first card and your first agent job.
+## Install
 
-Weighing udctl against other tools? See [how udctl compares](/compare/) — [vs Beads](/compare/beads/), [vs Taskwarrior + Vikunja](/compare/taskwarrior-vikunja/), [vs Vibe Kanban](/compare/vibe-kanban/) — or read the [FAQ](/faq/).
+```bash
+# requires Node.js 18+
+npm install -g @oatnil/ud
+ud --help
+```
 
-Ready to deploy udctl? Check out our [Self-Deployment Guide](./self-deployment.md) to get started.
+The CLI runs on macOS, Linux and Windows, on x64 and arm64. Homebrew, the desktop app, the web app and the mobile apps are listed on the [download page](./download.md).
 
-### Quick Links
+## Why we built it
 
-- [Getting Started](./getting-started.md) - From zero to your first card and first agent job
-- [Self-Deployment Guide](./self-deployment.md) - Choose your deployment method
-- [Docker Compose: Local Storage + SQLite](./self-deployment.md) - Quick start guide
-- [Account Management](./features/accounts.md) - Learn about user accounts
-- [API Documentation](./features/accounts-api.md) - Integrate with your applications
+We built udctl so that an AI agent keeps what a teammate keeps: the context of a task, the notes written along the way, and the progress so far. When Claude Code and Codex share tasks and record progress in one workspace, you stop re-explaining the background at the start of every session.
 
-## Requirements
+## Where to go next
 
-To deploy udctl, you'll need:
-
-- Docker and Docker Compose (or Kubernetes)
-- Basic understanding of container deployments
+- [Getting Started](./getting-started.md): from zero to your first card and your first agent job
+- [Self-Deployment Guide](./self-deployment.md): run udctl with Docker Compose, Kubernetes or a single binary
+- [How udctl compares](/compare/): [vs Beads](/compare/beads/), [vs Taskwarrior + Vikunja](/compare/taskwarrior-vikunja/), [vs Vibe Kanban](/compare/vibe-kanban/)
+- [FAQ](/faq/)

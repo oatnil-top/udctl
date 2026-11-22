@@ -82,5 +82,9 @@
   "link.item.label.Developers": {
     "message": "开发者",
     "description": "The label of footer link with label=Developers linking to /dev"
+  },
+  "link.item.label.What is udctl": {
+    "message": "udctl 是什么",
+    "description": "The label of footer link with label=What is udctl linking to /docs/intro"
   }
 }

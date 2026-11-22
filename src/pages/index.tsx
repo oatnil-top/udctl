@@ -1268,15 +1268,23 @@ export default function Home(): ReactNode {
       'udctl (UnDercontrol) is a self-hostable workspace for tasks, notes and expenses, with a kubectl-style CLI (`ud`) and AI coding agents you dispatch from a task comment.',
     description: 'The homepage meta description',
   });
+  // The homepage <title> is the whole string and STARTS with the brand: iPhone
+  // Safari's address-bar suggestion shows about 38 Latin characters, and the old
+  // `${headline} | udctl` cut off before the name (master 2026-11-22, card
+  // 88ddfef5). So Layout gets no title prop (the theme would append ` | udctl`)
+  // and the tags are set here; this <Head> renders after the theme's and wins.
+  // Keep it within ~39 Latin characters / ~20 CJK. Wording follows docs/intro.
+  const pageTitle = translate({
+    id: 'homepage.title',
+    message: 'udctl - Workspace for you and AI agents',
+    description: 'The homepage <title>, complete (no site-name suffix is appended). Must start with udctl and stay short enough for a phone address bar.',
+  });
   return (
-    <Layout
-      title={translate({
-        id: 'homepage.title',
-        message: 'Run a Team of AI Agents on Your Own Machine',
-        description: 'The homepage meta title',
-      })}
-      description={metaDescription}>
+    <Layout description={metaDescription}>
       <Head>
+        <title>{pageTitle}</title>
+        <meta property="og:title" content={pageTitle} />
+        <meta name="twitter:title" content={pageTitle} />
         <meta property="og:image" content={socialCard} />
         <meta name="twitter:image" content={socialCard} />
         <meta name="twitter:card" content="summary_large_image" />

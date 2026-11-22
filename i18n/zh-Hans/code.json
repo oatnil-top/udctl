@@ -846,7 +846,7 @@
     "message": "AI 工作区"
   },
   "homepage.title": {
-    "message": "在自己的机器上跑一支 AI 代理团队"
+    "message": "udctl - 你和 AI agent 共用的工作空间"
   },
   "homepage.trust.free.desc": {
     "message": "无广告、无追踪，个人使用永远免费。"

@@ -43,6 +43,48 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.192.0 (2026-11-22)
+
+**Minor release: a new desktop install connects to the official server by default, the official site can open sign-up without an invite code, and sign-ups per day can be capped, with an invite-a-friend bonus on daily AI points.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** the new web and desktop apps read sign-up state fields that an older server does not send.
+
+### New Features
+
+- **Desktop: a new install connects to the official server on first launch, and the login page has a switch with three choices: Official, Local and Custom.** An existing install keeps the server it already uses. Custom takes an address you type (it is remembered). Local is the backend built into the app; while that backend is down the login page says so, with Retry and Details, and does not send anything to whatever else holds the port.
+- **Sign-up without an invite code, as an operator switch.** The new setting `REGISTRATION_INVITE_CODE_REQUIRED` (environment variable or flag, default `true`, which changes nothing). Set it to `false` with `REGISTRATION_ENABLED=true` and `POST /auth/register` takes only email and password; the web and desktop login pages then hide the invite-code field and the "get code" button, and Profile hides the Invite Friends card.
+- **Daily sign-up limits, in three separate pools:** ordinary sign-ups, sign-ups that use an invite link, and visitor accounts. System settings `registration.daily_limit`, `registration.invited_daily_limit` and `registration.visitor_daily_limit`: `-1` means no limit (the default), `0` means closed for the day. A new day starts at 00:00 UTC. When a pool is full the login page shows "today's sign-up slots are full" with the reopening time, the visitor button is hidden when the visitor pool is full, and the API answers `429 AUTH_SIGNUP_DAILY_LIMIT_REACHED`. A sign-up that then fails gives its slot back. Changing a limit on the admin page applies from the next sign-up, with no restart.
+- **Invite a friend for more daily AI points.** Off by default (`referral.enabled`). When on, every counted invitee adds `referral.bonus_per_invite` (default 5) to the inviter's daily AI points, up to `referral.bonus_cap` (default 50); the invitee gets a bonus too. The Profile page's Invite Friends card shows your link, the counted friends and why any friend was not counted, and a new "Today's AI points" row shows used and limit as base plus invites. A notification tells you when a friend's sign-up is counted. At most two invitees per network per day count. Switching the program off stops new invitations from counting; bonuses already earned stay. `GET /ai/usage` now returns `base` and `referral_bonus`.
+
+### Improvements
+
+- **macOS update check cleans up after itself:** the temporary folders of a downloaded update are removed completely, so a verified update no longer leaves an `app.asar` behind.
+- **The macOS in-app update refuses to go backwards.** Before an update can be installed the app checks the downloaded package: the file names in the update list, the package's signature against the running app, the same app identifier, and a version that is exactly the announced one and newer than the running one. A package that fails is deleted and shown as a retryable verification error in the title bar and in Settings.
+- **Shared accounts: history only moves with its owner's rows.** Account history that belongs to another user keeps its own group when an account is saved, shared, or deleted.
+
+### Bug Fixes
+
+- **Editing, deleting or sharing an account that is not yours, or does not exist, answers 404 instead of a server error (500).** This covers `PUT /account/:id`, `DELETE /account/:id`, `PUT /account/:id/share` and `DELETE /account-history/:id`; a stranger's id and a missing id give the same answer.
+
+### Upgrade Notes (self-hosted)
+
+- **Update the server before the apps and the CLI.**
+- **One database migration, 00136 (SQLite and Postgres), runs on first boot.** Back up your database before upgrading, as with every release. It only adds three tables (sign-up counters and the invite-code and referral records) and changes no existing row.
+- **Migration 00135, from 0.191.0, was narrowed in place:** it now moves only the account owner's own history rows. An instance that already ran it does not run it again.
+- **No new environment variable needs to be set.** `REGISTRATION_INVITE_CODE_REQUIRED` is optional and defaults to `true`; the daily limits default to no limit and the invite bonus to off, so an upgraded instance behaves as before until you change them.
+- **Desktop: install the new app by hand** (download page, or `brew upgrade --cask undercontrol`) unless the installed one is 0.191.0 or later, which updates in-app.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.192.0`.
+
+---
+
 ## v0.191.0 (2026-11-21)
 
 **Minor release: the macOS desktop app can update itself, an account's page shows only that account's transactions, `ud api-resources` lists every resource, and the macOS desktop app is a normal Dock and Cmd+Tab citizen again.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** the new web and desktop apps ask the server for the account filter, which an older server does not have.

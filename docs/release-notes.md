@@ -43,6 +43,49 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.194.0 (2026-11-23)
+
+**Minor release: draw.io and Excalidraw become installable plugins instead of being packed into every install, the desktop app moves to Electron 45 (macOS 13 or later), the desktop package gets smaller, and the desktop app can update itself on Windows and Linux.** It changes the backend, the web app, the desktop app and the Docker images. **Update the server first:** the new web and desktop apps call plugin endpoints an older server does not have.
+
+### New Features
+
+- **Plugins: an editor can now be installed instead of shipped.** In Settings > Plugins an admin installs a plugin from a package file (`.udplugin`); every other user can only ask for one from the official list, and an admin approves the request. An admin's own request is approved in the same step, so on a single-user instance nothing waits. An approved plugin is available to every user of the instance. A plugin runs in a sandboxed frame with no access to your login or to the app's API, and Save, Save & close and the unsaved-changes question stay the app's own. Plugins you had added to your own account before this release are moved onto the same path the first time the new app loads when you are an admin; for any other user they keep working for that user only, as before.
+- **draw.io is now the first official plugin, and Excalidraw the second.** Opening or creating a `.drawio`, `.drawio.png` or `.excalidraw` file works as before once the plugin is installed. If it is not installed yet, the file's page and the New menus show an install panel instead of raw text, and it opens in the editor as soon as the install finishes. The first install downloads the package from the udctl download site (draw.io about 30 MB, Excalidraw about 16 MB); a server without internet access can be given the file by its operator (see Upgrade Notes).
+- **Desktop: the app updates itself on Windows and on Linux (AppImage), as it already did on macOS.** Windows checks the package and installs it silently (per-user and per-machine installs); Linux installs the downloaded AppImage. A build that includes this can update in-app to the next release.
+
+### Improvements
+
+- **A much smaller install.** draw.io and Excalidraw no longer ship in the web build, the Docker images, the standalone server or the desktop app: the built web app is about 124 MB smaller (154 MB to 31 MB with its compressed copies). The desktop app also stops carrying a second copy of the web app inside the server it runs, and drops the Chromium language files other than English and Chinese (about 44 MB installed on macOS). Desktop installers are built with a more compact disk-image format on macOS.
+- **Desktop: Electron 38 to 45** (Chromium 140 to 156, Node 22 to 24). **macOS 13 or later is now required; macOS 12 is no longer supported.** On macOS 12 the app is told there is no update instead of downloading a package that cannot start.
+
+- **Desktop: a window opened from a non-main window can only be blank or the app's own page.** Web links opened that way go to your browser instead.
+
+### Bug Fixes
+
+- **Desktop: windows that open another window (for example a task window starting a download) keep working on Electron 45.** A blank window opened first and navigated afterwards used to come back empty.
+
+### Upgrade Notes (self-hosted)
+
+- **Update the server before the apps and the CLI.**
+- **One database migration, 00138 (SQLite and Postgres), runs on first boot.** Back up your database before upgrading, as with every release. It adds two new tables for plugins and plugin install requests and changes no existing row.
+- **New optional setting `UD_PLUGIN_DIR`:** where approved plugin packages are unpacked. The default is `plugins` inside the data directory, so nothing needs setting. The desktop app sets it itself.
+- **draw.io and Excalidraw are no longer inside the server.** After the upgrade, the first `.drawio` or `.excalidraw` shows an install panel; an admin installs the plugin there (it downloads from the udctl download site). **An instance with no internet access:** put the package file, under its published name (for example `drawio-32.3.0-ud1.udplugin`), into the `seed` folder inside the plugin directory, then install from the panel; the package digest is checked either way.
+- **Desktop: macOS 13 or later is required.** Install the new app by hand (download page, or `brew upgrade --cask undercontrol`) unless the installed one is 0.191.0 or later, which can update in-app. If the app does not start after an in-app update, install it again from the download page.
+- **No other environment variable needs to be set. iOS is not part of this release.**
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.194.0`.
+
+---
+
 ## v0.193.0 (2026-11-22)
 
 **Minor release: a file keeps stable version numbers and can be restored to an older version, an open preview shows a file's new content as soon as it is replaced, an admin can give an API key system administration for at most 7 days, and the Finance and Dashboard switches are gone.** It changes the backend, the web app, the desktop app and the `ud` CLI. **Update the server first:** the new web and desktop apps call the restore endpoint, which an older server does not have.

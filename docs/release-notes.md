@@ -43,6 +43,36 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.194.1 (2026-11-24)
+
+**Patch release: fixes the Docker images that v0.194.0 failed to publish, and changes how stored files are served for download.** It changes the backend, the Docker images and the desktop app. Everything in v0.194.0 (installable draw.io and Excalidraw plugins, Electron 45 and macOS 13 or later, in-app update on Windows and Linux) is in this release as well.
+
+### Bug Fixes
+
+- **Docker images: v0.194.0 has none, v0.194.1 is the first of this line.** The image build for v0.194.0 stopped because the build stage lacked the plugin files it checks, so no v0.194.0 image was published. Self-hosted Docker installs go from v0.193.0 straight to v0.194.1.
+
+### Improvements
+
+- **Stored files are served more carefully.** The browser now opens a downloaded file inline only for a short list of types it cannot run as a page (plain text, common image and video types, PDF). Everything else is downloaded as a file, with a policy that stops it from running in the app's origin. **Markdown and CSV files now download instead of opening in the browser tab.** The same rule applies to the local-disk store and to S3-compatible storage.
+
+### Upgrade Notes (self-hosted)
+
+- **Update the server before the apps and the CLI.** Back up your database before upgrading, as with every release.
+- **Coming from v0.193.0 or older:** the v0.194.0 notes below apply as well (migration 00138 runs on first boot and only adds two tables; optional `UD_PLUGIN_DIR`; offline servers put the plugin package file in the `seed` folder; macOS 13 or later for the desktop app).
+- **Coming from v0.194.0:** no database migration and no new setting.
+- **Desktop:** install the new app by hand if the installed one cannot update in-app. If the app does not start after an in-app update, install it again from the download page.
+
+The CLI is yours to upgrade: publishing a release does not change the `ud` on anybody's machine. There are three routes; **use exactly one**.
+
+```bash
+npm i -g @oatnil/ud # installed via npm
+brew update && brew upgrade ud # installed via Homebrew
+```
+
+**If your `ud` came from the desktop app, neither line above is your route: install the new desktop app** (from the download page, or `brew upgrade --cask undercontrol` if you installed the app with Homebrew). The app's "Install ud CLI" makes `/usr/local/bin/ud` a symlink into the app bundle, so the `ud` you run is the one the app ships.
+
+Then confirm it took: `ud --version` must print `udctl version 0.194.1`.
+
 ## v0.194.0 (2026-11-23)
 
 **Minor release: draw.io and Excalidraw become installable plugins instead of being packed into every install, the desktop app moves to Electron 45 (macOS 13 or later), the desktop package gets smaller, and the desktop app can update itself on Windows and Linux.** It changes the backend, the web app, the desktop app and the Docker images. **Update the server first:** the new web and desktop apps call plugin endpoints an older server does not have.

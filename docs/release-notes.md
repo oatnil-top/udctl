@@ -43,6 +43,48 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.195.0 (2026-11-24)
+
+**Feature release: the Explorer gets folder management and remembers where you were, tables can be copied and downloaded, and the desktop update check says why it failed.** It changes the web app, the desktop app and the backend. Everything in v0.194.1 is in this release as well.
+
+### New Features
+
+- **Tables can be copied and downloaded.** Every table, in read-only view and while editing, shows a small bar at its top-right corner on hover. It copies the table for Excel or Numbers, copies it as CSV, and downloads it as .xlsx or CSV.
+- **Folders in the Explorer.** In the Explorer window a folder can be renamed or deleted (right-click menu, F2, Delete). The window toolbar has a New button that creates a task or a document in the folder on screen. In the docked tree, New folder makes a real empty folder and lets you name it in place.
+- **Select, copy and paste across table cells.** Drag across cells in the editor to select them, copy them, and paste them back as a grid.
+
+### Improvements
+
+- **The Explorer remembers its state.** The folders you had open, and whether the docked Explorer was open, come back the next time.
+- **Explorer search is easier to read.** It opens the folders that hold hits, also matches folder names, and the Unfiled count equals the number of hits.
+- **Undo after deleting a task.** A toast with Undo appears after a task is deleted from the Explorer.
+- **Clearer Explorer wording.** The move dialog reads Explorer and Move here, and a folder name says when characters in it were replaced. Rename from the right-click menu keeps the cursor in the input.
+- **Deleted elsewhere, gone here.** A task deleted in another window or on another device disappears from the Explorer, and the open card shows a deleted banner instead of loading forever.
+- **Desktop: the update check says why it failed.** The title bar keeps showing "Update check failed" with the reason (network, timeout, certificate, server, manifest), Settings has the detail with a Copy details button, and the failure is written to the log file.
+- **Sidebar.** Workspace now sits under the Conversations entry for every account, and the "Paste to add note" row no longer pushes the workspace task panel down when it gets focus.
+- **API keys.** The key list shows one badge per resource (Tasks Read, Create and so on), and a key that never expires says Never expires.
+- **Task pages load faster.** Attachments load alongside the task, and the page shows a loading row until they arrive instead of "no attachments" or "no comments".
+- **Notifications.** Messages that used to appear in a second style now all appear through the same notification area.
+- **Editor.** Rendered Mermaid, math and quote blocks no longer show their source next to the picture.
+- **Downloads.** A downloaded file keeps its full name, including names that contain an underscore or non-ASCII characters.
+
+### Upgrade Notes (self-hosted)
+
+- **Update the server before the apps and the CLI.** Back up your database before upgrading, as with every release.
+- **No database migrations and no new settings** in this release.
+- **Download links signed before the upgrade stop working** (RESOURCE_URL_SIGNATURE_INVALID) for at most their 15-minute lifetime. Reload the page to get a new one.
+
+The CLI is not changed by this release, but its version number moves with it. Upgrade it yourself with one of the following (pick the one you installed with):
+
+```bash
+npm i -g @oatnil/ud # installed with npm
+brew update && brew upgrade ud # installed with Homebrew
+```
+
+If your `ud` came from the desktop app, install the new desktop app instead (from the download page, or `brew upgrade --cask undercontrol`). Then check: `ud --version` must print `udctl version 0.195.0`.
+
+---
+
 ## v0.194.1 (2026-11-24)
 
 **Patch release: fixes the Docker images that v0.194.0 failed to publish, and changes how stored files are served for download.** It changes the backend, the Docker images and the desktop app. Everything in v0.194.0 (installable draw.io and Excalidraw plugins, Electron 45 and macOS 13 or later, in-app update on Windows and Linux) is in this release as well.

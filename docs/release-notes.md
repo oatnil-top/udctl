@@ -43,6 +43,40 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.195.1 (2026-11-26)
+
+**Fix release: notes take only the height of their content, the editor's save bar no longer covers the line you are writing, `.drawio.png` files get their Edit button back, and signing out now clears the Explorer's cached file names.** It changes the web app, the desktop app and the backend. Everything in v0.195.0 is in this release as well.
+
+### Improvements
+
+- **Notes are as tall as what is in them.** A one-line note no longer takes a large empty block, and entering edit mode barely moves the page. The edit buttons sit on the note's footer row, and a new note's editor starts small.
+- **Long notes keep their buttons in reach.** On a tall note the footer row (author, time, actions) stays at the bottom edge of the visible area, and Edit opens the editor where you are reading instead of at the end.
+- **Finding plugins from a file.** The Open with menu ends with "Add plugin…" on every file. A plugin that is not installed now says what clicking it does (install, request, waiting for an admin, or turned down).
+
+### Bug Fixes
+
+- **Signing out clears the Explorer cache.** After signing out and signing in with another account in the same browser or app, the Explorer could show the previous account's file names. The cache and the list of open folders are now wiped, and the cache written by earlier versions is discarded.
+- **The save bar no longer covers your text.** While editing inline, the line being written stays above the sticky save bar.
+- **`.drawio.png` has its Edit button again.** With the draw.io plugin not installed, the button leads to a page that offers the install; installing it while the file is open now updates the button.
+- **Copy for Excel / Numbers guards against formulas.** A cell that would be read as a formula is pasted as text, as the CSV export already did.
+- **Deleting or restoring a card that is not in the recycle bin** now answers with a clear error (400 `TASK_NOT_DELETED`) instead of a server error.
+
+### Upgrade Notes (self-hosted)
+
+- **Update the server before the apps and the CLI.** Back up your database before upgrading, as with every release.
+- **No database migrations and no new settings** in this release.
+
+The CLI is not changed by this release, but its version number moves with it. Upgrade it yourself with one of the following (pick the one you installed with):
+
+```bash
+npm i -g @oatnil/ud # installed with npm
+brew update && brew upgrade ud # installed with Homebrew
+```
+
+If your `ud` came from the desktop app, install the new desktop app instead (from the download page, or `brew upgrade --cask undercontrol`). Then check: `ud --version` must print `udctl version 0.195.1`.
+
+---
+
 ## v0.195.0 (2026-11-24)
 
 **Feature release: the Explorer gets folder management and remembers where you were, tables can be copied and downloaded, and the desktop update check says why it failed.** It changes the web app, the desktop app and the backend. Everything in v0.194.1 is in this release as well.

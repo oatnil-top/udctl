@@ -43,6 +43,38 @@ Merged to `main`, not in any published build yet. These ship with the next versi
   (Nothing owed right now: every bullet that was listed here was folded into v0.171.0.)
 -->
 
+## v0.196.0 (2026-11-27)
+
+**Recurring expenses (first step): a place for subscriptions, contracts and instalments, on the web, in the desktop app, in the CLI and in the API.** There is no recurring expenses screen in the iOS app yet. Two database migrations run on first start.
+
+### New Features
+
+- **Recurring expenses page.** In the finance group: monthly fixed outflow per currency, split into what is locked in and what you can cancel; items worth a look; the next 60 days with monthly subtotals; and every plan with its price steps, lock-in periods left and today's exit cost where there is one.
+- **Record a period.** Recording a period saves an ordinary expense linked to the plan. A plan is never counted in any total by itself, and no expense is created automatically.
+- **Ending a plan.** Paid off or terminated early: nothing more falls due. Unsubscribed: a bill for the period already started still shows as the last one.
+- **Dates explained in the form.** The end date and lock-in date say what they mean (the last day covered, not the last payment date), and a preview line counts the periods before you save.
+- **On the item's page.** A possession with an active plan shows that you are still paying for it, with a link to the plan.
+- **CLI and API.** `ud get | describe | apply | delete recurring-expense` (short name `rexp`), `ud get recurring-expense --attention`, `ud cook recurring-expense`, the payment link on expenses (`ud get expense --recurring <id>`), and `/api/v1/recurring-expense`.
+
+### Improvements
+
+- **Built-in guidance for money records.** The default instructions of the built-in Alfred agent now say that expenses, income, possessions and recurring expenses are product records to be written when you mention them, not memory notes. This reaches newly created Alfred agents only; an existing Alfred keeps its instructions. The built-in `ud-cli` skill, which existing instances do receive, lists the money record types.
+
+### Bug Fixes
+
+- **Stopping the sharing of an expense now works.** Taking an expense back from a group reported success but left it shared: group members could still read and edit it. See the upgrade note below.
+- **Clearing fields on an expense.** Removing an expense's budget or description, or unhiding it, reported success and changed nothing. It now saves.
+
+### Upgrade Notes (self-hosted)
+
+- Back up your database before upgrading. Two migrations run on first start (`00139`, `00140`); both only add (a new table, and new columns on expenses).
+- No new environment variables or settings.
+- **If you ever stopped sharing an expense with a group on 0.195.1 or earlier (instances with groups), it is still shared.** The upgrade does not change existing data. After upgrading, stop sharing those expenses again.
+- Upgrade the server before the apps and the CLI: the recurring expense screens and commands need a 0.196.0 server.
+- Upgrading the CLI: `npm i -g @oatnil/ud` (npm), `brew update && brew upgrade ud` (Homebrew), or install the new desktop app if the app installed your `ud`. Use one route, not several. Check with `ud --version`, which must print `udctl version 0.196.0`.
+
+---
+
 ## v0.195.1 (2026-11-26)
 
 **Fix release: notes take only the height of their content, the editor's save bar no longer covers the line you are writing, `.drawio.png` files get their Edit button back, and signing out now clears the Explorer's cached file names.** It changes the web app, the desktop app and the backend. Everything in v0.195.0 is in this release as well.

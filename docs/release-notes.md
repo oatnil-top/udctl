@@ -69,7 +69,7 @@ Merged to `main`, not in any published build yet. These ship with the next versi
 
 - Back up your database before upgrading. Two migrations run on first start (`00139`, `00140`); both only add (a new table, and new columns on expenses).
 - No new environment variables or settings.
-- **If you ever stopped sharing an expense with a group on 0.195.1 or earlier (instances with groups), it is still shared.** The upgrade does not change existing data. After upgrading, stop sharing those expenses again.
+- **If you ever stopped sharing an expense with a group on 0.195.1 or earlier (instances with groups), it is still shared.** The upgrade does not change existing data. After upgrading, stop sharing those expenses again. This includes the CLI: if you ever ran `ud unshare expense` on 0.195.1 or earlier, run it again after upgrading.
 - Upgrade the server before the apps and the CLI: the recurring expense screens and commands need a 0.196.0 server.
 - Upgrading the CLI: `npm i -g @oatnil/ud` (npm), `brew update && brew upgrade ud` (Homebrew), or install the new desktop app if the app installed your `ud`. Use one route, not several. Check with `ud --version`, which must print `udctl version 0.196.0`.
 
